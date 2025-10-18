@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract interface class CheckConnectivity {
   Future<bool> get isConnected;
@@ -13,18 +14,16 @@ class CheckConnectivityImp implements CheckConnectivity {
   @override
   Future<bool> get isConnected async {
     final result = await connectivity.checkConnectivity();
-    for (var item in result) {
-      switch (item) {
-        case ConnectivityResult.mobile:
-        case ConnectivityResult.vpn:
-        case ConnectivityResult.wifi:
-        case ConnectivityResult.ethernet:
-          return true;
-        default:
-          return false;
-      }
+    for (final item in result) {
+      return switch (item) {
+        ConnectivityResult.wifi || ConnectivityResult.mobile || ConnectivityResult.vpn || ConnectivityResult.ethernet || ConnectivityResult.other => true,
+        ConnectivityResult.none || ConnectivityResult.bluetooth => false
+      };
     }
     return false;
   }
-
 }
+
+final connectivityProvider = Provider<CheckConnectivityImp>((_) {
+  return CheckConnectivityImp(Connectivity());
+});
