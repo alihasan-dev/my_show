@@ -1,5 +1,5 @@
-import 'package:riverpod/legacy.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod/legacy.dart';
 import '../../../movie/domain/entities/trending_movie_entity.dart';
 import '../../domain/usecases/view_all_usecase.dart';
 

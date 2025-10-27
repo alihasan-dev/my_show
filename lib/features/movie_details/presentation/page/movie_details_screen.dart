@@ -2,10 +2,10 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/widgets/vote_percentage_widget.dart';
 import '../provider/movie_cast_provider.dart';
 import '../provider/movie_details_provider.dart';
 import '../provider/movie_keyword_provider.dart';
+import '../widget/movie_details_shimmer_widget.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/constants/movie_colors.dart';
@@ -13,10 +13,10 @@ import '../../../../core/widgets/movie_cast_banner.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/custom_sliver_app_bar.dart';
+import '../../../../core/widgets/vote_percentage_widget.dart';
 import '../../../../core/widgets/custom_keyword_chip_widget.dart';
 import '../../../../features/movie_details/presentation/widget/additional_info_tile.dart';
 import '../../../../features/movie_details/presentation/provider/movie_recommentation_provider.dart';
-import '../widget/movie_details_shimmer_widget.dart';
 
 class MovieDetailsScreen extends HookConsumerWidget {
   
@@ -404,9 +404,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
               ],
             );
           },
-          error: (_,_) {
-            return Center(child: Text('No data found'));
-          }, 
+          error: (_,_) => Center(child: Text('No data found')), 
           loading: () => MovieDetailsShimmer()
         ),
       ),
