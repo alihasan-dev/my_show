@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod/legacy.dart';
+import 'package:hooks_riverpod/legacy.dart';
 import '../../domain/entities/popular_people_entity.dart';
 import '../../domain/usecases/popular_people_usecase.dart';
 
