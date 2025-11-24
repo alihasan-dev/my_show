@@ -73,6 +73,7 @@ class TvShowWidgets extends StatelessWidget {
                         children: [
                           index == tvShowList.length
                           ? ViewAllWidget()
+                          // ? ViewAllWidget()
                           : MovieImageWidget(
                             imagePath: tvShow.posterPath.generateImageURL,
                             width: double.maxFinite,
