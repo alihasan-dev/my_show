@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../core/network/dio_provider.dart';
-import '../../../../core/utils/custom_exception.dart';
-import '../models/popular_people_model.dart';
+import '/core/network/dio_provider.dart';
+import '/core/utils/custom_exception.dart';
+import '/features/profile/data/models/popular_people_model.dart';
+import 'package:riverpod/riverpod.dart';
 
 abstract interface class PeopleDataSource {
 

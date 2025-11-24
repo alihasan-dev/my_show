@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/network/check_connectivity.dart';
-import '../../../../core/utils/custom_exception.dart';
-import '../../../movie/domain/entities/trending_movie_entity.dart';
-import '../../domain/entities/cast_entity.dart';
-import '../../domain/entities/movie_details_entity.dart';
-import '../../domain/entities/movie_keywords_entity.dart';
+import '/core/network/check_connectivity.dart';
+import '/core/utils/custom_exception.dart';
+import '/features/movie/domain/entities/trending_movie_entity.dart';
+import '/features/movie_details/data/datasource/movie_details_datasource.dart';
+import '/features/movie_details/domain/entities/cast_entity.dart';
+import '/features/movie_details/domain/entities/movie_details_entity.dart';
+import '/features/movie_details/domain/entities/movie_keywords_entity.dart';
 import '../../domain/repository/movie_details_repository.dart';
-import '../datasource/movie_details_datasource.dart';
 
 class MovieDetailsRepoImp implements MovieDetailsRepository {
 

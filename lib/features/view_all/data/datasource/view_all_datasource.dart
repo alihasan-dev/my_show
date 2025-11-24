@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/network/dio_provider.dart';
+import '/core/network/dio_provider.dart';
+import 'package:riverpod/riverpod.dart';
 import '../../../movie/data/models/trending_movies_model.dart';
 
 abstract class ViewAllDatasource {

@@ -1,11 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../core/network/check_connectivity.dart';
-import '../../../../core/utils/custom_exception.dart';
-import '../../domain/entities/popular_people_entity.dart';
-import '../../domain/repository/people_repository.dart';
-import '../datasource/people_datasource.dart';
+import '/core/network/check_connectivity.dart';
+import '/core/utils/custom_exception.dart';
+import '/features/profile/data/datasource/people_datasource.dart';
+import '/features/profile/domain/entities/popular_people_entity.dart';
+import '/features/profile/domain/repository/people_repository.dart';
 
 class PeopleRepositoryImp implements PeopleRepository {
 

@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../domain/entities/cast_entity.dart';
+import '/features/movie_details/domain/entities/cast_entity.dart';
 import '../../domain/usecases/movie_cast_usecase.dart';
 
 final movieCastProvider = FutureProvider.autoDispose.family<MovieCastEntity, ({String id, String type})>((ref, param) async {

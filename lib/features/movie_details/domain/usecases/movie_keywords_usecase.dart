@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '/core/utils/custom_exception.dart';
+import '/features/movie_details/domain/entities/movie_keywords_entity.dart';
+import '/features/movie_details/domain/repository/movie_details_repository.dart';
+import 'package:riverpod/riverpod.dart';
 
-import '../../../../core/utils/custom_exception.dart';
 import '../../data/repository/movie_details_repo_imp.dart';
-import '../entities/movie_keywords_entity.dart';
-import '../repository/movie_details_repository.dart';
 
 class MovieKeywordsUsecase {
 

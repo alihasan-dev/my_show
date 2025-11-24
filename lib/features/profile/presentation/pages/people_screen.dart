@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/core/utils/app_extension_method.dart';
+import '/core/constants/movie_colors.dart';
+import '/core/utils/app_extension_method.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/widgets/movie_text.dart';
@@ -35,7 +36,7 @@ class PeopleScreen extends HookConsumerWidget {
       };
     }, [scrollController]);
     
-    useEffect(() {
+    useEffect(() { 
       ref.read(popularPeopleProvider.notifier).popularPeople();
       return null;
     }, []);
@@ -61,14 +62,38 @@ class PeopleScreen extends HookConsumerWidget {
               itemCount: (data.results ?? []).length,
               itemBuilder: (context, index) {
                 final people = (data.results ?? [])[index];
-                return MovieImageWidget(
-                  onTap: () => context.pushNamed(
-                    AppRoutes.profile,
-                    queryParameters: {
-                      'userId': '${people.id}',
-                    }
-                  ),
-                  imagePath: (people.profilePath ?? '').generateImageURL
+                return Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    MovieImageWidget(
+                      onTap: () => context.pushNamed(
+                        AppRoutes.profile,
+                        queryParameters: {
+                          'userId': '${people.id}',
+                        }
+                      ),
+                      imagePath: (people.profilePath ?? '').generateImageURL
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                        color: MovieColors.black.withValues(alpha: 0.4),
+                        child: Center(
+                          child: MovieText(
+                            title: people.name ?? '',
+                            maxLine: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 11
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               }
             );

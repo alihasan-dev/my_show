@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import '../../../../core/utils/custom_exception.dart';
+import '/core/utils/custom_exception.dart';
+import '/features/movie_details/domain/entities/cast_entity.dart';
+import '/features/movie_details/domain/entities/movie_keywords_entity.dart';
 import '../../../movie/domain/entities/trending_movie_entity.dart';
-import '../entities/cast_entity.dart';
 import '../entities/movie_details_entity.dart';
-import '../entities/movie_keywords_entity.dart';
 
 abstract interface class MovieDetailsRepository {
 

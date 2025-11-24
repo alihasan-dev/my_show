@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/network/api_end_points.dart';
-import '../../../../core/network/dio_provider.dart';
-import '../../../movie/data/models/trending_movies_model.dart';
-import '../models/cast_model.dart';
+import '/core/network/api_end_points.dart';
+import '/core/network/dio_provider.dart';
+import '/features/movie/data/models/trending_movies_model.dart';
+import '/features/movie_details/data/models/cast_model.dart';
+import '/features/movie_details/data/models/movie_keyword_model.dart';
 import '../models/movie_details_model.dart';
-import '../models/movie_keyword_model.dart';
 
 abstract interface class MovieDetailsRemoteDatasource {
 

@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:hooks_riverpod/legacy.dart';
-import '../../domain/entities/popular_people_entity.dart';
-import '../../domain/usecases/popular_people_usecase.dart';
+import '/features/profile/domain/entities/popular_people_entity.dart';
+import '/features/profile/domain/usecases/popular_people_usecase.dart';
+import 'package:riverpod/legacy.dart';
 
 class PopularPeopleNotifier extends StateNotifier<AsyncValue<PopularPeopleEntity>> {
 

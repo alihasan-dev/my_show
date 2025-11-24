@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/utils/custom_exception.dart';
-import '../../data/repository/people_repository_imp.dart';
-import '../entities/popular_people_entity.dart';
-import '../repository/people_repository.dart';
+import '/core/utils/custom_exception.dart';
+import '/features/profile/data/repository/people_repository_imp.dart';
+import '/features/profile/domain/entities/popular_people_entity.dart';
+import '/features/profile/domain/repository/people_repository.dart';
 
 class PopularPeopleUsecase {
 

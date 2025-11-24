@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../movie/domain/entities/trending_movie_entity.dart';
+import '/features/movie/domain/entities/trending_movie_entity.dart';
+
 import '../../domain/usecases/movie_recommentation_usecase.dart';
 
 final movieRecommentationProvider = FutureProvider.autoDispose.family<TrendingMoviesEntity, ({String id, String type})>((ref, param) async {

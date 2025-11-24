@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '/features/profile/domain/entities/profile_details_entity.dart';
+import '/features/profile/domain/repository/profile_repository.dart';
+
 import '../../../../core/utils/custom_exception.dart';
 import '../../data/repository/profile_repository_imp.dart';
-import '../entities/profile_details_entity.dart';
-import '../repository/profile_repository.dart';
 
 class ProfileDetailsUsecase {
 

@@ -191,7 +191,7 @@ class ProfileScreen extends HookConsumerWidget {
                                   ProfileInfoTitle(
                                     title: 'Birthday',
                                     value: data.birthday!.formatDOB(
-                                      hideYrs: !(data.deathDay ?? '').isBlank
+                                      hideYrs: (data.deathDay ?? '').isNotEmpty
                                     )
                                   ),
                                 if ((data.deathDay ?? '').isNotEmpty)

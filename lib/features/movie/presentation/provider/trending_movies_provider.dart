@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../domain/entities/trending_movie_entity.dart';
+import '/features/movie/domain/entities/trending_movie_entity.dart';
 import '../../domain/usecases/trending_movies_usecase.dart';
 
 final trendingMoviesProvider = FutureProvider.autoDispose<TrendingMoviesEntity>((ref) async {

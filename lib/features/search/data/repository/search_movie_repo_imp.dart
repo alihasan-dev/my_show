@@ -1,11 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../core/network/check_connectivity.dart';
-import '../../../../core/utils/custom_exception.dart';
-import '../../domain/entities/search_movies_keyword_entity.dart';
-import '../../domain/repository/search_movie_repository.dart';
-import '../datasource/search_movie_datasource.dart';
+import '/core/network/check_connectivity.dart';
+import '/core/utils/custom_exception.dart';
+import '/features/search/data/datasource/search_movie_datasource.dart';
+import '/features/search/domain/entities/search_movies_keyword_entity.dart';
+import '/features/search/domain/repository/search_movie_repository.dart';
 
 class SearchMovieRepoImp implements SearchMovieRepository {
 

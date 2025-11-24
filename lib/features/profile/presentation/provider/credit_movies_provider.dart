@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '/features/profile/domain/usecases/credit_movie_usecase.dart';
+
 import '../../domain/entities/movie_credit_entity.dart';
-import '../../domain/usecases/credit_movie_usecase.dart';
 
 final movieCreditDataProvider = FutureProvider.autoDispose.family<MovieCreditEntity, String>((ref, userId) async {
   final creditMoviesData = ref.read(creditMovieUseCaseProvider);

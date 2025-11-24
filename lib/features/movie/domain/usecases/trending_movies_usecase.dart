@@ -1,8 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '/features/movie/domain/entities/trending_movie_entity.dart';
+import '/features/movie/domain/repository/movie_repository.dart';
 import 'package:dartz/dartz.dart';
+
 import '../../data/repository/movie_repository_imp.dart';
-import '../entities/trending_movie_entity.dart';
-import '../repository/movie_repository.dart';
 
 class DashboardUsecase {
 

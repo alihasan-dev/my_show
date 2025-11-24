@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '/features/profile/presentation/pages/people_screen.dart';
 import '../../../../features/movie/presentation/pages/movie_screen.dart';
 import '../../../../features/tv/presentation/pages/tv_screen.dart';
-import '../../../profile/presentation/pages/people_screen.dart';
 
 class DashboardScreen extends HookConsumerWidget {
 

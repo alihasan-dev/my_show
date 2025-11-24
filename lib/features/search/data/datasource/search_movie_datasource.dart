@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/network/dio_provider.dart';
+import '/core/network/dio_provider.dart';
 import '../models/search_movie_by_keyword_model.dart';
 
 abstract interface class SearchMovieDatasource {

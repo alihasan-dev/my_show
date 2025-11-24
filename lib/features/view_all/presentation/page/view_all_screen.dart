@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../core/constants/movie_colors.dart';
 import '../provider/view_all_provider.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
@@ -71,15 +72,39 @@ class ViewAllScreen extends HookConsumerWidget {
               itemCount: data.result.length,
               itemBuilder: (context, index) {
                 final show = data.result[index];
-                return MovieImageWidget(
-                  onTap: () => context.pushNamed(
-                    AppRoutes.movieDetails,
-                    queryParameters: {
-                      'id': '${show.id}',
-                      'type': showType
-                    }
-                  ),
-                  imagePath: show.posterPath.generateImageURL
+                return Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    MovieImageWidget(
+                      onTap: () => context.pushNamed(
+                        AppRoutes.movieDetails,
+                        queryParameters: {
+                          'id': '${show.id}',
+                          'type': showType
+                        }
+                      ),
+                      imagePath: show.posterPath.generateImageURL
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                        color: MovieColors.black.withValues(alpha: 0.4),
+                        child: Center(
+                          child: MovieText(
+                            title: show.title,
+                            maxLine: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 11
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 );
               }
             );

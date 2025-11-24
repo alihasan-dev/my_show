@@ -101,15 +101,6 @@ class MovieImageWidget extends StatelessWidget {
   }
 
   Widget get _imageShimmerLoader {
-    // return Shimmer.fromColors(
-    //   baseColor: Colors.grey[300]!, 
-    //   highlightColor: Colors.grey[100]!,
-    //   child: Container(
-    //     width: width,
-    //     height: height,
-    //     color: MovieColors.grey,
-    //   ),
-    // );
     return Shimmer.fromColors(
       baseColor: Color(0xFF2A2A2A), // Dark shimmer base
       highlightColor: Color(0xFF3A3A3A), // Subtle highlight

@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
-
-import '../../../../core/utils/custom_exception.dart';
-import '../entities/search_movies_keyword_entity.dart';
+import '/core/utils/custom_exception.dart';
+import '/features/search/domain/entities/search_movies_keyword_entity.dart';
 
 abstract interface class SearchMovieRepository {
 

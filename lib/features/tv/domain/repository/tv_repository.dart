@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import '../../../../core/utils/custom_exception.dart';
-import '../entities/trending_tvshow_entity.dart';
+import '/core/utils/custom_exception.dart';
+import '/features/tv/domain/entities/trending_tvshow_entity.dart';
 
 abstract interface class TvRepository {
 

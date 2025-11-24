@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../core/network/dio_provider.dart';
-import '../../../../core/utils/custom_exception.dart';
-import '../models/trending_tv_show_model.dart';
+import '/core/network/dio_provider.dart';
+import '/core/utils/custom_exception.dart';
+import '/features/tv/data/models/trending_tv_show_model.dart';
 
 abstract interface class TvShowDataSource {
 

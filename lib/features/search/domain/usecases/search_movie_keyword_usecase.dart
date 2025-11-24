@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../core/utils/custom_exception.dart';
-import '../../data/repository/search_movie_repo_imp.dart';
-import '../entities/search_movies_keyword_entity.dart';
-import '../repository/search_movie_repository.dart';
+import '/core/utils/custom_exception.dart';
+import '/features/search/data/repository/search_movie_repo_imp.dart';
+import '/features/search/domain/entities/search_movies_keyword_entity.dart';
+import '/features/search/domain/repository/search_movie_repository.dart';
 
 class SearchMovieKeywordUsecase {
   final SearchMovieRepository searchMovieRepository;

@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../domain/entities/trending_tvshow_entity.dart';
-import '../../domain/usecases/upcoming_usecase.dart';
+import '/features/tv/domain/entities/trending_tvshow_entity.dart';
+import '/features/tv/domain/usecases/upcoming_usecase.dart';
 
 final upcomingShowProvider = FutureProvider.autoDispose<TrendingTVShowEntity>((ref) async {
   final useCaseProvider = ref.read(upcomingShowUseCaseProvider);

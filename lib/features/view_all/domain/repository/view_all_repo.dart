@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import '../../../../core/utils/custom_exception.dart';
-import '../../../movie/domain/entities/trending_movie_entity.dart';
+import '/core/utils/custom_exception.dart';
+import '/features/movie/domain/entities/trending_movie_entity.dart';
 
 abstract interface class ViewAllRepo {
 
