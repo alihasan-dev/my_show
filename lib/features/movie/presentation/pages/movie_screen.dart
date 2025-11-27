@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../core/constants/app_strings.dart';
 import '../provider/top_rated_movies_provider.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../widgets/trending_movies_widgets.dart';
@@ -31,11 +32,11 @@ class MoviesScreen extends HookConsumerWidget {
             padding: const EdgeInsets.all(16),
             children: [
               TrendingMoviesWidgets(
-                title: 'Trending',
+                title: AppStrings.trending,
                 movieList: data.result,
               ),
               TrendingMoviesWidgets(
-                title: 'Now Playing',
+                title: AppStrings.nowPlaying,
                 movieList: nowPlayingMoviesList,
                 viewAll: () {
                   context.pushNamed(
@@ -48,7 +49,7 @@ class MoviesScreen extends HookConsumerWidget {
                 },
               ),
               TrendingMoviesWidgets(
-                title: 'Popular',
+                title: AppStrings.popular,
                 movieList: popularMoviesList,
                 viewAll: () {
                   context.pushNamed(
@@ -61,7 +62,7 @@ class MoviesScreen extends HookConsumerWidget {
                 },
               ),
               TrendingMoviesWidgets(
-                title: 'Top Rated',
+                title: AppStrings.topRated,
                 movieList: topRatedMoviesList,
                 viewAll: () {
                   context.pushNamed(
@@ -74,7 +75,7 @@ class MoviesScreen extends HookConsumerWidget {
                 },
               ),
               TrendingMoviesWidgets(
-                title: 'Upcoming',
+                title: AppStrings.upcoming,
                 movieList: upcomingMoviesList,
                 viewAll: () {
                   context.pushNamed(

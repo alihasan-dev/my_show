@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
@@ -54,7 +55,7 @@ class SearchMovieByKeywordScreen extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: MovieText(
-          title: "Search for '$name'",
+          title: "${AppStrings.searchFor} '$name'",
           style: theme.textTheme.titleLarge?.copyWith(
             fontSize: 18
           ),
@@ -152,7 +153,7 @@ class SearchMovieByKeywordScreen extends HookConsumerWidget {
               }
             );
           }, 
-          error: (_,_) => Center(child: MovieText(title: 'No data found')), 
+          error: (_,_) => Center(child: MovieText(title: AppStrings.noDataAvailable)), 
           loading: () => Center(child: CircularProgressIndicator())
         ),
       )

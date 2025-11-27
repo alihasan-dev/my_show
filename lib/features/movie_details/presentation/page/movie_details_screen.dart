@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../core/constants/app_strings.dart';
 import '/core/widgets/vote_percentage_widget.dart';
 import '../provider/movie_cast_provider.dart';
 import '../provider/movie_details_provider.dart';
@@ -153,7 +154,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           ),
                         const SizedBox(height: 10),
                         MovieText(
-                          title: "Overview",
+                          title: AppStrings.overview,
                           style: theme.titleMedium?.copyWith(
                             color: MovieColors.textPrimary,
                             fontSize: 18,
@@ -168,7 +169,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                         if (movieCastList.isNotEmpty) ...[
                           const SizedBox(height: 24),
                           MovieText(
-                            title: "Cast",
+                            title: AppStrings.cast,
                             style: theme.titleMedium?.copyWith(
                               color: MovieColors.textPrimary,
                               fontSize: 18,
@@ -201,7 +202,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                         ],
                         if (movieCrewList.isNotEmpty) ...[
                           MovieText(
-                            title: "Crew",
+                            title: AppStrings.crew,
                             style: theme.titleMedium?.copyWith(
                               color: MovieColors.textPrimary,
                               fontSize: 18,
@@ -234,7 +235,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                         ],
                         const SizedBox(height: 10),
                         MovieText(
-                          title: "Additional Info",
+                          title: AppStrings.additionalInfo,
                           style: theme.titleMedium?.copyWith(
                             color: MovieColors.textPrimary,
                             fontSize: 18,
@@ -243,50 +244,50 @@ class MovieDetailsScreen extends HookConsumerWidget {
                         ),
                         const SizedBox(height: 12),
                         AdditionalInfoTile(
-                          title: 'Status',
+                          title: AppStrings.status,
                           value: movieData.status ?? ''
                         ),
                         if (!(movieData.releaseDate ?? '').isBlank)
                           AdditionalInfoTile(
-                            title: 'Release Date',
+                            title: AppStrings.releaseDate,
                             value: movieData.releaseDate!.formatDOB(hideYrs: true)
                           ),
                         AdditionalInfoTile(
-                          title: 'Original Language',
+                          title: AppStrings.originalLanguage,
                           value: (movieData.originalLanguage ?? '').formatLanguage
                         ),
                         if (movieData.budget != null)
                           AdditionalInfoTile(
-                            title: 'Budget',
+                            title: AppStrings.budget,
                             value: (movieData.budget ?? 0) == 0
                             ? 'N/A'
                             : formatter.format(movieData.budget ?? 0)
                           ),
                         if (movieData.revenue != null)
                           AdditionalInfoTile(
-                            title: 'Revenue',
+                            title: AppStrings.revenue,
                             value: (movieData.revenue ?? 0) == 0
                             ? 'N/A'
                             : formatter.format(movieData.revenue ?? 0)
                           ),
                         if (!(movieData.type ?? '').isBlank)
                           AdditionalInfoTile(
-                            title: 'Type',
+                            title: AppStrings.type,
                             value: movieData.type ?? ''
                           ),
                         if (movieData.numberOfSeasons != null)
                           AdditionalInfoTile(
-                            title: 'Seasons',
+                            title: AppStrings.seasons,
                             value: movieData.numberOfSeasons.toString()
                           ),
                         if (movieData.numberOfSeasons != null)
                           AdditionalInfoTile(
-                            title: 'Episode',
+                            title: AppStrings.episode,
                             value: movieData.numberOfEpisodes.toString()
                           ),
                         if ((movieData.networks ?? []).isNotEmpty)
                           AdditionalInfoTile(
-                            title: 'Networks',
+                            title: AppStrings.networks,
                             widget: SizedBox(
                               height: 38,
                               child: ListView.separated(
@@ -307,7 +308,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           ),
                         if ((movieData.productionCompanies ?? []).isNotEmpty)
                           AdditionalInfoTile(
-                            title: 'Productions',
+                            title: AppStrings.productions,
                             widget: SizedBox(
                               height: 38,
                               child: ListView.separated(
@@ -329,7 +330,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           ),
                         const SizedBox(height: 10),
                         MovieText(
-                          title: "Keywords",
+                          title: AppStrings.keywords,
                           style: theme.titleMedium?.copyWith(
                             color: MovieColors.textPrimary,
                             fontSize: 18,
@@ -359,11 +360,11 @@ class MovieDetailsScreen extends HookConsumerWidget {
                               }
                             )
                           )
-                        : MovieText(title: 'No keywords found'),
+                        : MovieText(title: AppStrings.noKeywordsFound),
                         ////recommendations
                         const SizedBox(height: 18),
                         MovieText(
-                          title: "Recommendations",
+                          title: AppStrings.recommendations,
                           style: theme.titleMedium?.copyWith(
                             color: MovieColors.textPrimary,
                             fontSize: 18,
@@ -396,7 +397,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                             },
                           ),
                         )
-                        : MovieText(title: 'No recommended movies found'),
+                        : MovieText(title: AppStrings.noRecommendedMoviesFound),
                       ],
                     ),
                   ),
@@ -404,9 +405,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
               ],
             );
           },
-          error: (_,_) {
-            return Center(child: Text('No data found'));
-          }, 
+          error: (_,_) => Center(child: Text(AppStrings.noDataAvailable)), 
           loading: () => MovieDetailsShimmer()
         ),
       ),

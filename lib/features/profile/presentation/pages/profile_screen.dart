@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:my_show/core/constants/app_strings.dart';
 import '../provider/credit_tv_provider.dart';
 import '../widgets/profile_shimmer_loader.dart';
 import '../provider/credit_movies_provider.dart';
@@ -17,11 +18,7 @@ import '../../../../core/widgets/custom_sliver_app_bar.dart';
 class ProfileScreen extends HookConsumerWidget {
 
   final String userId;
-  
-  const ProfileScreen({
-    required this.userId, 
-    super.key
-  });
+  const ProfileScreen({required this.userId, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,7 +30,6 @@ class ProfileScreen extends HookConsumerWidget {
     final creditMovieList = creditMoviesData.asData?.value.castEntity ?? [];
     final creditTvList = creditTvData.asData?.value.castEntity ?? [];
     return Scaffold(
-      // backgroundColor: MovieColors.white,
       body: SafeArea(
         top: false,
         child: profileDetails.when(
@@ -52,22 +48,22 @@ class ProfileScreen extends HookConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         MovieText(
-                          title: data.name ?? '', 
+                          title: data.name ?? '',
                           style: theme.bodyMedium?.copyWith(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
-                            color: MovieColors.textPrimary
-                          )
+                            color: MovieColors.textPrimary,
+                          ),
                         ),
                         SizedBox(height: 12),
                         if (!(data.biography ?? '').isBlank) ...[
                           MovieText(
-                            title: 'Biography', 
+                            title: AppStrings.biography,
                             style: theme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                               fontSize: 16,
-                              color: MovieColors.textPrimary
-                            )
+                              color: MovieColors.textPrimary,
+                            ),
                           ),
                           SizedBox(height: 5),
                           MovieText(
@@ -81,55 +77,57 @@ class ProfileScreen extends HookConsumerWidget {
                             MovieText(
                               onTap: () => readMoreEnable.value = !readMoreEnable.value,
                               title: readMoreEnable.value
-                              ? 'Read Less'
-                              : 'Read More',
+                              ? AppStrings.readLess
+                              : AppStrings.readMore,
                               style: theme.bodyMedium?.copyWith(
                                 fontWeight: FontWeight.w400,
-                                color: MovieColors.blue
+                                color: MovieColors.blue,
                               ),
                             ),
                         ],
                         SizedBox(height: 10),
-                        MovieText(
-                          title: 'Known For (Movie)', 
-                          style: theme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                            color: MovieColors.textPrimary
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        SizedBox(
-                          height: 230,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: creditMovieList.length,
-                            separatorBuilder: (_,_) => const SizedBox(width: 12),
-                            itemBuilder: (context, index) {
-                              final cast = creditMovieList[index];
-                              return MovieCastBanner(
-                                onTap: () => context.pushNamed(
-                                  AppRoutes.movieDetails,
-                                  queryParameters: {
-                                    'id': cast.id.toString(),
-                                    'type':'movie'
-                                  }
-                                ),
-                                title: cast.title ?? '',
-                                subTitle: cast.character ?? '',
-                                imagePath: (cast.posterPath ?? '').generateImageURL
-                              );
-                            },
-                          ),
-                        ),
-                        if (creditTvList.isNotEmpty) ...[
-                          SizedBox(height: 10),
+                        if (creditMovieList.isNotEmpty) ...[
                           MovieText(
-                            title: 'Known For (TV)', 
+                            title: AppStrings.knownForMovies,
                             style: theme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                               fontSize: 16,
-                              color: MovieColors.textPrimary
+                              color: MovieColors.textPrimary,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          SizedBox(
+                            height: 230,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: creditMovieList.length,
+                              separatorBuilder: (_, _) => const SizedBox(width: 12),
+                              itemBuilder: (context, index) {
+                                final cast = creditMovieList[index];
+                                return MovieCastBanner(
+                                  onTap: () => context.pushNamed(
+                                    AppRoutes.movieDetails,
+                                    queryParameters: {
+                                      'id': cast.id.toString(),
+                                      'type': 'movie',
+                                    },
+                                  ),
+                                  title: cast.title ?? '',
+                                  subTitle: cast.character ?? '',
+                                  imagePath: (cast.posterPath ?? '').generateImageURL,
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                        if (creditTvList.isNotEmpty) ...[
+                          SizedBox(height: 10),
+                          MovieText(
+                            title: AppStrings.knownForTv,
+                            style: theme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              color: MovieColors.textPrimary,
                             ),
                           ),
                           SizedBox(height: 10),
@@ -138,7 +136,7 @@ class ProfileScreen extends HookConsumerWidget {
                             child: ListView.separated(
                               scrollDirection: Axis.horizontal,
                               itemCount: creditTvList.length,
-                              separatorBuilder: (_,_) => const SizedBox(width: 12),
+                              separatorBuilder: (_, _) => const SizedBox(width: 12),
                               itemBuilder: (context, index) {
                                 final cast = creditTvList[index];
                                 return MovieCastBanner(
@@ -146,12 +144,12 @@ class ProfileScreen extends HookConsumerWidget {
                                     AppRoutes.movieDetails,
                                     queryParameters: {
                                       'id': cast.id.toString(),
-                                      'type':'tv'
-                                    }
+                                      'type': 'tv',
+                                    },
                                   ),
                                   title: cast.title ?? '',
                                   subTitle: cast.character ?? '',
-                                  imagePath: (cast.posterPath ?? '').generateImageURL
+                                  imagePath: (cast.posterPath ?? '').generateImageURL,
                                 );
                               },
                             ),
@@ -160,55 +158,59 @@ class ProfileScreen extends HookConsumerWidget {
                         Container(
                           decoration: BoxDecoration(
                             color: MovieColors.grey.withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(10)
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Theme(
                             data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                             child: ExpansionTile(
                               title: MovieText(
-                                title: 'Personal Info', 
+                                title: AppStrings.personalInfo,
                                 style: theme.bodyMedium?.copyWith(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16,
-                                  color: MovieColors.textPrimary
-                                )
+                                  color: MovieColors.textPrimary,
+                                ),
                               ),
                               initiallyExpanded: true,
                               tilePadding: EdgeInsets.symmetric(horizontal: 15),
-                              childrenPadding: EdgeInsets.symmetric(horizontal: 15),
+                              childrenPadding: EdgeInsets.symmetric(
+                                horizontal: 15,
+                              ),
                               children: [
                                 if (data.knownFor != null)
                                   ProfileInfoTitle(
-                                    title: 'Known For',
-                                    value: data.knownFor ?? ''
+                                    title: AppStrings.knownFor,
+                                    value: data.knownFor ?? '',
                                   ),
                                 if (data.gender != null)
                                   ProfileInfoTitle(
-                                    title: 'Gender',
-                                    value: data.gender!.parseGender
+                                    title: AppStrings.gender,
+                                    value: data.gender!.parseGender,
                                   ),
                                 if (data.birthday != null)
                                   ProfileInfoTitle(
-                                    title: 'Birthday',
+                                    title: AppStrings.birthday,
                                     value: data.birthday!.formatDOB(
-                                      hideYrs: (data.deathDay ?? '').isNotEmpty
-                                    )
+                                      hideYrs: (data.deathDay ?? '').isNotEmpty,
+                                    ),
                                   ),
                                 if ((data.deathDay ?? '').isNotEmpty)
                                   ProfileInfoTitle(
-                                    title: 'Day of Death',
-                                    value: data.deathDay!.formatDOB()
+                                    title: AppStrings.dayOfDeath,
+                                    value: data.deathDay!.formatDOB(),
                                   ),
                                 if (data.birthPlace != null)
                                   ProfileInfoTitle(
-                                    title: 'Place of Birth',
-                                    value: data.birthPlace ?? ''
+                                    title: AppStrings.placeOfBirth,
+                                    value: data.birthPlace ?? '',
                                   ),
                                 if ((data.alsoKnownAs ?? []).isNotEmpty)
                                   ProfileInfoTitle(
-                                    title: 'Also Known As',
+                                    title: AppStrings.alsoKnownAs,
                                     value: data.alsoKnownAs?.fold('', (previousValue, element) {
-                                      if (previousValue!.toString().isBlank) return element;
+                                      if (previousValue!.toString().isBlank) {
+                                        return element;
+                                      }
                                       return '${previousValue.toString()}\n$element';
                                     }) ?? '',
                                   ),
@@ -222,9 +224,9 @@ class ProfileScreen extends HookConsumerWidget {
                 ),
               ],
             );
-          }, 
-          error: (_,_) => Center(child: MovieText(title: 'No data available')), 
-          loading: () => ProfileShimmerLoader()
+          },
+          error: (_, _) => Center(child: MovieText(title: AppStrings.noDataAvailable)),
+          loading: () => ProfileShimmerLoader(),
         ),
       ),
     );

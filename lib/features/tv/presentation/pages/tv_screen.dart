@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../core/constants/app_strings.dart';
 import '../provider/nowplaying_provider.dart';
 import '../provider/popular_show_provider.dart';
 import '../provider/trending_tv_show_provider.dart';
@@ -31,11 +32,11 @@ class TvScreen extends HookConsumerWidget {
             padding: const EdgeInsets.all(16),
             children: [
               TvShowWidgets(
-                title: 'Trending',
+                title: AppStrings.trending,
                 tvShowList: data.result,
               ),
               TvShowWidgets(
-                title: 'Now Playing',
+                title: AppStrings.nowPlaying,
                 tvShowList: nowPlayingShowList,
                 viewAll: () {
                   context.pushNamed(
@@ -48,7 +49,7 @@ class TvScreen extends HookConsumerWidget {
                 },
               ),
               TvShowWidgets(
-                title: 'Popular',
+                title: AppStrings.popular,
                 tvShowList: popularShowsList,
                 viewAll: () {
                   context.pushNamed(
@@ -61,7 +62,7 @@ class TvScreen extends HookConsumerWidget {
                 },
               ),
               TvShowWidgets(
-                title: 'Top Rated',
+                title: AppStrings.topRated,
                 tvShowList: topRatedShowsList,
                 viewAll: () {
                   context.pushNamed(
@@ -74,7 +75,7 @@ class TvScreen extends HookConsumerWidget {
                 },
               ),
               TvShowWidgets(
-                title: 'Upcoming',
+                title: AppStrings.upcoming,
                 tvShowList: upcomingShowsList,
                 viewAll: () {
                   context.pushNamed(
