@@ -28,8 +28,8 @@ My Show combines the depth of a professional database with the elegance of a mod
 |:---:|:---:|:---:|
 | <img src="screenshots/home_trending.png" width="200" /> | <img src="screenshots/home_now_playing.png" width="200" /> | <img src="screenshots/movie_details.png" width="200" /> |
 
-| Search | People | |
+| Search | People | Profile |
 |:---:|:---:|:---:|
-| <img src="screenshots/search_results.png" width="200" /> | <img src="screenshots/people_grid.png" width="200" /> | |
+| <img src="screenshots/search_results.png" width="200" /> | <img src="screenshots/people_grid.png" width="200" /> | <img src="screenshots/profile.png" width="200" /> |
 
 ---
