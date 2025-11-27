@@ -21,11 +21,10 @@ My Show isn't just a database; it's a curated experience. With a stunning dark-m
 
 My Show combines the depth of a professional database with the elegance of a modern consumer app. Whether you're a casual viewer or a hardcore cinephile, My Show is your go-to destination for all things entertainment.
 
-**Download My Show today and start your journey through the world of movies and TV.**
 
 ## Screenshots
 
-| Home | Now Playing | Movie Details |
+| Movies | Tv Shows | Movie Details |
 |:---:|:---:|:---:|
 | <img src="screenshots/home_trending.png" width="200" /> | <img src="screenshots/home_now_playing.png" width="200" /> | <img src="screenshots/movie_details.png" width="200" /> |
 
