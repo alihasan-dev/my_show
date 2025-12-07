@@ -14,9 +14,9 @@ class DashboardScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bottomSelectedIndex = useState<int>(0);
     final widgetList = [
-      MoviesScreen(),
-      TvScreen(),
-      PeopleScreen()
+      const MoviesScreen(),
+      const TvScreen(),
+      const PeopleScreen()
     ];
     return Scaffold(
       body: widgetList[bottomSelectedIndex.value],

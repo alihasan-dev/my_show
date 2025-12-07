@@ -2,7 +2,9 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../provider/movie_video_provider.dart';
 import '/core/widgets/vote_percentage_widget.dart';
 import '../provider/movie_cast_provider.dart';
 import '../provider/movie_details_provider.dart';
@@ -34,6 +36,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final formatter = NumberFormat.currency(locale: "en_US", symbol: "\$");
     final theme = Theme.of(context).textTheme;
+    final movieVideo = ref.watch(movieVideoProvider((id: id, type: type)));
     final movieDetails = ref.watch(movieDetailsProvider((id: id, type: type)));
     final movieCast = ref.watch(movieCastProvider((id: id, type: type)));
     final movieRecommentation = ref.watch(movieRecommentationProvider((id: id, type: type)));
@@ -42,6 +45,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
     final movieCastList = movieCast.asData?.value.cast ?? [];
     final movieCrewList = movieCast.asData?.value.crew ?? [];
     final movieKeywordList = movieKeywords.asData?.value.keywords ?? [];
+    final movieVideoList = movieVideo.asData?.value.results ?? [];
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -398,6 +402,58 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           ),
                         )
                         : MovieText(title: AppStrings.noRecommendedMoviesFound),
+                        const SizedBox(height: 18),
+                        MovieText(
+                          title: "Videos",
+                          style: theme.titleMedium?.copyWith(
+                            color: MovieColors.textPrimary,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        movieVideoList.isNotEmpty
+                        ? SizedBox(
+                          height: 160,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: movieVideoList.length,
+                            separatorBuilder: (_,_) => const SizedBox(width: 12),
+                            itemBuilder: (context, index) {
+                              final video = movieVideoList[index];
+                              ////youtube player id
+                              final _controller = YoutubePlayerController.fromVideoId(
+                                videoId: "NOhDyUmT9z0",
+                                autoPlay: false,
+                                params: const YoutubePlayerParams(showFullscreenButton: true),
+                              );
+                              ///
+                              ///
+                              // return MovieCastBanner(
+                              //   width: 200,
+                              //   height: 112,
+                              //   onTap: () => context.pushNamed(
+                              //     AppRoutes.movieDetails,
+                              //     queryParameters: {
+                              //       'id': cast.id.toString(),
+                              //       'type': type
+                              //     }
+                              //   ),
+                              //   imagePath: "",
+                              //   title: "Check",
+                              // );
+                              return SizedBox(
+                                width: 200,
+                                height: 112,
+                                child: YoutubePlayer(
+                                  controller: _controller,
+                                  aspectRatio: 16 / 9,
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                        : MovieText(title: AppStrings.noVideosFound),
                       ],
                     ),
                   ),

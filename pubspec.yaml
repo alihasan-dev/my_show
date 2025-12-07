@@ -44,6 +44,7 @@ dependencies:
   hooks_riverpod: ^3.0.3
   flutter_svg: ^2.2.1
   cached_network_image: ^3.4.1
+  youtube_player_iframe: ^5.2.2
 
 dev_dependencies:
   flutter_test:

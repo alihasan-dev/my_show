@@ -45,4 +45,5 @@ class AppStrings {
   static const String recommendations = 'Recommendations';
   static const String noRecommendedMoviesFound = 'No recommended movies found';
   static const String noKeywordsFound = 'No keywords found';
+  static const String noVideosFound = 'No videos found';
 }

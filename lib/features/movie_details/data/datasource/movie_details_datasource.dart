@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../models/video_model.dart';
 import '/core/network/api_end_points.dart';
 import '/core/network/dio_provider.dart';
 import '/features/movie/data/models/trending_movies_model.dart';
@@ -16,6 +17,8 @@ abstract interface class MovieDetailsRemoteDatasource {
   Future<TrendingMoviesResponse> movieRecommentation({required String id, required String type}); 
 
   Future<MovieKeywordModel> movieKeywords({required String id, required String type}); 
+
+  Future<VideoModel> movieVideo({required String id, required String type}); 
 }
 
 class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
@@ -68,6 +71,19 @@ class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
       final response = await dioClient.get('/3/$type/$id/keywords');
       if (response.statusCode == 200) {
         return MovieKeywordModel.fromJson(response.data);
+      }
+      throw Exception();
+    } catch (e) {
+      throw Exception();   
+    }
+  }
+  
+  @override
+  Future<VideoModel> movieVideo({required String id, required String type}) async {
+    try {
+      final response = await dioClient.get('/3/$type/$id/videos');
+      if (response.statusCode == 200) {
+        return VideoModel.fromJson(response.data);
       }
       throw Exception();
     } catch (e) {
