@@ -22,6 +22,15 @@ class Movies {
   final String? originalLanguage;
   final String? originalTitle;
   final String? overview;
+
+  final String? name;
+  final String? knownForDepartment;
+  final String? originalName;
+  final String? mediaType;
+  final int? gender;
+  final String? profilePath;
+  final List<Movies> knownFor;
+
   final double? popularity;
   final String? posterPath;
   final String? releaseDate;
@@ -38,6 +47,15 @@ class Movies {
     this.originalLanguage = '',
     this.originalTitle = '',
     this.overview = '',
+
+    this.name = '',
+    this.knownForDepartment = '',
+    this.originalName = '',
+    this.mediaType = '',
+    this.gender = -1,
+    this.profilePath = '',
+    this.knownFor = const [],
+
     this.popularity = 0.0,
     this.posterPath = '',
     this.releaseDate = '',

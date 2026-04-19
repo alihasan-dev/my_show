@@ -19,10 +19,10 @@ class SearchMovieKeywordNotifier extends StateNotifier<AsyncValue<SearchMoviesKe
         state = AsyncValue.error(failure.message, StackTrace.current);
       },
       (entity) {
+        if ((entity.result ?? []).isNotEmpty) pageCount+=1;
         movieList.addAll(entity.result ?? []);
         entity.result = movieList;
         state = AsyncValue.data(entity);
-        pageCount+=1;
       },
     );
     return state;

@@ -13,14 +13,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: 'MyShow',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFF121212),
         cardColor: const Color(0xFF1E1E1E),
         colorScheme: const ColorScheme.dark(
-          primary: Color(0xFFBB86FC),
+          primary: Color(0xFF03DAC6),
           secondary: Color(0xFF03DAC6),
           error: Color(0xFFCF6679),
         ),

@@ -5,6 +5,8 @@ import '../../features/movie_details/presentation/page/movie_details_screen.dart
 import '../../features/profile/presentation/pages/profile_screen.dart';
 import '../../features/view_all/presentation/page/view_all_screen.dart';
 import '../../features/search/presentation/pages/search_movie_by_keyword_screen.dart';
+import '../../features/movie_details/presentation/page/video_player_screen.dart';
+import '../../features/movie_details/domain/entities/video_entity.dart';
 
 class AppRoutes {
 
@@ -18,6 +20,7 @@ class AppRoutes {
   static const String profile = '/profile';
   static const String searchMovieByKeywordScreen = '/search_movie_by_keyword';
   static const String viewAll = '/view_all';
+  static const String videoPlayer = '/video_player';
 
   static final GoRouter routes = GoRouter(
     routes: [
@@ -66,6 +69,17 @@ class AppRoutes {
             id: int.parse(id),
             name: name,
             type: type,
+          );
+        }
+      ),
+      GoRoute(
+        name: videoPlayer,
+        path: videoPlayer,
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>;
+          return VideoPlayerScreen(
+            videos: extra['videos'] as List<Results>,
+            initialIndex: extra['initialIndex'] as int? ?? 0,
           );
         }
       ),

@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:movie_db/core/constants/app_strings.dart';
 import '../../../../core/constants/movie_colors.dart';
 
 class ViewAllWidget extends StatelessWidget {
@@ -43,7 +44,7 @@ class ViewAllWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "View All",
+                    AppStrings.viewAll,
                     style: TextStyle(
                       color: MovieColors.white.withValues(alpha: 0.9),
                       fontSize: 16,

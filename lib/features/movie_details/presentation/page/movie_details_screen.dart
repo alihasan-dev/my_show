@@ -1,8 +1,8 @@
-import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../provider/movie_video_provider.dart';
 import '/core/widgets/vote_percentage_widget.dart';
@@ -140,7 +140,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                   ),
                                 ],
                               ),
-                            )
+                            ),
                           ],
                         ),
                         if (!(movieData.tagline ?? '').isBlank)
@@ -156,20 +156,22 @@ class MovieDetailsScreen extends HookConsumerWidget {
                               ),
                             ],
                           ),
-                        const SizedBox(height: 10),
-                        MovieText(
-                          title: AppStrings.overview,
-                          style: theme.titleMedium?.copyWith(
-                            color: MovieColors.textPrimary,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600
+                        if (!(movieData.overview ?? '').isBlank) ...[
+                          const SizedBox(height: 10),
+                          MovieText(
+                            title: AppStrings.overview,
+                            style: theme.titleMedium?.copyWith(
+                              color: MovieColors.textPrimary,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          movieData.overview ?? '',
-                          style: TextStyle(color: Colors.grey),
-                        ),
+                          const SizedBox(height: 8),
+                          Text(
+                            movieData.overview ?? '',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
                         if (movieCastList.isNotEmpty) ...[
                           const SizedBox(height: 24),
                           MovieText(
@@ -223,12 +225,13 @@ class MovieDetailsScreen extends HookConsumerWidget {
                               itemBuilder: (context, index) {
                                 final cast = movieCrewList[index];
                                 return MovieCastBanner(
-                                  onTap: () => context.pushNamed(
-                                    AppRoutes.profile,
-                                    queryParameters: {
-                                      'userId': '${cast.id}'
-                                    }
-                                  ),
+                                  onTap: () {
+                                    if (cast.id == null) return;
+                                    context.pushNamed(
+                                      AppRoutes.profile,
+                                      queryParameters: {'userId': '${cast.id}'}
+                                    );
+                                  },
                                   imagePath: (cast.profilePath ?? '').generateImageURL,
                                   title: cast.name ?? '',
                                   subTitle: cast.job ?? '',
@@ -414,40 +417,64 @@ class MovieDetailsScreen extends HookConsumerWidget {
                         const SizedBox(height: 10),
                         movieVideoList.isNotEmpty
                         ? SizedBox(
-                          height: 160,
+                          height: 180,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: movieVideoList.length,
-                            separatorBuilder: (_,_) => const SizedBox(width: 12),
+                            separatorBuilder: (_, __) => const SizedBox(width: 12),
                             itemBuilder: (context, index) {
                               final video = movieVideoList[index];
-                              ////youtube player id
-                              final _controller = YoutubePlayerController.fromVideoId(
-                                videoId: "NOhDyUmT9z0",
-                                autoPlay: false,
-                                params: const YoutubePlayerParams(showFullscreenButton: true),
-                              );
-                              ///
-                              ///
-                              // return MovieCastBanner(
-                              //   width: 200,
-                              //   height: 112,
-                              //   onTap: () => context.pushNamed(
-                              //     AppRoutes.movieDetails,
-                              //     queryParameters: {
-                              //       'id': cast.id.toString(),
-                              //       'type': type
-                              //     }
-                              //   ),
-                              //   imagePath: "",
-                              //   title: "Check",
-                              // );
-                              return SizedBox(
-                                width: 200,
-                                height: 112,
-                                child: YoutubePlayer(
-                                  controller: _controller,
-                                  aspectRatio: 16 / 9,
+                              final thumbnailUrl = YoutubePlayer.getThumbnail(videoId: video.key ?? '');
+                              return GestureDetector(
+                                onTap: () => context.pushNamed(
+                                  AppRoutes.videoPlayer,
+                                  extra: {
+                                    'videos': movieVideoList,
+                                    'initialIndex': index,
+                                  },
+                                ),
+                                child: SizedBox(
+                                  width: 250,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            MovieImageWidget(
+                                              imagePath: thumbnailUrl,
+                                              height: 140,
+                                              width: 250,
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: MovieColors.black.withValues(alpha: 0.5),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              padding: const EdgeInsets.all(8),
+                                              child: const Icon(
+                                                Icons.play_arrow_rounded,
+                                                color: MovieColors.white,
+                                                size: 32,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 6),
+                                      MovieText(
+                                        title: video.name ?? '',
+                                        maxLine: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          color: MovieColors.textPrimary,
+                                          fontSize: 13,
+                                        )
+                                      )
+                                    ],
+                                  ),
                                 ),
                               );
                             },

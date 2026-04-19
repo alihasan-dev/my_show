@@ -57,74 +57,62 @@ class MovieImageWidget extends StatelessWidget {
     }
   }
 
-  Widget get _networkImageBuilder {
-    return CachedNetworkImage(
-      imageUrl: imagePath,
-      height: height,
-      width: width,
-      fit: fit,
-      placeholder: (_,_) => _imageShimmerLoader,
-      errorWidget: (_,_,_) => _imageErrorBuilder,
-    );
-  }
+  Widget get _networkImageBuilder => CachedNetworkImage(
+    imageUrl: imagePath,
+    height: height,
+    width: width,
+    fit: fit,
+    placeholder: (_,_) => _imageShimmerLoader,
+    errorWidget: (_,_,_) => _imageErrorBuilder,
+  );
 
-  Widget get _svgNetworkImageBuilder {
-    return SvgPicture.network(
-      imagePath,
+  Widget get _svgNetworkImageBuilder => SvgPicture.network(
+    imagePath,
+    width: width,
+    height: height,
+    fit: fit,
+    errorBuilder: (_,_,_) => _imageErrorBuilder,
+    placeholderBuilder: (_) => _imageShimmerLoader,
+  );
+
+  Widget get _svgAssetImageBuilder => SvgPicture.asset(
+    imagePath,
+    width: width,
+    height: height,
+    fit: fit,
+    errorBuilder: (_,_,_) => _imageErrorBuilder,
+    placeholderBuilder: (_) => _imageShimmerLoader,
+  );
+
+  Widget get _imageAssetBuilder => Image.asset(
+    imagePath,
+    width: width,
+    height: height,
+    fit: fit,
+    errorBuilder: (_,_,_) => _imageErrorBuilder
+  );
+
+  Widget get _imageShimmerLoader => Shimmer.fromColors(
+    baseColor: Color(0xFF2A2A2A), // Dark shimmer base
+    highlightColor: Color(0xFF3A3A3A), // Subtle highlight
+    child: Container(
       width: width,
       height: height,
-      fit: fit,
-      errorBuilder: (_,_,_) => _imageErrorBuilder,
-      placeholderBuilder: (_) => _imageShimmerLoader,
-    );
-  }
+      color: Color(0xFF2C2C2C)
+    ),
+  );
 
-  Widget get _svgAssetImageBuilder {
-    return SvgPicture.asset(
-      imagePath,
-      width: width,
-      height: height,
-      fit: fit,
-      errorBuilder: (_,_,_) => _imageErrorBuilder,
-      placeholderBuilder: (_) => _imageShimmerLoader,
-    );
-  }
-
-  Widget get _imageAssetBuilder {
-    return Image.asset(
-      imagePath,
-      width: width,
-      height: height,
-      fit: fit,
-      errorBuilder: (_,_,_) => _imageErrorBuilder
-    );
-  }
-
-  Widget get _imageShimmerLoader {
-    return Shimmer.fromColors(
-      baseColor: Color(0xFF2A2A2A), // Dark shimmer base
-      highlightColor: Color(0xFF3A3A3A), // Subtle highlight
-      child: Container(
-        width: width,
-        height: height,
-        color: Color(0xFF2C2C2C)
+  Widget get _imageErrorBuilder => Container(
+    width: width,
+    height: height,
+    color: MovieColors.grey.withValues(alpha: 0.3),
+    child: Center(
+      child: Icon(
+        Icons.broken_image,
+        size: 40,
+        color: MovieColors.grey,
       ),
-    );
-  }
-
-  Widget get _imageErrorBuilder {
-    return Container(
-      width: width,
-      height: height,
-      color: MovieColors.grey.withValues(alpha: 0.3),
-      child: Center(
-        child: Icon(
-          Icons.broken_image,
-          size: 40,
-          color: MovieColors.grey,
-        ),
-      ),
-    );
-  }
+    ),
+  );
 
 }

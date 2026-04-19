@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/features/movie_details/domain/entities/video_entity.dart';
+import '../../domain/entities/video_entity.dart';
 import '../../domain/usecases/movie_video_usecase.dart';
 
 final movieVideoProvider = FutureProvider.autoDispose.family<VideoEntity, ({String id, String type})>((ref, param) async {

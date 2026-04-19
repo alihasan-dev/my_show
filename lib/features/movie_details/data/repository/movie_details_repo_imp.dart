@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/features/movie_details/domain/entities/video_entity.dart';
+import '../../domain/entities/video_entity.dart';
 import '/core/network/check_connectivity.dart';
 import '/core/utils/custom_exception.dart';
 import '/features/movie/domain/entities/trending_movie_entity.dart';
