@@ -2,14 +2,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/constants/app_strings.dart';
 import '/core/constants/movie_colors.dart';
 import '/core/utils/app_extension_method.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../provider/popular_people_provider.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/widgets/movie_text.dart';
-import '../provider/popular_people_provider.dart';
+import '../../../../core/widgets/no_data_widget.dart';
+import '../../../../core/widgets/people_shimmer_widget.dart';
 
 class PeopleScreen extends HookConsumerWidget {
 
@@ -48,6 +49,14 @@ class PeopleScreen extends HookConsumerWidget {
         top: false,
         child: peopleList.when(
           data: (data) {
+            if ((data.results ?? []).isEmpty) {
+              return NoDataWidget(
+                icon: Icons.people_outline_rounded,
+                title: 'No People Found',
+                subtitle: 'Popular people aren\'t available right now.\nPlease try again later.',
+                onRetry: () => ref.read(popularPeopleProvider.notifier).popularPeople(),
+              );
+            }
             return GridView.builder(
               controller: scrollController,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -67,12 +76,13 @@ class PeopleScreen extends HookConsumerWidget {
                   fit: StackFit.expand,
                   children: [
                     MovieImageWidget(
-                      onTap: () => context.pushNamed(
-                        AppRoutes.profile,
-                        queryParameters: {
-                          'userId': '${people.id}',
-                        }
-                      ),
+                      onTap: () {
+                        if ((people.id ?? -1).isNegative) return;
+                        context.pushNamed(
+                          AppRoutes.profile,
+                          queryParameters: {'userId': '${people.id}'}
+                        );
+                      },
                       imagePath: (people.profilePath ?? '').generateImageURL
                     ),
                     Positioned(
@@ -99,8 +109,13 @@ class PeopleScreen extends HookConsumerWidget {
               }
             );
           }, 
-          error: (_,_) => Center(child: MovieText(title: AppStrings.noDataAvailable)), 
-          loading: () => Center(child: CircularProgressIndicator())
+          error: (_,_) => NoDataWidget(
+            icon: Icons.error_outline_rounded,
+            title: 'Something Went Wrong',
+            subtitle: 'We couldn\'t load the people list.\nPlease check your connection and try again.',
+            onRetry: () => ref.read(popularPeopleProvider.notifier).popularPeople(),
+          ), 
+          loading: () => const PeopleShimmerWidget()
         ),
       ),
     );

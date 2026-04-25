@@ -81,9 +81,7 @@ class MovieDetailsShimmer extends StatelessWidget {
                 color: Color(0xFF2C2C2C),
               ),
             ),
-
             const SizedBox(height: 12),
-
             // Overview text shimmer
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -122,7 +120,7 @@ class MovieDetailsShimmer extends StatelessWidget {
               child: ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 scrollDirection: Axis.horizontal,
-                itemCount: 4,
+                itemCount: 6,
                 separatorBuilder: (_, __) => const SizedBox(width: 12),
                 itemBuilder: (context, index) => Column(
                   children: [
@@ -145,13 +143,13 @@ class MovieDetailsShimmer extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            // Cast list shimmer
+            // Crew list shimmer
             SizedBox(
               height: 150,
               child: ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 scrollDirection: Axis.horizontal,
-                itemCount: 4,
+                itemCount: 6,
                 separatorBuilder: (_, __) => const SizedBox(width: 12),
                 itemBuilder: (context, index) => Column(
                   children: [
@@ -170,6 +168,34 @@ class MovieDetailsShimmer extends StatelessWidget {
                       color: Color(0xFF2C2C2C),
                     ),
                   ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 18),
+            // Additional info shimmer
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Container(
+                height: 18,
+                width: 100,
+                color: Color(0xFF2C2C2C),
+              ),
+            ),
+            const SizedBox(height: 12),
+            // Additional info text shimmer
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: List.generate(
+                  3,
+                  (index) => Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Container(
+                      height: 14,
+                      width: width * 0.9,
+                      color: Color(0xFF2C2C2C),
+                    ),
+                  ),
                 ),
               ),
             ),

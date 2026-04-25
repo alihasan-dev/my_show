@@ -79,7 +79,7 @@ class ProfileShimmerLoader extends StatelessWidget {
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   scrollDirection: Axis.horizontal,
-                  itemCount: 4,
+                  itemCount: 5,
                   separatorBuilder: (_, __) => const SizedBox(width: 12),
                   itemBuilder: (_, __) => Container(
                     height: 150,
@@ -92,18 +92,31 @@ class ProfileShimmerLoader extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-                child: Column(
-                  children: List.generate(
-                    2,
-                    (index) => Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: Container(
-                        height: 14,
-                        width: double.infinity,
-                        color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
-                      ),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Container(
+                  height: 16,
+                  width: 120,
+                  color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
+                ),
+              ),
+              const SizedBox(height: 12),
+              // Horizontal scroll for movies
+              SizedBox(
+                height: 150,
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  separatorBuilder: (_, __) => const SizedBox(width: 12),
+                  itemBuilder: (_, __) => Container(
+                    height: 150,
+                    width: 100,
+                    // color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
                     ),
                   ),
                 ),

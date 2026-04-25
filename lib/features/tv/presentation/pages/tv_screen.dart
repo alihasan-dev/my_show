@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/constants/app_strings.dart';
 import '../provider/nowplaying_provider.dart';
 import '../provider/popular_show_provider.dart';
 import '../provider/trending_tv_show_provider.dart';
 import '../widgets/tv_show_widget.dart';
+import '../../../../core/constants/app_strings.dart';
+import '../../../../core/widgets/movie_shimmer_widget.dart';
 import '../../../../features/tv/presentation/provider/top_rated_show_provider.dart';
 import '../../../../features/tv/presentation/provider/upcoming_show_provider.dart';
 import '../../../../core/routes/app_routes.dart';
@@ -91,7 +92,7 @@ class TvScreen extends HookConsumerWidget {
           );
         },
         error: (message,_) => Center(child: Text('$message')), 
-        loading: () => const Center(child: CircularProgressIndicator())
+        loading: () => const MovieShimmerWidget()
       ),
     );
   }

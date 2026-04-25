@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/constants/app_strings.dart';
 import '../provider/credit_tv_provider.dart';
 import '../widgets/profile_shimmer_loader.dart';
 import '../provider/credit_movies_provider.dart';
 import '../provider/profile_details_provider.dart';
 import '../widgets/profile_info_title.dart';
+import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_extension_method.dart';
@@ -163,6 +163,8 @@ class ProfileScreen extends HookConsumerWidget {
                           child: Theme(
                             data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                             child: ExpansionTile(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               title: MovieText(
                                 title: AppStrings.personalInfo,
                                 style: theme.bodyMedium?.copyWith(
@@ -173,11 +175,9 @@ class ProfileScreen extends HookConsumerWidget {
                               ),
                               initiallyExpanded: true,
                               tilePadding: EdgeInsets.symmetric(horizontal: 15),
-                              childrenPadding: EdgeInsets.symmetric(
-                                horizontal: 15,
-                              ),
+                              childrenPadding: EdgeInsets.symmetric(horizontal: 15),
                               children: [
-                                if (data.knownFor != null)
+                                if (!(data.knownFor ?? '').isBlank)
                                   ProfileInfoTitle(
                                     title: AppStrings.knownFor,
                                     value: data.knownFor ?? '',
@@ -187,19 +187,19 @@ class ProfileScreen extends HookConsumerWidget {
                                     title: AppStrings.gender,
                                     value: data.gender!.parseGender,
                                   ),
-                                if (data.birthday != null)
+                                if (!(data.birthday ?? '').isBlank)
                                   ProfileInfoTitle(
                                     title: AppStrings.birthday,
                                     value: data.birthday!.formatDOB(
                                       hideYrs: (data.deathDay ?? '').isNotEmpty,
                                     ),
                                   ),
-                                if ((data.deathDay ?? '').isNotEmpty)
+                                if (!(data.deathDay ?? '').isBlank)
                                   ProfileInfoTitle(
                                     title: AppStrings.dayOfDeath,
                                     value: data.deathDay!.formatDOB(),
                                   ),
-                                if (data.birthPlace != null)
+                                if (!(data.birthPlace ?? '').isBlank)
                                   ProfileInfoTitle(
                                     title: AppStrings.placeOfBirth,
                                     value: data.birthPlace ?? '',

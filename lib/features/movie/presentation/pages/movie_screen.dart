@@ -9,6 +9,7 @@ import '../provider/now_playing_provider.dart';
 import '../provider/popular_movies_provider.dart';
 import '../provider/trending_movies_provider.dart';
 import '../provider/upcoming_movie_provider.dart';
+import '../../../../core/widgets/movie_shimmer_widget.dart';
 
 class MoviesScreen extends HookConsumerWidget {
 
@@ -35,6 +36,7 @@ class MoviesScreen extends HookConsumerWidget {
                 title: AppStrings.trending,
                 movieList: data.result,
               ),
+              SizedBox(height: 10),
               TrendingMoviesWidgets(
                 title: AppStrings.nowPlaying,
                 movieList: nowPlayingMoviesList,
@@ -48,6 +50,7 @@ class MoviesScreen extends HookConsumerWidget {
                   );
                 },
               ),
+              SizedBox(height: 10),
               TrendingMoviesWidgets(
                 title: AppStrings.popular,
                 movieList: popularMoviesList,
@@ -61,6 +64,7 @@ class MoviesScreen extends HookConsumerWidget {
                   );
                 },
               ),
+              SizedBox(height: 10),
               TrendingMoviesWidgets(
                 title: AppStrings.topRated,
                 movieList: topRatedMoviesList,
@@ -74,6 +78,7 @@ class MoviesScreen extends HookConsumerWidget {
                   );
                 },
               ),
+              SizedBox(height: 10),
               TrendingMoviesWidgets(
                 title: AppStrings.upcoming,
                 movieList: upcomingMoviesList,
@@ -91,7 +96,7 @@ class MoviesScreen extends HookConsumerWidget {
           );
         },
         error: (message, _) => Center(child: Text('$message')), 
-        loading: () => const Center(child: CircularProgressIndicator())
+        loading: () => const MovieShimmerWidget()
       ),
     );
   }

@@ -37,7 +37,7 @@ class TrendingShow {
     this.originalName = '',
     this.overview = '',
     this.posterPath = '',
-    this.mediaType = 'movie',
+    this.mediaType = 'tv',
     this.originalLanguage = 'en',
     this.genreId = const [],
     this.popularity = 0.0,

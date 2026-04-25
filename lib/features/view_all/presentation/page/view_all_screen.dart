@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/constants/app_strings.dart';
+import 'package:movie_db/core/widgets/people_shimmer_widget.dart';
 import '../../../../core/constants/movie_colors.dart';
+import '../../../../core/widgets/no_data_widget.dart';
 import '../provider/view_all_provider.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
@@ -50,14 +51,24 @@ class ViewAllScreen extends HookConsumerWidget {
     
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: MovieText(
-          title: showCategory.capitalizeWord
+          title: showCategory.capitalizeWord,
+          style: TextStyle(fontSize: 18),
         ),
       ),
       body: SafeArea(
         top: false,
         child: showList.when(
           data: (data) {
+            if (data.result.isEmpty) {
+              return NoDataWidget(
+                icon: Icons.people_outline_rounded,
+                title: 'No ${showCategory.capitalizeWord} Found',
+                subtitle: '${showCategory.capitalizeWord} aren\'t available right now.\nPlease try again later.',
+                onRetry: () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory),
+              );
+            }
             return GridView.builder(
               controller: scrollController,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -77,13 +88,16 @@ class ViewAllScreen extends HookConsumerWidget {
                   fit: StackFit.expand,
                   children: [
                     MovieImageWidget(
-                      onTap: () => context.pushNamed(
-                        AppRoutes.movieDetails,
-                        queryParameters: {
-                          'id': '${show.id}',
-                          'type': showType
-                        }
-                      ),
+                      onTap: () {
+                        if (show.id.isNegative || showType.isBlank) return;
+                        context.pushNamed(
+                          AppRoutes.movieDetails,
+                          queryParameters: {
+                            'id': '${show.id}',
+                            'type': showType
+                          }
+                        );
+                      },
                       imagePath: show.posterPath.generateImageURL
                     ),
                     Positioned(
@@ -104,14 +118,19 @@ class ViewAllScreen extends HookConsumerWidget {
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 );
               }
             );
           }, 
-          error: (_,_) => Center(child: MovieText(title: AppStrings.noDataAvailable)), 
-          loading: () => Center(child: CircularProgressIndicator())
+          error: (_,_) => NoDataWidget(
+            icon: Icons.error_outline_rounded,
+            title: 'Something Went Wrong',
+            subtitle: 'We couldn\'t load the ${showCategory.toLowerCase()} list.\nPlease check your connection and try again.',
+            onRetry: () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory),
+          ), 
+          loading: () => const PeopleShimmerWidget()
         ),
       ),
     );

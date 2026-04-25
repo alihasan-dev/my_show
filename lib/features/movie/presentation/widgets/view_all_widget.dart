@@ -75,7 +75,7 @@ class ViewAllWidget extends StatelessWidget {
                       size: 20,
                       color: MovieColors.white.withValues(alpha: 0.8),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

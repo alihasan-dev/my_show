@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:movie_db/core/utils/custom_snackbar.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../provider/movie_video_provider.dart';
@@ -80,8 +81,8 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                 children: [
                                   Text(
                                     type == 'movie'
-                                    ? '${movieData.title ?? ''} (${year.first})'
-                                    : '${movieData.name ?? ''} (${year.first})',
+                                    ? '${movieData.title ?? ''} ${year.isEmpty ? '' : '(${year.first})'}'
+                                    : '${movieData.name ?? ''} ${year.isEmpty ? '' : '(${year.first})'}',
                                     style: TextStyle(
                                       fontSize: 18, 
                                       fontWeight: FontWeight.bold,
@@ -125,15 +126,42 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                       ),
                                       const SizedBox(width: 12),
                                       IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          CustomSnackBar.show(
+                                            context, 
+                                            message: AppStrings.comingSoon
+                                          );
+                                        },
                                         icon: const Icon(Icons.favorite_border),
                                       ),
                                       IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          CustomSnackBar.show(
+                                            context, 
+                                            message: AppStrings.comingSoon
+                                          );
+                                        },
                                         icon: const Icon(Icons.bookmark_border),
                                       ),
                                       IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          if (movieVideoList.isEmpty) {
+                                            CustomSnackBar.show(
+                                              context, 
+                                              message: type == 'movie'
+                                              ? AppStrings.noMovieVideosAvailable
+                                              : AppStrings.noTvVideosAvailable
+                                            );
+                                            return;
+                                          }
+                                          context.pushNamed(
+                                            AppRoutes.videoPlayer,
+                                            extra: {
+                                              'videos': movieVideoList,
+                                              'initialIndex': 0,
+                                            },
+                                          );
+                                        },
                                         icon: const Icon(Icons.play_circle),
                                       ),
                                     ],
@@ -184,7 +212,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           ),
                           const SizedBox(height: 10),
                           SizedBox(
-                            height: 230,
+                            height: 236,
                             child: ListView.separated(
                               scrollDirection: Axis.horizontal,
                               itemCount: movieCastList.length,
@@ -217,7 +245,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           ),
                           const SizedBox(height: 10),
                           SizedBox(
-                            height: 230,
+                            height: 236,
                             child: ListView.separated(
                               scrollDirection: Axis.horizontal,
                               itemCount: movieCrewList.length,
@@ -369,7 +397,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           )
                         : MovieText(title: AppStrings.noKeywordsFound),
                         ////recommendations
-                        const SizedBox(height: 18),
+                        const SizedBox(height: 20),
                         MovieText(
                           title: AppStrings.recommendations,
                           style: theme.titleMedium?.copyWith(
@@ -381,7 +409,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                         const SizedBox(height: 10),
                         recommendedMovieList.isNotEmpty
                         ? SizedBox(
-                          height: 160,
+                          height: 162,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: recommendedMovieList.length,
@@ -405,9 +433,9 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           ),
                         )
                         : MovieText(title: AppStrings.noRecommendedMoviesFound),
-                        const SizedBox(height: 18),
+                        const SizedBox(height: 10),
                         MovieText(
-                          title: "Videos",
+                          title: AppStrings.videos,
                           style: theme.titleMedium?.copyWith(
                             color: MovieColors.textPrimary,
                             fontSize: 18,

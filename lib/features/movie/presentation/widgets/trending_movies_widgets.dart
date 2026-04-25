@@ -40,7 +40,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
         ),
         SizedBox(height: 10),
         SizedBox(
-          height: 300,
+          height: 301,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: viewAll != null
@@ -107,6 +107,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
                               ),
                               MovieText(
                                 title: movie.releaseDate.formatDOB(hideYrs: true),
+                                maxLine: 1,
                                 style: theme.textTheme.bodySmall?.copyWith(
                                   color: MovieColors.textSecondary
                                 ),

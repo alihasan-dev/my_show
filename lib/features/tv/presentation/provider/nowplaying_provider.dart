@@ -1,5 +1,4 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../domain/entities/trending_tvshow_entity.dart';
 import '../../domain/usecases/now_playing_usecase.dart';
 

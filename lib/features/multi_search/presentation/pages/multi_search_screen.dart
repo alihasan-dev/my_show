@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:movie_db/core/widgets/movie_tv_search_widget.dart';
+import '../../../../core/widgets/custom_gradient_button.dart';
 import '../../../../core/widgets/movie_carousel_widget.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/movie_colors.dart';
@@ -12,6 +13,7 @@ import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/routes/app_routes.dart';
+import '../../../search/presentation/widgets/search_shimmer_widget.dart';
 import '../providers/multi_search_provider.dart';
 
 class MultiSearchScreen extends HookConsumerWidget {
@@ -176,41 +178,16 @@ class MultiSearchScreen extends HookConsumerWidget {
                                         style: TextStyle(color: MovieColors.textPrimary),
                                       ),
                                       SizedBox(height: 10),
-                                      InkWell(
-                                        borderRadius: BorderRadius.circular(20),
+                                      CustomGradientButton(
+                                        label: AppStrings.viewProfile,
                                         onTap: () {
                                           if (movie.id == null) return;
                                           context.pushNamed(
                                             AppRoutes.profile,
                                             queryParameters: {'userId': '${movie.id}'}
                                           );
-                                        },
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-                                          decoration: ShapeDecoration(
-                                            shape: StadiumBorder(
-                                              side: BorderSide(
-                                                color: MovieColors.white.withValues(alpha: 0.25),
-                                                width: 1.5,
-                                              )
-                                            ),
-                                            gradient: LinearGradient(
-                                              colors: [
-                                                MovieColors.white.withValues(alpha: 0.20),
-                                                MovieColors.white.withValues(alpha: 0.05),
-                                              ],
-                                              begin: Alignment.topLeft,
-                                              end: Alignment.bottomRight,
-                                            ),
-                                          ),
-                                          child: MovieText(
-                                            title: AppStrings.viewProfile,
-                                            style: theme.textTheme.labelMedium?.copyWith(
-                                              color: MovieColors.white.withValues(alpha: 0.8)
-                                            ),
-                                          )
-                                        ),
-                                      )
+                                        }
+                                      ),
                                     ],
                                   )
                                 ],
@@ -264,7 +241,7 @@ class MultiSearchScreen extends HookConsumerWidget {
                     }
                   ),
                   if (showLoader.value)
-                    const Center(child: CircularProgressIndicator()),
+                    const SearchShimmerWidget(padding: EdgeInsets.zero),
                 ],
               ),
             ),

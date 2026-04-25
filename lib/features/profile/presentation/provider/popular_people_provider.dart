@@ -18,10 +18,10 @@ class PopularPeopleNotifier extends StateNotifier<AsyncValue<PopularPeopleEntity
         state = AsyncValue.error(failure.message, StackTrace.current);
       },
       (entity) {
+        if ((entity.results ?? []).isNotEmpty) pageCount+=1;
         popularPeopleList.addAll(entity.results ?? []);
         entity.results = popularPeopleList;
         state = AsyncValue.data(entity);
-        pageCount+=1;
       },
     );
     return state;

@@ -40,7 +40,7 @@ class TvShowWidgets extends StatelessWidget {
         ),
         SizedBox(height: 10),
         SizedBox(
-          height: 300,
+          height: 301,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: viewAll != null
@@ -74,10 +74,10 @@ class TvShowWidgets extends StatelessWidget {
                           index == tvShowList.length
                           ? ViewAllWidget()
                           : MovieImageWidget(
-                            imagePath: tvShow.posterPath.generateImageURL,
-                            width: double.maxFinite,
-                            height: 200
-                          ),
+                              imagePath: tvShow.posterPath.generateImageURL,
+                              width: double.maxFinite,
+                              height: 200
+                            ),
                           if (index != tvShowList.length)
                             Positioned(
                               bottom: 0,
@@ -107,6 +107,8 @@ class TvShowWidgets extends StatelessWidget {
                               ),
                               MovieText(
                                 title: tvShow.firstAirDate.formatDOB(hideYrs: true),
+                                maxLine: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: theme.textTheme.bodySmall?.copyWith(
                                   color: MovieColors.textSecondary
                                 ),

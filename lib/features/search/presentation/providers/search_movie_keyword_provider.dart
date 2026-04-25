@@ -11,7 +11,6 @@ class SearchMovieKeywordNotifier extends StateNotifier<AsyncValue<SearchMoviesKe
 
   SearchMovieKeywordNotifier(this.searchMovieKeywordUsecase) : super(AsyncValue.loading());
 
-
   Future<AsyncValue<SearchMoviesKeywordEntity>> searchMovieKeyword({required String query, required String type}) async {
     final result = await searchMovieKeywordUsecase.searchMovieKeyword(query: query, type: type, pageCount: pageCount);
     result.fold(
@@ -30,6 +29,6 @@ class SearchMovieKeywordNotifier extends StateNotifier<AsyncValue<SearchMoviesKe
 
 }
 
-final searchMovieKeywordProvider = StateNotifierProvider.autoDispose<SearchMovieKeywordNotifier, AsyncValue<SearchMoviesKeywordEntity>>((ref) {
+final searchMovieKeywordProvider = StateNotifierProvider.autoDispose.family<SearchMovieKeywordNotifier, AsyncValue<SearchMoviesKeywordEntity>, String>((ref, query) {
   return SearchMovieKeywordNotifier(ref.read(searchMovieKeywordUseCaseProvider));
 });

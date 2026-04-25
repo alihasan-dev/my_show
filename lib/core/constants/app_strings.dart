@@ -29,6 +29,8 @@ class AppStrings {
   static const String tvShows = 'TV Shows';
   static const String people = 'People';
   static const String searchFor = 'Search for ';
+  static const String videos = 'Videos';
+  static const String retry = 'Retry';
 
   static const String overview = 'Overview';
   static const String cast = 'Cast';
@@ -52,6 +54,9 @@ class AppStrings {
   static const String search = 'Search';
   static const String viewAll = 'View All';
   static const String viewProfile = 'View Profile';
+  static const String noMovieVideosAvailable = 'No trailer/video available for this movie';
+  static const String noTvVideosAvailable = 'No trailer/video available for this show';
+  static const String comingSoon = 'Coming soon';
 
   static const List<String> searchHints = [
     'Try "Inception", "Breaking Bad"...',
