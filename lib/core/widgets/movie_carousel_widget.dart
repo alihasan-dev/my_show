@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_db/core/constants/movie_colors.dart';
+import 'package:my_show/core/constants/movie_colors.dart';
 
 class MovieCarouselWidget extends StatefulWidget {
   final int itemCount;

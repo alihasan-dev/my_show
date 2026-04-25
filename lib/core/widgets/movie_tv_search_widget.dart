@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_db/core/widgets/movie_image_widget.dart';
-import 'package:movie_db/core/widgets/movie_text.dart';
+import 'package:my_show/core/widgets/movie_image_widget.dart';
+import 'package:my_show/core/widgets/movie_text.dart';
 import '../constants/movie_colors.dart';
 import '../utils/app_extension_method.dart';
 

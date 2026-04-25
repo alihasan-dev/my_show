@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:movie_db/core/utils/custom_snackbar.dart';
+import 'package:my_show/core/utils/custom_snackbar.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../provider/movie_video_provider.dart';

@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:movie_db/core/constants/app_strings.dart';
+import 'package:my_show/core/constants/app_strings.dart';
 import '../../../../core/constants/movie_colors.dart';
 
 class ViewAllWidget extends StatelessWidget {

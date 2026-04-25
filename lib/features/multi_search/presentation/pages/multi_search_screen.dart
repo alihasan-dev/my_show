@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:movie_db/core/widgets/movie_tv_search_widget.dart';
+import 'package:my_show/core/widgets/movie_tv_search_widget.dart';
 import '../../../../core/widgets/custom_gradient_button.dart';
 import '../../../../core/widgets/movie_carousel_widget.dart';
 import '../../../../core/constants/app_strings.dart';

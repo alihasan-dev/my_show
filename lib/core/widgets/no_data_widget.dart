@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_db/core/widgets/custom_gradient_button.dart';
+import 'package:my_show/core/widgets/custom_gradient_button.dart';
 import '../constants/app_strings.dart';
 import '../constants/movie_colors.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:movie_db/core/widgets/people_shimmer_widget.dart';
+import 'package:my_show/core/widgets/people_shimmer_widget.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/widgets/no_data_widget.dart';
 import '../provider/view_all_provider.dart';

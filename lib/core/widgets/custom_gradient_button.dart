@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_db/core/widgets/movie_text.dart';
+import 'package:my_show/core/widgets/movie_text.dart';
 import '../constants/movie_colors.dart';
 
 class CustomGradientButton extends StatelessWidget {
