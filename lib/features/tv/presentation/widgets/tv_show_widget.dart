@@ -53,6 +53,12 @@ class TvShowWidgets extends StatelessWidget {
               : tvShowList[index];
               return InkWell(
                 borderRadius: BorderRadius.circular(12),
+                highlightColor: index != tvShowList.length
+                ? null
+                :Colors.transparent,
+                splashColor: index != tvShowList.length
+                ? null
+                :Colors.transparent,
                 onTap: () {
                   index == tvShowList.length
                   ? viewAll?.call()

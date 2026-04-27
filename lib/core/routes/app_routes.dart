@@ -89,9 +89,11 @@ class AppRoutes {
         builder: (context, state) {
           final showType = state.uri.queryParameters['showType']!;
           final showCategory = state.uri.queryParameters['showCategory']!;
+          final label = state.uri.queryParameters['label']!;
           return ViewAllScreen(
             showCategory: showCategory,
-            showType: showType
+            showType: showType,
+            label: label,
           );
         }
       ),

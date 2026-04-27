@@ -53,6 +53,12 @@ class TrendingMoviesWidgets extends StatelessWidget {
               : movieList[index];
               return InkWell(
                 borderRadius: BorderRadius.circular(12),
+                highlightColor: index != movieList.length
+                ? null
+                :Colors.transparent,
+                splashColor: index != movieList.length
+                ? null
+                :Colors.transparent,
                 onTap: () {
                   index == movieList.length
                   ? viewAll?.call()

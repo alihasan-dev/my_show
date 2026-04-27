@@ -16,10 +16,12 @@ class ViewAllScreen extends HookConsumerWidget {
   
   final String showType;
   final String showCategory;
+  final String label;
   
   const ViewAllScreen({
     required this.showCategory,
     required this.showType,
+    required this.label,
     super.key
   });
 
@@ -53,7 +55,7 @@ class ViewAllScreen extends HookConsumerWidget {
       appBar: AppBar(
         centerTitle: true,
         title: MovieText(
-          title: showCategory.capitalizeWord,
+          title: label.capitalizeWord,
           style: TextStyle(fontSize: 18),
         ),
       ),
@@ -64,8 +66,8 @@ class ViewAllScreen extends HookConsumerWidget {
             if (data.result.isEmpty) {
               return NoDataWidget(
                 icon: Icons.people_outline_rounded,
-                title: 'No ${showCategory.capitalizeWord} Found',
-                subtitle: '${showCategory.capitalizeWord} aren\'t available right now.\nPlease try again later.',
+                title: 'No ${label.capitalizeWord} Found',
+                subtitle: '${label.capitalizeWord} aren\'t available right now.\nPlease try again later.',
                 onRetry: () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory),
               );
             }
@@ -127,7 +129,7 @@ class ViewAllScreen extends HookConsumerWidget {
           error: (_,_) => NoDataWidget(
             icon: Icons.error_outline_rounded,
             title: 'Something Went Wrong',
-            subtitle: 'We couldn\'t load the ${showCategory.toLowerCase()} list.\nPlease check your connection and try again.',
+            subtitle: 'We couldn\'t load the ${label.toLowerCase()} list.\nPlease check your connection and try again.',
             onRetry: () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory),
           ), 
           loading: () => const PeopleShimmerWidget()

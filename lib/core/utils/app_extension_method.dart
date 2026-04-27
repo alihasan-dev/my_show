@@ -1,6 +1,6 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import '../../core/utils/language_code.dart';
-import '../constants/app_strings.dart';
 
 extension NumExtensionUtils on num {
 
@@ -9,7 +9,7 @@ extension NumExtensionUtils on num {
       final gender = this;
       switch (gender) {
         case 0:
-          return 'Not set / not specified';
+          return 'Not specified';
         case 1:
           return 'Female';
         case 2:
@@ -75,7 +75,7 @@ extension StringExtensionUtils on String {
     try {
       String value = this;
       if (value.isBlank) return value;
-      return value.split('_').map((item) => item.capitalize).join(' ');
+      return value.split(' ').map((item) => item.capitalize).join(' ');
     } catch (e) {
       return this;
     }
@@ -91,7 +91,7 @@ extension StringExtensionUtils on String {
 
   String get generateImageURL {
     try {
-      return "${AppStrings.imageBaseUrl}$this";
+      return "${dotenv.get('IMAGE_BASE_URL')}$this";
     } catch (e) {
       return this;
     }

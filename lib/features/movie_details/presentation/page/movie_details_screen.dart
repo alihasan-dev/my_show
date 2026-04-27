@@ -73,6 +73,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                             MovieImageWidget(
                               imagePath: (movieData.posterPath ?? '').generateImageURL,
                               height: 150,
+                              width: 106,
                             ),
                             const SizedBox(width: 16),
                             Expanded(

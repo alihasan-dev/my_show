@@ -44,7 +44,8 @@ class TvScreen extends HookConsumerWidget {
                     AppRoutes.viewAll,
                     queryParameters: {
                       'showType': 'tv',
-                      'showCategory': 'now_playing'
+                      'label': AppStrings.nowPlaying,
+                      'showCategory': 'on_the_air'
                     }
                   );
                 },
@@ -57,6 +58,7 @@ class TvScreen extends HookConsumerWidget {
                     AppRoutes.viewAll,
                     queryParameters: {
                       'showType': 'tv',
+                      'label': AppStrings.popular,
                       'showCategory': 'popular'
                     }
                   );
@@ -70,6 +72,7 @@ class TvScreen extends HookConsumerWidget {
                     AppRoutes.viewAll,
                     queryParameters: {
                       'showType': 'tv',
+                      'label': AppStrings.topRated,
                       'showCategory': 'top_rated'
                     }
                   );
@@ -83,7 +86,9 @@ class TvScreen extends HookConsumerWidget {
                     AppRoutes.viewAll,
                     queryParameters: {
                       'showType': 'tv',
-                      'showCategory': 'upcoming'
+                      'label': AppStrings.upcoming,
+                      'showCategory': 'airing_today',
+
                     }
                   );
                 },

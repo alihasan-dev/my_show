@@ -27,7 +27,7 @@ class SearchMovieDatasourceImp implements SearchMovieDatasource {
       if (type.startsWith('movie')) {
         endPoint = '/3/keyword/$query/movies?page=$pageCount';
       } else if (type.startsWith('tv')) {
-        endPoint = '/3/discover/tv?include_adult=true&include_null_first_air_dates=false&language=en-US&page=$pageCount&sort_by=popularity.desc&with_keywords=$query';
+        endPoint = '/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=$pageCount&sort_by=popularity.desc&with_keywords=$query';
       }
       final response = await dioClient.get(endPoint);
       if (response.statusCode == 200) {

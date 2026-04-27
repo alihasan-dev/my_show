@@ -1,9 +1,6 @@
 class AppStrings {
   AppStrings._();
 
-  static const String baseUrl = 'https://api.themoviedb.org';
-  static const String imageBaseUrl = "https://image.tmdb.org/t/p/w500";
-
   static const String biography = 'Biography';
   static const String readMore = 'Read More';
   static const String readLess = 'Read Less';

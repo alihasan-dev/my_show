@@ -45,6 +45,7 @@ class MoviesScreen extends HookConsumerWidget {
                     AppRoutes.viewAll,
                     queryParameters: {
                       'showType': 'movie',
+                      'label': AppStrings.nowPlaying,
                       'showCategory': 'now_playing'
                     }
                   );
@@ -59,6 +60,7 @@ class MoviesScreen extends HookConsumerWidget {
                     AppRoutes.viewAll,
                     queryParameters: {
                       'showType': 'movie',
+                      'label': AppStrings.popular,
                       'showCategory': 'popular'
                     }
                   );
@@ -73,6 +75,7 @@ class MoviesScreen extends HookConsumerWidget {
                     AppRoutes.viewAll,
                     queryParameters: {
                       'showType': 'movie',
+                      'label': AppStrings.topRated,
                       'showCategory': 'top_rated'
                     }
                   );
@@ -87,6 +90,7 @@ class MoviesScreen extends HookConsumerWidget {
                     AppRoutes.viewAll,
                     queryParameters: {
                       'showType': 'movie',
+                      'label': AppStrings.upcoming,
                       'showCategory': 'upcoming'
                     }
                   );
