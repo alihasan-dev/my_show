@@ -3,6 +3,7 @@ import '/features/tv/domain/entities/trending_tvshow_entity.dart';
 import '/features/tv/domain/usecases/top_rated_usecase.dart';
 
 final topRatedShowProvider = FutureProvider.autoDispose<TrendingTVShowEntity>((ref) async {
+  ref.keepAlive();
   final topRatedUseCase = ref.read(topRatedUasCaseProvider);
   final result = await topRatedUseCase.topRatedShows();
   return result.fold(
