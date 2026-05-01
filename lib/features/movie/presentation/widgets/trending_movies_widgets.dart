@@ -9,7 +9,6 @@ import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/widgets/vote_percentage_widget.dart';
 import '../../domain/entities/trending_movie_entity.dart';
 
-
 class TrendingMoviesWidgets extends StatelessWidget {
 
   final String title;

@@ -18,7 +18,7 @@ class DashboardRepositoryImp implements DashboardRepository {
   @override
   Future<Either<String, TrendingMoviesEntity>> trendingMovies() async {
     try {
-      if (await checkConnectivity.isConnected) {
+      if (await checkConnectivity.hasConnection) {
         final data = await remoteDatasource.trendingMovies();
         final movieEntity = TrendingMoviesEntity(
           page: data.page ?? 0,
@@ -56,7 +56,7 @@ class DashboardRepositoryImp implements DashboardRepository {
   @override
   Future<Either<CustomFailureException, TrendingMoviesEntity>> popularMovies({required int page}) async {
     try {
-      if (await checkConnectivity.isConnected) {
+      if (await checkConnectivity.hasConnection) {
         final data = await remoteDatasource.popularMovies(page: page);
         final movieEntity = TrendingMoviesEntity(
           page: data.page ?? 0,
@@ -94,7 +94,7 @@ class DashboardRepositoryImp implements DashboardRepository {
   @override
   Future<Either<CustomFailureException, TrendingMoviesEntity>> topRatedMovies({required int page}) async {
     try {
-      if (await checkConnectivity.isConnected) {
+      if (await checkConnectivity.hasConnection) {
         final data = await remoteDatasource.topRatedMovies(page: page);
         final movieEntity = TrendingMoviesEntity(
           page: data.page ?? 0,
@@ -132,7 +132,7 @@ class DashboardRepositoryImp implements DashboardRepository {
   @override
   Future<Either<CustomFailureException, TrendingMoviesEntity>> nowPlayingMovies({required int page}) async {
     try {
-      if (await checkConnectivity.isConnected) {
+      if (await checkConnectivity.hasConnection) {
         final data = await remoteDatasource.nowPlayingMovies(page: page);
         final movieEntity = TrendingMoviesEntity(
           page: data.page ?? 0,
@@ -170,7 +170,7 @@ class DashboardRepositoryImp implements DashboardRepository {
   @override
   Future<Either<CustomFailureException, TrendingMoviesEntity>> upcomingMovies({required int page}) async {
     try {
-      if (await checkConnectivity.isConnected) {
+      if (await checkConnectivity.hasConnection) {
         final data = await remoteDatasource.upcomingMovies(page: page);
         final movieEntity = TrendingMoviesEntity(
           page: data.page ?? 0,

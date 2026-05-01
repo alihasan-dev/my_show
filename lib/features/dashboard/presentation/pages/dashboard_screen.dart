@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/constants/app_strings.dart';
+import '../../../../core/constants/movie_colors.dart';
 import '../../../multi_search/presentation/pages/multi_search_screen.dart';
-import '/features/profile/presentation/pages/people_screen.dart';
 import '../../../../features/movie/presentation/pages/movie_screen.dart';
 import '../../../../features/tv/presentation/pages/tv_screen.dart';
+import '../widgets/dashboard_bottom_bar_item_list.dart';
+import '/features/profile/presentation/pages/people_screen.dart';
 
 class DashboardScreen extends HookConsumerWidget {
 
@@ -30,24 +31,27 @@ class DashboardScreen extends HookConsumerWidget {
         onTap: (value) => bottomSelectedIndex.value = value,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        items: [
-          BottomNavigationBarItem(
-            label: AppStrings.movies,
-            icon: Icon(Icons.movie_outlined)
-          ),
-          BottomNavigationBarItem(
-            label: AppStrings.tvShows,
-            icon: Icon(Icons.tv)
-          ),
-          BottomNavigationBarItem(
-            label: AppStrings.people,
-            icon: Icon(Icons.groups_2)
-          ),
-          BottomNavigationBarItem(
-            label: AppStrings.search,
-            icon: Icon(Icons.search)
-          )
-        ],
+        selectedItemColor: MovieColors.white,
+        items: List.generate(
+          bottomBarIconList.length,
+          (index) {
+            final bottomLabel = bottomBarIconList[index];
+            return BottomNavigationBarItem(
+              label: bottomLabel.title,
+              icon: AnimatedContainer(
+                duration: Duration(milliseconds: 500),
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+                decoration: ShapeDecoration(
+                  color: bottomSelectedIndex.value == index
+                  ? MovieColors.primaryColor.withValues(alpha: 0.8)
+                  : MovieColors.transparent,
+                  shape: StadiumBorder()
+                ),
+                child: Icon(bottomLabel.iconData, size: 22),
+              )
+            );
+          }
+        ),
       ),
     );
   }

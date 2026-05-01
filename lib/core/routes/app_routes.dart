@@ -14,7 +14,7 @@ class AppRoutes {
 
   static const String initialRoute = '/';
   static const String dashboard = '/dashboard';
-  static const String splash = '/splash';
+  // static const String splash = '/splash';
   static const String movie = '/movie';
   static const String movieDetails = '/movie_details';
   static const String profile = '/profile';
@@ -26,12 +26,12 @@ class AppRoutes {
     routes: [
       GoRoute(
         path: initialRoute,
-        redirect: (_,_) => splash
-      ),
-      GoRoute(
-        path: splash,
         redirect: (_,_) => dashboard
       ),
+      // GoRoute(
+      //   path: splash,
+      //   redirect: (_,_) => dashboard
+      // ),
       GoRoute(
         name: dashboard,
         path: dashboard,

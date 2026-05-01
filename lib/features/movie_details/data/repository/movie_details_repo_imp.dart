@@ -20,7 +20,7 @@ class MovieDetailsRepoImp implements MovieDetailsRepository {
 
   @override
   Future<Either<CustomFailureException, MovieDetailEntity>> movieDetails({required String id, required String type}) async {
-    if (await connectivity.isConnected) {
+    if (await connectivity.hasConnection) {
       final response = await movieDetailsRemoteDatasource.movieDetails(id: id, type: type);
       return Right(MovieDetailEntity(
         adult: response.adult,
@@ -104,7 +104,7 @@ class MovieDetailsRepoImp implements MovieDetailsRepository {
 
   @override
   Future<Either<CustomFailureException, MovieCastEntity>> movieCast({required String id, required String type}) async {
-    if (await connectivity.isConnected) {
+    if (await connectivity.hasConnection) {
       final movieCast = await movieDetailsRemoteDatasource.movieCast(id: id, type: type);
       return Right(MovieCastEntity(
         id: movieCast.id,
@@ -147,7 +147,7 @@ class MovieDetailsRepoImp implements MovieDetailsRepository {
 
   @override
   Future<Either<CustomFailureException, TrendingMoviesEntity>> movieRecommendation({required String id, required String type}) async {
-    if (await connectivity.isConnected) {
+    if (await connectivity.hasConnection) {
       final data = await movieDetailsRemoteDatasource.movieRecommentation(id: id, type: type);
       final movieEntity = TrendingMoviesEntity(
           page: data.page ?? 0,
@@ -183,7 +183,7 @@ class MovieDetailsRepoImp implements MovieDetailsRepository {
 
   @override
   Future<Either<CustomFailureException, MovieKeywordsEntity>> movieKeywords({required String id, required String type}) async {
-    if (await connectivity.isConnected) {
+    if (await connectivity.hasConnection) {
       final data = await movieDetailsRemoteDatasource.movieKeywords(id: id, type: type);
       final keywords = type == 'movie' ? data.keywords : data.results;
       final movieEntity = MovieKeywordsEntity(
@@ -205,7 +205,7 @@ class MovieDetailsRepoImp implements MovieDetailsRepository {
 
   @override
   Future<Either<CustomFailureException, VideoEntity>> movieVideo({required String id, required String type}) async {
-    if (await connectivity.isConnected) {
+    if (await connectivity.hasConnection) {
       final data = await movieDetailsRemoteDatasource.movieVideo(id: id, type: type);
       final movieEntity = VideoEntity(
         id: data.id,

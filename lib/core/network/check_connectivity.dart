@@ -2,7 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract interface class CheckConnectivity {
-  Future<bool> get isConnected;
+  Future<bool> get hasConnection;
 }
 
 class CheckConnectivityImp implements CheckConnectivity {
@@ -12,7 +12,7 @@ class CheckConnectivityImp implements CheckConnectivity {
   CheckConnectivityImp(this.connectivity);
 
   @override
-  Future<bool> get isConnected async {
+  Future<bool> get hasConnection async {
     final result = await connectivity.checkConnectivity();
     for (final item in result) {
       return switch (item) {

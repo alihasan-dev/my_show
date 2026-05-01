@@ -15,7 +15,7 @@ class MultiSearchRepoImp implements MultiSearchRepository {
   
   @override
   Future<Either<CustomFailureException, SearchMoviesKeywordEntity>> multiSearch({required String query, required int pageCount}) async {
-    if (await checkConnectivity.isConnected) {
+    if (await checkConnectivity.hasConnection) {
       final data = await searchMovieDatasource.multiSearch(query: query, pageCount: pageCount);
       final movieEntity = SearchMoviesKeywordEntity(
           id: data.id,

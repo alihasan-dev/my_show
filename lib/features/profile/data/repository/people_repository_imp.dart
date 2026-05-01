@@ -16,7 +16,7 @@ class PeopleRepositoryImp implements PeopleRepository {
   @override
   Future<Either<CustomFailureException, PopularPeopleEntity>> popularPeople({required int pageCount}) async {
     try {
-      if (await connectivity.isConnected) {
+      if (await connectivity.hasConnection) {
         final result = await dataSource.popularPeople(pageCount: pageCount);
         return Right(PopularPeopleEntity(
           page: result.page,

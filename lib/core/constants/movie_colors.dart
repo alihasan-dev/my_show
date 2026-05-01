@@ -14,9 +14,11 @@ class MovieColors {
   static const Color blue = Colors.blue;
   static const Color green = Colors.green;
   static const Color greenAccent = Colors.greenAccent;
+  static const Color transparent = Colors.transparent;
 
   static const Color textPrimary = Color(0xE6FFFFFF); // Primary text
   static const Color textSecondary = Color(0xFFB3B3B3); // Secondary text
   static const Color textDisabled = Color(0xFF666666); // Disabled / hint text
   static const Color textOnPrimary = Color(0xFF000000); // Text on accent buttons
+  static const Color primaryColor = Color(0xFF03DAC6); // Text on accent buttons
 }

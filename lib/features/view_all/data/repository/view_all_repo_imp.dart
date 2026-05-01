@@ -15,7 +15,7 @@ class ViewAllRepoImp implements ViewAllRepo {
 
   @override
   Future<Either<CustomFailureException, TrendingMoviesEntity>> getAllShow({required String showType, required String showCategory, int page = 1}) async {
-    if (await checkConnectivity.isConnected) {
+    if (await checkConnectivity.hasConnection) {
       final result = await viewAllDatasource.getAllShow(
         showType: showType,
         showCategory: showCategory,

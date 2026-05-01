@@ -17,7 +17,7 @@ class ProfileRepositoryImp implements ProfileRepository {
   
   @override
   Future<Either<CustomFailureException, MovieCreditEntity>> creditMovies({required String userId, required String type}) async {
-    if (await connectivity.isConnected) {
+    if (await connectivity.hasConnection) {
       final response = await profileDatasource.creditMovies(userId: userId, type: type);
       return Right(MovieCreditEntity(
         id: response.id,
@@ -52,7 +52,7 @@ class ProfileRepositoryImp implements ProfileRepository {
 
   @override
   Future<Either<CustomFailureException, ProfileDetailsEntity>> profileDetails({required String userId}) async {
-    if (await connectivity.isConnected) {
+    if (await connectivity.hasConnection) {
       final response = await profileDatasource.profileDetails(userId: userId);
       return Right(ProfileDetailsEntity(
         adult: response.adult,

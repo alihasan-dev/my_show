@@ -15,7 +15,7 @@ class SearchMovieRepoImp implements SearchMovieRepository {
   
   @override
   Future<Either<CustomFailureException, SearchMoviesKeywordEntity>> searchMovieByKeyword({required String query, required String type, required int pageCount}) async {
-    if (await checkConnectivity.isConnected) {
+    if (await checkConnectivity.hasConnection) {
       final data = await searchMovieDatasource.searchMovieByKeyword(query: query, type: type, pageCount: pageCount);
       final movieEntity = SearchMoviesKeywordEntity(
           id: data.id,

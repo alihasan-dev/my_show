@@ -16,7 +16,7 @@ class TvRepositoryImp implements TvRepository {
 
   @override
   Future<Either<CustomFailureException, TrendingTVShowEntity>> trendingTVShow() async {
-    if (await checkConnectivity.isConnected) {
+    if (await checkConnectivity.hasConnection) {
       final data = await tvShowDataSource.trendingTvShow();
       final tvShowEntity = TrendingTVShowEntity(
         page: data.page ?? 0,
@@ -49,7 +49,7 @@ class TvRepositoryImp implements TvRepository {
   
   @override
   Future<Either<CustomFailureException, TrendingTVShowEntity>> getNowPlaying() async {
-    if (await checkConnectivity.isConnected) {
+    if (await checkConnectivity.hasConnection) {
       final data = await tvShowDataSource.onAirShows();
       final tvShowEntity = TrendingTVShowEntity(
         page: data.page ?? 0,
@@ -82,7 +82,7 @@ class TvRepositoryImp implements TvRepository {
   
   @override
   Future<Either<CustomFailureException, TrendingTVShowEntity>> popularShow() async {
-    if (await checkConnectivity.isConnected) {
+    if (await checkConnectivity.hasConnection) {
       final data = await tvShowDataSource.popularShows();
       final tvShowEntity = TrendingTVShowEntity(
         page: data.page ?? 0,
@@ -115,7 +115,7 @@ class TvRepositoryImp implements TvRepository {
   
   @override
   Future<Either<CustomFailureException, TrendingTVShowEntity>> topRatedShows() async {
-    if (await checkConnectivity.isConnected) {
+    if (await checkConnectivity.hasConnection) {
       final data = await tvShowDataSource.topRatedShows();
       final tvShowEntity = TrendingTVShowEntity(
         page: data.page ?? 0,
@@ -148,7 +148,7 @@ class TvRepositoryImp implements TvRepository {
   
   @override
   Future<Either<CustomFailureException, TrendingTVShowEntity>> upcomingShows() async {
-    if (await checkConnectivity.isConnected) {
+    if (await checkConnectivity.hasConnection) {
       final data = await tvShowDataSource.upcomingShows();
       final tvShowEntity = TrendingTVShowEntity(
         page: data.page ?? 0,
@@ -182,7 +182,7 @@ class TvRepositoryImp implements TvRepository {
 }
 
 
-final tvRepositoryProvider = Provider<TvRepository>((ref){ 
+final tvRepositoryProvider = Provider<TvRepository>((ref) { 
   return TvRepositoryImp(
     ref.read(tvShowDataSourceProvider), 
     ref.read(connectivityProvider)

@@ -96,7 +96,7 @@ class _ShimmerCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 12),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
