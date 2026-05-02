@@ -17,7 +17,7 @@ class CheckConnectivityImp implements CheckConnectivity {
     for (final item in result) {
       return switch (item) {
         ConnectivityResult.wifi || ConnectivityResult.mobile || ConnectivityResult.vpn || ConnectivityResult.ethernet || ConnectivityResult.other => true,
-        ConnectivityResult.none || ConnectivityResult.bluetooth => false
+        ConnectivityResult.none || ConnectivityResult.bluetooth || ConnectivityResult.satellite => false
       };
     }
     return false;

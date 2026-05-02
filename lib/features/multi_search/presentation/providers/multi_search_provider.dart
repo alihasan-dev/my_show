@@ -38,7 +38,7 @@ class MultiSearchNotifier extends StateNotifier<AsyncValue<SearchMoviesKeywordEn
 
   void resetSearch() {
     movieList.clear();
-    state = AsyncValue.error('reset the search list', StackTrace.current);
+    state = AsyncValue.error('Reset the search list', StackTrace.current);
   }
 
 }

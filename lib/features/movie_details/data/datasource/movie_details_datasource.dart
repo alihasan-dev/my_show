@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:my_show/core/utils/app_extension_method.dart';
+import '../models/movie_award_model.dart';
 import '../models/video_model.dart';
 import '/core/network/api_end_points.dart';
 import '/core/network/dio_provider.dart';
@@ -19,6 +22,8 @@ abstract interface class MovieDetailsRemoteDatasource {
   Future<MovieKeywordModel> movieKeywords({required String id, required String type}); 
 
   Future<VideoModel> movieVideo({required String id, required String type}); 
+
+  Future<AwardModel> movieAwards({required String id}); 
 }
 
 class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
@@ -84,6 +89,24 @@ class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
       final response = await dioClient.get('/3/$type/$id/videos');
       if (response.statusCode == 200) {
         return VideoModel.fromJson(response.data);
+      }
+      throw Exception();
+    } catch (e) {
+      throw Exception();   
+    }
+  }
+  
+  @override
+  Future<AwardModel> movieAwards({required String id}) async {
+    final omdbApiKey = dotenv.get('OMDB_API_kEY');
+    if (omdbApiKey.isBlank) throw Exception('Invalid OMDB API Key');
+    try {
+      final response = await dioClient.get(
+        'https://www.omdbapi.com/?i=$id&apikey=$omdbApiKey',
+        options: Options(headers: null)
+      );
+      if (response.statusCode == 200) {
+        return AwardModel.fromJson(response.data);
       }
       throw Exception();
     } catch (e) {

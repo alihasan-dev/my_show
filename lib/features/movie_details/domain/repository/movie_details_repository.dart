@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import '../entities/movie_award_entity.dart';
 import '../entities/video_entity.dart';
 import '/core/utils/custom_exception.dart';
 import '/features/movie_details/domain/entities/cast_entity.dart';
@@ -17,5 +18,7 @@ abstract interface class MovieDetailsRepository {
   Future<Either<CustomFailureException, MovieKeywordsEntity>> movieKeywords({required String id, required String type});
 
   Future<Either<CustomFailureException, VideoEntity>> movieVideo({required String id, required String type});
+
+  Future<Either<CustomFailureException, MovieAwardEntity>> movieAwards({required String id});
 
 }

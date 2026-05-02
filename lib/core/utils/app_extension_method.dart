@@ -15,7 +15,7 @@ extension NumExtensionUtils on num {
         case 2:
           return 'Male';
         case 3:
-          return 'Non-binary';
+          return 'Non binary';
         default:
           return 'N/A';
       }

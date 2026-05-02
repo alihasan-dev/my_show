@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:my_show/features/movie_details/domain/entities/movie_award_entity.dart';
 import '../../domain/entities/video_entity.dart';
 import '/core/network/check_connectivity.dart';
 import '/core/utils/custom_exception.dart';
@@ -223,6 +224,33 @@ class MovieDetailsRepoImp implements MovieDetailsRepository {
             iso31661: item.iso31661
           );
         }).toList() ?? [],
+      );
+      return Right(movieEntity);
+    } else {
+      return left(CustomFailureException(
+        message: 'No internet connection'
+      ));
+    }
+  }
+
+  @override
+  Future<Either<CustomFailureException, MovieAwardEntity>> movieAwards({required String id}) async {
+    if (await connectivity.hasConnection) {
+      final data = await movieDetailsRemoteDatasource.movieAwards(id: id);
+      final movieEntity = MovieAwardEntity(
+        title: data.title,
+        year: data.year,
+        rated: data.rated,
+        released: data.released,
+        runtime: data.runtime,
+        genre: data.genre,
+        director: data.director,
+        writer: data.writer,
+        actors: data.actors,
+        plot: data.plot,
+        language: data.language,
+        country: data.country,
+        awards: data.awards
       );
       return Right(movieEntity);
     } else {
