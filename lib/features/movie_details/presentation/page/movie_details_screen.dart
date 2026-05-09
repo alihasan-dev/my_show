@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:my_show/core/utils/custom_snackbar.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/widgets/custom_gradient_button.dart';
 import '../provider/movie_awards_provider.dart';
 import '../provider/movie_video_provider.dart';
 import '/core/widgets/vote_percentage_widget.dart';
@@ -383,6 +384,46 @@ class MovieDetailsScreen extends HookConsumerWidget {
                             title: 'Awards',
                             value: awards.value
                           ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 6),
+                          child: CustomGradientButton(
+                            label: AppStrings.viewProfile,
+                            width: double.maxFinite,
+                            padding: EdgeInsetsGeometry.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(8)
+                            ),
+                            radius: 8,
+                            widget: Padding(
+                              padding: EdgeInsetsGeometry.symmetric(horizontal: 12),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  MovieText(
+                                    title: 'Read all review',
+                                    style: theme.labelLarge?.copyWith(
+                                      color: MovieColors.white.withValues(alpha: 0.7)
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios, 
+                                    size: 18,
+                                    color: MovieColors.white.withValues(alpha: 0.7),
+                                  )
+                                ],
+                              ),
+                            ),
+                            onTap: () {
+                              context.pushNamed(
+                                AppRoutes.review,
+                                queryParameters: {
+                                  'id': id,
+                                  'showType': type
+                                }
+                              );
+                            }
+                          ),
+                        ),
                         const SizedBox(height: 10),
                         MovieText(
                           title: AppStrings.keywords,
@@ -469,7 +510,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: movieVideoList.length,
-                            separatorBuilder: (_, __) => const SizedBox(width: 12),
+                            separatorBuilder: (_,_) => const SizedBox(width: 12),
                             itemBuilder: (context, index) {
                               final video = movieVideoList[index];
                               final thumbnailUrl = YoutubePlayer.getThumbnail(videoId: video.key ?? '');

@@ -144,7 +144,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             },
                             icon: ValueListenableBuilder(
                               valueListenable: _controller,
-                              builder: (_, value, __) => Icon(
+                              builder: (_,value,_) => Icon(
                                 value.isPlaying ? Icons.pause_circle_filled : Icons.play_circle_filled,
                                 size: 48,
                                 color: MovieColors.white,
@@ -205,7 +205,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         child: ListView.separated(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           itemCount: widget.videos.length,
-                          separatorBuilder: (_, __) => const SizedBox(height: 10),
+                          separatorBuilder: (_,_) => const SizedBox(height: 10),
                           itemBuilder: (context, index) {
                             final item = widget.videos[index];
                             final isPlaying = index == _currentIndex;
@@ -234,7 +234,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                         width: 120,
                                         height: 68,
                                         fit: BoxFit.cover,
-                                        errorBuilder: (_, __, ___) => Container(
+                                        errorBuilder: (_,_,_) => Container(
                                           width: 120,
                                           height: 68,
                                           color: MovieColors.grey.withValues(alpha: 0.3),

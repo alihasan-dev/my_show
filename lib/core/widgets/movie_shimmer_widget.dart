@@ -14,8 +14,8 @@ class MovieShimmerWidget extends StatelessWidget {
       child: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: sectionCount,
-        separatorBuilder: (_, __) => const SizedBox(height: 20),
-        itemBuilder: (_, __) => const _ShimmerSection(),
+        separatorBuilder: (_,_) => const SizedBox(height: 20),
+        itemBuilder: (_,_) => const _ShimmerSection(),
       ),
     );
   }
@@ -44,8 +44,8 @@ class _ShimmerSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: 4,
-            separatorBuilder: (_, __) => const SizedBox(width: 15),
-            itemBuilder: (_, __) => const _ShimmerCard(),
+            separatorBuilder: (_,_) => const SizedBox(width: 15),
+            itemBuilder: (_,_) => const _ShimmerCard(),
           ),
         ),
       ],

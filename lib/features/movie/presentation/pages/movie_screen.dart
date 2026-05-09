@@ -31,6 +31,7 @@ class MoviesScreen extends HookConsumerWidget {
         data: (data) {
           // return MovieShimmerWidget();
           return ListView(
+            shrinkWrap: true,
             padding: const EdgeInsets.all(16),
             children: [
               TrendingMoviesWidgets(

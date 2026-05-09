@@ -18,14 +18,12 @@ class ProfileShimmerLoader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Profile Image Placeholder
               Container(
                 height: MediaQuery.of(context).size.height * 0.52,
                 width: double.infinity,
                 color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
               ),
               const SizedBox(height: 16),
-              // Name Placeholder
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Container(
@@ -35,7 +33,6 @@ class ProfileShimmerLoader extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              // Biography title placeholder
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Container(
@@ -80,11 +77,10 @@ class ProfileShimmerLoader extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
-                  separatorBuilder: (_, __) => const SizedBox(width: 12),
-                  itemBuilder: (_, __) => Container(
+                  separatorBuilder: (_,_) => const SizedBox(width: 12),
+                  itemBuilder: (_,_) => Container(
                     height: 150,
                     width: 100,
-                    // color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
@@ -109,11 +105,10 @@ class ProfileShimmerLoader extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
-                  separatorBuilder: (_, __) => const SizedBox(width: 12),
-                  itemBuilder: (_, __) => Container(
+                  separatorBuilder: (_,_) => const SizedBox(width: 12),
+                  itemBuilder: (_,_) => Container(
                     height: 150,
                     width: 100,
-                    // color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,

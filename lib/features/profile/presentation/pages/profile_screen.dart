@@ -81,7 +81,7 @@ class ProfileScreen extends HookConsumerWidget {
                               : AppStrings.readMore,
                               style: theme.bodyMedium?.copyWith(
                                 fontWeight: FontWeight.w400,
-                                color: MovieColors.blue,
+                                color: MovieColors.primaryColor,
                               ),
                             ),
                         ],

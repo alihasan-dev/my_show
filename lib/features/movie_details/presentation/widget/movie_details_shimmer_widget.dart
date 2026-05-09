@@ -121,7 +121,7 @@ class MovieDetailsShimmer extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 scrollDirection: Axis.horizontal,
                 itemCount: 6,
-                separatorBuilder: (_, __) => const SizedBox(width: 12),
+                separatorBuilder: (_,_) => const SizedBox(width: 12),
                 itemBuilder: (context, index) => Column(
                   children: [
                     Container(
@@ -150,7 +150,7 @@ class MovieDetailsShimmer extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 scrollDirection: Axis.horizontal,
                 itemCount: 6,
-                separatorBuilder: (_, __) => const SizedBox(width: 12),
+                separatorBuilder: (_,_) => const SizedBox(width: 12),
                 itemBuilder: (context, index) => Column(
                   children: [
                     Container(

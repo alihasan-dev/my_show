@@ -23,7 +23,7 @@ class PeopleShimmerWidget extends StatelessWidget {
           childAspectRatio: 0.7,
         ),
         itemCount: 15,
-        itemBuilder: (_, __) => Stack(
+        itemBuilder: (_,_) => Stack(
           fit: StackFit.expand,
           children: [
             Container(

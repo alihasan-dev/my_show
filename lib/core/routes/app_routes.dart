@@ -3,6 +3,7 @@ import '../../features/dashboard/presentation/pages/dashboard_screen.dart';
 import '../../features/movie/presentation/pages/movie_screen.dart';
 import '../../features/movie_details/presentation/page/movie_details_screen.dart';
 import '../../features/profile/presentation/pages/profile_screen.dart';
+import '../../features/review/presentation/pages/review_screen.dart';
 import '../../features/view_all/presentation/page/view_all_screen.dart';
 import '../../features/search/presentation/pages/search_movie_by_keyword_screen.dart';
 import '../../features/movie_details/presentation/page/video_player_screen.dart';
@@ -14,37 +15,33 @@ class AppRoutes {
 
   static const String initialRoute = '/';
   static const String dashboard = '/dashboard';
-  // static const String splash = '/splash';
   static const String movie = '/movie';
   static const String movieDetails = '/movie_details';
   static const String profile = '/profile';
   static const String searchMovieByKeywordScreen = '/search_movie_by_keyword';
   static const String viewAll = '/view_all';
   static const String videoPlayer = '/video_player';
+  static const String review = '/review';
 
   static final GoRouter routes = GoRouter(
     routes: [
       GoRoute(
         path: initialRoute,
-        redirect: (_,_) => dashboard
+        redirect: (_, _) => dashboard
       ),
-      // GoRoute(
-      //   path: splash,
-      //   redirect: (_,_) => dashboard
-      // ),
       GoRoute(
         name: dashboard,
         path: dashboard,
-        builder: (context, state) => DashboardScreen()
+        builder: (_, _) => DashboardScreen()
       ),
       GoRoute(
         path: movie,
-        builder: (context, state) => MoviesScreen()
+        builder: (_, _) => MoviesScreen()
       ),
       GoRoute(
         name: movieDetails,
         path: movieDetails,
-        builder: (context, state) {
+        builder: (_, state) {
           final id = state.uri.queryParameters['id']!;
           final type = state.uri.queryParameters['type']!;
           return MovieDetailsScreen(id: id, type: type);
@@ -53,7 +50,7 @@ class AppRoutes {
       GoRoute(
         name: profile,
         path: profile,
-        builder: (context, state) {
+        builder: (_, state) {
           final userId = state.uri.queryParameters['userId']!;
           return ProfileScreen(userId: userId);
         }
@@ -61,7 +58,7 @@ class AppRoutes {
       GoRoute(
         name: searchMovieByKeywordScreen,
         path: searchMovieByKeywordScreen,
-        builder: (context, state) {
+        builder: (_, state) {
           final id = state.uri.queryParameters['id']!;
           final name = state.uri.queryParameters['name']!;
           final type = state.uri.queryParameters['type']!;
@@ -75,7 +72,7 @@ class AppRoutes {
       GoRoute(
         name: videoPlayer,
         path: videoPlayer,
-        builder: (context, state) {
+        builder: (_, state) {
           final extra = state.extra as Map<String, dynamic>;
           return VideoPlayerScreen(
             videos: extra['videos'] as List<Results>,
@@ -86,7 +83,7 @@ class AppRoutes {
       GoRoute(
         name: viewAll,
         path: viewAll,
-        builder: (context, state) {
+        builder: (_, state) {
           final showType = state.uri.queryParameters['showType']!;
           final showCategory = state.uri.queryParameters['showCategory']!;
           final label = state.uri.queryParameters['label']!;
@@ -94,6 +91,18 @@ class AppRoutes {
             showCategory: showCategory,
             showType: showType,
             label: label,
+          );
+        }
+      ),
+      GoRoute(
+        name: review,
+        path: review,
+        builder: (_, state) {
+          final showType = state.uri.queryParameters['showType']!;
+          final id = state.uri.queryParameters['id']!;
+          return ReviewScreen(
+            showType: showType,
+            id: id,
           );
         }
       ),

@@ -31,6 +31,12 @@ extension NumExtensionUtils on num {
     return "${hours}h ${mins}m";
   }
 
+  String get formattedRating {
+    return this % 1 == 0
+        ? toInt().toString()
+        : toString();
+  }
+
 }
 
 extension StringExtensionUtils on String {
@@ -66,6 +72,16 @@ extension StringExtensionUtils on String {
       String value = this;
       if (value.isBlank) return value;
       return value[0].toUpperCase() + value.substring(1).toLowerCase();
+    } catch (e) {
+      return this;
+    }
+  }
+
+  String get nameAvatarLabel {
+    try {
+      String value = this;
+      if (value.isBlank) return value;
+      return value[0].toUpperCase();
     } catch (e) {
       return this;
     }
