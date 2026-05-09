@@ -5,10 +5,12 @@ import '../../../../core/constants/movie_colors.dart';
 class SearchShimmerWidget extends StatelessWidget {
 
   final EdgeInsetsGeometry? padding;
+  final double height;
   
   const SearchShimmerWidget({
     super.key,
-    this.padding = const EdgeInsets.symmetric(vertical: 12, horizontal: 20)
+    this.padding = const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+    this.height = 141
   });
   
   @override
@@ -22,7 +24,7 @@ class SearchShimmerWidget extends StatelessWidget {
         itemCount: 6,
         separatorBuilder: (_,_) => SizedBox(height: 12),
         itemBuilder: (_,_) => Container(
-          height: 141,        
+          height: height,        
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: Colors.grey.shade100

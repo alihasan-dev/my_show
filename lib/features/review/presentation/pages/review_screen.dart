@@ -6,15 +6,19 @@ import 'package:my_show/core/utils/app_extension_method.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/widgets/movie_text.dart';
+import '../../../../core/widgets/no_data_widget.dart';
+import '../../../search/presentation/widgets/search_shimmer_widget.dart';
 import '../providers/show_review_provider.dart';
 
 class ReviewScreen extends HookConsumerWidget {
   final String showType;
   final String id;
+  final String title;
 
   const ReviewScreen({
     required this.showType, 
     required this.id,
+    required this.title,
     super.key
   });
 
@@ -53,17 +57,26 @@ class ReviewScreen extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: MovieText(
-          title: 'Review',
+          title: 'Review  |  $title',
           style: TextStyle(fontSize: 18),
         ),
       ),
       body: reviewList.when(
         data: (review) {
-          return review.isEmpty
-          ? const Center(child: Text('No data available'))
-          : ListView.separated(
+          if (review.isEmpty) {
+            return NoDataWidget(
+              icon: Icons.star_half_rounded,
+              title: 'No review found',
+              subtitle: 'Review aren\'t available right now.\nPlease try again later.',
+              onRetry: () => ref.read(reviewProvider.notifier).resetReview(
+                id: id,
+                type: showType,
+              )
+            );
+          }
+          return ListView.separated(
             controller: scrollController,
             shrinkWrap: true,
             padding: const EdgeInsets.only(bottom: 14, left: 16, right: 16),
@@ -83,29 +96,36 @@ class ReviewScreen extends HookConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          spacing: 8,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: MovieColors.grey.withValues(alpha: 0.5)
-                              ),
-                              child: MovieText(
-                                title: (reviewItem.author ?? '').nameAvatarLabel,
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  fontSize: 14
+                        Expanded(
+                          child: Row(
+                            spacing: 8,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: MovieColors.grey.withValues(alpha: 0.5)
+                                ),
+                                child: MovieText(
+                                  title: (reviewItem.author ?? '').nameAvatarLabel,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    fontSize: 14
+                                  ),
                                 ),
                               ),
-                            ),
-                            MovieText(
-                              title: (reviewItem.author ?? '').capitalizeWord,
-                              style: theme.textTheme.labelLarge,
-                            ),
-                          ],
+                              Expanded(
+                                child: MovieText(
+                                  title: (reviewItem.author ?? '').capitalizeWord.handleEmptyName,
+                                  maxLine: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: theme.textTheme.labelLarge,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         if (reviewItem.authorDetails?.rating != null) ...[
+                          SizedBox(width: 8),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                             decoration: BoxDecoration(
@@ -122,7 +142,7 @@ class ReviewScreen extends HookConsumerWidget {
                                 Icon(Icons.star, size: 12)
                               ],
                             ),
-                          )
+                          ),
                         ]
                       ],
                     ),
@@ -132,7 +152,7 @@ class ReviewScreen extends HookConsumerWidget {
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: MovieColors.grey
                         ),
-                      )
+                      ),
                     ],
                     MovieText(
                       title: reviewItem.content ?? '',
@@ -166,8 +186,16 @@ class ReviewScreen extends HookConsumerWidget {
             separatorBuilder: (_,_) => SizedBox(height: 12),
           );
         }, 
-        error: (_,_) => SizedBox(), 
-        loading: () => Center(child: const CircularProgressIndicator())
+        error: (_,_) => NoDataWidget(
+          icon: Icons.star_half_rounded,
+          title: 'No review found',
+          subtitle: 'Review aren\'t available right now.\nPlease try again later.',
+          onRetry: () => ref.read(reviewProvider.notifier).resetReview(
+            id: id,
+            type: showType,
+          )
+        ), 
+        loading: () => SearchShimmerWidget(height: 110, padding: EdgeInsets.symmetric(horizontal: 16))
       ),
     );
   }

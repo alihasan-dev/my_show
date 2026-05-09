@@ -418,7 +418,8 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                 AppRoutes.review,
                                 queryParameters: {
                                   'id': id,
-                                  'showType': type
+                                  'showType': type,
+                                  'title': type == 'movie' ? movieData.title : movieData.name
                                 }
                               );
                             }

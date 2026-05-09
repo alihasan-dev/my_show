@@ -42,8 +42,8 @@ class AppRoutes {
         name: movieDetails,
         path: movieDetails,
         builder: (_, state) {
-          final id = state.uri.queryParameters['id']!;
-          final type = state.uri.queryParameters['type']!;
+          final id = state.uri.queryParameters['id'] ?? '';
+          final type = state.uri.queryParameters['type'] ?? '';
           return MovieDetailsScreen(id: id, type: type);
         }
       ),
@@ -51,7 +51,7 @@ class AppRoutes {
         name: profile,
         path: profile,
         builder: (_, state) {
-          final userId = state.uri.queryParameters['userId']!;
+          final userId = state.uri.queryParameters['userId'] ?? '';
           return ProfileScreen(userId: userId);
         }
       ),
@@ -59,9 +59,9 @@ class AppRoutes {
         name: searchMovieByKeywordScreen,
         path: searchMovieByKeywordScreen,
         builder: (_, state) {
-          final id = state.uri.queryParameters['id']!;
-          final name = state.uri.queryParameters['name']!;
-          final type = state.uri.queryParameters['type']!;
+          final id = state.uri.queryParameters['id'] ?? '';
+          final name = state.uri.queryParameters['name'] ?? '';
+          final type = state.uri.queryParameters['type'] ?? '';
           return SearchMovieByKeywordScreen(
             id: int.parse(id),
             name: name,
@@ -84,9 +84,9 @@ class AppRoutes {
         name: viewAll,
         path: viewAll,
         builder: (_, state) {
-          final showType = state.uri.queryParameters['showType']!;
-          final showCategory = state.uri.queryParameters['showCategory']!;
-          final label = state.uri.queryParameters['label']!;
+          final showType = state.uri.queryParameters['showType'] ?? '';
+          final showCategory = state.uri.queryParameters['showCategory'] ?? '';
+          final label = state.uri.queryParameters['label'] ?? '';
           return ViewAllScreen(
             showCategory: showCategory,
             showType: showType,
@@ -98,11 +98,13 @@ class AppRoutes {
         name: review,
         path: review,
         builder: (_, state) {
-          final showType = state.uri.queryParameters['showType']!;
-          final id = state.uri.queryParameters['id']!;
+          final showType = state.uri.queryParameters['showType'] ?? '';
+          final id = state.uri.queryParameters['id'] ?? '';
+          final title = state.uri.queryParameters['title'] ?? '';
           return ReviewScreen(
             showType: showType,
             id: id,
+            title: title
           );
         }
       ),

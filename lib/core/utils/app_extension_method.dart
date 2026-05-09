@@ -97,6 +97,10 @@ extension StringExtensionUtils on String {
     }
   }
 
+  String get handleEmptyName {
+    return isBlank ? 'Anonymous' : this;
+  }
+
   bool get isBlank {
     try {
       return trim().isEmpty;

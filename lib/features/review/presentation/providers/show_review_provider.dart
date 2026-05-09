@@ -28,19 +28,22 @@ class ReviewNotifier extends StateNotifier<AsyncValue<List<ReviewEntity>>> {
       (review) {
         if (review.isNotEmpty) {
           pageCount+=1;
+          reviewList.addAll(review);
         } else {
           canCallAPI = false;
         }
-        reviewList.addAll(review);
         state = AsyncValue.data(reviewList);
       },
     );
     return state;
   }
 
-  void resetReview() {
+  void resetReview({required String id, required String type}) {
     reviewList.clear();
-    state = AsyncValue.error('Reset the search list', StackTrace.current);
+    canCallAPI = true;
+    pageCount = 1;
+    state = AsyncData([]);
+    review(id: id, type: type);
   }
 
   void toggleReadMore(int index) {
