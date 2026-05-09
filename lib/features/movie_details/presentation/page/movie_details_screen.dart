@@ -9,6 +9,7 @@ import '../../../../core/constants/app_strings.dart';
 import '../../../../core/widgets/custom_gradient_button.dart';
 import '../provider/movie_awards_provider.dart';
 import '../provider/movie_video_provider.dart';
+import '../provider/watch_provider.dart';
 import '/core/widgets/vote_percentage_widget.dart';
 import '../provider/movie_cast_provider.dart';
 import '../provider/movie_details_provider.dart';
@@ -45,11 +46,13 @@ class MovieDetailsScreen extends HookConsumerWidget {
     final movieCast = ref.watch(movieCastProvider((id: id, type: type)));
     final movieRecommentation = ref.watch(movieRecommentationProvider((id: id, type: type)));
     final movieKeywords = ref.watch(movieKeywordProvider((id: id, type: type)));
+    final movieTvWatchProvider = ref.watch(watchProvider);
     final recommendedMovieList = movieRecommentation.asData?.value.result ?? [];
     final movieCastList = movieCast.asData?.value.cast ?? [];
     final movieCrewList = movieCast.asData?.value.crew ?? [];
     final movieKeywordList = movieKeywords.asData?.value.keywords ?? [];
     final movieVideoList = movieVideo.asData?.value.results ?? [];
+    final movieTvWatchData = movieTvWatchProvider.asData?.value;
     final awards = useState<String>('');
 
     useEffect(() {
@@ -61,6 +64,13 @@ class MovieDetailsScreen extends HookConsumerWidget {
       });
       return null;
     }, [movieDetails]);
+
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(watchProvider.notifier).watchProvider(id: id, type: type);
+      });
+      return null;
+    }, []);
 
     return Scaffold(
       body: SafeArea(
@@ -384,6 +394,104 @@ class MovieDetailsScreen extends HookConsumerWidget {
                             title: 'Awards',
                             value: awards.value
                           ),
+                        if (movieTvWatchData != null) ...[
+                          MovieText(
+                            title: 'Watch Provider',
+                            style: theme.titleMedium?.copyWith(
+                              color: MovieColors.textPrimary,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600
+                            ),
+                          ),
+                          if ((movieTvWatchData.watchRegion?.free ?? []).isNotEmpty) ...[
+                            SizedBox(height: 4),
+                            MovieText(
+                              title: 'Free',
+                              style: TextStyle(color: MovieColors.textDisabled),
+                            ),
+                            SizedBox(height: 4),
+                            SizedBox(
+                              height: 100,
+                              child: ListView.separated(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: movieTvWatchData.watchRegion!.free!.length,
+                                itemBuilder: (context, index) {
+                                  final item = movieTvWatchData.watchRegion!.free![index];
+                                  return MovieCastBanner(
+                                    height: 50,
+                                    width: 55,
+                                    imagePath: item.logoPath!.generateImageURL,
+                                    subTitle: item.providerName ?? '',
+                                    textStyle: theme.labelSmall?.copyWith(
+                                      fontSize: 8
+                                    ),
+                                  );
+                                },
+                                separatorBuilder: (context, index) => SizedBox(width: 10),
+                              ),
+                            ),
+                            if ((movieTvWatchData.watchRegion?.rent ?? []).isNotEmpty) ...[
+                              SizedBox(height: 4),
+                              MovieText(
+                                title: 'Rent',
+                                style: TextStyle(color: MovieColors.textDisabled),
+                              ),
+                              SizedBox(height: 4),
+                              SizedBox(
+                                height: 100,
+                                child: ListView.separated(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: movieTvWatchData.watchRegion!.rent!.length,
+                                  itemBuilder: (context, index) {
+                                    final item = movieTvWatchData.watchRegion!.rent![index];
+                                    return MovieCastBanner(
+                                      height: 50,
+                                      width: 55,
+                                      imagePath: item.logoPath!.generateImageURL,
+                                      subTitle: item.providerName ?? '',
+                                      textStyle: theme.labelSmall?.copyWith(
+                                        fontSize: 8
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) => SizedBox(width: 10),
+                                ),
+                              )
+                            ],
+                            if ((movieTvWatchData.watchRegion?.buy ?? []).isNotEmpty) ...[
+                              SizedBox(height: 4),
+                              MovieText(
+                                title: 'Buy',
+                                style: TextStyle(color: MovieColors.textDisabled),
+                              ),
+                              SizedBox(height: 4),
+                              SizedBox(
+                                height: 100,
+                                child: ListView.separated(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: movieTvWatchData.watchRegion!.buy!.length,
+                                  itemBuilder: (context, index) {
+                                    final item = movieTvWatchData.watchRegion!.buy![index];
+                                    return MovieCastBanner(
+                                      height: 50,
+                                      width: 55,
+                                      imagePath: item.logoPath!.generateImageURL,
+                                      subTitle: item.providerName ?? '',
+                                      textStyle: theme.labelSmall?.copyWith(
+                                        fontSize: 8
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) => SizedBox(width: 10),
+                                ),
+                              )
+                            ]
+                          ],
+                          SizedBox(height: 20)
+                        ],
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 6),
                           child: CustomGradientButton(

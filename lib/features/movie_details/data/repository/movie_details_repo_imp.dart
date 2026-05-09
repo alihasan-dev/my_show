@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/features/movie_details/domain/entities/movie_award_entity.dart';
+import 'package:my_show/features/movie_details/domain/entities/watch_provider_entity.dart';
 import '../../domain/entities/video_entity.dart';
 import '/core/network/check_connectivity.dart';
 import '/core/utils/custom_exception.dart';
@@ -253,6 +254,59 @@ class MovieDetailsRepoImp implements MovieDetailsRepository {
         awards: data.awards
       );
       return Right(movieEntity);
+    } else {
+      return left(CustomFailureException(
+        message: 'No internet connection'
+      ));
+    }
+  }
+
+  @override
+  Future<Either<CustomFailureException, WatchProviderEntity>> watchProvider({required String id, required String type}) async {
+    if (await connectivity.hasConnection) {
+      final data = await movieDetailsRemoteDatasource.watchProvider(id: id, type: type);
+      final watchProvider = WatchProviderEntity(
+        id: data.id,
+        results: data.results?.map((key, value) => MapEntry(
+          key, 
+          WatchRegion(
+            link: value.link,
+            flatrate: value.flatrate?.map((item) {
+              return ProviderDetails(
+                logoPath: item.logoPath,
+                providerId: item.providerId,
+                providerName: item.providerName,
+                displayPriority: item.displayPriority
+              );
+            }).toList(),
+            buy: value.buy?.map((item) {
+              return ProviderDetails(
+                logoPath: item.logoPath,
+                providerId: item.providerId,
+                providerName: item.providerName,
+                displayPriority: item.displayPriority
+              );
+            }).toList(),
+            rent: value.rent?.map((item) {
+              return ProviderDetails(
+                logoPath: item.logoPath,
+                providerId: item.providerId,
+                providerName: item.providerName,
+                displayPriority: item.displayPriority
+              );
+            }).toList(),
+            free: value.free?.map((item) {
+              return ProviderDetails(
+                logoPath: item.logoPath,
+                providerId: item.providerId,
+                providerName: item.providerName,
+                displayPriority: item.displayPriority
+              );
+            }).toList()
+          )
+        )),
+      );
+      return Right(watchProvider);
     } else {
       return left(CustomFailureException(
         message: 'No internet connection'

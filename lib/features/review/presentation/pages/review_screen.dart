@@ -107,7 +107,7 @@ class ReviewScreen extends HookConsumerWidget {
                                   color: MovieColors.grey.withValues(alpha: 0.5)
                                 ),
                                 child: MovieText(
-                                  title: (reviewItem.author ?? '').nameAvatarLabel,
+                                  title: (reviewItem.author ?? '').handleEmptyName.nameAvatarLabel,
                                   style: theme.textTheme.bodySmall?.copyWith(
                                     fontSize: 14
                                   ),

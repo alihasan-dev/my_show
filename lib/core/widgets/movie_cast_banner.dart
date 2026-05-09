@@ -12,6 +12,7 @@ class MovieCastBanner extends StatelessWidget {
   final String subTitle;
   final double height;
   final double width;
+  final TextStyle? textStyle;
   
   const MovieCastBanner({
     this.onTap,
@@ -20,6 +21,7 @@ class MovieCastBanner extends StatelessWidget {
     this.subTitle = '',
     this.width = 100,
     this.height = 150,
+    this.textStyle,
     super.key
   });
 
@@ -59,7 +61,7 @@ class MovieCastBanner extends StatelessWidget {
                       title: subTitle,
                       maxLine: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: textStyle ?? TextStyle(
                         fontSize: 10, 
                         color: MovieColors.textSecondary
                       ),

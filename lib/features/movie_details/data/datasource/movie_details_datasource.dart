@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/utils/app_extension_method.dart';
 import '../models/movie_award_model.dart';
 import '../models/video_model.dart';
+import '../models/watch_provider_model.dart';
 import '/core/network/api_end_points.dart';
 import '/core/network/dio_provider.dart';
 import '/features/movie/data/models/trending_movies_model.dart';
@@ -24,6 +25,8 @@ abstract interface class MovieDetailsRemoteDatasource {
   Future<VideoModel> movieVideo({required String id, required String type}); 
 
   Future<AwardModel> movieAwards({required String id}); 
+
+  Future<WatchProviderModel> watchProvider({required String id, required String type}); 
 }
 
 class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
@@ -107,6 +110,19 @@ class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
       );
       if (response.statusCode == 200) {
         return AwardModel.fromJson(response.data);
+      }
+      throw Exception();
+    } catch (e) {
+      throw Exception();   
+    }
+  }
+  
+  @override
+  Future<WatchProviderModel> watchProvider({required String id, required String type}) async {
+    try {
+      final response = await dioClient.get('/3/$type/$id/watch/providers');
+      if (response.statusCode == 200) {
+        return WatchProviderModel.fromJson(response.data);
       }
       throw Exception();
     } catch (e) {
