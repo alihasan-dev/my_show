@@ -6,11 +6,13 @@ class SearchShimmerWidget extends StatelessWidget {
 
   final EdgeInsetsGeometry? padding;
   final double height;
+  final int? itemCount;
   
   const SearchShimmerWidget({
     super.key,
     this.padding = const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-    this.height = 141
+    this.height = 141,
+    this.itemCount
   });
   
   @override
@@ -21,7 +23,7 @@ class SearchShimmerWidget extends StatelessWidget {
       child: ListView.separated(
         padding: padding,
         shrinkWrap: true,
-        itemCount: 6,
+        itemCount: itemCount ?? 10,
         separatorBuilder: (_,_) => SizedBox(height: 12),
         itemBuilder: (_,_) => Container(
           height: height,        

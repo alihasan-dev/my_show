@@ -389,109 +389,111 @@ class MovieDetailsScreen extends HookConsumerWidget {
                               ),
                             )
                           ),
-                        if (!awards.value.isBlank)
+                        if (!awards.value.isBlank) ...[
                           AdditionalInfoTile(
                             title: 'Awards',
                             value: awards.value
                           ),
-                        if (movieTvWatchData != null) ...[
-                          MovieText(
-                            title: 'Watch Provider',
-                            style: theme.titleMedium?.copyWith(
-                              color: MovieColors.textPrimary,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600
-                            ),
-                          ),
-                          if ((movieTvWatchData.watchRegion?.free ?? []).isNotEmpty) ...[
-                            SizedBox(height: 4),
-                            MovieText(
-                              title: 'Free',
-                              style: TextStyle(color: MovieColors.textDisabled),
-                            ),
-                            SizedBox(height: 4),
-                            SizedBox(
-                              height: 100,
-                              child: ListView.separated(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemCount: movieTvWatchData.watchRegion!.free!.length,
-                                itemBuilder: (context, index) {
-                                  final item = movieTvWatchData.watchRegion!.free![index];
-                                  return MovieCastBanner(
-                                    height: 50,
-                                    width: 55,
-                                    imagePath: item.logoPath!.generateImageURL,
-                                    subTitle: item.providerName ?? '',
-                                    textStyle: theme.labelSmall?.copyWith(
-                                      fontSize: 8
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) => SizedBox(width: 10),
-                              ),
-                            ),
-                            if ((movieTvWatchData.watchRegion?.rent ?? []).isNotEmpty) ...[
-                              SizedBox(height: 4),
-                              MovieText(
-                                title: 'Rent',
-                                style: TextStyle(color: MovieColors.textDisabled),
-                              ),
-                              SizedBox(height: 4),
-                              SizedBox(
-                                height: 100,
-                                child: ListView.separated(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: movieTvWatchData.watchRegion!.rent!.length,
-                                  itemBuilder: (context, index) {
-                                    final item = movieTvWatchData.watchRegion!.rent![index];
-                                    return MovieCastBanner(
-                                      height: 50,
-                                      width: 55,
-                                      imagePath: item.logoPath!.generateImageURL,
-                                      subTitle: item.providerName ?? '',
-                                      textStyle: theme.labelSmall?.copyWith(
-                                        fontSize: 8
-                                      ),
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) => SizedBox(width: 10),
-                                ),
-                              )
-                            ],
-                            if ((movieTvWatchData.watchRegion?.buy ?? []).isNotEmpty) ...[
-                              SizedBox(height: 4),
-                              MovieText(
-                                title: 'Buy',
-                                style: TextStyle(color: MovieColors.textDisabled),
-                              ),
-                              SizedBox(height: 4),
-                              SizedBox(
-                                height: 100,
-                                child: ListView.separated(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: movieTvWatchData.watchRegion!.buy!.length,
-                                  itemBuilder: (context, index) {
-                                    final item = movieTvWatchData.watchRegion!.buy![index];
-                                    return MovieCastBanner(
-                                      height: 50,
-                                      width: 55,
-                                      imagePath: item.logoPath!.generateImageURL,
-                                      subTitle: item.providerName ?? '',
-                                      textStyle: theme.labelSmall?.copyWith(
-                                        fontSize: 8
-                                      ),
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) => SizedBox(width: 10),
-                                ),
-                              )
-                            ]
-                          ],
-                          SizedBox(height: 20)
+                          SizedBox(height: 5)
                         ],
+                        // if (movieTvWatchData != null) ...[
+                        //   MovieText(
+                        //     title: 'Watch Provider',
+                        //     style: theme.titleMedium?.copyWith(
+                        //       color: MovieColors.textPrimary,
+                        //       fontSize: 18,
+                        //       fontWeight: FontWeight.w600
+                        //     ),
+                        //   ),
+                        //   if ((movieTvWatchData.watchRegion?.free ?? []).isNotEmpty) ...[
+                        //     SizedBox(height: 4),
+                        //     MovieText(
+                        //       title: 'Free',
+                        //       style: TextStyle(color: MovieColors.textDisabled),
+                        //     ),
+                        //     SizedBox(height: 4),
+                        //     SizedBox(
+                        //       height: 100,
+                        //       child: ListView.separated(
+                        //         shrinkWrap: true,
+                        //         scrollDirection: Axis.horizontal,
+                        //         itemCount: movieTvWatchData.watchRegion!.free!.length,
+                        //         itemBuilder: (context, index) {
+                        //           final item = movieTvWatchData.watchRegion!.free![index];
+                        //           return MovieCastBanner(
+                        //             height: 50,
+                        //             width: 55,
+                        //             imagePath: item.logoPath!.generateImageURL,
+                        //             subTitle: item.providerName ?? '',
+                        //             textStyle: theme.labelSmall?.copyWith(
+                        //               fontSize: 8
+                        //             ),
+                        //           );
+                        //         },
+                        //         separatorBuilder: (context, index) => SizedBox(width: 10),
+                        //       ),
+                        //     ),
+                        //     if ((movieTvWatchData.watchRegion?.rent ?? []).isNotEmpty) ...[
+                        //       SizedBox(height: 4),
+                        //       MovieText(
+                        //         title: 'Rent',
+                        //         style: TextStyle(color: MovieColors.textDisabled),
+                        //       ),
+                        //       SizedBox(height: 4),
+                        //       SizedBox(
+                        //         height: 100,
+                        //         child: ListView.separated(
+                        //           shrinkWrap: true,
+                        //           scrollDirection: Axis.horizontal,
+                        //           itemCount: movieTvWatchData.watchRegion!.rent!.length,
+                        //           itemBuilder: (context, index) {
+                        //             final item = movieTvWatchData.watchRegion!.rent![index];
+                        //             return MovieCastBanner(
+                        //               height: 50,
+                        //               width: 55,
+                        //               imagePath: item.logoPath!.generateImageURL,
+                        //               subTitle: item.providerName ?? '',
+                        //               textStyle: theme.labelSmall?.copyWith(
+                        //                 fontSize: 8
+                        //               ),
+                        //             );
+                        //           },
+                        //           separatorBuilder: (context, index) => SizedBox(width: 10),
+                        //         ),
+                        //       )
+                        //     ],
+                        //     if ((movieTvWatchData.watchRegion?.buy ?? []).isNotEmpty) ...[
+                        //       SizedBox(height: 4),
+                        //       MovieText(
+                        //         title: 'Buy',
+                        //         style: TextStyle(color: MovieColors.textDisabled),
+                        //       ),
+                        //       SizedBox(height: 4),
+                        //       SizedBox(
+                        //         height: 100,
+                        //         child: ListView.separated(
+                        //           shrinkWrap: true,
+                        //           scrollDirection: Axis.horizontal,
+                        //           itemCount: movieTvWatchData.watchRegion!.buy!.length,
+                        //           itemBuilder: (context, index) {
+                        //             final item = movieTvWatchData.watchRegion!.buy![index];
+                        //             return MovieCastBanner(
+                        //               height: 50,
+                        //               width: 55,
+                        //               imagePath: item.logoPath!.generateImageURL,
+                        //               subTitle: item.providerName ?? '',
+                        //               textStyle: theme.labelSmall?.copyWith(
+                        //                 fontSize: 8
+                        //               ),
+                        //             );
+                        //           },
+                        //           separatorBuilder: (context, index) => SizedBox(width: 10),
+                        //         ),
+                        //       )
+                        //     ]
+                        //   ],
+                        //   SizedBox(height: 20)
+                        // ],
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 6),
                           child: CustomGradientButton(
