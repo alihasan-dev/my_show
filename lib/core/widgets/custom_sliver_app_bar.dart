@@ -19,6 +19,7 @@ class CustomSliverAppBar extends StatelessWidget {
     return SliverAppBar(
       expandedHeight: expandedHeight,
       pinned: true,
+      scrolledUnderElevation: 0,
       flexibleSpace: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.biggest.height <= kToolbarHeight + MediaQuery.of(context).padding.top)  {

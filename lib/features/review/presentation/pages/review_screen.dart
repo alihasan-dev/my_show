@@ -57,10 +57,12 @@ class ReviewScreen extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         centerTitle: false,
-        title: MovieText(
-          title: 'Review  |  $title',
-          style: TextStyle(fontSize: 18),
+        title: Text(
+          'Review  |  $title',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
       body: reviewList.when(

@@ -43,11 +43,10 @@ class PeopleScreen extends HookConsumerWidget {
       return null;
     }, []);
     
-    return Scaffold(
-      appBar: AppBar(toolbarHeight: 0),
-      body: SafeArea(
-        top: false,
-        child: peopleList.when(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(toolbarHeight: 0),
+        body: peopleList.when(
           data: (data) {
             if ((data.results ?? []).isEmpty) {
               return NoDataWidget(

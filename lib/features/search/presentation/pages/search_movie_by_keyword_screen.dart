@@ -57,11 +57,12 @@ class SearchMovieByKeywordScreen extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: MovieText(
-          title: "${AppStrings.searchFor} '$name'",
-          style: theme.textTheme.titleLarge?.copyWith(
-            fontSize: 18
-          ),
+        scrolledUnderElevation: 0,
+        centerTitle: false,
+        title: Text(
+          "${AppStrings.searchFor} '$name'",
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
       body: SafeArea(

@@ -53,10 +53,12 @@ class ViewAllScreen extends HookConsumerWidget {
     
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: MovieText(
-          title: label.capitalizeWord,
-          style: TextStyle(fontSize: 18),
+        centerTitle: false,
+        scrolledUnderElevation: 0,
+        title: Text(
+          label.capitalizeWord,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
       body: SafeArea(

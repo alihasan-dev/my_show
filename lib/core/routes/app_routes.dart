@@ -8,7 +8,6 @@ import '../../features/view_all/presentation/page/view_all_screen.dart';
 import '../../features/search/presentation/pages/search_movie_by_keyword_screen.dart';
 import '../../features/movie_details/presentation/page/video_player_screen.dart';
 import '../../features/movie_details/domain/entities/video_entity.dart';
-
 class AppRoutes {
 
   AppRoutes._();
@@ -45,7 +44,7 @@ class AppRoutes {
           final id = state.uri.queryParameters['id'] ?? '';
           final type = state.uri.queryParameters['type'] ?? '';
           return MovieDetailsScreen(id: id, type: type);
-        }
+        },
       ),
       GoRoute(
         name: profile,
@@ -53,7 +52,7 @@ class AppRoutes {
         builder: (_, state) {
           final userId = state.uri.queryParameters['userId'] ?? '';
           return ProfileScreen(userId: userId);
-        }
+        },
       ),
       GoRoute(
         name: searchMovieByKeywordScreen,
@@ -67,7 +66,7 @@ class AppRoutes {
             name: name,
             type: type,
           );
-        }
+        },
       ),
       GoRoute(
         name: videoPlayer,
@@ -78,7 +77,7 @@ class AppRoutes {
             videos: extra['videos'] as List<Results>,
             initialIndex: extra['initialIndex'] as int? ?? 0,
           );
-        }
+        },
       ),
       GoRoute(
         name: viewAll,
@@ -92,7 +91,7 @@ class AppRoutes {
             showType: showType,
             label: label,
           );
-        }
+        },
       ),
       GoRoute(
         name: review,
@@ -106,7 +105,7 @@ class AppRoutes {
             id: id,
             title: title
           );
-        }
+        },
       ),
     ]
   );

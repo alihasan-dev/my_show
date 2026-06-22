@@ -23,6 +23,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late YoutubePlayerController _controller;
   late int _currentIndex;
   final ValueNotifier<bool> _isFullScreen = ValueNotifier(false);
+  bool isFullScreen = false;
 
   @override
   void initState() {
@@ -66,8 +67,18 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     final video = widget.videos[_currentIndex];
 
     return YoutubePlayerBuilder(
-      onEnterFullScreen: () => _isFullScreen.value = true,
-      onExitFullScreen: () => _isFullScreen.value = false,
+      onEnterFullScreen: () {
+       _isFullScreen.value = true;
+       setState(() {
+         isFullScreen = true;
+       });
+      },
+      onExitFullScreen: () {
+       _isFullScreen.value = false;
+       setState(() {
+         isFullScreen = false;
+       });
+      },
       player: YoutubePlayer(
         controller: _controller,
         showVideoProgressIndicator: true,
@@ -76,17 +87,28 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           playedColor: MovieColors.red,
           handleColor: MovieColors.red,
         ),
-        topActions: [
+        topActions: isFullScreen
+        ?[
           const SizedBox(width: 8),
           Expanded(
-            child: Text(
-              video.name ?? '',
-              style: const TextStyle(color: MovieColors.white, fontSize: 14),
-              overflow: TextOverflow.ellipsis,
+            child: Row(
+              spacing: 5,
+              children: [
+                BackButton(),
+                Expanded(
+                  child: Text(
+                    video.name ?? '',
+                    style: const TextStyle(color: MovieColors.white, fontSize: 18),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ),
+              ],
             ),
           ),
-        ],
+        ] : null,
         bottomActions: [
+          const SizedBox(width: 22),
           CurrentPosition(),
           const SizedBox(width: 8),
           ProgressBar(
@@ -102,6 +124,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             icon: const Icon(Icons.fullscreen, color: MovieColors.white),
             onPressed: () => _controller.toggleFullScreenMode(),
           ),
+          const SizedBox(width: 10),
         ],
       ),
       builder: (context, player) {

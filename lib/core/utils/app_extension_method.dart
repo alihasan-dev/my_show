@@ -33,8 +33,8 @@ extension NumExtensionUtils on num {
 
   String get formattedRating {
     return this % 1 == 0
-        ? toInt().toString()
-        : toString();
+    ? toInt().toString()
+    : toString();
   }
 
 }

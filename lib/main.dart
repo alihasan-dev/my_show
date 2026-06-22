@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFF121212),
+        // scaffoldBackgroundColor: const Color(0xFF121212),
         cardColor: const Color(0xFF1E1E1E),
         colorScheme: const ColorScheme.dark(
           primary: Color(0xFF03DAC6),
