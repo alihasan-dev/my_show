@@ -19,22 +19,26 @@ class ReviewNotifier extends StateNotifier<AsyncValue<List<ReviewEntity>>> {
       return state;
     }
     if (reviewList.isEmpty) state = const AsyncValue.loading();
-    final result = await reviewUsecase.review(id: id, type: type, page: pageCount);
-    result.fold(
-      (failure) {
-        if (reviewList.isNotEmpty) return;
-        state = AsyncValue.error(failure.message, StackTrace.current);
-      },
-      (review) {
-        if (review.isNotEmpty) {
-          pageCount+=1;
-          reviewList.addAll(review);
-        } else {
-          canCallAPI = false;
-        }
-        state = AsyncValue.data(reviewList);
-      },
-    );
+    try {
+      final result = await reviewUsecase.review(id: id, type: type, page: pageCount);
+      result.fold(
+        (failure) {
+          if (reviewList.isNotEmpty) return;
+          state = AsyncValue.error(failure.message, StackTrace.current);
+        },
+        (review) {
+          if (review.isNotEmpty) {
+            pageCount+=1;
+            reviewList.addAll(review);
+          } else {
+            canCallAPI = false;
+          }
+          state = AsyncValue.data(reviewList);
+        },
+      );
+    } catch (e) {
+      state = AsyncValue.data(reviewList);
+    }
     return state;
   }
 

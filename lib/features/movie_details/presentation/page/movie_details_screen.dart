@@ -83,7 +83,6 @@ class MovieDetailsScreen extends HookConsumerWidget {
         child: movieDetails.when(
           data: (data) {
             final movieData = data;
-            final year = (movieData.releaseDate ?? '').split('-');
             return CustomScrollView(
               slivers: [
                 CustomSliverAppBar(
@@ -112,8 +111,8 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                 children: [
                                   Text(
                                     type == 'movie'
-                                    ? '${movieData.title ?? ''} ${year.isEmpty ? '' : '(${year.first})'}'
-                                    : '${movieData.name ?? ''} ${year.isEmpty ? '' : '(${year.first})'}',
+                                    ? movieData.title ?? ''
+                                    : movieData.name ?? '',
                                     style: TextStyle(
                                       fontSize: 18, 
                                       fontWeight: FontWeight.bold,
@@ -417,7 +416,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                     : 'Watch Providers',
                                     padding: EdgeInsetsGeometry.symmetric(vertical: 14),
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadiusGeometry.circular(8)
+                                      borderRadius: BorderRadiusGeometry.circular(8),
                                     ),
                                     textAlign: TextAlign.center,
                                     textStyle: theme.labelLarge?.copyWith(

@@ -7,11 +7,13 @@ class SearchShimmerWidget extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final double height;
   final int? itemCount;
+  final double? radius;
   
   const SearchShimmerWidget({
     super.key,
     this.padding = const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
     this.height = 141,
+    this.radius,
     this.itemCount
   });
   
@@ -28,7 +30,7 @@ class SearchShimmerWidget extends StatelessWidget {
         itemBuilder: (_,_) => Container(
           height: height,        
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(radius ?? 8),
             color: Colors.grey.shade100
           ),
         ),

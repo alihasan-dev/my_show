@@ -2,10 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/core/utils/app_extension_method.dart';
-import '../../../../core/constants/app_strings.dart';
-import '../../../../core/constants/movie_colors.dart';
-import '../../../../core/widgets/movie_text.dart';
+import 'package:my_show/features/review/presentation/widgets/review_card.dart';
 import '../../../../core/widgets/no_data_widget.dart';
 import '../../../search/presentation/widgets/search_shimmer_widget.dart';
 import '../providers/show_review_provider.dart';
@@ -24,10 +21,8 @@ class ReviewScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
     final reviewList = ref.watch(reviewProvider);
     final scrollController = useScrollController();
-
     Timer? timer;
     useEffect(() {
       void listener() {
@@ -85,104 +80,11 @@ class ReviewScreen extends HookConsumerWidget {
             itemCount: review.length,
             itemBuilder: (context, index) {
               final reviewItem = review[index];
-              return Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: MovieColors.grey.withValues(alpha: 0.1),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 8,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Row(
-                            spacing: 8,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: MovieColors.grey.withValues(alpha: 0.5)
-                                ),
-                                child: MovieText(
-                                  title: (reviewItem.author ?? '').handleEmptyName.nameAvatarLabel,
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    fontSize: 14
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: MovieText(
-                                  title: (reviewItem.author ?? '').capitalizeWord.handleEmptyName,
-                                  maxLine: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: theme.textTheme.labelLarge,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        if (reviewItem.authorDetails?.rating != null) ...[
-                          SizedBox(width: 8),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: MovieColors.grey.withValues(alpha: 0.5)
-                            ),
-                            child: Row(
-                              spacing: 2.5,
-                              children: [
-                                MovieText(
-                                  title: reviewItem.authorDetails!.rating!.formattedRating,
-                                  style: theme.textTheme.bodySmall?.copyWith(),
-                                ),
-                                Icon(Icons.star, size: 12)
-                              ],
-                            ),
-                          ),
-                        ]
-                      ],
-                    ),
-                    if (!(reviewItem.updatedAt ?? '').isBlank) ...[
-                      MovieText(
-                        title: reviewItem.updatedAt!.formatDOB(hideYrs: true),
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: MovieColors.grey
-                        ),
-                      ),
-                    ],
-                    MovieText(
-                      title: reviewItem.content ?? '',
-                      maxLine: reviewItem.isReadMre
-                      ? null
-                      : 4,
-                      overflow: reviewItem.isReadMre
-                      ? TextOverflow.visible
-                      : TextOverflow.ellipsis,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: MovieColors.white.withValues(alpha: 0.95)
-                      ),
-                    ),
-                    if ((reviewItem.content ?? '').length > 185) ...[
-                      InkWell(
-                        onTap: () => ref.read(reviewProvider.notifier).toggleReadMore(index),
-                        child: MovieText(
-                          title: reviewItem.isReadMre
-                          ? AppStrings.readLess
-                          : AppStrings.readMore,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: MovieColors.primaryColor
-                          ),
-                        ),
-                      ),
-                    ]
-                  ],
-                ),
+              return ReviewCard(
+                reviewItem: reviewItem,
+                onTapReadMore: () {
+                  ref.read(reviewProvider.notifier).toggleReadMore(index);
+                },
               );
             },
             separatorBuilder: (_,_) => SizedBox(height: 12),
@@ -197,7 +99,11 @@ class ReviewScreen extends HookConsumerWidget {
             type: showType,
           )
         ), 
-        loading: () => SearchShimmerWidget(height: 110, padding: EdgeInsets.symmetric(horizontal: 16))
+        loading: () => SearchShimmerWidget(
+          height: 110, 
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          radius: 16,
+        ),
       ),
     );
   }

@@ -31,12 +31,12 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 4),
+          SizedBox(height: 6),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 16.0),
+                padding: const EdgeInsets.only(left: 18.0),
                 child: MovieText(
                   title: 'Watch Providers',
                   style: theme.titleMedium?.copyWith(
@@ -55,7 +55,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
           Flexible(
             child: ListView(
               shrinkWrap: true,
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 18),
               children: [
                 if ((watchProvider?.watchRegion?.flatrate ?? []).isNotEmpty) ...[
                   SizedBox(height: 10),
@@ -68,7 +68,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                   ),
                   SizedBox(height: 10),
                   SizedBox(
-                    height: 100,
+                    height: 95,
                     child: ListView.separated(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
@@ -92,7 +92,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                           ),
                         );
                       },
-                      separatorBuilder: (_, _) => SizedBox(width: 14),
+                      separatorBuilder: (_, _) => SizedBox(width: 16),
                     ),
                   ),
                 ],
@@ -107,7 +107,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                   ),
                   SizedBox(height: 10),
                   SizedBox(
-                    height: 100,
+                    height: 95,
                     child: ListView.separated(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
@@ -131,7 +131,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                           ),
                         );
                       },
-                      separatorBuilder: (_, _) => SizedBox(width: 14),
+                      separatorBuilder: (_, _) => SizedBox(width: 16),
                     ),
                   ),
                 ],
@@ -146,7 +146,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                   ),
                   SizedBox(height: 10),
                   SizedBox(
-                    height: 100,
+                    height: 95,
                     child: ListView.separated(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
@@ -170,7 +170,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                           ),
                         );
                       },
-                      separatorBuilder: (_, _) => SizedBox(width: 14),
+                      separatorBuilder: (_, _) => SizedBox(width: 16),
                     ),
                   )
                 ],
@@ -185,7 +185,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                   ),
                   SizedBox(height: 10),
                   SizedBox(
-                    height: 100,
+                    height: 95,
                     child: ListView.separated(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
@@ -209,10 +209,11 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                           ),
                         );
                       },
-                      separatorBuilder: (_, _) => SizedBox(width: 14),
+                      separatorBuilder: (_, _) => SizedBox(width: 16),
                     ),
                   )
                 ],
+                SizedBox(height: 12),
               ],
             ),
           ),     
