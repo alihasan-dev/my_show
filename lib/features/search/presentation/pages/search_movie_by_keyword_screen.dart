@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/app_extension_method.dart';
-import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/widgets/movie_tv_search_widget.dart';
 import '../providers/search_movie_keyword_provider.dart';
@@ -27,7 +26,7 @@ class SearchMovieByKeywordScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
+    // final theme = Theme.of(context);
     final queryKey = '$id-$name';
     final searchMovieKeyword = ref.watch(searchMovieKeywordProvider(queryKey));
     final movieList = searchMovieKeyword.asData?.value.result ?? [];

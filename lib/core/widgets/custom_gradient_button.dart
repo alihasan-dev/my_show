@@ -11,6 +11,7 @@ class CustomGradientButton extends StatelessWidget {
   final ShapeBorder? shape;
   final Widget? widget;
   final double radius;
+  final TextAlign? textAlign;
   
   const CustomGradientButton({
     this.label = '',
@@ -21,6 +22,7 @@ class CustomGradientButton extends StatelessWidget {
     this.shape,
     this.widget,
     this.radius = 20,
+    this.textAlign,
     super.key
   });
 
@@ -51,6 +53,7 @@ class CustomGradientButton extends StatelessWidget {
         ),
         child: widget ?? MovieText(
           title: label,
+          textAlign: textAlign,
           style: textStyle ?? theme.textTheme.labelMedium?.copyWith(
             color: MovieColors.white.withValues(alpha: 0.8)
           ),

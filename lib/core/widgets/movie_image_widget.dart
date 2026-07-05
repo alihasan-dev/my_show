@@ -12,7 +12,7 @@ class MovieImageWidget extends StatelessWidget {
   final double? width;
   final Function()? onTap;
   final BoxFit fit;
-  final double radius;
+  final double? radius;
   final BorderRadius? borderRadius;
   final String tooltipMessage;
   
@@ -22,7 +22,7 @@ class MovieImageWidget extends StatelessWidget {
     this.width,
     this.onTap,
     this.fit = BoxFit.cover,
-    this.radius = 8.0,
+    this.radius,
     this.borderRadius,
     this.tooltipMessage = '',
     super.key
@@ -35,7 +35,7 @@ class MovieImageWidget extends StatelessWidget {
       child: Tooltip(
         message: tooltipMessage,
         child: ClipRRect(
-          borderRadius: borderRadius ?? BorderRadius.circular(radius),
+          borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 8.0),
           child: _imageBuilder
         ),
       )

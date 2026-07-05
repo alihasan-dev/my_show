@@ -1,30 +1,32 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import '/core/widgets/vote_percentage_widget.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/utils/custom_snackbar.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import '../../../../core/constants/app_strings.dart';
-import '../../../../core/widgets/custom_gradient_button.dart';
-import '../provider/movie_awards_provider.dart';
-import '../provider/movie_video_provider.dart';
 import '../provider/watch_provider.dart';
-import '/core/widgets/vote_percentage_widget.dart';
 import '../provider/movie_cast_provider.dart';
+import '../provider/movie_video_provider.dart';
+import '../provider/movie_awards_provider.dart';
 import '../provider/movie_details_provider.dart';
 import '../provider/movie_keyword_provider.dart';
+import '../widget/watch_provider_bottom_sheet.dart';
+import '../widget/movie_details_shimmer_widget.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/widgets/movie_text.dart';
+import '../../../../core/constants/app_strings.dart';
+import '../../../../core/utils/locale_provider.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/widgets/movie_cast_banner.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/custom_sliver_app_bar.dart';
+import '../../../../core/widgets/custom_gradient_button.dart';
 import '../../../../core/widgets/custom_keyword_chip_widget.dart';
 import '../../../../features/movie_details/presentation/widget/additional_info_tile.dart';
 import '../../../../features/movie_details/presentation/provider/movie_recommentation_provider.dart';
-import '../widget/movie_details_shimmer_widget.dart';
 
 class MovieDetailsScreen extends HookConsumerWidget {
   
@@ -39,15 +41,16 @@ class MovieDetailsScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.read(localeProvider);
     final formatter = NumberFormat.currency(locale: "en_US", symbol: "\$");
     final theme = Theme.of(context).textTheme;
     final movieVideo = ref.watch(movieVideoProvider((id: id, type: type)));
     final movieDetails = ref.watch(movieDetailsProvider((id: id, type: type)));
     final movieCast = ref.watch(movieCastProvider((id: id, type: type)));
-    final movieRecommentation = ref.watch(movieRecommentationProvider((id: id, type: type)));
+    final movieRecommendation = ref.watch(movieRecommendationProvider((id: id, type: type)));
     final movieKeywords = ref.watch(movieKeywordProvider((id: id, type: type)));
     final movieTvWatchProvider = ref.watch(watchProvider);
-    final recommendedMovieList = movieRecommentation.asData?.value.result ?? [];
+    final recommendedMovieList = movieRecommendation.asData?.value.result ?? [];
     final movieCastList = movieCast.asData?.value.cast ?? [];
     final movieCrewList = movieCast.asData?.value.crew ?? [];
     final movieKeywordList = movieKeywords.asData?.value.keywords ?? [];
@@ -67,7 +70,9 @@ class MovieDetailsScreen extends HookConsumerWidget {
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.read(watchProvider.notifier).watchProvider(id: id, type: type);
+        final countryCode = locale.countryCode ?? 'US';
+        debugPrint("Detected Locale : $countryCode");
+        ref.read(watchProvider.notifier).watchProvider(id: id, type: type, countryCode: countryCode);
       });
       return null;
     }, []);
@@ -321,14 +326,14 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           AdditionalInfoTile(
                             title: AppStrings.budget,
                             value: (movieData.budget ?? 0) == 0
-                            ? 'N/A'
+                            ? '-'
                             : formatter.format(movieData.budget ?? 0)
                           ),
                         if (movieData.revenue != null)
                           AdditionalInfoTile(
                             title: AppStrings.revenue,
                             value: (movieData.revenue ?? 0) == 0
-                            ? 'N/A'
+                            ? '-'
                             : formatter.format(movieData.revenue ?? 0)
                           ),
                         if (!(movieData.type ?? '').isBlank)
@@ -392,147 +397,66 @@ class MovieDetailsScreen extends HookConsumerWidget {
                         if (!awards.value.isBlank) ...[
                           AdditionalInfoTile(
                             title: 'Awards',
-                            value: awards.value
+                            value: awards.value.replaceNA
                           ),
                           SizedBox(height: 5)
                         ],
-                        // if (movieTvWatchData != null) ...[
-                        //   MovieText(
-                        //     title: 'Watch Provider',
-                        //     style: theme.titleMedium?.copyWith(
-                        //       color: MovieColors.textPrimary,
-                        //       fontSize: 18,
-                        //       fontWeight: FontWeight.w600
-                        //     ),
-                        //   ),
-                        //   if ((movieTvWatchData.watchRegion?.free ?? []).isNotEmpty) ...[
-                        //     SizedBox(height: 4),
-                        //     MovieText(
-                        //       title: 'Free',
-                        //       style: TextStyle(color: MovieColors.textDisabled),
-                        //     ),
-                        //     SizedBox(height: 4),
-                        //     SizedBox(
-                        //       height: 100,
-                        //       child: ListView.separated(
-                        //         shrinkWrap: true,
-                        //         scrollDirection: Axis.horizontal,
-                        //         itemCount: movieTvWatchData.watchRegion!.free!.length,
-                        //         itemBuilder: (context, index) {
-                        //           final item = movieTvWatchData.watchRegion!.free![index];
-                        //           return MovieCastBanner(
-                        //             height: 50,
-                        //             width: 55,
-                        //             imagePath: item.logoPath!.generateImageURL,
-                        //             subTitle: item.providerName ?? '',
-                        //             textStyle: theme.labelSmall?.copyWith(
-                        //               fontSize: 8
-                        //             ),
-                        //           );
-                        //         },
-                        //         separatorBuilder: (context, index) => SizedBox(width: 10),
-                        //       ),
-                        //     ),
-                        //     if ((movieTvWatchData.watchRegion?.rent ?? []).isNotEmpty) ...[
-                        //       SizedBox(height: 4),
-                        //       MovieText(
-                        //         title: 'Rent',
-                        //         style: TextStyle(color: MovieColors.textDisabled),
-                        //       ),
-                        //       SizedBox(height: 4),
-                        //       SizedBox(
-                        //         height: 100,
-                        //         child: ListView.separated(
-                        //           shrinkWrap: true,
-                        //           scrollDirection: Axis.horizontal,
-                        //           itemCount: movieTvWatchData.watchRegion!.rent!.length,
-                        //           itemBuilder: (context, index) {
-                        //             final item = movieTvWatchData.watchRegion!.rent![index];
-                        //             return MovieCastBanner(
-                        //               height: 50,
-                        //               width: 55,
-                        //               imagePath: item.logoPath!.generateImageURL,
-                        //               subTitle: item.providerName ?? '',
-                        //               textStyle: theme.labelSmall?.copyWith(
-                        //                 fontSize: 8
-                        //               ),
-                        //             );
-                        //           },
-                        //           separatorBuilder: (context, index) => SizedBox(width: 10),
-                        //         ),
-                        //       )
-                        //     ],
-                        //     if ((movieTvWatchData.watchRegion?.buy ?? []).isNotEmpty) ...[
-                        //       SizedBox(height: 4),
-                        //       MovieText(
-                        //         title: 'Buy',
-                        //         style: TextStyle(color: MovieColors.textDisabled),
-                        //       ),
-                        //       SizedBox(height: 4),
-                        //       SizedBox(
-                        //         height: 100,
-                        //         child: ListView.separated(
-                        //           shrinkWrap: true,
-                        //           scrollDirection: Axis.horizontal,
-                        //           itemCount: movieTvWatchData.watchRegion!.buy!.length,
-                        //           itemBuilder: (context, index) {
-                        //             final item = movieTvWatchData.watchRegion!.buy![index];
-                        //             return MovieCastBanner(
-                        //               height: 50,
-                        //               width: 55,
-                        //               imagePath: item.logoPath!.generateImageURL,
-                        //               subTitle: item.providerName ?? '',
-                        //               textStyle: theme.labelSmall?.copyWith(
-                        //                 fontSize: 8
-                        //               ),
-                        //             );
-                        //           },
-                        //           separatorBuilder: (context, index) => SizedBox(width: 10),
-                        //         ),
-                        //       )
-                        //     ]
-                        //   ],
-                        //   SizedBox(height: 20)
-                        // ],
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 6),
-                          child: CustomGradientButton(
-                            label: AppStrings.viewProfile,
-                            width: double.maxFinite,
-                            padding: EdgeInsetsGeometry.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadiusGeometry.circular(8)
-                            ),
-                            radius: 8,
-                            widget: Padding(
-                              padding: EdgeInsetsGeometry.symmetric(horizontal: 12),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  MovieText(
-                                    title: 'Read all review',
-                                    style: theme.labelLarge?.copyWith(
-                                      color: MovieColors.white.withValues(alpha: 0.7)
+                          child: Row(
+                            spacing: 10,
+                            children: List.generate(
+                              movieTvWatchData?.watchRegion == null
+                              ? 1
+                              : 2, 
+                              (watchIndex) {
+                                return Expanded(
+                                  child: CustomGradientButton(
+                                    label: watchIndex == 0
+                                    ? 'Read All Reviews'
+                                    : 'Watch Providers',
+                                    padding: EdgeInsetsGeometry.symmetric(vertical: 14),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadiusGeometry.circular(8)
                                     ),
+                                    textAlign: TextAlign.center,
+                                    textStyle: theme.labelLarge?.copyWith(
+                                      color: MovieColors.white.withValues(alpha: 0.8)
+                                    ),
+                                    radius: 8,
+                                    onTap: () {
+                                      switch (watchIndex) {
+                                        case 0:
+                                          context.pushNamed(
+                                            AppRoutes.review,
+                                            queryParameters: {
+                                              'id': id,
+                                              'showType': type,
+                                              'title': type == 'movie' ? movieData.title : movieData.name
+                                            }
+                                          );
+                                          break;
+                                        case 1: 
+                                          showModalBottomSheet(
+                                            context: context, 
+                                            isScrollControlled: true,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                topRight: Radius.circular(20)
+                                              )
+                                            ),
+                                            builder: (_) => WatchProviderBottomSheet(
+                                              watchProvider: movieTvWatchData,
+                                            )
+                                          );
+                                        default:
+                                      }
+                                    }
                                   ),
-                                  Icon(
-                                    Icons.arrow_forward_ios, 
-                                    size: 18,
-                                    color: MovieColors.white.withValues(alpha: 0.7),
-                                  )
-                                ],
-                              ),
+                                );
+                              }
                             ),
-                            onTap: () {
-                              context.pushNamed(
-                                AppRoutes.review,
-                                queryParameters: {
-                                  'id': id,
-                                  'showType': type,
-                                  'title': type == 'movie' ? movieData.title : movieData.name
-                                }
-                              );
-                            }
                           ),
                         ),
                         const SizedBox(height: 10),

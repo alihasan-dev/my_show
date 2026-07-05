@@ -43,19 +43,24 @@ class _MovieCarouselWidgetState extends State<MovieCarouselWidget> {
             padding: const EdgeInsets.only(top: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(widget.itemCount, (index) {
-                final isActive = index == _currentPage;
-                return AnimatedContainer(
-                  duration: const Duration(milliseconds: 250),
-                  margin: const EdgeInsets.symmetric(horizontal: 3),
-                  width: isActive ? 18 : 6,
-                  height: 6,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    color: isActive ? widget.activeColor : widget.inactiveColor.withValues(alpha: 0.4),
-                  ),
-                );
-              }),
+              children: List.generate(
+                widget.itemCount, 
+                (index) {
+                  final isActive = index == _currentPage;
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 250),
+                    margin: const EdgeInsets.symmetric(horizontal: 3),
+                    width: isActive ? 18 : 6,
+                    height: 6,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(3),
+                      color: isActive 
+                      ? widget.activeColor 
+                      : widget.inactiveColor.withValues(alpha: 0.4),
+                    ),
+                  );
+                }
+              ),
             ),
           ),
       ],

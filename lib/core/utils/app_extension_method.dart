@@ -17,10 +17,10 @@ extension NumExtensionUtils on num {
         case 3:
           return 'Non binary';
         default:
-          return 'N/A';
+          return '-';
       }
     } catch (e) {
-      return 'N/A';
+      return '-';
     }
   }
 
@@ -44,7 +44,7 @@ extension StringExtensionUtils on String {
   String formatDOB({bool hideYrs = false}) {
     try {
       String input = this;
-      if (input.isBlank) return 'N/A';
+      if (input.isBlank) return '-';
       final dob = DateTime.parse(input);
       final newDate = DateTime(dob.year, dob.month, dob.day);
       String formattedDate = DateFormat("MMM d, y").format(newDate);
@@ -53,17 +53,17 @@ extension StringExtensionUtils on String {
       String age = calculateAge(newDate);
       return "$formattedDate ($age)";
     } catch (e) {
-      return 'N/A';
+      return '-';
     }
   }
 
   String get formatLanguage {
     try {
       final languageCode = this;
-      if (languageCode.isBlank) return 'N/A';
-      return languageMap[languageCode] ?? 'N/A';
+      if (languageCode.isBlank) return '-';
+      return languageMap[languageCode] ?? '-';
     } catch (e) {
-      return 'N/A';
+      return '-';
     }
   }
 
@@ -115,6 +115,10 @@ extension StringExtensionUtils on String {
     } catch (e) {
       return this;
     }
+  }
+
+  String get replaceNA {
+    return toLowerCase().contains('n/a') ? '-' : this;
   }
 
 }

@@ -12,6 +12,7 @@ class WatchNotifier extends StateNotifier<AsyncValue<WatchProviderModal?>> {
   WatchProviderEntity? watchProviderEntity;
 
   Future<AsyncValue<WatchProviderModal?>> watchProvider({required String id, required String type, String countryCode = 'US'}) async {
+
     state = const AsyncValue.loading();
     final result = await watchProviderUsecase.watchProvider(id: id, type: type);
     result.fold(

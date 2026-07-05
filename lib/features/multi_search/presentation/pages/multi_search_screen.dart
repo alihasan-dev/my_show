@@ -108,9 +108,9 @@ class MultiSearchScreen extends HookConsumerWidget {
                             SizedBox(height: 12),
                             MovieText(
                               title: AppStrings.searchInitialTitle,
-                              style: theme.textTheme.titleMedium?.copyWith(
+                              style: theme.textTheme.bodyLarge?.copyWith(
                                 color: MovieColors.grey,
-                                fontWeight: FontWeight.w600,
+                                // fontWeight: FontWeight.w600,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -120,7 +120,9 @@ class MultiSearchScreen extends HookConsumerWidget {
                             title: hasSearched.value
                             ? AppStrings.noResultsFound
                             : AppStrings.searchInitialSubtitle,
-                            style: theme.textTheme.bodyMedium?.copyWith(color: MovieColors.textSecondary),
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: MovieColors.textSecondary
+                            ),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -135,7 +137,7 @@ class MultiSearchScreen extends HookConsumerWidget {
                     itemBuilder: (context, index) {
                       final movie = movieList[index];
                       if (movie.id == null) return SizedBox.shrink();
-                      return movie.mediaType == 'person'
+                      return movie.mediaType?.toLowerCase() == 'person'
                       ? Container(
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(

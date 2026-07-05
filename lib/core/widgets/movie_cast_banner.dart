@@ -13,6 +13,9 @@ class MovieCastBanner extends StatelessWidget {
   final double height;
   final double width;
   final TextStyle? textStyle;
+  final double? radius;
+  final EdgeInsetsGeometry? padding;
+  final TextAlign? textAlign;
   
   const MovieCastBanner({
     this.onTap,
@@ -22,6 +25,9 @@ class MovieCastBanner extends StatelessWidget {
     this.width = 100,
     this.height = 150,
     this.textStyle,
+    this.radius,
+    this.padding,
+    this.textAlign,
     super.key
   });
 
@@ -39,9 +45,10 @@ class MovieCastBanner extends StatelessWidget {
               imagePath: imagePath,
               height: height,
               width: double.maxFinite,
+              radius: radius,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
+              padding: padding ?? const EdgeInsets.symmetric(
                 vertical: 5,
                 horizontal: 10
               ),
@@ -54,16 +61,21 @@ class MovieCastBanner extends StatelessWidget {
                       title: title,
                       maxLine: 2,
                       overflow: TextOverflow.ellipsis,
+                      textAlign: textAlign,
                       style: TextStyle(fontSize: 12, color: MovieColors.textPrimary)
                     ),
                   if (!subTitle.isBlank)
-                    MovieText(
-                      title: subTitle,
-                      maxLine: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: textStyle ?? TextStyle(
-                        fontSize: 10, 
-                        color: MovieColors.textSecondary
+                    SizedBox(
+                      width: double.maxFinite,
+                      child: MovieText(
+                        title: subTitle,
+                        maxLine: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: textAlign,
+                        style: textStyle ?? TextStyle(
+                          fontSize: 10, 
+                          color: MovieColors.textSecondary
+                        ),
                       ),
                     ),
                 ],
