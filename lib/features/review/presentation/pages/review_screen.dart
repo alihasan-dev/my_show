@@ -76,7 +76,7 @@ class ReviewScreen extends HookConsumerWidget {
           return ListView.separated(
             controller: scrollController,
             shrinkWrap: true,
-            padding: const EdgeInsets.only(bottom: 14, left: 16, right: 16),
+            padding: const EdgeInsets.only(bottom: 26, left: 16, right: 16),
             itemCount: review.length,
             itemBuilder: (context, index) {
               final reviewItem = review[index];

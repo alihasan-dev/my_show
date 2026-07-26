@@ -213,7 +213,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                     ),
                   )
                 ],
-                SizedBox(height: 12),
+                SizedBox(height: 20),
               ],
             ),
           ),     
