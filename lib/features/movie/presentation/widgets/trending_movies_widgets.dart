@@ -89,7 +89,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
                               left: 12,
                               child: VotePercentageWidget(
                                 votePercent: movie.voteAverage / 10,
-                                title: (movie.voteAverage * 10).toStringAsFixed(0),
+                                // title: (movie.voteAverage * 10).toStringAsFixed(0),
                               ),
                             ),
                         ],

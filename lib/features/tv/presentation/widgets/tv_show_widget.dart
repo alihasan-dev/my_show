@@ -90,7 +90,7 @@ class TvShowWidgets extends StatelessWidget {
                               left: 12,
                               child: VotePercentageWidget(
                                 votePercent: tvShow.voteAverage / 10,
-                                title: (tvShow.voteAverage * 10).toStringAsFixed(0),
+                                // title: (tvShow.voteAverage * 10).toStringAsFixed(0),
                               ),
                             ),
                         ],

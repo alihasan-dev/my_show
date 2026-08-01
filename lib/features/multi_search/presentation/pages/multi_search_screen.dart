@@ -5,6 +5,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/widgets/movie_tv_search_widget.dart';
+import 'package:my_show/features/multi_search/domain/entities/recent_search_entity.dart';
+import 'package:my_show/features/multi_search/presentation/providers/recent_search_provider.dart';
 import '../../../../core/widgets/custom_gradient_button.dart';
 import '../../../../core/widgets/movie_carousel_widget.dart';
 import '../../../../core/constants/app_strings.dart';
@@ -15,6 +17,7 @@ import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../search/presentation/widgets/search_shimmer_widget.dart';
 import '../providers/multi_search_provider.dart';
+import '../widgets/recent_search_widget.dart';
 
 class MultiSearchScreen extends HookConsumerWidget {
   
@@ -24,6 +27,8 @@ class MultiSearchScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final searchMovieKeyword = ref.watch(multiSearchProvider);
+    final recentSearchState = ref.watch(recentSearchProvider);
+    final recentSearchProviderRead = ref.read(recentSearchProvider.notifier);
     final movieList = searchMovieKeyword.asData?.value.result ?? [];
     final scrollController = useScrollController();
     final searchTextController = useTextEditingController();
@@ -31,9 +36,10 @@ class MultiSearchScreen extends HookConsumerWidget {
     final hasSearched = useState<bool>(false);
     final searchHint = useMemoized(() => AppStrings.searchHints[Random().nextInt(AppStrings.searchHints.length)]);
     Timer? timer;
+    final isRecentSearchAvailable = (recentSearchState.value ?? []).isNotEmpty;
 
     useEffect(() {
-      void listener() {
+      void scrollListener() {
         final normalizedSearchText = searchTextController.text.trim();
         if (scrollController.position.pixels >= scrollController.position.maxScrollExtent - 200 && normalizedSearchText.length > 2) {
           timer?.cancel();
@@ -55,10 +61,10 @@ class MultiSearchScreen extends HookConsumerWidget {
           }
         });
       }
-      scrollController.addListener(listener);
+      scrollController.addListener(scrollListener);
       searchTextController.addListener(textListener);
       return () {
-        scrollController.removeListener(listener);
+        scrollController.removeListener(scrollListener);
         searchTextController.removeListener(textListener);
         timer?.cancel();
       };
@@ -88,12 +94,19 @@ class MultiSearchScreen extends HookConsumerWidget {
                 prefixIcon: const Icon(Icons.search, color: MovieColors.grey),
               ),
             ),
+            if (movieList.isEmpty && !showLoader.value && searchTextController.text.isBlank) ...[
+              RecentSearchWidget(
+                onTapRecentSearch: (query) {
+                  searchTextController.text = query.toLowerCase();
+                },
+              ),
+            ],
             SizedBox(height: 14),
             Expanded(
               child: Stack(
                 children: [
-                  movieList.isEmpty && !showLoader.value
-                  ? Center(
+                  if (movieList.isEmpty && !showLoader.value && (!isRecentSearchAvailable || !searchTextController.text.isBlank)) ...[
+                    Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -128,120 +141,152 @@ class MultiSearchScreen extends HookConsumerWidget {
                         ],
                       ),
                     )
-                  : ListView.separated(
-                    shrinkWrap: true,
-                    controller: scrollController,
-                    padding: const EdgeInsets.only(bottom: 14),
-                    itemCount: movieList.length,
-                    separatorBuilder: (_,_) => SizedBox(height: 12),
-                    itemBuilder: (context, index) {
-                      final movie = movieList[index];
-                      if (movie.id == null) return SizedBox.shrink();
-                      return movie.mediaType?.toLowerCase() == 'person'
-                      ? Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: MovieColors.grey.withValues(alpha: 0.1),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                spacing: 14,
-                                children: [
-                                  MovieImageWidget(
-                                    height: 140,
-                                    width: 100,
-                                    imagePath: (movie.profilePath ?? '').generateImageURL
-                                  ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    spacing: 2,
-                                    children: [
-                                      MovieText(
-                                        title: movie.originalName ?? '',
-                                        style: theme.textTheme.bodyMedium?.copyWith(
-                                          fontWeight: FontWeight.w700,
-                                          color: MovieColors.textPrimary
+                  ],
+                  if (movieList.isNotEmpty && !showLoader.value) ...[
+                    ListView.separated(
+                      shrinkWrap: true,
+                      controller: scrollController,
+                      padding: const EdgeInsets.only(bottom: 14),
+                      itemCount: movieList.length,
+                      separatorBuilder: (_,_) => SizedBox(height: 12),
+                      itemBuilder: (context, index) {
+                        final movie = movieList[index];
+                        if (movie.id == null) return SizedBox.shrink();
+                        return movie.mediaType?.toLowerCase() == 'person'
+                        ? Container(
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: MovieColors.grey.withValues(alpha: 0.1),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  spacing: 14,
+                                  children: [
+                                    MovieImageWidget(
+                                      height: 140,
+                                      width: 100,
+                                      imagePath: (movie.profilePath ?? '').generateImageURL
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      spacing: 2,
+                                      children: [
+                                        MovieText(
+                                          title: movie.originalName ?? '',
+                                          style: theme.textTheme.bodyMedium?.copyWith(
+                                            fontWeight: FontWeight.w700,
+                                            color: MovieColors.textPrimary
+                                          ),
+                                          maxLine: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                        maxLine: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      MovieText(
-                                        title: movie.gender!.parseGender,
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(color: MovieColors.textPrimary),
-                                      ),
-                                      MovieText(
-                                        title: movie.knownForDepartment ?? '',
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(color: MovieColors.textPrimary),
-                                      ),
-                                      SizedBox(height: 10),
-                                      CustomGradientButton(
-                                        label: AppStrings.viewProfile,
-                                        onTap: () {
-                                          if (movie.id == null) return;
-                                          context.pushNamed(
-                                            AppRoutes.profile,
-                                            queryParameters: {'userId': '${movie.id}'}
-                                          );
-                                        }
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              if (movie.knownFor.isNotEmpty) ...[
-                                SizedBox(height: 10),
-                                MovieCarouselWidget(
-                                  itemCount: movie.knownFor.length,
-                                  height: 120,
-                                  itemBuilder: (_, subIndex) {
-                                    final item = movie.knownFor[subIndex];
-                                    return MovieTvSearchWidget(
-                                      onTap: () {
-                                        if (item.id == null || (item.mediaType ?? '').isBlank) return;
-                                        context.pushNamed(
-                                          AppRoutes.movieDetails,
-                                          queryParameters: {
-                                            'id': '${item.id}',
-                                            'type': item.mediaType
+                                        MovieText(
+                                          title: movie.gender!.parseGender,
+                                          textAlign: TextAlign.end,
+                                          style: TextStyle(color: MovieColors.textPrimary),
+                                        ),
+                                        MovieText(
+                                          title: movie.knownForDepartment ?? '',
+                                          textAlign: TextAlign.end,
+                                          style: TextStyle(color: MovieColors.textPrimary),
+                                        ),
+                                        SizedBox(height: 10),
+                                        CustomGradientButton(
+                                          label: AppStrings.viewProfile,
+                                          onTap: () {
+                                            if (movie.id == null) return;
+                                            ///save as recent search locally
+                                            final entity = RecentSearchEntity(
+                                              id: movie.id.toString(),
+                                              mediaType: movie.mediaType!,
+                                              title: movie.originalName ?? '',
+                                              posterPath: movie.profilePath ?? '',
+                                              subtitle: movie.knownForDepartment ?? ''
+                                            );
+                                            recentSearchProviderRead.saveSearch(entity: entity);
+
+                                            context.pushNamed(
+                                              AppRoutes.profile,
+                                              queryParameters: {'userId': '${movie.id}'}
+                                            );
                                           }
-                                        );
-                                      },
-                                      maxLine: 3,
-                                      imagePath: item.backdropPath ?? '',
-                                      title: item.title ?? movie.name ?? '',
-                                      releaseDate: item.releaseDate ?? '',
-                                      overview: item.overview ?? '',
-                                    );
-                                  },
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                              ]
-                            ],
-                          ),
-                        )
-                      : MovieTvSearchWidget(
-                        onTap: () {
-                          if (movie.id == null || (movie.mediaType ?? '').isBlank) return;
-                          context.pushNamed(
-                            AppRoutes.movieDetails,
-                            queryParameters: {
-                              'id': '${movie.id}',
-                              'type': movie.mediaType
-                            }
-                          );
-                        },
-                        imagePath: movie.posterPath ?? '',
-                        title: movie.title ?? movie.name ?? '',
-                        releaseDate: movie.releaseDate ?? '',
-                        overview: movie.overview ?? '',
-                      );
-                    }
-                  ),
+                                if (movie.knownFor.isNotEmpty) ...[
+                                  SizedBox(height: 10),
+                                  MovieCarouselWidget(
+                                    itemCount: movie.knownFor.length,
+                                    height: 120,
+                                    itemBuilder: (_, subIndex) {
+                                      final item = movie.knownFor[subIndex];
+                                      return MovieTvSearchWidget(
+                                        onTap: () {
+                                          if (item.id == null || (item.mediaType ?? '').isBlank) return;
+                                          ///save as recent search locally
+                                          final entity = RecentSearchEntity(
+                                            id: item.id.toString(),
+                                            mediaType: item.mediaType!,
+                                            title: item.title ?? item.name ?? '',
+                                            posterPath: item.backdropPath ?? '',
+                                            subtitle: item.releaseDate ?? ''
+                                          );
+                                          recentSearchProviderRead.saveSearch(entity: entity);
+                                          context.pushNamed(
+                                            AppRoutes.movieDetails,
+                                            queryParameters: {
+                                              'id': '${item.id}',
+                                              'type': item.mediaType
+                                            }
+                                          );
+                                        },
+                                        maxLine: 3,
+                                        imagePath: item.backdropPath ?? '',
+                                        title: item.title ?? movie.name ?? '',
+                                        releaseDate: item.releaseDate ?? '',
+                                        overview: item.overview ?? '',
+                                      );
+                                    },
+                                  ),
+                                ]
+                              ],
+                            ),
+                          )
+                        : MovieTvSearchWidget(
+                          onTap: () {
+                            if (movie.id == null || (movie.mediaType ?? '').isBlank) return;
+                            ///save as recent search locally
+                            final entity = RecentSearchEntity(
+                              id: movie.id.toString(),
+                              mediaType: movie.mediaType!,
+                              title: movie.title ?? movie.name ?? '',
+                              posterPath: movie.posterPath ?? '',
+                              subtitle: movie.releaseDate ?? ''
+                            );
+                            recentSearchProviderRead.saveSearch(entity: entity);
+                            ///navigate to details screen
+                            context.pushNamed(
+                              AppRoutes.movieDetails,
+                              queryParameters: {
+                                'id': '${movie.id}',
+                                'type': movie.mediaType
+                              }
+                            );
+                          },
+                          imagePath: movie.posterPath ?? '',
+                          title: movie.title ?? movie.name ?? '',
+                          releaseDate: movie.releaseDate ?? '',
+                          overview: movie.overview ?? '',
+                        );
+                      }
+                    ),
+                  ],
                   if (showLoader.value)
                     const SearchShimmerWidget(padding: EdgeInsets.zero),
                 ],
@@ -249,7 +294,7 @@ class MultiSearchScreen extends HookConsumerWidget {
             ),
           ],
         ),
-      )
+      ),
     );
   }
 }

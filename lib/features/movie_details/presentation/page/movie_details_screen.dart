@@ -61,8 +61,10 @@ class MovieDetailsScreen extends HookConsumerWidget {
     useEffect(() {
       movieDetails.whenData((data) async {
         if (awards.value.isBlank && !(data.imdbId ?? '').isBlank) {
-          final movieAwards = await ref.read(movieAwardProvider(data.imdbId!).future);
-          awards.value = movieAwards.awards ?? '';
+          try {
+            final movieAwards = await ref.read(movieAwardProvider(data.imdbId!).future);
+            awards.value = movieAwards.awards ?? '';
+          } catch (_) {}
         }
       });
       return null;
@@ -150,7 +152,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                       VotePercentageWidget(
                                         height: 40,
                                         width: 40,
-                                        title: (movieData.voteAverage! * 10).toStringAsFixed(0),
+                                        // title: (movieData.voteAverage! * 10).toStringAsFixed(0),
                                         votePercent: movieData.voteAverage! / 10,
                                         yTransform: 0,
                                       ),

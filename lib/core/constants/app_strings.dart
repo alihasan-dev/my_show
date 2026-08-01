@@ -28,6 +28,7 @@ class AppStrings {
   static const String searchFor = 'Search for ';
   static const String videos = 'Videos';
   static const String retry = 'Retry';
+  static const String remove = 'Remove';
 
   static const String overview = 'Overview';
   static const String cast = 'Cast';

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'core/routes/app_routes.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+import 'core/storage/storage_provider.dart';
+
 Future<void> main() async {
   await dotenv.load(fileName: '.env');
+  final prefs = await SharedPreferences.getInstance();
   await SentryFlutter.init(
     (options) {
       options.dsn = 'https://6069ae5b83b57ab70e5f8ae2c35cd000@o4511802462961664.ingest.us.sentry.io/4511802473381888';
@@ -18,12 +22,21 @@ Future<void> main() async {
       options.tracesSampleRate = 1.0;
       // The sampling rate for profiling is relative to tracesSampleRate
       // Setting to 1.0 will profile 100% of sampled transactions:
-      options.profilesSampleRate = 1.0;
+      // options.profilesSampleRate = 1.0;
       // Configure Session Replay
       options.replay.sessionSampleRate = 0.1;
       options.replay.onErrorSampleRate = 1.0;
     },
-    appRunner: () => runApp(SentryWidget(child: ProviderScope(child: const MyApp()))),
+    appRunner: () => runApp(
+      SentryWidget(
+        child: ProviderScope(
+          overrides: [
+            sharedPreferencesProvider.overrideWithValue(prefs),
+          ],
+          child: const MyApp()
+        )
+      )
+    ),
   );
 }
 

@@ -236,7 +236,14 @@ class MovieDetailsRepoImp implements MovieDetailsRepository {
 
   @override
   Future<Either<CustomFailureException, MovieAwardEntity>> movieAwards({required String id}) async {
-    if (await connectivity.hasConnection) {
+    if (!await connectivity.hasConnection) {
+      return Left(
+        CustomFailureException(
+          message: 'No internet connection',
+        ),
+      );
+    }
+    try {
       final data = await movieDetailsRemoteDatasource.movieAwards(id: id);
       final movieEntity = MovieAwardEntity(
         title: data.title,
@@ -254,10 +261,12 @@ class MovieDetailsRepoImp implements MovieDetailsRepository {
         awards: data.awards
       );
       return Right(movieEntity);
-    } else {
-      return left(CustomFailureException(
-        message: 'No internet connection'
-      ));
+    } catch (e) {
+      return Left(
+        CustomFailureException(
+          message: e.toString(),
+        ),
+      );
     }
   }
 
