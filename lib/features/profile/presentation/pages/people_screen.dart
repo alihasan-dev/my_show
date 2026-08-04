@@ -46,77 +46,89 @@ class PeopleScreen extends HookConsumerWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(toolbarHeight: 0),
-        body: peopleList.when(
-          data: (data) {
-            if ((data.results ?? []).isEmpty) {
-              return NoDataWidget(
-                icon: Icons.people_outline_rounded,
-                title: 'No People Found',
-                subtitle: 'Popular people aren\'t available right now.\nPlease try again later.',
-                onRetry: () => ref.read(popularPeopleProvider.notifier).popularPeople(),
-              );
-            }
-            return GridView.builder(
-              controller: scrollController,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                childAspectRatio: 0.7
-              ), 
-              padding: EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 16
-              ),
-              itemCount: (data.results ?? []).length,
-              itemBuilder: (context, index) {
-                final people = (data.results ?? [])[index];
-                return Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    MovieImageWidget(
-                      onTap: () {
-                        if ((people.id ?? -1).isNegative) return;
-                        context.pushNamed(
-                          AppRoutes.profile,
-                          queryParameters: {'userId': '${people.id}'}
-                        );
-                      },
-                      imagePath: (people.profilePath ?? '').generateImageURL
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-                        color: MovieColors.black.withValues(alpha: 0.4),
-                        child: Center(
-                          child: MovieText(
-                            title: people.name ?? '',
-                            maxLine: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 11
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            return peopleList.when(
+              data: (data) {
+                if ((data.results ?? []).isEmpty) {
+                  return NoDataWidget(
+                    icon: Icons.people_outline_rounded,
+                    title: 'No People Found',
+                    subtitle: 'Popular people aren\'t available right now.\nPlease try again later.',
+                    onRetry: () => ref.read(popularPeopleProvider.notifier).popularPeople(),
+                  );
+                }
+                return GridView.builder(
+                  controller: scrollController,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: _getCrossAxisCount(constraints.maxWidth),
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    childAspectRatio: 0.7
+                  ), 
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 16
+                  ),
+                  itemCount: (data.results ?? []).length,
+                  itemBuilder: (context, index) {
+                    final people = (data.results ?? [])[index];
+                    return Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        MovieImageWidget(
+                          onTap: () {
+                            if ((people.id ?? -1).isNegative) return;
+                            context.pushNamed(
+                              AppRoutes.profile,
+                              queryParameters: {'userId': '${people.id}'}
+                            );
+                          },
+                          imagePath: (people.profilePath ?? '').generateImageURL
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                            color: MovieColors.black.withValues(alpha: 0.4),
+                            child: Center(
+                              child: MovieText(
+                                title: people.name ?? '',
+                                maxLine: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 11
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
+                      ],
+                    );
+                  }
                 );
-              }
+              }, 
+              error: (_,_) => NoDataWidget(
+                icon: Icons.error_outline_rounded,
+                title: 'Something Went Wrong',
+                subtitle: 'We couldn\'t load the people list.\nPlease check your connection and try again.',
+                onRetry: () => ref.read(popularPeopleProvider.notifier).popularPeople(),
+              ), 
+              loading: () => const PeopleShimmerWidget()
             );
-          }, 
-          error: (_,_) => NoDataWidget(
-            icon: Icons.error_outline_rounded,
-            title: 'Something Went Wrong',
-            subtitle: 'We couldn\'t load the people list.\nPlease check your connection and try again.',
-            onRetry: () => ref.read(popularPeopleProvider.notifier).popularPeople(),
-          ), 
-          loading: () => const PeopleShimmerWidget()
+          }
         ),
       ),
     );
+  }
+
+  int _getCrossAxisCount(double width) {
+    if (width < 600) return 3;       // Mobile
+    if (width < 900) return 4;       // Tablet
+    if (width < 1200) return 5;      // Small Desktop
+    if (width < 1500) return 6;      // Medium Desktop
+    return 7;                        // Large Desktop
   }
 }

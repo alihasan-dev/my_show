@@ -58,7 +58,8 @@ class RecentSearchTile extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(8),
       child: Container(
-        height: 120,
+        height: 110,
+        width: 300,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: MovieColors.grey.withValues(alpha: 0.1),

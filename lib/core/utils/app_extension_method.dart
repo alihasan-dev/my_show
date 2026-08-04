@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import '../../core/utils/language_code.dart';
@@ -35,6 +36,27 @@ extension NumExtensionUtils on num {
     return this % 1 == 0
     ? toInt().toString()
     : toString();
+  }
+
+  Color get getRatingColor {
+    var rating = clamp(0.0, 1.0);
+    if (rating >= 0.90) {
+      return const Color(0xFF2E7D32); // Dark Green
+    } else if (rating >= 0.80) {
+      return const Color(0xFF43A047); // Green
+    } else if (rating >= 0.70) {
+      return const Color(0xFF7CB342); // Light Green
+    } else if (rating >= 0.60) {
+      return const Color(0xFFFDD835); // Yellow
+    } else if (rating >= 0.50) {
+      return const Color(0xFFFFB300); // Amber
+    } else if (rating >= 0.40) {
+      return const Color(0xFFFB8C00); // Orange
+    } else if (rating >= 0.30) {
+      return const Color(0xFFF4511E); // Deep Orange
+    } else {
+      return const Color(0xFFD32F2F); // Red
+    }
   }
 
 }

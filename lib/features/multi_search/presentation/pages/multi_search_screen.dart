@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -77,6 +78,7 @@ class MultiSearchScreen extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
+            if (kIsWeb) SizedBox(height: 20),
             TextField(
               controller: searchTextController,
               decoration: InputDecoration(

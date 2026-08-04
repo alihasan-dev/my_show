@@ -30,6 +30,8 @@ class ViewAllScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final showList = ref.watch(viewAllProvider);
     final scrollController = useScrollController();
+    final searchQueryController = useTextEditingController();
+    final enableSearch = useState<bool>(false);
     Timer? timer;
     useEffect(() {
       void listener() {
@@ -56,11 +58,42 @@ class ViewAllScreen extends HookConsumerWidget {
       appBar: AppBar(
         centerTitle: false,
         scrolledUnderElevation: 0,
-        title: Text(
-          label.capitalizeWord,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+        title: AnimatedSize(
+          duration: Duration(milliseconds: 250),
+          child: enableSearch.value
+          ? TextField(
+              controller: searchQueryController,
+              onChanged: (value) => ref.read(viewAllProvider.notifier).search(query: value),
+              decoration: InputDecoration.collapsed(
+                hintText: 'Search',
+                hintStyle: TextStyle(
+                  fontSize: 18
+                )
+              ),
+              autofocus: true,
+            )
+          : Text(
+            label.capitalizeWord,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              if (enableSearch.value) {
+                searchQueryController.clear();
+                ref.read(viewAllProvider.notifier).search(query: '');
+              }
+              enableSearch.value = !enableSearch.value;
+            }, 
+            icon: Icon(
+              enableSearch.value 
+              ? Icons.clear 
+              : Icons.search
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         top: false,
@@ -68,10 +101,18 @@ class ViewAllScreen extends HookConsumerWidget {
           data: (data) {
             if (data.result.isEmpty) {
               return NoDataWidget(
-                icon: Icons.people_outline_rounded,
-                title: 'No ${label.capitalizeWord} Found',
-                subtitle: '${label.capitalizeWord} aren\'t available right now.\nPlease try again later.',
-                onRetry: () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory),
+                icon: searchQueryController.text.isBlank
+                ? Icons.people_outline_rounded
+                : Icons.search_off,
+                title: searchQueryController.text.isBlank
+                ? 'No ${label.capitalizeWord} Found'
+                : "No matches for ${searchQueryController.text}.",
+                subtitle: searchQueryController.text.isBlank
+                ? '${label.capitalizeWord} aren\'t available right now.\nPlease try again later.'
+                : 'Check the spelling or try another search.',
+                onRetry: searchQueryController.text.isBlank
+                ? () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory)
+                : null,
               );
             }
             return GridView.builder(
