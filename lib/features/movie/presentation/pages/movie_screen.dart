@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/widgets/custom_carousel_slider_widget.dart';
 import '../widgets/trending_movies_widgets.dart';
 import '../provider/now_playing_provider.dart';
 import '../provider/popular_movies_provider.dart';

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/constants/movie_colors.dart';
@@ -22,21 +23,23 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         color: MovieColors.white.withValues(alpha: 0.05),
-        borderRadius: BorderRadius.only(
+        borderRadius: kIsWeb
+        ? BorderRadius.all(Radius.circular(20))
+        : BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20)
-        ) 
+        ),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 6),
+          SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 18.0),
+                padding: const EdgeInsets.only(left: 20.0),
                 child: MovieText(
                   title: 'Watch Providers',
                   style: theme.titleMedium?.copyWith(
@@ -47,7 +50,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                 ),
               ),
               Transform.translate(
-                offset: Offset(-4, 0),
+                offset: Offset(-6, 0),
                 child: CloseButton()
               ),
             ],
@@ -55,7 +58,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
           Flexible(
             child: ListView(
               shrinkWrap: true,
-              padding: EdgeInsets.symmetric(horizontal: 18),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               children: [
                 if ((watchProvider?.watchRegion?.flatrate ?? []).isNotEmpty) ...[
                   SizedBox(height: 10),

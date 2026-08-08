@@ -49,7 +49,7 @@ class RecentSearchWidget extends HookConsumerWidget {
                   GestureDetector(
                     onTap: () => ref.read(recentSearchProvider.notifier).clearRecentSearch(),
                     child: Text(
-                      AppStrings.viewAll,
+                      AppStrings.clearAll,
                       style: theme.textTheme.labelMedium?.copyWith(
                         fontSize: 13,
                         color: MovieColors.red

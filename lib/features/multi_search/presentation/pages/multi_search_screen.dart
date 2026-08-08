@@ -210,7 +210,6 @@ class MultiSearchScreen extends HookConsumerWidget {
                                               subtitle: movie.knownForDepartment ?? ''
                                             );
                                             recentSearchProviderRead.saveSearch(entity: entity);
-
                                             context.pushNamed(
                                               AppRoutes.profile,
                                               queryParameters: {'userId': '${movie.id}'}

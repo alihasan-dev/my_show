@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/features/review/presentation/widgets/review_card.dart';
+import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/no_data_widget.dart';
 import '../../../search/presentation/widgets/search_shimmer_widget.dart';
 import '../providers/show_review_provider.dart';
-
 class ReviewScreen extends HookConsumerWidget {
   final String showType;
   final String id;
@@ -73,12 +73,28 @@ class ReviewScreen extends HookConsumerWidget {
               )
             );
           }
+
+          review.sort((a, b) {
+            final first = a.updatedAt ?? '';
+            final second = b.updatedAt ?? '';
+            if (first.isBlank && second.isBlank) return 0;
+            if (first.isBlank) return 1;
+            if (second.isBlank) return -1;
+            final firstDate = DateTime.tryParse(first);
+            final secondDate = DateTime.tryParse(second);
+            // Invalid dates also go to the end
+            if (firstDate == null && secondDate == null) return 0;
+            if (firstDate == null) return 1;
+            if (secondDate == null) return -1;
+            return secondDate.compareTo(firstDate);
+          });
+
           return ListView.separated(
             controller: scrollController,
             shrinkWrap: true,
             padding: const EdgeInsets.only(bottom: 26, left: 16, right: 16),
             itemCount: review.length,
-            itemBuilder: (context, index) {
+            itemBuilder: (_, index) {
               final reviewItem = review[index];
               return ReviewCard(
                 reviewItem: reviewItem,
@@ -87,10 +103,10 @@ class ReviewScreen extends HookConsumerWidget {
                 },
               );
             },
-            separatorBuilder: (_,_) => SizedBox(height: 12),
+            separatorBuilder: (_, _) => SizedBox(height: 8),
           );
         }, 
-        error: (_,_) => NoDataWidget(
+        error: (_, _) => NoDataWidget(
           icon: Icons.star_half_rounded,
           title: 'No review found',
           subtitle: 'Review aren\'t available right now.\nPlease try again later.',

@@ -29,6 +29,33 @@ class ProfileScreen extends HookConsumerWidget {
     final profileDetails = ref.watch(profileDetailsProvider(userId));
     final creditMovieList = creditMoviesData.asData?.value.castEntity ?? [];
     final creditTvList = creditTvData.asData?.value.castEntity ?? [];
+
+    creditMovieList.sort((a, b) {
+      if ((a.releaseDate ?? '').isBlank && (b.releaseDate ?? '').isBlank) return 0;
+      if ((a.releaseDate ?? '').isBlank) return 1;
+      if ((b.releaseDate ?? '').isBlank) return -1;
+      final first = DateTime.tryParse(a.releaseDate!);
+      final second = DateTime.tryParse(b.releaseDate!);
+      // Invalid dates also go to the end
+      if (first == null && second == null) return 0;
+      if (first == null) return 1;
+      if (second == null) return -1;
+      return second.compareTo(first);
+    });
+
+    creditTvList.sort((a, b) {
+      if ((a.releaseDate ?? '').isBlank && (b.releaseDate ?? '').isBlank) return 0;
+      if ((a.releaseDate ?? '').isBlank) return 1;
+      if ((b.releaseDate ?? '').isBlank) return -1;
+      final first = DateTime.tryParse(a.releaseDate!);
+      final second = DateTime.tryParse(b.releaseDate!);
+      // Invalid dates also go to the end
+      if (first == null && second == null) return 0;
+      if (first == null) return 1;
+      if (second == null) return -1;
+      return second.compareTo(first);
+    });
+
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -102,7 +129,7 @@ class ProfileScreen extends HookConsumerWidget {
                               scrollDirection: Axis.horizontal,
                               itemCount: creditMovieList.length,
                               separatorBuilder: (_, _) => const SizedBox(width: 12),
-                              itemBuilder: (context, index) {
+                              itemBuilder: (_, index) {
                                 final cast = creditMovieList[index];
                                 return MovieCastBanner(
                                   onTap: () => context.pushNamed(
@@ -137,7 +164,7 @@ class ProfileScreen extends HookConsumerWidget {
                               scrollDirection: Axis.horizontal,
                               itemCount: creditTvList.length,
                               separatorBuilder: (_, _) => const SizedBox(width: 12),
-                              itemBuilder: (context, index) {
+                              itemBuilder: (_, index) {
                                 final cast = creditTvList[index];
                                 return MovieCastBanner(
                                   onTap: () => context.pushNamed(

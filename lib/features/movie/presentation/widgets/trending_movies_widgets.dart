@@ -27,6 +27,20 @@ class TrendingMoviesWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     if (movieList.isEmpty) return SizedBox.shrink();
+    movieList.sort((a, b) {
+      final first = a.releaseDate;
+      final second = b.releaseDate;
+      if (first.isBlank && second.isBlank) return 0;
+      if (first.isBlank) return 1;
+      if (second.isBlank) return -1;
+      final firstDate = DateTime.tryParse(first);
+      final secondDate = DateTime.tryParse(second);
+      // Invalid dates also go to the end
+      if (firstDate == null && secondDate == null) return 0;
+      if (firstDate == null) return 1;
+      if (secondDate == null) return -1;
+      return secondDate.compareTo(firstDate);
+    });
     return LayoutBuilder(
       builder: (contex, constraints) {
         return Column(

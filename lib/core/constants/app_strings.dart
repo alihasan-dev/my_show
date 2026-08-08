@@ -30,7 +30,7 @@ class AppStrings {
   static const String retry = 'Retry';
   static const String remove = 'Remove';
   static const String recentSearch = 'Recent Searches';
-  static const String clearAl = 'Clear All';
+  static const String clearAll = 'Clear All';
 
   static const String overview = 'Overview';
   static const String cast = 'Cast';

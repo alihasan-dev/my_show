@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -73,11 +74,36 @@ class MovieDetailsScreen extends HookConsumerWidget {
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final countryCode = locale.countryCode ?? 'US';
-        debugPrint("Detected Locale : $countryCode");
         ref.read(watchProvider.notifier).watchProvider(id: id, type: type, countryCode: countryCode);
       });
       return null;
     }, []);
+
+    if (movieKeywordList.isNotEmpty) {
+      movieKeywordList.sort((a, b) {
+        final keyA = a.name ?? '';
+        final keyB = b.name ?? '';
+        if (keyA.isBlank && keyB.isBlank) return 0;
+        if (keyA.isBlank) return 1;
+        if (keyB.isBlank) return -1;
+        return keyA.compareTo(keyB);
+      });
+    }
+
+    if (recommendedMovieList.isNotEmpty) {
+      recommendedMovieList.sort((a, b) {
+        if (a.releaseDate.isBlank && b.releaseDate.isBlank) return 0;
+        if (a.releaseDate.isBlank) return 1;
+        if (b.releaseDate.isBlank) return -1;
+        final first = DateTime.tryParse(a.releaseDate);
+        final second = DateTime.tryParse(b.releaseDate);
+        // Invalid dates also go to the end
+        if (first == null && second == null) return 0;
+        if (first == null) return 1;
+        if (second == null) return -1;
+        return second.compareTo(first);
+      });
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -360,8 +386,8 @@ class MovieDetailsScreen extends HookConsumerWidget {
                               child: ListView.separated(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: (movieData.networks ?? []).length,
-                                separatorBuilder: (_,_) => const SizedBox(width: 10),
-                                itemBuilder: (context, index) {
+                                separatorBuilder: (_, _) => const SizedBox(width: 10),
+                                itemBuilder: (_, index) {
                                   final network = (movieData.networks ?? [])[index];
                                   return MovieImageWidget(
                                     tooltipMessage: network.name ?? '',
@@ -381,8 +407,8 @@ class MovieDetailsScreen extends HookConsumerWidget {
                               child: ListView.separated(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: (movieData.productionCompanies ?? []).length,
-                                separatorBuilder: (_,_) => const SizedBox(width: 10),
-                                itemBuilder: (context, index) {
+                                separatorBuilder: (_, _) => const SizedBox(width: 10),
+                                itemBuilder: (_, index) {
                                   final network = (movieData.productionCompanies ?? [])[index];
                                   if ((network.logoPath ?? '').isBlank) return SizedBox.shrink();
                                   return MovieImageWidget(
@@ -438,19 +464,39 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                           );
                                           break;
                                         case 1: 
-                                          showModalBottomSheet(
-                                            context: context, 
-                                            isScrollControlled: true,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(20),
-                                                topRight: Radius.circular(20)
+                                          if (kIsWeb) {
+                                            showDialog(
+                                              context: context,
+                                              barrierColor: MovieColors.transparent,
+                                              builder: (_) {
+                                                return AlertDialog(
+                                                  contentPadding: EdgeInsets.zero,
+                                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                                  content: SizedBox(
+                                                    width: 400,
+                                                    height: 400,
+                                                    child: WatchProviderBottomSheet(
+                                                      watchProvider: movieTvWatchData,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                            );
+                                          } else {
+                                            showModalBottomSheet(
+                                              context: context, 
+                                              isScrollControlled: true,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(20),
+                                                  topRight: Radius.circular(20)
+                                                )
+                                              ),
+                                              builder: (_) => WatchProviderBottomSheet(
+                                                watchProvider: movieTvWatchData,
                                               )
-                                            ),
-                                            builder: (_) => WatchProviderBottomSheet(
-                                              watchProvider: movieTvWatchData,
-                                            )
-                                          );
+                                            );
+                                          }
                                         default:
                                       }
                                     }
@@ -546,8 +592,8 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: movieVideoList.length,
-                            separatorBuilder: (_,_) => const SizedBox(width: 12),
-                            itemBuilder: (context, index) {
+                            separatorBuilder: (_, _) => const SizedBox(width: 12),
+                            itemBuilder: (_, index) {
                               final video = movieVideoList[index];
                               final thumbnailUrl = YoutubePlayer.getThumbnail(videoId: video.key ?? '');
                               return GestureDetector(
@@ -613,7 +659,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
               ],
             );
           },
-          error: (_,_) => Center(child: Text(AppStrings.noDataAvailable)), 
+          error: (_, _) => Center(child: Text(AppStrings.noDataAvailable)), 
           loading: () => MovieDetailsShimmer()
         ),
       ),
