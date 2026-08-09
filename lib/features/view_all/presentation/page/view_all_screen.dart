@@ -97,86 +97,90 @@ class ViewAllScreen extends HookConsumerWidget {
       ),
       body: SafeArea(
         top: false,
-        child: showList.when(
-          data: (data) {
-            if (data.result.isEmpty) {
-              return NoDataWidget(
-                icon: searchQueryController.text.isBlank
-                ? Icons.people_outline_rounded
-                : Icons.search_off,
-                title: searchQueryController.text.isBlank
-                ? 'No ${label.capitalizeWord} Found'
-                : "No matches for ${searchQueryController.text}.",
-                subtitle: searchQueryController.text.isBlank
-                ? '${label.capitalizeWord} aren\'t available right now.\nPlease try again later.'
-                : 'Check the spelling or try another search.',
-                onRetry: searchQueryController.text.isBlank
-                ? () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory)
-                : null,
-              );
-            }
-            return GridView.builder(
-              controller: scrollController,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: kIsWeb ? 6 : 3,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                childAspectRatio: 0.7
-              ), 
-              padding: EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 16
-              ),
-              itemCount: data.result.length,
-              itemBuilder: (context, index) {
-                final show = data.result[index];
-                return Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    MovieImageWidget(
-                      onTap: () {
-                        if (show.id.isNegative || showType.isBlank) return;
-                        context.pushNamed(
-                          AppRoutes.movieDetails,
-                          queryParameters: {
-                            'id': '${show.id}',
-                            'type': showType
-                          }
-                        );
-                      },
-                      imagePath: show.posterPath.generateImageURL
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-                        color: MovieColors.black.withValues(alpha: 0.4),
-                        child: Center(
-                          child: MovieText(
-                            title: show.title,
-                            maxLine: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 11
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return showList.when(
+              data: (data) {
+                if (data.result.isEmpty) {
+                  return NoDataWidget(
+                    icon: searchQueryController.text.isBlank
+                    ? Icons.people_outline_rounded
+                    : Icons.search_off,
+                    title: searchQueryController.text.isBlank
+                    ? 'No ${label.capitalizeWord} Found'
+                    : "No matches for ${searchQueryController.text}.",
+                    subtitle: searchQueryController.text.isBlank
+                    ? '${label.capitalizeWord} aren\'t available right now.\nPlease try again later.'
+                    : 'Check the spelling or try another search.',
+                    onRetry: searchQueryController.text.isBlank
+                    ? () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory)
+                    : null,
+                  );
+                }
+                return GridView.builder(
+                  controller: scrollController,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: constraints.maxWidth.getCrossAxisCount,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    childAspectRatio: 0.7
+                  ), 
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 16
+                  ),
+                  itemCount: data.result.length,
+                  itemBuilder: (context, index) {
+                    final show = data.result[index];
+                    return Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        MovieImageWidget(
+                          onTap: () {
+                            if (show.id.isNegative || showType.isBlank) return;
+                            context.pushNamed(
+                              AppRoutes.movieDetails,
+                              queryParameters: {
+                                'id': '${show.id}',
+                                'type': showType
+                              }
+                            );
+                          },
+                          imagePath: show.posterPath.generateImageURL
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                            color: MovieColors.black.withValues(alpha: 0.4),
+                            child: Center(
+                              child: MovieText(
+                                title: show.title,
+                                maxLine: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 11
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
+                      ],
+                    );
+                  }
                 );
-              }
+              }, 
+              error: (_,_) => NoDataWidget(
+                icon: Icons.error_outline_rounded,
+                title: 'Something Went Wrong',
+                subtitle: 'We couldn\'t load the ${label.toLowerCase()} list.\nPlease check your connection and try again.',
+                onRetry: () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory),
+              ), 
+              loading: () => const PeopleShimmerWidget()
             );
-          }, 
-          error: (_,_) => NoDataWidget(
-            icon: Icons.error_outline_rounded,
-            title: 'Something Went Wrong',
-            subtitle: 'We couldn\'t load the ${label.toLowerCase()} list.\nPlease check your connection and try again.',
-            onRetry: () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory),
-          ), 
-          loading: () => const PeopleShimmerWidget()
+          }
         ),
       ),
     );

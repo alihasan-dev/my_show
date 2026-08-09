@@ -61,7 +61,7 @@ class PeopleScreen extends HookConsumerWidget {
                 return GridView.builder(
                   controller: scrollController,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: _getCrossAxisCount(constraints.maxWidth),
+                    crossAxisCount:  constraints.maxWidth.getCrossAxisCount,
                     mainAxisSpacing: 8,
                     crossAxisSpacing: 8,
                     childAspectRatio: 0.7
@@ -122,13 +122,5 @@ class PeopleScreen extends HookConsumerWidget {
         ),
       ),
     );
-  }
-
-  int _getCrossAxisCount(double width) {
-    if (width < 600) return 3;       // Mobile
-    if (width < 900) return 4;       // Tablet
-    if (width < 1200) return 5;      // Small Desktop
-    if (width < 1500) return 6;      // Medium Desktop
-    return 7;                        // Large Desktop
   }
 }

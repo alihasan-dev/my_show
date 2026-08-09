@@ -59,6 +59,15 @@ extension NumExtensionUtils on num {
     }
   }
 
+  int get getCrossAxisCount {
+    final width = this;
+    if (width < 600) return 3;       // Mobile
+    if (width < 900) return 4;       // Tablet
+    if (width < 1200) return 5;      // Small Desktop
+    if (width < 1500) return 6;      // Medium Desktop
+    return 7;                        // Large Desktop
+  }
+
 }
 
 extension StringExtensionUtils on String {
@@ -160,3 +169,4 @@ String calculateAge(DateTime birthDate) {
     }
   }
 }
+
