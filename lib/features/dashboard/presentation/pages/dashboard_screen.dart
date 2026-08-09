@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../core/constants/movie_colors.dart';
 import '../../../multi_search/presentation/pages/multi_search_screen.dart';
 import '../../../../features/movie/presentation/pages/movie_screen.dart';
 import '../../../../features/tv/presentation/pages/tv_screen.dart';
-import '../widgets/animated_bottom_bar_item.dart';
-import '../widgets/dashboard_bottom_bar_item_list.dart';
+import '../widgets/bottom_animated_bar.dart';
 import '/features/profile/presentation/pages/people_screen.dart';
 
 class DashboardScreen extends HookConsumerWidget {
@@ -55,58 +53,16 @@ class DashboardScreen extends HookConsumerWidget {
       //   ),
       // ),
       bottomNavigationBar: ValueListenableBuilder<int>(
-      valueListenable: bottomSelectedIndex,
-      builder: (context, selectedIndex, _) {
-        return BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: selectedIndex,
-
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-
-          onTap: (index) {
-            bottomSelectedIndex.value = index;
-          },
-
-          items: List.generate(
-            bottomBarIconList.length,
-            (index) {
-              final item = bottomBarIconList[index];
-
-              final isSelected = selectedIndex == index;
-
-              return BottomNavigationBarItem(
-                label: item.title,
-                icon: AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeOutCubic,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isSelected ? 22 : 15,
-                    vertical: 7,
-                  ),
-                  decoration: ShapeDecoration(
-                    color: isSelected
-                        ? MovieColors.primaryColor.withValues(alpha: 0.85)
-                        : Colors.transparent,
-                    shape: const StadiumBorder(),
-                  ),
-                  child: AnimatedScale(
-                    duration: const Duration(milliseconds: 250),
-                    curve: Curves.easeOutBack,
-                    scale: isSelected ? 1.15 : 1.0,
-                    child: Icon(
-                      item.iconData,
-                      size: 22,
-                      color: MovieColors.white,
-                    ),
-                  ),
-                ),
-              );
+        valueListenable: bottomSelectedIndex,
+        builder: (context, selectedIndex, _) {
+          return MovieBottomNavigation(
+            selectedIndex: selectedIndex,
+            onChanged: (index) {
+              bottomSelectedIndex.value = index;
             },
-          ),
-        );
-      },
-    )
+          );
+        },
+      )
     );
   }
 }
