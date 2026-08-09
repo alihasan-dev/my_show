@@ -56,7 +56,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
             ),
             SizedBox(height: 10),
             SizedBox(
-              height: 301,
+              height: 285,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: viewAll != null
@@ -104,20 +104,21 @@ class TrendingMoviesWidgets extends StatelessWidget {
                                 width: double.maxFinite,
                                 height: 200
                               ),
-                              if (index != movieList.length)
+                              if (movie.voteAverage > 0.0 && index != movieList.length)
                                 Positioned(
-                                  bottom: 0,
-                                  left: 12,
+                                  bottom: 5,
+                                  right: 5,
                                   child: VotePercentageWidget(
                                     votePercent: movie.voteAverage / 10,
+                                    yTransform: 0,
                                   ),
                                 ),
                             ],
                           ),
-                          SizedBox(height: 24),
+                          SizedBox(height: 8),
                           if (index != movieList.length)
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Column(
                                 spacing: 2,
                                 crossAxisAlignment: CrossAxisAlignment.start,
