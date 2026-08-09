@@ -101,7 +101,6 @@ class TrendingMoviesWidgets extends StatelessWidget {
                                   constraints.maxWidth, 
                                   canCalculate: title == AppStrings.trending
                                 ),
-                                // imagePath: movie.backdropPath.generateImageURL,
                                 width: double.maxFinite,
                                 height: 200
                               ),

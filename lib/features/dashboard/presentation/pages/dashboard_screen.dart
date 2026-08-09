@@ -5,6 +5,7 @@ import '../../../../core/constants/movie_colors.dart';
 import '../../../multi_search/presentation/pages/multi_search_screen.dart';
 import '../../../../features/movie/presentation/pages/movie_screen.dart';
 import '../../../../features/tv/presentation/pages/tv_screen.dart';
+import '../widgets/animated_bottom_bar_item.dart';
 import '../widgets/dashboard_bottom_bar_item_list.dart';
 import '/features/profile/presentation/pages/people_screen.dart';
 
@@ -23,36 +24,89 @@ class DashboardScreen extends HookConsumerWidget {
     ];
     return Scaffold(
       body: widgetList[bottomSelectedIndex.value],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: bottomSelectedIndex.value,
-        selectedFontSize: 12,
-        unselectedFontSize: 10,
-        onTap: (value) => bottomSelectedIndex.value = value,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: MovieColors.white,
-        items: List.generate(
-          bottomBarIconList.length,
-          (index) {
-            final bottomLabel = bottomBarIconList[index];
-            return BottomNavigationBarItem(
-              label: bottomLabel.title,
-              icon: AnimatedContainer(
-                duration: Duration(milliseconds: 500),
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-                decoration: ShapeDecoration(
-                  color: bottomSelectedIndex.value == index
-                  ? MovieColors.primaryColor.withValues(alpha: 0.8)
-                  : MovieColors.transparent,
-                  shape: StadiumBorder()
+      // bottomNavigationBar: BottomNavigationBar(
+      //   type: BottomNavigationBarType.fixed,
+      //   currentIndex: bottomSelectedIndex.value,
+      //   selectedFontSize: 12,
+      //   unselectedFontSize: 10,
+      //   onTap: (value) => bottomSelectedIndex.value = value,
+      //   showSelectedLabels: false,
+      //   showUnselectedLabels: false,
+      //   selectedItemColor: MovieColors.white,
+      //   items: List.generate(
+      //     bottomBarIconList.length,
+      //     (index) {
+      //       final bottomLabel = bottomBarIconList[index];
+      //       return BottomNavigationBarItem(
+      //         label: bottomLabel.title,
+      //         icon: AnimatedContainer(
+      //           duration: Duration(milliseconds: 500),
+      //           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+      //           decoration: ShapeDecoration(
+      //             color: bottomSelectedIndex.value == index
+      //             ? MovieColors.primaryColor.withValues(alpha: 0.8)
+      //             : MovieColors.transparent,
+      //             shape: StadiumBorder()
+      //           ),
+      //           child: Icon(bottomLabel.iconData, size: 22),
+      //         )
+      //       );
+      //     }
+      //   ),
+      // ),
+      bottomNavigationBar: ValueListenableBuilder<int>(
+      valueListenable: bottomSelectedIndex,
+      builder: (context, selectedIndex, _) {
+        return BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: selectedIndex,
+
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+
+          onTap: (index) {
+            bottomSelectedIndex.value = index;
+          },
+
+          items: List.generate(
+            bottomBarIconList.length,
+            (index) {
+              final item = bottomBarIconList[index];
+
+              final isSelected = selectedIndex == index;
+
+              return BottomNavigationBarItem(
+                label: item.title,
+                icon: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeOutCubic,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isSelected ? 22 : 15,
+                    vertical: 7,
+                  ),
+                  decoration: ShapeDecoration(
+                    color: isSelected
+                        ? MovieColors.primaryColor.withValues(alpha: 0.85)
+                        : Colors.transparent,
+                    shape: const StadiumBorder(),
+                  ),
+                  child: AnimatedScale(
+                    duration: const Duration(milliseconds: 250),
+                    curve: Curves.easeOutBack,
+                    scale: isSelected ? 1.15 : 1.0,
+                    child: Icon(
+                      item.iconData,
+                      size: 22,
+                      color: MovieColors.white,
+                    ),
+                  ),
                 ),
-                child: Icon(bottomLabel.iconData, size: 22),
-              )
-            );
-          }
-        ),
-      ),
+              );
+            },
+          ),
+        );
+      },
+    )
     );
   }
 }
