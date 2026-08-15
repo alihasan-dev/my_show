@@ -27,6 +27,28 @@ class SearchMovieKeywordNotifier extends StateNotifier<AsyncValue<SearchMoviesKe
     return state;
   }
 
+  AsyncValue<SearchMoviesKeywordEntity> search({required String query}) {
+    if (movieList.isEmpty) return state;
+
+    final q = query.trim().toLowerCase();
+
+    final filteredMovies = q.length < 3
+    ? movieList
+    : movieList.where((movie) {
+        final title = movie.title ?? '';
+        final originalTitle = movie.originalTitle ?? '';
+        return title.toLowerCase().contains(q) || originalTitle.toLowerCase().contains(q);
+      }).toList();
+
+    final current = state.value;
+    if (current != null) {
+      state = AsyncValue.data(
+        current.copyWith(result: filteredMovies),
+      );
+    }
+    return state;
+  }
+
 }
 
 final searchMovieKeywordProvider = StateNotifierProvider.autoDispose.family<SearchMovieKeywordNotifier, AsyncValue<SearchMoviesKeywordEntity>, String>((ref, query) {

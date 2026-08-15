@@ -1,6 +1,4 @@
-import 'package:dartz/dartz.dart';
 import 'package:riverpod/riverpod.dart';
-import '../../../../core/utils/custom_exception.dart';
 import '../../data/repository/recent_search_repo_imp.dart';
 import '../entities/recent_search_entity.dart';
 import '../repository/recent_search_repository.dart';

@@ -31,6 +31,8 @@ class SearchMovieByKeywordScreen extends HookConsumerWidget {
     final searchMovieKeyword = ref.watch(searchMovieKeywordProvider(queryKey));
     final movieList = searchMovieKeyword.asData?.value.result ?? [];
     final scrollController = useScrollController();
+    final searchQueryController = useTextEditingController();
+    final enableSearch = useState<bool>(false);
     Timer? timer;
 
     useEffect(() {
@@ -58,11 +60,42 @@ class SearchMovieByKeywordScreen extends HookConsumerWidget {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         centerTitle: false,
-        title: Text(
-          "${AppStrings.searchFor} '$name'",
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+        title: AnimatedSize(
+          duration: Duration(milliseconds: 250),
+          child: enableSearch.value
+          ? TextField(
+              controller: searchQueryController,
+              onChanged: (value) => ref.read(searchMovieKeywordProvider(queryKey).notifier).search(query: value),
+              decoration: InputDecoration.collapsed(
+                hintText: 'Search',
+                hintStyle: TextStyle(
+                  fontSize: 18
+                )
+              ),
+              autofocus: true,
+            )
+          : Text(
+             "${AppStrings.searchFor} '$name'",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              if (enableSearch.value) {
+                searchQueryController.clear();
+                ref.read(searchMovieKeywordProvider(queryKey).notifier).search(query: '');
+              }
+              enableSearch.value = !enableSearch.value;
+            }, 
+            icon: Icon(
+              enableSearch.value 
+              ? Icons.clear 
+              : Icons.search
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         top: false,
