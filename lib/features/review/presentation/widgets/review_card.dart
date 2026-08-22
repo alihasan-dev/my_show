@@ -118,7 +118,7 @@ class ReviewCard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 6.0),
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
               child: Divider(color: Colors.white12),
             ),
             /// REVIEW

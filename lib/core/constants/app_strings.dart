@@ -31,6 +31,9 @@ class AppStrings {
   static const String remove = 'Remove';
   static const String recentSearch = 'Recent Searches';
   static const String clearAll = 'Clear All';
+  static const String readAllReviews = 'Read All Reviews';
+  static const String watchProvider = 'Watch Providers';
+  static const String awards = 'Awards';
 
   static const String overview = 'Overview';
   static const String cast = 'Cast';

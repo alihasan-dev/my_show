@@ -157,14 +157,15 @@ extension StringExtensionUtils on String {
 String calculateAge(DateTime birthDate) {
   final today = DateTime.now();
   int age = today.year - birthDate.year;
+  int months = today.month - birthDate.month;
+  int days = today.day - birthDate.day;
+  if (months.isNegative) age-=1;
   if (age != 0) {
     return '$age Yrs';
   } else {
-    int months = today.month - birthDate.month;
-    if (months != 0) {
+    if (months != 0 && !days.isNegative) {
       return '$months Mths';
     } else {
-      int days = today.day - birthDate.day;
       return days == 0 ? 'Today' : '$days Days';
     }
   }

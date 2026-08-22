@@ -43,7 +43,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.read(localeProvider);
-    final formatter = NumberFormat.currency(locale: "en_US", symbol: "\$");
+    final formatter = NumberFormat.currency(locale: "en_US", symbol: "\$", decimalDigits: 0);
     final theme = Theme.of(context).textTheme;
     final movieVideo = ref.watch(movieVideoProvider((id: id, type: type)));
     final movieDetails = ref.watch(movieDetailsProvider((id: id, type: type)));
@@ -156,7 +156,9 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                         : movieData.genres!.length,
                                         (index) {
                                           return index == movieData.genres!.length
-                                          ? MovieText(
+                                          ? (movieData.runtime ?? 0) <= 0
+                                            ? const SizedBox.shrink()
+                                            : MovieText(
                                               title: ' • ${(movieData.runtime ?? 0).formatRuntime}',
                                               style: theme.labelMedium?.copyWith(
                                                 color: MovieColors.grey
@@ -424,7 +426,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           ),
                         if (!awards.value.isBlank) ...[
                           AdditionalInfoTile(
-                            title: 'Awards',
+                            title: AppStrings.awards,
                             value: awards.value.replaceNA
                           ),
                           SizedBox(height: 5)
@@ -441,8 +443,8 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                 return Expanded(
                                   child: CustomGradientButton(
                                     label: watchIndex == 0
-                                    ? 'Read All Reviews'
-                                    : 'Watch Providers',
+                                    ? AppStrings.readAllReviews
+                                    : AppStrings.watchProvider,
                                     padding: EdgeInsetsGeometry.symmetric(vertical: 14),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadiusGeometry.circular(8),
@@ -537,7 +539,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                   title: keyword.name ?? ''
                                 );
                               }
-                            )
+                            ),
                           )
                         : MovieText(title: AppStrings.noKeywordsFound),
                         ////recommendations
@@ -643,8 +645,8 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                         style: TextStyle(
                                           color: MovieColors.textPrimary,
                                           fontSize: 13,
-                                        )
-                                      )
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
