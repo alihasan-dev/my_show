@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_show/core/constants/app_strings.dart';
+import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_image_widget.dart';

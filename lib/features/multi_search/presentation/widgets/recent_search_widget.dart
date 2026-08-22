@@ -35,7 +35,7 @@ class RecentSearchWidget extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
+              padding: const EdgeInsets.symmetric(vertical: 14.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -44,7 +44,7 @@ class RecentSearchWidget extends HookConsumerWidget {
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontSize: 15,
                       color: MovieColors.grey
-                    )
+                    ),
                   ),
                   GestureDetector(
                     onTap: () => ref.read(recentSearchProvider.notifier).clearRecentSearch(),
@@ -66,7 +66,7 @@ class RecentSearchWidget extends HookConsumerWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: search.length,
                 padding: EdgeInsets.zero,
-                separatorBuilder: (_,_) => const SizedBox(width: 12),
+                separatorBuilder: (_, _) => const SizedBox(width: 12),
                 itemBuilder: (_, index) {
                   final item = search[index];
                   return RecentSearchTile(
@@ -83,7 +83,7 @@ class RecentSearchWidget extends HookConsumerWidget {
           ],
         );
       }, 
-      error: (_,_) => SizedBox.shrink(), 
+      error: (_, _) => SizedBox.shrink(), 
       loading: () => SizedBox.shrink()
     );
   }

@@ -94,6 +94,17 @@ class MultiSearchScreen extends HookConsumerWidget {
                 fillColor: MovieColors.grey.withValues(alpha: 0.1),
                 filled: true,
                 prefixIcon: const Icon(Icons.search, color: MovieColors.grey),
+                suffixIcon: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 50),
+                  child: searchTextController.text.isBlank
+                  ? const SizedBox.shrink()
+                  : InkWell(
+                    onTap: () {
+                      searchTextController.clear();
+                      ref.read(multiSearchProvider.notifier).resetSearch();
+                    },
+                    child: Icon(Icons.close, color: MovieColors.grey))
+                )
               ),
             ),
             if (movieList.isEmpty && !showLoader.value && searchTextController.text.isBlank) ...[
