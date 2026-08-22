@@ -125,7 +125,6 @@ class MultiSearchScreen extends HookConsumerWidget {
                               title: AppStrings.searchInitialTitle,
                               style: theme.textTheme.bodyLarge?.copyWith(
                                 color: MovieColors.grey,
-                                // fontWeight: FontWeight.w600,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -204,7 +203,7 @@ class MultiSearchScreen extends HookConsumerWidget {
                                             ///save as recent search locally
                                             final entity = RecentSearchEntity(
                                               id: movie.id.toString(),
-                                              mediaType: movie.mediaType!,
+                                              mediaType: movie.mediaType ?? '',
                                               title: movie.originalName ?? '',
                                               posterPath: movie.profilePath ?? '',
                                               subtitle: movie.knownForDepartment ?? ''
@@ -233,7 +232,7 @@ class MultiSearchScreen extends HookConsumerWidget {
                                           ///save as recent search locally
                                           final entity = RecentSearchEntity(
                                             id: item.id.toString(),
-                                            mediaType: item.mediaType!,
+                                            mediaType: item.mediaType ?? '',
                                             title: item.title ?? item.name ?? '',
                                             posterPath: item.backdropPath ?? '',
                                             subtitle: item.releaseDate ?? ''
@@ -262,10 +261,10 @@ class MultiSearchScreen extends HookConsumerWidget {
                         : MovieTvSearchWidget(
                           onTap: () {
                             if (movie.id == null || (movie.mediaType ?? '').isBlank) return;
-                            ///save as recent search locally
+                            ///save as recent search local
                             final entity = RecentSearchEntity(
                               id: movie.id.toString(),
-                              mediaType: movie.mediaType!,
+                              mediaType: movie.mediaType ?? '',
                               title: movie.title ?? movie.name ?? '',
                               posterPath: movie.posterPath ?? '',
                               subtitle: movie.releaseDate ?? ''

@@ -26,7 +26,6 @@ class SearchMovieByKeywordScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final theme = Theme.of(context);
     final queryKey = '$id-$name';
     final searchMovieKeyword = ref.watch(searchMovieKeywordProvider(queryKey));
     final movieList = searchMovieKeyword.asData?.value.result ?? [];
@@ -101,7 +100,7 @@ class SearchMovieByKeywordScreen extends HookConsumerWidget {
         top: false,
         child: searchMovieKeyword.when(
           data: (_) {
-            if (movieList.isEmpty) return SearchEmptyWidget();
+            if (movieList.isEmpty && !searchQueryController.text.isBlank) return SearchEmptyWidget(searchQuery: searchQueryController.text);
             return ListView.separated(
               shrinkWrap: true,
               controller: scrollController,
