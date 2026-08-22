@@ -175,14 +175,15 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                   const SizedBox(height: 8),
                                   Row(
                                     children: [
-                                      VotePercentageWidget(
-                                        height: 40,
-                                        width: 40,
-                                        // title: (movieData.voteAverage! * 10).toStringAsFixed(0),
-                                        votePercent: movieData.voteAverage! / 10,
-                                        yTransform: 0,
-                                      ),
-                                      const SizedBox(width: 12),
+                                      if ((movieData.voteAverage ?? 0.0) > 0.0) ...[
+                                        VotePercentageWidget(
+                                          height: 40,
+                                          width: 40,
+                                          votePercent: movieData.voteAverage! / 10,
+                                          yTransform: 0,
+                                        ),
+                                        const SizedBox(width: 12),
+                                      ],
                                       IconButton(
                                         onPressed: () {
                                           CustomSnackBar.show(
