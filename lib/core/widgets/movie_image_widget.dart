@@ -15,6 +15,7 @@ class MovieImageWidget extends StatelessWidget {
   final double? radius;
   final BorderRadius? borderRadius;
   final String tooltipMessage;
+  final ImageErrorIconSize? errorIconSize;
   
   const MovieImageWidget({
     required this.imagePath,
@@ -25,6 +26,7 @@ class MovieImageWidget extends StatelessWidget {
     this.radius,
     this.borderRadius,
     this.tooltipMessage = '',
+    this.errorIconSize,
     super.key
   });
 
@@ -109,10 +111,12 @@ class MovieImageWidget extends StatelessWidget {
     child: Center(
       child: Icon(
         Icons.broken_image,
-        size: 40,
+        size: (errorIconSize ?? ImageErrorIconSize.medium).errorIconSize,
         color: MovieColors.grey,
       ),
     ),
   );
 
 }
+
+enum ImageErrorIconSize {large, medium, small}

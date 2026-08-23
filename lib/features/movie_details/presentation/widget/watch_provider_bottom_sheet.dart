@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/constants/movie_colors.dart';
+import 'package:my_show/core/widgets/movie_image_widget.dart';
+import '../../../../core/constants/app_strings.dart';
 import '../../domain/entities/watch_provider_entity.dart';
 import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/utils/app_extension_method.dart';
@@ -41,7 +43,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: MovieText(
-                  title: 'Watch Providers',
+                  title: AppStrings.watchProvider,
                   style: theme.titleMedium?.copyWith(
                     color: MovieColors.textPrimary,
                     fontSize: 18,
@@ -84,6 +86,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                           radius: 12,
                           imagePath: item.logoPath!.generateImageURL,
                           subTitle: item.providerName ?? '',
+                          errorIconSize: ImageErrorIconSize.small,
                           padding: EdgeInsets.symmetric(
                             vertical: 5,
                             horizontal: 1
@@ -123,6 +126,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                           radius: 12,
                           imagePath: item.logoPath!.generateImageURL,
                           subTitle: item.providerName ?? '',
+                          errorIconSize: ImageErrorIconSize.small,
                           padding: EdgeInsets.symmetric(
                             vertical: 5,
                             horizontal: 1
@@ -162,6 +166,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                           radius: 12,
                           imagePath: item.logoPath!.generateImageURL,
                           subTitle: item.providerName ?? '',
+                          errorIconSize: ImageErrorIconSize.small,
                           padding: EdgeInsets.symmetric(
                             vertical: 5,
                             horizontal: 1
@@ -201,6 +206,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                           radius: 12,
                           imagePath: item.logoPath!.generateImageURL,
                           subTitle: item.providerName ?? '',
+                          errorIconSize: ImageErrorIconSize.small,
                           padding: EdgeInsets.symmetric(
                             vertical: 5,
                             horizontal: 1

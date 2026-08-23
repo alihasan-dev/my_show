@@ -3,10 +3,11 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../domain/entities/video_entity.dart';
 import '/core/widgets/vote_percentage_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/utils/custom_snackbar.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../provider/watch_provider.dart';
 import '../provider/movie_cast_provider.dart';
 import '../provider/movie_video_provider.dart';
@@ -206,7 +207,20 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          if (movieVideoList.isEmpty) {
+                                          String youTubeURL = '';
+                                          if (movieVideoList.isNotEmpty) {
+                                            youTubeURL = movieVideoList.firstWhere((item) => !(item.key ?? '').isBlank, orElse: () => Results()).key ?? '';
+                                          }
+                                          youTubeURL = youTubeURL.generateYouTubeURL;
+                                          // having some issue in youtube video player
+                                          // context.pushNamed(
+                                          //   AppRoutes.videoPlayer,
+                                          //   extra: {
+                                          //     'videos': movieVideoList,
+                                          //     'initialIndex': 0,
+                                          //   },
+                                          // );
+                                          if (youTubeURL.isBlank) {
                                             CustomSnackBar.show(
                                               context, 
                                               message: type == 'movie'
@@ -215,13 +229,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                             );
                                             return;
                                           }
-                                          context.pushNamed(
-                                            AppRoutes.videoPlayer,
-                                            extra: {
-                                              'videos': movieVideoList,
-                                              'initialIndex': 0,
-                                            },
-                                          );
+                                          launchUrl(Uri.parse(youTubeURL));
                                         },
                                         icon: const Icon(Icons.play_circle),
                                       ),
@@ -598,15 +606,27 @@ class MovieDetailsScreen extends HookConsumerWidget {
                             separatorBuilder: (_, _) => const SizedBox(width: 12),
                             itemBuilder: (_, index) {
                               final video = movieVideoList[index];
-                              final thumbnailUrl = YoutubePlayer.getThumbnail(videoId: video.key ?? '');
+                              final thumbnailUrl = (video.key ?? '').generateYouTubeThumbnail;
+                              final youTubeURL = (video.key ?? '').generateYouTubeURL;
                               return GestureDetector(
-                                onTap: () => context.pushNamed(
-                                  AppRoutes.videoPlayer,
-                                  extra: {
-                                    'videos': movieVideoList,
-                                    'initialIndex': index,
-                                  },
-                                ),
+                                // having some issue in youtube video player
+                                // onTap: () => context.pushNamed(
+                                //   AppRoutes.videoPlayer,
+                                //   extra: {
+                                //     'videos': movieVideoList,
+                                //     'initialIndex': index,
+                                //   },
+                                // ),
+                                onTap: () {
+                                  if (youTubeURL.isBlank) {
+                                    CustomSnackBar.show(
+                                      context, 
+                                      message: 'Video not avaiable'
+                                    );
+                                    return;
+                                  }
+                                  launchUrl(Uri.parse(youTubeURL));
+                                },
                                 child: SizedBox(
                                   width: 250,
                                   child: Column(

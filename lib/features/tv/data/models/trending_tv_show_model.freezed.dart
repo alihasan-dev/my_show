@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'trending_tv_show_model.dart';
@@ -9,6 +9,7 @@ part of 'trending_tv_show_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$TrendingTVShowModelCopyWithImpl<$Res>
 /// Create a copy of TrendingTVShowModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? page = freezed,Object? results = freezed,Object? totalPages = freezed,Object? totalResults = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(TrendingTVShowModel(
 page: freezed == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int?,results: freezed == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
 as List<TvShow>?,totalPages: freezed == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
@@ -206,7 +207,7 @@ return $default(_that.page,_that.results,_that.totalPages,_that.totalResults);ca
 @JsonSerializable()
 
 class _TrendingTVShowModel implements TrendingTVShowModel {
-   _TrendingTVShowModel({this.page, final  List<TvShow>? results, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults}): _results = results;
+   _TrendingTVShowModel({this.page,  List<TvShow>? results, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults}): _results = results;
   factory _TrendingTVShowModel.fromJson(Map<String, dynamic> json) => _$TrendingTVShowModelFromJson(json);
 
 @override final  int? page;
@@ -340,7 +341,7 @@ class _$TvShowCopyWithImpl<$Res>
 /// Create a copy of TvShow
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? adult = freezed,Object? backdropPath = freezed,Object? id = freezed,Object? name = freezed,Object? originalTitle = freezed,Object? overview = freezed,Object? posterPath = freezed,Object? mediaType = freezed,Object? originalLanguage = freezed,Object? genreIds = freezed,Object? popularity = freezed,Object? firstAirDate = freezed,Object? voteAverage = freezed,Object? voteCount = freezed,Object? originCountry = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(TvShow(
 adult: freezed == adult ? _self.adult : adult // ignore: cast_nullable_to_non_nullable
 as bool?,backdropPath: freezed == backdropPath ? _self.backdropPath : backdropPath // ignore: cast_nullable_to_non_nullable
 as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
@@ -491,7 +492,7 @@ return $default(_that.adult,_that.backdropPath,_that.id,_that.name,_that.origina
 @JsonSerializable()
 
 class _TvShow implements TvShow {
-   _TvShow({this.adult, @JsonKey(name: 'backdrop_path') this.backdropPath, this.id, this.name, @JsonKey(name: 'original_name') this.originalTitle, this.overview, @JsonKey(name: 'poster_path') this.posterPath, @JsonKey(name: 'media_type') this.mediaType, @JsonKey(name: 'original_language') this.originalLanguage, @JsonKey(name: 'genre_ids') final  List<int>? genreIds, this.popularity, @JsonKey(name: 'first_air_date') this.firstAirDate, @JsonKey(name: 'vote_average') this.voteAverage, @JsonKey(name: 'vote_count') this.voteCount, @JsonKey(name: 'origin_country') final  List<String>? originCountry}): _genreIds = genreIds,_originCountry = originCountry;
+   _TvShow({this.adult, @JsonKey(name: 'backdrop_path') this.backdropPath, this.id, this.name, @JsonKey(name: 'original_name') this.originalTitle, this.overview, @JsonKey(name: 'poster_path') this.posterPath, @JsonKey(name: 'media_type') this.mediaType, @JsonKey(name: 'original_language') this.originalLanguage, @JsonKey(name: 'genre_ids')  List<int>? genreIds, this.popularity, @JsonKey(name: 'first_air_date') this.firstAirDate, @JsonKey(name: 'vote_average') this.voteAverage, @JsonKey(name: 'vote_count') this.voteCount, @JsonKey(name: 'origin_country')  List<String>? originCountry}): _genreIds = genreIds,_originCountry = originCountry;
   factory _TvShow.fromJson(Map<String, dynamic> json) => _$TvShowFromJson(json);
 
 @override final  bool? adult;

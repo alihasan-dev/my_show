@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'popular_people_model.dart';
@@ -9,6 +9,7 @@ part of 'popular_people_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$PopularPeopleModelCopyWithImpl<$Res>
 /// Create a copy of PopularPeopleModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? page = freezed,Object? totalPages = freezed,Object? totalResults = freezed,Object? results = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(PopularPeopleModel(
 page: freezed == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int?,totalPages: freezed == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
 as int?,totalResults: freezed == totalResults ? _self.totalResults : totalResults // ignore: cast_nullable_to_non_nullable
@@ -206,7 +207,7 @@ return $default(_that.page,_that.totalPages,_that.totalResults,_that.results);ca
 @JsonSerializable()
 
 class _PopularPeopleModel implements PopularPeopleModel {
-  const _PopularPeopleModel({this.page, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults, final  List<People>? results}): _results = results;
+  const _PopularPeopleModel({this.page, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults,  List<People>? results}): _results = results;
   factory _PopularPeopleModel.fromJson(Map<String, dynamic> json) => _$PopularPeopleModelFromJson(json);
 
 @override final  int? page;
@@ -340,7 +341,7 @@ class _$PeopleCopyWithImpl<$Res>
 /// Create a copy of People
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? adult = freezed,Object? gender = freezed,Object? id = freezed,Object? knownForDepartment = freezed,Object? name = freezed,Object? originalName = freezed,Object? popularity = freezed,Object? profilePath = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(People(
 adult: freezed == adult ? _self.adult : adult // ignore: cast_nullable_to_non_nullable
 as bool?,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as int?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable

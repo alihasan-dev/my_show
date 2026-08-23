@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'movie_award_model.dart';
@@ -9,6 +9,7 @@ part of 'movie_award_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$AwardModelCopyWithImpl<$Res>
 /// Create a copy of AwardModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? title = freezed,Object? year = freezed,Object? rated = freezed,Object? released = freezed,Object? runtime = freezed,Object? genre = freezed,Object? director = freezed,Object? writer = freezed,Object? actors = freezed,Object? plot = freezed,Object? language = freezed,Object? country = freezed,Object? awards = freezed,Object? poster = freezed,Object? ratings = freezed,Object? metascrore = freezed,Object? imdbRating = freezed,Object? imdbVotes = freezed,Object? imdbID = freezed,Object? type = freezed,Object? dvd = freezed,Object? boxOffice = freezed,Object? production = freezed,Object? website = freezed,Object? respnse = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(AwardModel(
 title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,year: freezed == year ? _self.year : year // ignore: cast_nullable_to_non_nullable
 as String?,rated: freezed == rated ? _self.rated : rated // ignore: cast_nullable_to_non_nullable
@@ -227,7 +228,7 @@ return $default(_that.title,_that.year,_that.rated,_that.released,_that.runtime,
 @JsonSerializable()
 
 class _AwardModel implements AwardModel {
-  const _AwardModel({@JsonKey(name: 'Title') this.title, @JsonKey(name: 'Year') this.year, @JsonKey(name: 'Rated') this.rated, @JsonKey(name: 'Released') this.released, @JsonKey(name: 'Runtime') this.runtime, @JsonKey(name: 'Genre') this.genre, @JsonKey(name: 'Director') this.director, @JsonKey(name: 'Writer') this.writer, @JsonKey(name: 'Actors') this.actors, @JsonKey(name: 'Plot') this.plot, @JsonKey(name: 'Language') this.language, @JsonKey(name: 'Country') this.country, @JsonKey(name: 'Awards') this.awards, @JsonKey(name: 'Poster') this.poster, @JsonKey(name: 'Ratings') final  List<Ratings>? ratings, @JsonKey(name: 'Metascore') this.metascrore, @JsonKey(name: 'imdbRating') this.imdbRating, @JsonKey(name: 'imdbVotes') this.imdbVotes, @JsonKey(name: 'imdbID') this.imdbID, @JsonKey(name: 'Type') this.type, @JsonKey(name: 'DVD') this.dvd, @JsonKey(name: 'BoxOffice') this.boxOffice, @JsonKey(name: 'Production') this.production, @JsonKey(name: 'Website') this.website, @JsonKey(name: 'Response') this.respnse}): _ratings = ratings;
+  const _AwardModel({@JsonKey(name: 'Title') this.title, @JsonKey(name: 'Year') this.year, @JsonKey(name: 'Rated') this.rated, @JsonKey(name: 'Released') this.released, @JsonKey(name: 'Runtime') this.runtime, @JsonKey(name: 'Genre') this.genre, @JsonKey(name: 'Director') this.director, @JsonKey(name: 'Writer') this.writer, @JsonKey(name: 'Actors') this.actors, @JsonKey(name: 'Plot') this.plot, @JsonKey(name: 'Language') this.language, @JsonKey(name: 'Country') this.country, @JsonKey(name: 'Awards') this.awards, @JsonKey(name: 'Poster') this.poster, @JsonKey(name: 'Ratings')  List<Ratings>? ratings, @JsonKey(name: 'Metascore') this.metascrore, @JsonKey(name: 'imdbRating') this.imdbRating, @JsonKey(name: 'imdbVotes') this.imdbVotes, @JsonKey(name: 'imdbID') this.imdbID, @JsonKey(name: 'Type') this.type, @JsonKey(name: 'DVD') this.dvd, @JsonKey(name: 'BoxOffice') this.boxOffice, @JsonKey(name: 'Production') this.production, @JsonKey(name: 'Website') this.website, @JsonKey(name: 'Response') this.respnse}): _ratings = ratings;
   factory _AwardModel.fromJson(Map<String, dynamic> json) => _$AwardModelFromJson(json);
 
 @override@JsonKey(name: 'Title') final  String? title;
@@ -403,7 +404,7 @@ class _$RatingsCopyWithImpl<$Res>
 /// Create a copy of Ratings
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? source = freezed,Object? value = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Ratings(
 source: freezed == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
 as String?,value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as String?,

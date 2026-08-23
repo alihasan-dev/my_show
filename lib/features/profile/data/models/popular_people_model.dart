@@ -6,10 +6,10 @@ part 'popular_people_model.g.dart';
 sealed class PopularPeopleModel with _$PopularPeopleModel {
 
   const factory PopularPeopleModel({
-    final int? page,
-    @JsonKey(name: 'total_pages') final int? totalPages,
-    @JsonKey(name: 'total_results') final int? totalResults,
-    final List<People>? results,
+    int? page,
+    @JsonKey(name: 'total_pages') int? totalPages,
+    @JsonKey(name: 'total_results') int? totalResults,
+    List<People>? results,
   }) = _PopularPeopleModel;
 
   factory PopularPeopleModel.fromJson(Map<String, dynamic> json) => _$PopularPeopleModelFromJson(json); 
@@ -20,14 +20,14 @@ sealed class PopularPeopleModel with _$PopularPeopleModel {
 sealed class People with _$People {
 
   const factory People({
-    final bool? adult,
-    final int? gender,
-    final int? id,
-    @JsonKey(name: 'known_for_department') final String? knownForDepartment,
-    final String? name,
-    @JsonKey(name: 'original_name') final String? originalName,
-    final double? popularity,
-    @JsonKey(name: 'profile_path') final String? profilePath,
+    bool? adult,
+    int? gender,
+    int? id,
+    @JsonKey(name: 'known_for_department') String? knownForDepartment,
+    String? name,
+    @JsonKey(name: 'original_name') String? originalName,
+    double? popularity,
+    @JsonKey(name: 'profile_path') String? profilePath,
   }) = _People;
 
   factory People.fromJson(Map<String, dynamic> json) => _$PeopleFromJson(json);

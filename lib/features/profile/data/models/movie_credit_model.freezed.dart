@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'movie_credit_model.dart';
@@ -9,6 +9,7 @@ part of 'movie_credit_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$MovieCreditModelCopyWithImpl<$Res>
 /// Create a copy of MovieCreditModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? cast = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(MovieCreditModel(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,cast: freezed == cast ? _self.cast : cast // ignore: cast_nullable_to_non_nullable
 as List<Cast>?,
@@ -204,7 +205,7 @@ return $default(_that.id,_that.cast);case _:
 @JsonSerializable()
 
 class _MovieCreditModel implements MovieCreditModel {
-  const _MovieCreditModel({this.id, final  List<Cast>? cast}): _cast = cast;
+  const _MovieCreditModel({this.id,  List<Cast>? cast}): _cast = cast;
   factory _MovieCreditModel.fromJson(Map<String, dynamic> json) => _$MovieCreditModelFromJson(json);
 
 @override final  int? id;
@@ -334,7 +335,7 @@ class _$CastCopyWithImpl<$Res>
 /// Create a copy of Cast
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? adult = freezed,Object? backdropPath = freezed,Object? genreId = freezed,Object? id = freezed,Object? originalLanguage = freezed,Object? originalTitle = freezed,Object? overview = freezed,Object? popularity = freezed,Object? posterPath = freezed,Object? releaseDate = freezed,Object? title = freezed,Object? video = freezed,Object? voteAverage = freezed,Object? voteCount = freezed,Object? character = freezed,Object? creditId = freezed,Object? order = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Cast(
 adult: freezed == adult ? _self.adult : adult // ignore: cast_nullable_to_non_nullable
 as bool?,backdropPath: freezed == backdropPath ? _self.backdropPath : backdropPath // ignore: cast_nullable_to_non_nullable
 as String?,genreId: freezed == genreId ? _self.genreId : genreId // ignore: cast_nullable_to_non_nullable
@@ -487,7 +488,7 @@ return $default(_that.adult,_that.backdropPath,_that.genreId,_that.id,_that.orig
 @JsonSerializable()
 
 class _Cast implements Cast {
-  const _Cast({this.adult, @JsonKey(name: 'backdrop_path') this.backdropPath, @JsonKey(name: 'genre_ids') final  List<int>? genreId, this.id, @JsonKey(name: 'original_language') this.originalLanguage, @JsonKey(name: 'original_title') this.originalTitle, this.overview, this.popularity, @JsonKey(name: 'poster_path') this.posterPath, @JsonKey(name: 'release_date') this.releaseDate, this.title, this.video, @JsonKey(name: 'vote_average') this.voteAverage, @JsonKey(name: 'vote_count') this.voteCount, this.character, @JsonKey(name: 'credit_id') this.creditId, this.order}): _genreId = genreId;
+  const _Cast({this.adult, @JsonKey(name: 'backdrop_path') this.backdropPath, @JsonKey(name: 'genre_ids')  List<int>? genreId, this.id, @JsonKey(name: 'original_language') this.originalLanguage, @JsonKey(name: 'original_title') this.originalTitle, this.overview, this.popularity, @JsonKey(name: 'poster_path') this.posterPath, @JsonKey(name: 'release_date') this.releaseDate, this.title, this.video, @JsonKey(name: 'vote_average') this.voteAverage, @JsonKey(name: 'vote_count') this.voteCount, this.character, @JsonKey(name: 'credit_id') this.creditId, this.order}): _genreId = genreId;
   factory _Cast.fromJson(Map<String, dynamic> json) => _$CastFromJson(json);
 
 @override final  bool? adult;

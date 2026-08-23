@@ -6,9 +6,9 @@ part 'movie_keyword_model.g.dart';
 @freezed
 sealed class MovieKeywordModel with _$MovieKeywordModel {
   const factory MovieKeywordModel({
-    final int? id,
-    final List<Keyword>? keywords,
-    @JsonKey(name: 'results') final List<Keyword>? results,
+    int? id,
+    List<Keyword>? keywords,
+    @JsonKey(name: 'results') List<Keyword>? results,
   }) = _MovieKeywordModel;
 
   factory MovieKeywordModel.fromJson(Map<String, dynamic> json) => _$MovieKeywordModelFromJson(json);
@@ -17,8 +17,8 @@ sealed class MovieKeywordModel with _$MovieKeywordModel {
 @freezed
 sealed class Keyword with _$Keyword {
   const factory Keyword({
-    final int? id,
-    final String? name,
+    int? id,
+    String? name,
   }) = _Keyword;
 
   factory Keyword.fromJson(Map<String, dynamic> json) => _$KeywordFromJson(json);

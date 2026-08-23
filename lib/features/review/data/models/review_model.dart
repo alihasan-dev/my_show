@@ -5,11 +5,11 @@ part 'review_model.g.dart';
 @freezed
 sealed class ReviewModel with _$ReviewModel {
   const factory ReviewModel({
-    final int? id,
-    final int? page,  
-    final List<Review>? results,
-    @JsonKey(name: 'total_pages') final int? totalPages,
-    @JsonKey(name: 'total_results') final int? totalResults,
+    int? id,
+    int? page,  
+    List<Review>? results,
+    @JsonKey(name: 'total_pages') int? totalPages,
+    @JsonKey(name: 'total_results') int? totalResults,
   }) = _ReviewModel;
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) => _$ReviewModelFromJson(json);
@@ -18,13 +18,13 @@ sealed class ReviewModel with _$ReviewModel {
 @freezed
 sealed class Review with _$Review {
   const factory Review({
-    final String? author,
-    @JsonKey(name: 'author_details') final AuthorDetails? authorDetails,
-    final String? content,
-    @JsonKey(name: 'created_at') final String? createdAt,
-    final String? id,
-    @JsonKey(name: 'updated_at') final String? updatedAt,
-    final String? url
+    String? author,
+    @JsonKey(name: 'author_details') AuthorDetails? authorDetails,
+    String? content,
+    @JsonKey(name: 'created_at') String? createdAt,
+    String? id,
+    @JsonKey(name: 'updated_at') String? updatedAt,
+    String? url
   }) = _Review;
 
   factory Review.fromJson(Map<String, dynamic> json) => _$ReviewFromJson(json);
@@ -33,10 +33,10 @@ sealed class Review with _$Review {
 @freezed
 sealed class AuthorDetails with _$AuthorDetails {
   const factory AuthorDetails({
-    final String? name,
-    final String? username,
-    @JsonKey(name: 'avatar_path') final String? avatarPath,
-    final double? rating
+    String? name,
+    String? username,
+    @JsonKey(name: 'avatar_path') String? avatarPath,
+    double? rating
   }) = _AuthorDetails;
 
   factory AuthorDetails.fromJson(Map<String, dynamic> json) => _$AuthorDetailsFromJson(json);

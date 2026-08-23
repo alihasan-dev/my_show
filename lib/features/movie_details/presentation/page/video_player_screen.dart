@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../../../core/constants/movie_colors.dart';
+import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/widgets/movie_text.dart';
 import '../../../movie_details/domain/entities/video_entity.dart';
 
@@ -33,12 +34,22 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   }
 
   void _initController() {
-    _controller = YoutubePlayerController(
-      initialVideoId: widget.videos[_currentIndex].key ?? '',
-      flags: const YoutubePlayerFlags(
-        autoPlay: true,
-        enableCaption: false,
-        useHybridComposition: true,
+    // _controller = YoutubePlayerController(
+    //   initialVideoId: widget.videos[_currentIndex].key ?? '',
+    //   flags: const YoutubePlayerFlags(
+    //     autoPlay: true,
+    //     enableCaption: false,
+    //     useHybridComposition: true,
+    //   ),
+    // );
+    _controller = YoutubePlayerController.fromVideoId(
+      videoId: widget.videos[_currentIndex].key ?? '',
+      autoPlay: true,
+      startSeconds: 0,
+      params: const YoutubePlayerParams(
+        mute: false,
+        strictRelatedVideos: true,
+        enableCaption: false
       ),
     );
   }
@@ -46,7 +57,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void _playVideoAt(int index) {
     if (index < 0 || index >= widget.videos.length) return;
     setState(() => _currentIndex = index);
-    _controller.load(widget.videos[_currentIndex].key ?? '');
+    // _controller.load(widget.videos[_currentIndex].key ?? '');
+    _controller.loadVideoById(videoId: widget.videos[_currentIndex].key ?? '');
   }
 
   bool get _hasNext => _currentIndex < widget.videos.length - 1;
@@ -55,7 +67,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   void dispose() {
     _isFullScreen.dispose();
-    _controller.dispose();
+    // _controller.dispose();
+    _controller.close();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.dispose();
@@ -66,67 +79,69 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     final theme = Theme.of(context).textTheme;
     final video = widget.videos[_currentIndex];
 
-    return YoutubePlayerBuilder(
-      onEnterFullScreen: () {
-       _isFullScreen.value = true;
-       setState(() {
-         isFullScreen = true;
-       });
-      },
-      onExitFullScreen: () {
-       _isFullScreen.value = false;
-       setState(() {
-         isFullScreen = false;
-       });
-      },
-      player: YoutubePlayer(
-        controller: _controller,
-        showVideoProgressIndicator: true,
-        progressIndicatorColor: MovieColors.red,
-        progressColors: const ProgressBarColors(
-          playedColor: MovieColors.red,
-          handleColor: MovieColors.red,
-        ),
-        topActions: isFullScreen
-        ?[
-          const SizedBox(width: 8),
-          Expanded(
-            child: Row(
-              spacing: 5,
-              children: [
-                BackButton(),
-                Expanded(
-                  child: Text(
-                    video.name ?? '',
-                    style: const TextStyle(color: MovieColors.white, fontSize: 18),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ] : null,
-        bottomActions: [
-          const SizedBox(width: 22),
-          CurrentPosition(),
-          const SizedBox(width: 8),
-          ProgressBar(
-            isExpanded: true,
-            colors: const ProgressBarColors(
-              playedColor: MovieColors.red,
-              handleColor: MovieColors.red,
-            ),
-          ),
-          const SizedBox(width: 8),
-          RemainingDuration(),
-          IconButton(
-            icon: const Icon(Icons.fullscreen, color: MovieColors.white),
-            onPressed: () => _controller.toggleFullScreenMode(),
-          ),
-          const SizedBox(width: 10),
-        ],
-      ),
+    // return YoutubePlayerBuilder(
+    return YoutubeValueBuilder(
+      controller: _controller,
+      // onEnterFullScreen: () {
+      //  _isFullScreen.value = true;
+      //  setState(() {
+      //    isFullScreen = true;
+      //  });
+      // },
+      // onExitFullScreen: () {
+      //  _isFullScreen.value = false;
+      //  setState(() {
+      //    isFullScreen = false;
+      //  });
+      // },
+      // player: YoutubePlayer(
+      //   controller: _controller,
+      //   showVideoProgressIndicator: true,
+      //   progressIndicatorColor: MovieColors.red,
+      //   progressColors: const ProgressBarColors(
+      //     playedColor: MovieColors.red,
+      //     handleColor: MovieColors.red,
+      //   ),
+      //   topActions: isFullScreen
+      //   ?[
+      //     const SizedBox(width: 8),
+      //     Expanded(
+      //       child: Row(
+      //         spacing: 5,
+      //         children: [
+      //           BackButton(),
+      //           Expanded(
+      //             child: Text(
+      //               video.name ?? '',
+      //               style: const TextStyle(color: MovieColors.white, fontSize: 18),
+      //               overflow: TextOverflow.ellipsis,
+      //               maxLines: 1,
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //   ] : null,
+      //   bottomActions: [
+      //     const SizedBox(width: 22),
+      //     CurrentPosition(),
+      //     const SizedBox(width: 8),
+      //     ProgressBar(
+      //       isExpanded: true,
+      //       colors: const ProgressBarColors(
+      //         playedColor: MovieColors.red,
+      //         handleColor: MovieColors.red,
+      //       ),
+      //     ),
+      //     const SizedBox(width: 8),
+      //     RemainingDuration(),
+      //     IconButton(
+      //       icon: const Icon(Icons.fullscreen, color: MovieColors.white),
+      //       onPressed: () => _controller.toggleFullScreenMode(),
+      //     ),
+      //     const SizedBox(width: 10),
+      //   ],
+      // ),
       builder: (context, player) {
         return ValueListenableBuilder<bool>(
           valueListenable: _isFullScreen,
@@ -144,7 +159,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     ),
               body: Column(
                 children: [
-                  player,
+                  // player,
                   if (!isFullScreen) ...[
                     // Controls row
                     Padding(
@@ -161,19 +176,22 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             ),
                           ),
                           const SizedBox(width: 16),
-                          IconButton(
-                            onPressed: () {
-                              _controller.value.isPlaying ? _controller.pause() : _controller.play();
-                            },
-                            icon: ValueListenableBuilder(
-                              valueListenable: _controller,
-                              builder: (_,value,_) => Icon(
-                                value.isPlaying ? Icons.pause_circle_filled : Icons.play_circle_filled,
-                                size: 48,
-                                color: MovieColors.white,
-                              ),
-                            ),
-                          ),
+                          // IconButton(
+                          //   onPressed: () {
+                          //     // _controller.value.isPlaying ? _controller.pause() : _controller.play();
+                          //     _controller.value.playerState == PlayerState.playing 
+                          //     ? _controller.pauseVideo() 
+                          //     : _controller.playVideo();
+                          //   },
+                          //   icon: ValueListenableBuilder(
+                          //     valueListenable: _controller,
+                          //     builder: (_, value, _) => Icon(
+                          //       value.isPlaying ? Icons.pause_circle_filled : Icons.play_circle_filled,
+                          //       size: 48,
+                          //       color: MovieColors.white,
+                          //     ),
+                          //   ),
+                          // ),
                           const SizedBox(width: 16),
                           IconButton(
                             onPressed: _hasNext ? () => _playVideoAt(_currentIndex + 1) : null,
@@ -250,20 +268,25 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                         padding: EdgeInsets.only(right: 8),
                                         child: Icon(Icons.play_arrow, color: MovieColors.red, size: 20),
                                       ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(6),
-                                      child: Image.network(
-                                        YoutubePlayer.getThumbnail(videoId: item.key ?? ''),
-                                        width: 120,
-                                        height: 68,
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (_,_,_) => Container(
-                                          width: 120,
-                                          height: 68,
-                                          color: MovieColors.grey.withValues(alpha: 0.3),
-                                          child: const Icon(Icons.broken_image, color: MovieColors.grey),
-                                        ),
-                                      ),
+                                    // ClipRRect(
+                                    //   borderRadius: BorderRadius.circular(6),
+                                    //   child: Image.network(
+                                    //     YoutubePlayer.getThumbnail(videoId: item.key ?? ''),
+                                    //     width: 120,
+                                    //     height: 68,
+                                    //     fit: BoxFit.cover,
+                                    //     errorBuilder: (_,_,_) => Container(
+                                    //       width: 120,
+                                    //       height: 68,
+                                    //       color: MovieColors.grey.withValues(alpha: 0.3),
+                                    //       child: const Icon(Icons.broken_image, color: MovieColors.grey),
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                    MovieImageWidget(
+                                      imagePath: 'https://img.youtube.com/vi/${item.key}/maxresdefault.jpg',
+                                      height: 68,
+                                      width: 120,
                                     ),
                                     const SizedBox(width: 12),
                                     Expanded(

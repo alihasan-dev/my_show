@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'video_model.dart';
@@ -9,6 +9,7 @@ part of 'video_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$VideoModelCopyWithImpl<$Res>
 /// Create a copy of VideoModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? results = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(VideoModel(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,results: freezed == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
 as List<Results>?,
@@ -204,7 +205,7 @@ return $default(_that.id,_that.results);case _:
 @JsonSerializable()
 
 class _VideoModel implements VideoModel {
-  const _VideoModel({this.id, final  List<Results>? results}): _results = results;
+  const _VideoModel({this.id,  List<Results>? results}): _results = results;
   factory _VideoModel.fromJson(Map<String, dynamic> json) => _$VideoModelFromJson(json);
 
 @override final  int? id;
@@ -334,7 +335,7 @@ class _$ResultsCopyWithImpl<$Res>
 /// Create a copy of Results
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? iso6391 = freezed,Object? iso31661 = freezed,Object? key = freezed,Object? name = freezed,Object? site = freezed,Object? size = freezed,Object? type = freezed,Object? official = freezed,Object? publishedAt = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Results(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,iso6391: freezed == iso6391 ? _self.iso6391 : iso6391 // ignore: cast_nullable_to_non_nullable
 as String?,iso31661: freezed == iso31661 ? _self.iso31661 : iso31661 // ignore: cast_nullable_to_non_nullable

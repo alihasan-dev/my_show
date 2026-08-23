@@ -104,7 +104,7 @@ class MultiSearchScreen extends HookConsumerWidget {
                       ref.read(multiSearchProvider.notifier).resetSearch();
                     },
                     child: Icon(Icons.close, color: MovieColors.grey))
-                )
+                ),
               ),
             ),
             if (movieList.isEmpty && !showLoader.value && searchTextController.text.isBlank) ...[

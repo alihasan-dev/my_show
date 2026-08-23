@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'movie_keyword_model.dart';
@@ -9,6 +9,7 @@ part of 'movie_keyword_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$MovieKeywordModelCopyWithImpl<$Res>
 /// Create a copy of MovieKeywordModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? keywords = freezed,Object? results = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(MovieKeywordModel(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,keywords: freezed == keywords ? _self.keywords : keywords // ignore: cast_nullable_to_non_nullable
 as List<Keyword>?,results: freezed == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
@@ -205,7 +206,7 @@ return $default(_that.id,_that.keywords,_that.results);case _:
 @JsonSerializable()
 
 class _MovieKeywordModel implements MovieKeywordModel {
-  const _MovieKeywordModel({this.id, final  List<Keyword>? keywords, @JsonKey(name: 'results') final  List<Keyword>? results}): _keywords = keywords,_results = results;
+  const _MovieKeywordModel({this.id,  List<Keyword>? keywords, @JsonKey(name: 'results')  List<Keyword>? results}): _keywords = keywords,_results = results;
   factory _MovieKeywordModel.fromJson(Map<String, dynamic> json) => _$MovieKeywordModelFromJson(json);
 
 @override final  int? id;
@@ -345,7 +346,7 @@ class _$KeywordCopyWithImpl<$Res>
 /// Create a copy of Keyword
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Keyword(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,

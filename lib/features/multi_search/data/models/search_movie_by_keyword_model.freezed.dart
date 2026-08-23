@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'search_movie_by_keyword_model.dart';
@@ -9,6 +9,7 @@ part of 'search_movie_by_keyword_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$SearchMovieByKeywordModelCopyWithImpl<$Res>
 /// Create a copy of SearchMovieByKeywordModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? page = freezed,Object? results = freezed,Object? totalPages = freezed,Object? totalResults = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(SearchMovieByKeywordModel(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,page: freezed == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int?,results: freezed == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
@@ -207,7 +208,7 @@ return $default(_that.id,_that.page,_that.results,_that.totalPages,_that.totalRe
 @JsonSerializable()
 
 class _SearchMovieByKeywordModel implements SearchMovieByKeywordModel {
-  const _SearchMovieByKeywordModel({this.id, this.page, final  List<SearchMovieKeyword>? results, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults}): _results = results;
+  const _SearchMovieByKeywordModel({this.id, this.page,  List<SearchMovieKeyword>? results, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults}): _results = results;
   factory _SearchMovieByKeywordModel.fromJson(Map<String, dynamic> json) => _$SearchMovieByKeywordModelFromJson(json);
 
 @override final  int? id;
@@ -343,7 +344,7 @@ class _$SearchMovieKeywordCopyWithImpl<$Res>
 /// Create a copy of SearchMovieKeyword
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? adult = freezed,Object? backdropPath = freezed,Object? genreIds = freezed,Object? id = freezed,Object? originCountry = freezed,Object? originalName = freezed,Object? mediaType = freezed,Object? originalTitle = freezed,Object? overview = freezed,Object? title = freezed,Object? name = freezed,Object? gender = freezed,Object? knownFor = freezed,Object? knownForDepartment = freezed,Object? posterPath = freezed,Object? profilePath = freezed,Object? originalLanguage = freezed,Object? popularity = freezed,Object? firstAirDate = freezed,Object? releaseDate = freezed,Object? video = freezed,Object? voteAverage = freezed,Object? voteCount = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(SearchMovieKeyword(
 adult: freezed == adult ? _self.adult : adult // ignore: cast_nullable_to_non_nullable
 as bool?,backdropPath: freezed == backdropPath ? _self.backdropPath : backdropPath // ignore: cast_nullable_to_non_nullable
 as String?,genreIds: freezed == genreIds ? _self.genreIds : genreIds // ignore: cast_nullable_to_non_nullable
@@ -502,7 +503,7 @@ return $default(_that.adult,_that.backdropPath,_that.genreIds,_that.id,_that.ori
 @JsonSerializable()
 
 class _SearchMovieKeyword implements SearchMovieKeyword {
-  const _SearchMovieKeyword({this.adult, @JsonKey(name: 'backdrop_path') this.backdropPath, @JsonKey(name: 'genre_ids') final  List<int>? genreIds, this.id, @JsonKey(name: "origin_country") final  List<String>? originCountry, @JsonKey(name: 'original_name') this.originalName, @JsonKey(name: 'media_type') this.mediaType, @JsonKey(name: 'original_title') this.originalTitle, this.overview, this.title, this.name, this.gender, @JsonKey(name: 'known_for') final  List<SearchMovieKeyword>? knownFor, @JsonKey(name: 'known_for_department') this.knownForDepartment, @JsonKey(name: 'poster_path') this.posterPath, @JsonKey(name: 'profile_path') this.profilePath, @JsonKey(name: 'original_language') this.originalLanguage, this.popularity, @JsonKey(name: 'first_air_date') this.firstAirDate, @JsonKey(name: 'release_date') this.releaseDate, this.video, @JsonKey(name: 'vote_average') this.voteAverage, @JsonKey(name: 'vote_count') this.voteCount}): _genreIds = genreIds,_originCountry = originCountry,_knownFor = knownFor;
+  const _SearchMovieKeyword({this.adult, @JsonKey(name: 'backdrop_path') this.backdropPath, @JsonKey(name: 'genre_ids')  List<int>? genreIds, this.id, @JsonKey(name: "origin_country")  List<String>? originCountry, @JsonKey(name: 'original_name') this.originalName, @JsonKey(name: 'media_type') this.mediaType, @JsonKey(name: 'original_title') this.originalTitle, this.overview, this.title, this.name, this.gender, @JsonKey(name: 'known_for')  List<SearchMovieKeyword>? knownFor, @JsonKey(name: 'known_for_department') this.knownForDepartment, @JsonKey(name: 'poster_path') this.posterPath, @JsonKey(name: 'profile_path') this.profilePath, @JsonKey(name: 'original_language') this.originalLanguage, this.popularity, @JsonKey(name: 'first_air_date') this.firstAirDate, @JsonKey(name: 'release_date') this.releaseDate, this.video, @JsonKey(name: 'vote_average') this.voteAverage, @JsonKey(name: 'vote_count') this.voteCount}): _genreIds = genreIds,_originCountry = originCountry,_knownFor = knownFor;
   factory _SearchMovieKeyword.fromJson(Map<String, dynamic> json) => _$SearchMovieKeywordFromJson(json);
 
 @override final  bool? adult;

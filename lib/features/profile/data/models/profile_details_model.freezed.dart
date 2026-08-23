@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'profile_details_model.dart';
@@ -9,6 +9,7 @@ part of 'profile_details_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$ProfileDetailsModelCopyWithImpl<$Res>
 /// Create a copy of ProfileDetailsModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? adult = freezed,Object? knownFor = freezed,Object? biography = freezed,Object? birthday = freezed,Object? deathday = freezed,Object? gender = freezed,Object? homepage = freezed,Object? id = freezed,Object? imdbId = freezed,Object? knownForDepartment = freezed,Object? name = freezed,Object? birthPlace = freezed,Object? popularity = freezed,Object? profilePath = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ProfileDetailsModel(
 adult: freezed == adult ? _self.adult : adult // ignore: cast_nullable_to_non_nullable
 as bool?,knownFor: freezed == knownFor ? _self.knownFor : knownFor // ignore: cast_nullable_to_non_nullable
 as List<String>?,biography: freezed == biography ? _self.biography : biography // ignore: cast_nullable_to_non_nullable
@@ -216,7 +217,7 @@ return $default(_that.adult,_that.knownFor,_that.biography,_that.birthday,_that.
 @JsonSerializable()
 
 class _ProfileDetailsModel implements ProfileDetailsModel {
-  const _ProfileDetailsModel({this.adult, @JsonKey(name: 'also_known_as') final  List<String>? knownFor, this.biography, this.birthday, this.deathday, this.gender, this.homepage, this.id, @JsonKey(name: 'imdb_id') this.imdbId, @JsonKey(name: 'known_for_department') this.knownForDepartment, this.name, @JsonKey(name: 'place_of_birth') this.birthPlace, this.popularity, @JsonKey(name: 'profile_path') this.profilePath}): _knownFor = knownFor;
+  const _ProfileDetailsModel({this.adult, @JsonKey(name: 'also_known_as')  List<String>? knownFor, this.biography, this.birthday, this.deathday, this.gender, this.homepage, this.id, @JsonKey(name: 'imdb_id') this.imdbId, @JsonKey(name: 'known_for_department') this.knownForDepartment, this.name, @JsonKey(name: 'place_of_birth') this.birthPlace, this.popularity, @JsonKey(name: 'profile_path') this.profilePath}): _knownFor = knownFor;
   factory _ProfileDetailsModel.fromJson(Map<String, dynamic> json) => _$ProfileDetailsModelFromJson(json);
 
 @override final  bool? adult;

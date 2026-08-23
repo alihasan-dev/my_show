@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'movie_details_model.dart';
@@ -9,6 +9,7 @@ part of 'movie_details_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$MovieDetailsModelCopyWithImpl<$Res>
 /// Create a copy of MovieDetailsModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? adult = freezed,Object? backdropPath = freezed,Object? belongsToCollection = freezed,Object? budget = freezed,Object? genres = freezed,Object? homepage = freezed,Object? id = freezed,Object? imdbId = freezed,Object? originCountry = freezed,Object? originalLanguage = freezed,Object? originalTitle = freezed,Object? originalName = freezed,Object? overview = freezed,Object? popularity = freezed,Object? posterPath = freezed,Object? productionCompanies = freezed,Object? productionCountries = freezed,Object? releaseDate = freezed,Object? firstAirDate = freezed,Object? revenue = freezed,Object? runtime = freezed,Object? spokenLanguages = freezed,Object? status = freezed,Object? tagline = freezed,Object? type = freezed,Object? title = freezed,Object? name = freezed,Object? video = freezed,Object? numberOfEpisodes = freezed,Object? numberOfSeasons = freezed,Object? networks = freezed,Object? seasons = freezed,Object? voteAverage = freezed,Object? voteCount = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(MovieDetailsModel(
 adult: freezed == adult ? _self.adult : adult // ignore: cast_nullable_to_non_nullable
 as bool?,backdropPath: freezed == backdropPath ? _self.backdropPath : backdropPath // ignore: cast_nullable_to_non_nullable
 as String?,belongsToCollection: freezed == belongsToCollection ? _self.belongsToCollection : belongsToCollection // ignore: cast_nullable_to_non_nullable
@@ -236,7 +237,7 @@ return $default(_that.adult,_that.backdropPath,_that.belongsToCollection,_that.b
 @JsonSerializable()
 
 class _MovieDetailsModel implements MovieDetailsModel {
-  const _MovieDetailsModel({this.adult, @JsonKey(name: 'backdrop_path') this.backdropPath, @JsonKey(name: 'belongs_to_collection') this.belongsToCollection, this.budget, final  List<Genre>? genres, this.homepage, this.id, @JsonKey(name: 'imdb_id') this.imdbId, @JsonKey(name: 'origin_country') final  List<String>? originCountry, @JsonKey(name: 'original_language') this.originalLanguage, @JsonKey(name: 'original_title') this.originalTitle, @JsonKey(name: 'original_name') this.originalName, this.overview, this.popularity, @JsonKey(name: 'poster_path') this.posterPath, @JsonKey(name: 'production_companies') final  List<ProductionCompany>? productionCompanies, @JsonKey(name: 'production_countries') final  List<ProductionCountry>? productionCountries, @JsonKey(name: 'release_date') this.releaseDate, @JsonKey(name: 'first_air_date') this.firstAirDate, this.revenue, this.runtime, @JsonKey(name: 'spoken_languages') final  List<SpokenLanguage>? spokenLanguages, this.status, this.tagline, this.type, this.title, this.name, this.video, @JsonKey(name: 'number_of_episodes') this.numberOfEpisodes, @JsonKey(name: 'number_of_seasons') this.numberOfSeasons, final  List<Networks>? networks, final  List<Seasons>? seasons, @JsonKey(name: 'vote_average') this.voteAverage, @JsonKey(name: 'vote_count') this.voteCount}): _genres = genres,_originCountry = originCountry,_productionCompanies = productionCompanies,_productionCountries = productionCountries,_spokenLanguages = spokenLanguages,_networks = networks,_seasons = seasons;
+  const _MovieDetailsModel({this.adult, @JsonKey(name: 'backdrop_path') this.backdropPath, @JsonKey(name: 'belongs_to_collection') this.belongsToCollection, this.budget,  List<Genre>? genres, this.homepage, this.id, @JsonKey(name: 'imdb_id') this.imdbId, @JsonKey(name: 'origin_country')  List<String>? originCountry, @JsonKey(name: 'original_language') this.originalLanguage, @JsonKey(name: 'original_title') this.originalTitle, @JsonKey(name: 'original_name') this.originalName, this.overview, this.popularity, @JsonKey(name: 'poster_path') this.posterPath, @JsonKey(name: 'production_companies')  List<ProductionCompany>? productionCompanies, @JsonKey(name: 'production_countries')  List<ProductionCountry>? productionCountries, @JsonKey(name: 'release_date') this.releaseDate, @JsonKey(name: 'first_air_date') this.firstAirDate, this.revenue, this.runtime, @JsonKey(name: 'spoken_languages')  List<SpokenLanguage>? spokenLanguages, this.status, this.tagline, this.type, this.title, this.name, this.video, @JsonKey(name: 'number_of_episodes') this.numberOfEpisodes, @JsonKey(name: 'number_of_seasons') this.numberOfSeasons,  List<Networks>? networks,  List<Seasons>? seasons, @JsonKey(name: 'vote_average') this.voteAverage, @JsonKey(name: 'vote_count') this.voteCount}): _genres = genres,_originCountry = originCountry,_productionCompanies = productionCompanies,_productionCountries = productionCountries,_spokenLanguages = spokenLanguages,_networks = networks,_seasons = seasons;
   factory _MovieDetailsModel.fromJson(Map<String, dynamic> json) => _$MovieDetailsModelFromJson(json);
 
 @override final  bool? adult;
@@ -478,7 +479,7 @@ class _$GenreCopyWithImpl<$Res>
 /// Create a copy of Genre
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Genre(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -738,7 +739,7 @@ class _$ProductionCompanyCopyWithImpl<$Res>
 /// Create a copy of ProductionCompany
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? logoPath = freezed,Object? name = freezed,Object? originCountry = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ProductionCompany(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,logoPath: freezed == logoPath ? _self.logoPath : logoPath // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -1004,7 +1005,7 @@ class _$ProductionCountryCopyWithImpl<$Res>
 /// Create a copy of ProductionCountry
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? iso31661 = freezed,Object? name = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ProductionCountry(
 iso31661: freezed == iso31661 ? _self.iso31661 : iso31661 // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -1264,7 +1265,7 @@ class _$SpokenLanguageCopyWithImpl<$Res>
 /// Create a copy of SpokenLanguage
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? englishName = freezed,Object? iso6391 = freezed,Object? name = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(SpokenLanguage(
 englishName: freezed == englishName ? _self.englishName : englishName // ignore: cast_nullable_to_non_nullable
 as String?,iso6391: freezed == iso6391 ? _self.iso6391 : iso6391 // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -1527,7 +1528,7 @@ class _$NetworksCopyWithImpl<$Res>
 /// Create a copy of Networks
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? logoPath = freezed,Object? name = freezed,Object? originCountry = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Networks(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,logoPath: freezed == logoPath ? _self.logoPath : logoPath // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -1793,7 +1794,7 @@ class _$SeasonsCopyWithImpl<$Res>
 /// Create a copy of Seasons
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? airDate = freezed,Object? episodeCount = freezed,Object? id = freezed,Object? posterPath = freezed,Object? name = freezed,Object? overview = freezed,Object? seasonNumber = freezed,Object? voteAverage = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Seasons(
 airDate: freezed == airDate ? _self.airDate : airDate // ignore: cast_nullable_to_non_nullable
 as String?,episodeCount: freezed == episodeCount ? _self.episodeCount : episodeCount // ignore: cast_nullable_to_non_nullable
 as int?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable

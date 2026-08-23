@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'cast_model.dart';
@@ -9,6 +9,7 @@ part of 'cast_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$CastModelCopyWithImpl<$Res>
 /// Create a copy of CastModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? cast = freezed,Object? crew = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(CastModel(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,cast: freezed == cast ? _self.cast : cast // ignore: cast_nullable_to_non_nullable
 as List<Cast>?,crew: freezed == crew ? _self.crew : crew // ignore: cast_nullable_to_non_nullable
@@ -205,7 +206,7 @@ return $default(_that.id,_that.cast,_that.crew);case _:
 @JsonSerializable()
 
 class _CastModel implements CastModel {
-  const _CastModel({this.id, final  List<Cast>? cast, final  List<Crew>? crew}): _cast = cast,_crew = crew;
+  const _CastModel({this.id,  List<Cast>? cast,  List<Crew>? crew}): _cast = cast,_crew = crew;
   factory _CastModel.fromJson(Map<String, dynamic> json) => _$CastModelFromJson(json);
 
 @override final  int? id;
@@ -345,7 +346,7 @@ class _$CastCopyWithImpl<$Res>
 /// Create a copy of Cast
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? adult = freezed,Object? gender = freezed,Object? id = freezed,Object? knownFordepartment = freezed,Object? name = freezed,Object? originalName = freezed,Object? popularity = freezed,Object? profilePath = freezed,Object? castId = freezed,Object? character = freezed,Object? creditId = freezed,Object? order = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Cast(
 adult: freezed == adult ? _self.adult : adult // ignore: cast_nullable_to_non_nullable
 as bool?,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as int?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
@@ -635,7 +636,7 @@ class _$CrewCopyWithImpl<$Res>
 /// Create a copy of Crew
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? adult = freezed,Object? gender = freezed,Object? id = freezed,Object? knownFordepartment = freezed,Object? name = freezed,Object? originalName = freezed,Object? popularity = freezed,Object? profilePath = freezed,Object? creditId = freezed,Object? department = freezed,Object? job = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Crew(
 adult: freezed == adult ? _self.adult : adult // ignore: cast_nullable_to_non_nullable
 as bool?,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as int?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable

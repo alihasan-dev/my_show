@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'review_model.dart';
@@ -9,6 +9,7 @@ part of 'review_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$ReviewModelCopyWithImpl<$Res>
 /// Create a copy of ReviewModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? page = freezed,Object? results = freezed,Object? totalPages = freezed,Object? totalResults = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ReviewModel(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,page: freezed == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int?,results: freezed == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
@@ -207,7 +208,7 @@ return $default(_that.id,_that.page,_that.results,_that.totalPages,_that.totalRe
 @JsonSerializable()
 
 class _ReviewModel implements ReviewModel {
-  const _ReviewModel({this.id, this.page, final  List<Review>? results, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults}): _results = results;
+  const _ReviewModel({this.id, this.page,  List<Review>? results, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults}): _results = results;
   factory _ReviewModel.fromJson(Map<String, dynamic> json) => _$ReviewModelFromJson(json);
 
 @override final  int? id;
@@ -343,7 +344,7 @@ class _$ReviewCopyWithImpl<$Res>
 /// Create a copy of Review
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? author = freezed,Object? authorDetails = freezed,Object? content = freezed,Object? createdAt = freezed,Object? id = freezed,Object? updatedAt = freezed,Object? url = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Review(
 author: freezed == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as String?,authorDetails: freezed == authorDetails ? _self.authorDetails : authorDetails // ignore: cast_nullable_to_non_nullable
 as AuthorDetails?,content: freezed == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
@@ -642,7 +643,7 @@ class _$AuthorDetailsCopyWithImpl<$Res>
 /// Create a copy of AuthorDetails
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? username = freezed,Object? avatarPath = freezed,Object? rating = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(AuthorDetails(
 name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,username: freezed == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
 as String?,avatarPath: freezed == avatarPath ? _self.avatarPath : avatarPath // ignore: cast_nullable_to_non_nullable

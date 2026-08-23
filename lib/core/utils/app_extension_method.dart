@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import '../../core/utils/language_code.dart';
+import '../widgets/movie_image_widget.dart';
 
 extension NumExtensionUtils on num {
 
@@ -152,6 +153,34 @@ extension StringExtensionUtils on String {
     return toLowerCase().contains('n/a') ? '-' : this;
   }
 
+  String get generateYouTubeThumbnail {
+    final videoId = this;
+    return videoId.isBlank
+    ? ''
+    : "https://img.youtube.com/vi/$videoId/sddefault.jpg";
+  }
+
+  String get generateYouTubeURL {
+    final videoId = this;
+    return videoId.isBlank
+    ? ''
+    : "https://www.youtube.com/watch?v=$videoId";
+  }
+
+}
+
+extension ImageErrorExtensionUtils on ImageErrorIconSize {
+  
+  double get errorIconSize {
+    switch (this) {
+      case ImageErrorIconSize.small:
+        return 30.0;
+      case ImageErrorIconSize.medium:
+        return 40.0;
+      case ImageErrorIconSize.large:
+        return 54.0;
+    }
+  }
 }
 
 String calculateAge(DateTime birthDate) {
