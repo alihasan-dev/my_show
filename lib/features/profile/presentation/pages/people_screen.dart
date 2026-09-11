@@ -116,7 +116,9 @@ class PeopleScreen extends HookConsumerWidget {
                 subtitle: 'We couldn\'t load the people list.\nPlease check your connection and try again.',
                 onRetry: () => ref.read(popularPeopleProvider.notifier).popularPeople(),
               ), 
-              loading: () => const PeopleShimmerWidget()
+              loading: () => PeopleShimmerWidget(
+                crossAxisCount: constraints.maxWidth.getCrossAxisCount,
+              )
             );
           }
         ),

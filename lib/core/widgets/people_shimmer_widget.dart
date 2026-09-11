@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../constants/movie_colors.dart';
 
 class PeopleShimmerWidget extends StatelessWidget {
-  const PeopleShimmerWidget({super.key});
+  final int? crossAxisCount;
+  const PeopleShimmerWidget({
+    super.key,
+    this.crossAxisCount
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +19,8 @@ class PeopleShimmerWidget extends StatelessWidget {
       child: GridView.builder(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
         physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisCount ?? 3,
           mainAxisSpacing: 8,
           crossAxisSpacing: 8,
           childAspectRatio: 0.7,

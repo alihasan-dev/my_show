@@ -177,7 +177,9 @@ class ViewAllScreen extends HookConsumerWidget {
                 subtitle: 'We couldn\'t load the ${label.toLowerCase()} list.\nPlease check your connection and try again.',
                 onRetry: () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory),
               ), 
-              loading: () => const PeopleShimmerWidget()
+              loading: () => PeopleShimmerWidget(
+                crossAxisCount: constraints.maxWidth.getCrossAxisCount,
+              )
             );
           }
         ),

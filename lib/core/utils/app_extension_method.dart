@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
+import 'package:my_show/core/utils/app_enums.dart';
 import '../../core/utils/language_code.dart';
 import '../widgets/movie_image_widget.dart';
 
@@ -67,6 +68,23 @@ extension NumExtensionUtils on num {
     if (width < 1200) return 5;      // Small Desktop
     if (width < 1500) return 6;      // Medium Desktop
     return 7;                        // Large Desktop
+  }
+
+  ScreenType get screenType {
+    final width = this;
+    if (width < 600) {
+      return ScreenType.mobile;
+    }
+    if (width < 900) {
+      return ScreenType.tablet;
+    }
+    if (width < 1200) {
+      return ScreenType.smallDesktop;
+    }
+    if (width < 1500) {
+      return ScreenType.mediumDesktop;
+    }
+    return ScreenType.largeDesktop;
   }
 
 }

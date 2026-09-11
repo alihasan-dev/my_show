@@ -43,6 +43,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
     });
     return LayoutBuilder(
       builder: (contex, constraints) {
+        final cardWidth = getTrendingCardWidth(constraints.maxWidth, canCalculate: title == AppStrings.trending);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -56,7 +57,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
             ),
             SizedBox(height: 10),
             SizedBox(
-              height: 285,
+              height: cardWidth <= 125 ? 285 : 265,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: viewAll != null
@@ -87,7 +88,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
                       );
                     },
                     child: SizedBox(
-                      width: getTrendingCardWidth(constraints.maxWidth, canCalculate: title == AppStrings.trending),
+                      width: cardWidth,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

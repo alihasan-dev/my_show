@@ -1,6 +1,7 @@
 class AppStrings {
   AppStrings._();
 
+  static const String appName = 'MyShow';
   static const String biography = 'Biography';
   static const String readMore = 'Read More';
   static const String readLess = 'Read Less';
@@ -88,4 +89,6 @@ class AppStrings {
     'Try "Matt Damon", "The Martian"...',
     'Try "Joaquin Phoenix", "Joker"...',
   ];
+
+  
 }

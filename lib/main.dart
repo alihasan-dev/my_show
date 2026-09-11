@@ -33,7 +33,14 @@ Future<void> main() async {
           overrides: [
             sharedPreferencesProvider.overrideWithValue(prefs),
           ],
-          child: const MyApp()
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1300),
+              child: const MyApp()
+            ),
+          )
+          // child: const MyApp()
         )
       )
     ),
@@ -50,6 +57,10 @@ class MyApp extends StatelessWidget {
       title: 'MyShow',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
+      // Remove persistent web scrollbars globally
+      scrollBehavior: const MaterialScrollBehavior().copyWith(
+        scrollbars: false,
+      ),
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFF121212),
         // scaffoldBackgroundColor: const Color(0xFF121212),

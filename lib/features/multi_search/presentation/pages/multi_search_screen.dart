@@ -78,7 +78,7 @@ class MultiSearchScreen extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            if (kIsWeb) SizedBox(height: 20),
+            if (kIsWeb) SizedBox(height: 10),
             TextField(
               controller: searchTextController,
               decoration: InputDecoration(
