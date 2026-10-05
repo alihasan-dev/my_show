@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:my_show/core/utils/app_enums.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MovieShimmerWidget extends StatelessWidget {
+
+  final ScreenType screenType;
   final int sectionCount;
 
-  const MovieShimmerWidget({super.key, this.sectionCount = 3});
+  const MovieShimmerWidget({
+    super.key, 
+    this.sectionCount = 3,
+    this.screenType = ScreenType.mobile
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +21,23 @@ class MovieShimmerWidget extends StatelessWidget {
       child: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: sectionCount,
-        separatorBuilder: (_,_) => const SizedBox(height: 20),
+        separatorBuilder: (_,_) => SizedBox(
+          height: screenType == ScreenType.mobile
+          ? 10
+          : 20
+        ),
         itemBuilder: (_,_) => const _ShimmerSection(),
       ),
     );
   }
+
 }
 
 class _ShimmerSection extends StatelessWidget {
-  const _ShimmerSection();
+  final ScreenType screenType; 
+  const _ShimmerSection({
+    this.screenType = ScreenType.mobile
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +59,7 @@ class _ShimmerSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: 4,
-            separatorBuilder: (_,_) => const SizedBox(width: 15),
+            separatorBuilder: (_,_) => SizedBox(width: screenType == ScreenType.mobile ? 6.5 : 15),
             itemBuilder: (_,_) => const _ShimmerCard(),
           ),
         ),
@@ -63,31 +78,6 @@ class _ShimmerCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Stack(
-          //   clipBehavior: Clip.none,
-          //   children: [
-          //     Container(
-          //       width: double.maxFinite,
-          //       height: 200,
-          //       decoration: BoxDecoration(
-          //         color: Colors.white,
-          //         borderRadius: BorderRadius.circular(12),
-          //       ),
-          //     ),
-          //     Positioned(
-          //       bottom: -12,
-          //       left: 12,
-          //       child: Container(
-          //         width: 30,
-          //         height: 30,
-          //         decoration: const BoxDecoration(
-          //           color: Colors.white,
-          //           shape: BoxShape.circle,
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
           Container(
             width: double.maxFinite,
             height: 200,

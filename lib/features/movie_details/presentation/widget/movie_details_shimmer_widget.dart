@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:my_show/core/utils/app_enums.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MovieDetailsShimmer extends StatelessWidget {
+
+  final ScreenType screenType;
   
-  const MovieDetailsShimmer({super.key});
+  const MovieDetailsShimmer({
+    super.key, 
+    this.screenType = ScreenType.mobile
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -116,17 +122,22 @@ class MovieDetailsShimmer extends StatelessWidget {
 
             // Cast list shimmer
             SizedBox(
-              height: 150,
+              height: 200,
               child: ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 scrollDirection: Axis.horizontal,
                 itemCount: 6,
-                separatorBuilder: (_,_) => const SizedBox(width: 12),
+                separatorBuilder: (_,_) => SizedBox(
+                  width: screenType == ScreenType.mobile
+                  ? 5
+                  : 12
+                ),
                 itemBuilder: (context, index) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      height: 100,
-                      width: 80,
+                      height: 150,
+                      width: 100,
                       decoration: BoxDecoration(
                         color: Color(0xFF2C2C2C),
                         borderRadius: BorderRadius.circular(8),
@@ -143,19 +154,35 @@ class MovieDetailsShimmer extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
+            // Cast title shimmer
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Container(
+                height: 18,
+                width: 60,
+                color: Color(0xFF2C2C2C),
+              ),
+            ),
+
+            const SizedBox(height: 12),
             // Crew list shimmer
             SizedBox(
-              height: 150,
+              height: 200,
               child: ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 scrollDirection: Axis.horizontal,
                 itemCount: 6,
-                separatorBuilder: (_,_) => const SizedBox(width: 12),
+                separatorBuilder: (_,_) => SizedBox(
+                  width: screenType == ScreenType.mobile
+                  ? 5
+                  : 12
+                ),
                 itemBuilder: (context, index) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      height: 100,
-                      width: 80,
+                      height: 150,
+                      width: 100,
                       decoration: BoxDecoration(
                         color: Color(0xFF2C2C2C),
                         borderRadius: BorderRadius.circular(8),

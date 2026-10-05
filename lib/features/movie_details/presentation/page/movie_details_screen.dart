@@ -116,6 +116,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
             return LayoutBuilder(
               builder: (context, constraints) {
                 final screenType = constraints.maxWidth.screenType;
+                // return MovieDetailsShimmer(screenType: screenType);
                 return CustomScrollView(
                   slivers: [
                     CustomSliverAppBar(
