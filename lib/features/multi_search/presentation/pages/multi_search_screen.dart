@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:my_show/core/utils/app_utils.dart';
 import 'package:my_show/core/widgets/movie_tv_search_widget.dart';
 import 'package:my_show/features/multi_search/domain/entities/recent_search_entity.dart';
 import 'package:my_show/features/multi_search/presentation/providers/recent_search_provider.dart';
@@ -78,7 +78,7 @@ class MultiSearchScreen extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            if (kIsWeb) SizedBox(height: 10),
+            SizedBox(height: 14),
             TextField(
               controller: searchTextController,
               decoration: InputDecoration(
@@ -160,7 +160,7 @@ class MultiSearchScreen extends HookConsumerWidget {
                       controller: scrollController,
                       padding: const EdgeInsets.only(bottom: 14),
                       itemCount: movieList.length,
-                      separatorBuilder: (_,_) => SizedBox(height: 12),
+                      separatorBuilder: (_,_) => SizedBox(height: AppUtils.cardGapHeightMobile),
                       itemBuilder: (context, index) {
                         final movie = movieList[index];
                         if (movie.id == null) return SizedBox.shrink();

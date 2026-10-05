@@ -154,39 +154,6 @@ class Header extends HookConsumerWidget {
                 ),
               ],
             ),
-            // InkWell(
-            //   onTap: () {},
-            //   borderRadius: BorderRadius.circular(20),
-            //   child: Container(
-            //     width: 360,
-            //     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            //     decoration: ShapeDecoration(
-            //       color: MovieColors.grey.withValues(alpha: 0.1),
-            //       shape: StadiumBorder()
-            //     ),
-            //     child: Row(
-            //       spacing: 10,
-            //       children: [
-            //         Icon(
-            //           Icons.search, 
-            //           size: 20,
-            //           color: MovieColors.grey.withValues(alpha: 0.9)
-            //         ),
-            //         Expanded(
-            //           child: MovieText(
-            //             title: searchHint,
-            //             maxLine: 1,
-            //             overflow: TextOverflow.ellipsis,
-            //             style: TextStyle(
-            //               fontSize: 13,
-            //               color: MovieColors.grey.withValues(alpha: 0.9)
-            //             ),
-            //           ),
-            //         )
-            //       ],
-            //     ),
-            //   ),
-            // ),
             Row(
               children: [
                 TextButton.icon(

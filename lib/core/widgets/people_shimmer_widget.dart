@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:my_show/core/utils/app_enums.dart';
 import 'package:shimmer/shimmer.dart';
 import '../constants/movie_colors.dart';
 
 class PeopleShimmerWidget extends StatelessWidget {
   final int? crossAxisCount;
+  final ScreenType screenType;
   const PeopleShimmerWidget({
     super.key,
-    this.crossAxisCount
+    this.crossAxisCount,
+    this.screenType = ScreenType.mobile
   });
 
   @override
@@ -21,8 +24,8 @@ class PeopleShimmerWidget extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: crossAxisCount ?? 3,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
+          mainAxisSpacing: screenType == ScreenType.mobile ? 4 : 8,
+          crossAxisSpacing: screenType == ScreenType.mobile ? 4 : 8,
           childAspectRatio: 0.7,
         ),
         itemCount: 15,

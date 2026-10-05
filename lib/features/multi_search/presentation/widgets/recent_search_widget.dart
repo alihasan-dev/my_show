@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/constants/app_strings.dart';
+import 'package:my_show/core/utils/app_enums.dart';
+import 'package:my_show/core/utils/app_utils.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../providers/recent_search_provider.dart';
 import 'recent_search_title.dart';
@@ -9,10 +11,12 @@ import 'recent_search_title.dart';
 class RecentSearchWidget extends HookConsumerWidget {
   
   final Function(String)? onTapRecentSearch;
+  final ScreenType screenType;
   
   const RecentSearchWidget({
     super.key,
-    this.onTapRecentSearch
+    this.onTapRecentSearch,
+    this.screenType = ScreenType.mobile
   });
 
   @override
@@ -66,7 +70,11 @@ class RecentSearchWidget extends HookConsumerWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: search.length,
                 padding: EdgeInsets.zero,
-                separatorBuilder: (_, _) => const SizedBox(width: 12),
+                separatorBuilder: (_, _) => SizedBox(
+                  width: screenType == ScreenType.mobile
+                  ? AppUtils.cardGapHeightMobile
+                  : AppUtils.cardGapHeightWeb
+                ),
                 itemBuilder: (_, index) {
                   final item = search[index];
                   return RecentSearchTile(

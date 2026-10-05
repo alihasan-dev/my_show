@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/widgets/people_shimmer_widget.dart';
 import '../../../../core/constants/movie_colors.dart';
+import '../../../../core/utils/app_enums.dart';
 import '../../../../core/widgets/no_data_widget.dart';
 import '../provider/view_all_provider.dart';
 import '../../../../core/utils/app_extension_method.dart';
@@ -120,8 +121,10 @@ class ViewAllScreen extends HookConsumerWidget {
                   controller: scrollController,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: constraints.maxWidth.getCrossAxisCount,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8,
+                    // mainAxisSpacing: 8,
+                    // crossAxisSpacing: 8,
+                    mainAxisSpacing: constraints.maxWidth.screenType == ScreenType.mobile ? 4 : 8,
+                    crossAxisSpacing: constraints.maxWidth.screenType == ScreenType.mobile ? 4 : 8,
                     childAspectRatio: 0.7
                   ), 
                   padding: EdgeInsets.symmetric(

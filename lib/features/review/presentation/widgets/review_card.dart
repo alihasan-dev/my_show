@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:my_show/core/constants/movie_colors.dart';
+import 'package:my_show/core/utils/app_enums.dart';
 import 'package:my_show/core/widgets/custom_gradient_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/constants/app_strings.dart';
@@ -11,11 +12,13 @@ import '../../domain/entities/review_entity.dart';
 class ReviewCard extends StatelessWidget {
   final ReviewEntity reviewItem;
   final Function()? onTapReadMore;
+  final ScreenType screenType;
 
   const ReviewCard({
     super.key,
     required this.reviewItem,
-    this.onTapReadMore
+    this.onTapReadMore,
+    this.screenType = ScreenType.mobile
   });
 
   @override
@@ -38,7 +41,7 @@ class ReviewCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  padding: EdgeInsets.all(14),
+                  padding: EdgeInsets.all(screenType == ScreenType.mobile ? 12 : 14),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: MovieColors.teal
@@ -46,11 +49,15 @@ class ReviewCard extends StatelessWidget {
                   child: MovieText(
                     title: (reviewItem.author ?? '').handleEmptyName.nameAvatarLabel,
                     style: theme.textTheme.bodySmall?.copyWith(
-                      fontSize: 15
+                      fontSize: screenType == ScreenType.mobile ? 14 : 15
                     ),
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(
+                  width: screenType == ScreenType.mobile
+                  ? 10
+                  : 12
+                ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,11 +67,11 @@ class ReviewCard extends StatelessWidget {
                         maxLine: 2,
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.labelLarge?.copyWith(
-                          fontSize: 16
+                          fontSize: screenType == ScreenType.mobile ? 15 : 16
                         ),
                       ),
                       if (!(reviewItem.updatedAt ?? '').isBlank) ...[
-                        const SizedBox(height: 3),
+                        SizedBox(height: 3),
                         Row(
                           spacing: 5,
                           children: [
@@ -88,9 +95,9 @@ class ReviewCard extends StatelessWidget {
                 ),
                 if (reviewItem.authorDetails?.rating != null) ...[
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 6,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: screenType == ScreenType.mobile ? 9 : 10,
+                      vertical: screenType == ScreenType.mobile ? 5 : 6,
                     ),
                     decoration: BoxDecoration(
                       color: Colors.grey.shade800,

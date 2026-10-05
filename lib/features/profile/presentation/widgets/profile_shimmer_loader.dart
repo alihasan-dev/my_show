@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:my_show/core/utils/app_enums.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProfileShimmerLoader extends StatelessWidget {
+
   final bool isDark;
+  final ScreenType screenType;
+  
   const ProfileShimmerLoader({
     super.key,
-    this.isDark = true
+    this.isDark = true,
+    this.screenType = ScreenType.mobile
   });
   
   @override
@@ -77,8 +82,12 @@ class ProfileShimmerLoader extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
-                  separatorBuilder: (_,_) => const SizedBox(width: 12),
-                  itemBuilder: (_,_) => Container(
+                  separatorBuilder: (_, _) => SizedBox(
+                    width: screenType == ScreenType.mobile
+                    ? 5
+                    : 12
+                  ),
+                  itemBuilder: (_, _) => Container(
                     height: 150,
                     width: 100,
                     decoration: BoxDecoration(
@@ -105,8 +114,44 @@ class ProfileShimmerLoader extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
-                  separatorBuilder: (_,_) => const SizedBox(width: 12),
-                  itemBuilder: (_,_) => Container(
+                  separatorBuilder: (_, _) => SizedBox(
+                    width: screenType == ScreenType.mobile
+                    ? 5
+                    : 12
+                  ),
+                  itemBuilder: (_, _) => Container(
+                    height: 150,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Container(
+                  height: 16,
+                  width: 120,
+                  color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
+                ),
+              ),
+              const SizedBox(height: 12),
+              // Horizontal scroll for movies
+              SizedBox(
+                height: 150,
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  separatorBuilder: (_, _) => SizedBox(
+                    width: screenType == ScreenType.mobile
+                    ? 5
+                    : 12
+                  ),
+                  itemBuilder: (_, _) => Container(
                     height: 150,
                     width: 100,
                     decoration: BoxDecoration(

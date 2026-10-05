@@ -28,6 +28,7 @@ class TvShowWidgets extends StatelessWidget {
     if (tvShowList.isEmpty) return SizedBox.shrink();
     return LayoutBuilder(
       builder: (context, constraints) {
+        final cardWidth = getTrendingCardWidth(constraints.maxWidth, canCalculate: title == AppStrings.trending);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -47,7 +48,7 @@ class TvShowWidgets extends StatelessWidget {
                 itemCount: viewAll != null
                 ? tvShowList.length + 1
                 : tvShowList.length,
-                separatorBuilder: (_,_) => SizedBox(width: 15),
+                separatorBuilder: (_,_) => SizedBox(width: cardWidth <= 125 ? 6.5 : 15),
                 itemBuilder: (_,index) {
                   final tvShow = index == tvShowList.length 
                   ? tvShowList[index - 1]

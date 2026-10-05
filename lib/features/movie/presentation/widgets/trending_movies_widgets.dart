@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_show/core/utils/app_utils.dart';
 import '../../../../core/constants/app_strings.dart';
 import 'view_all_widget.dart';
 import '../../../../core/utils/app_extension_method.dart';
@@ -63,13 +64,13 @@ class TrendingMoviesWidgets extends StatelessWidget {
                 itemCount: viewAll != null
                 ? movieList.length + 1
                 : movieList.length,
-                separatorBuilder: (_,_) => SizedBox(width: 15),
+                separatorBuilder: (_,_) => SizedBox(width: cardWidth <= 125 ? 6.5 : 15),
                 itemBuilder: (_,index) {
                   final movie = index == movieList.length 
                   ? movieList[index - 1]
                   : movieList[index];
                   return InkWell(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(AppUtils.cardRadius),
                     highlightColor: index != movieList.length
                     ? null
                     :Colors.transparent,
@@ -158,13 +159,10 @@ class TrendingMoviesWidgets extends StatelessWidget {
   String backgroundImage(TrendingMovie movie, double screenWidth, {bool canCalculate = false}) {
     if (!canCalculate) return movie.posterPath.generateImageURL;
     if (screenWidth < 600) {
-      // Mobile: Strictly 125 as defined
       return movie.posterPath.generateImageURL; 
     } else if (screenWidth < 1100) {
-      // Tablet / Laptop: Scale dynamically between mobile and desktop
       return movie.backdropPath.generateImageURL;
     } else {
-      // Large Desktop: Cap max width
       return movie.backdropPath.generateImageURL; 
     }
   }

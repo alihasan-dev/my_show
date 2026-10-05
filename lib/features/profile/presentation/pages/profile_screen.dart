@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../core/utils/app_enums.dart';
 import '../provider/credit_tv_provider.dart';
 import '../widgets/profile_shimmer_loader.dart';
 import '../provider/credit_movies_provider.dart';
@@ -59,201 +60,214 @@ class ProfileScreen extends HookConsumerWidget {
     return Scaffold(
       body: SafeArea(
         top: false,
-        child: profileDetails.when(
-          data: (data) {
-            return CustomScrollView(
-              slivers: [
-                CustomSliverAppBar(
-                  expandedHeight: MediaQuery.of(context).size.height * 0.52,
-                  title: data.name ?? '',
-                  imagePath: (data.profilePath ?? '').generateImageURL,
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MovieText(
-                          title: data.name ?? '',
-                          style: theme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: MovieColors.textPrimary,
-                          ),
-                        ),
-                        SizedBox(height: 12),
-                        if (!(data.biography ?? '').isBlank) ...[
-                          MovieText(
-                            title: AppStrings.biography,
-                            style: theme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              color: MovieColors.textPrimary,
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          MovieText(
-                            title: data.biography ?? '',
-                            maxLine: readMoreEnable.value ? null : 4,
-                            overflow: readMoreEnable.value
-                            ? TextOverflow.visible
-                            : TextOverflow.ellipsis,
-                          ),
-                          if ((data.biography ?? '').length > 190)
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final screenType = constraints.maxWidth.screenType;
+            return profileDetails.when(
+              data: (data) {
+                return CustomScrollView(
+                  slivers: [
+                    CustomSliverAppBar(
+                      expandedHeight: MediaQuery.of(context).size.height * 0.52,
+                      title: data.name ?? '',
+                      imagePath: (data.profilePath ?? '').generateImageURL,
+                    ),
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                             MovieText(
-                              onTap: () => readMoreEnable.value = !readMoreEnable.value,
-                              title: readMoreEnable.value
-                              ? AppStrings.readLess
-                              : AppStrings.readMore,
+                              title: data.name ?? '',
                               style: theme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w400,
-                                color: MovieColors.primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: MovieColors.textPrimary,
                               ),
                             ),
-                        ],
-                        SizedBox(height: 10),
-                        if (creditMovieList.isNotEmpty) ...[
-                          MovieText(
-                            title: AppStrings.knownForMovies,
-                            style: theme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              color: MovieColors.textPrimary,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          SizedBox(
-                            height: 230,
-                            child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: creditMovieList.length,
-                              separatorBuilder: (_, _) => const SizedBox(width: 12),
-                              itemBuilder: (_, index) {
-                                final cast = creditMovieList[index];
-                                return MovieCastBanner(
-                                  onTap: () => context.pushNamed(
-                                    AppRoutes.movieDetails,
-                                    queryParameters: {
-                                      'id': cast.id.toString(),
-                                      'type': 'movie',
-                                    },
-                                  ),
-                                  title: cast.title ?? '',
-                                  subTitle: cast.character ?? '',
-                                  imagePath: (cast.posterPath ?? '').generateImageURL,
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                        if (creditTvList.isNotEmpty) ...[
-                          SizedBox(height: 10),
-                          MovieText(
-                            title: AppStrings.knownForTv,
-                            style: theme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              color: MovieColors.textPrimary,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          SizedBox(
-                            height: 230,
-                            child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: creditTvList.length,
-                              separatorBuilder: (_, _) => const SizedBox(width: 12),
-                              itemBuilder: (_, index) {
-                                final cast = creditTvList[index];
-                                return MovieCastBanner(
-                                  onTap: () => context.pushNamed(
-                                    AppRoutes.movieDetails,
-                                    queryParameters: {
-                                      'id': cast.id.toString(),
-                                      'type': 'tv',
-                                    },
-                                  ),
-                                  title: cast.title ?? '',
-                                  subTitle: cast.character ?? '',
-                                  imagePath: (cast.posterPath ?? '').generateImageURL,
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                        Container(
-                          decoration: BoxDecoration(
-                            color: MovieColors.grey.withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Theme(
-                            data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-                            child: ExpansionTile(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                              collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                              title: MovieText(
-                                title: AppStrings.personalInfo,
+                            SizedBox(height: 12),
+                            if (!(data.biography ?? '').isBlank) ...[
+                              MovieText(
+                                title: AppStrings.biography,
                                 style: theme.bodyMedium?.copyWith(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16,
                                   color: MovieColors.textPrimary,
                                 ),
                               ),
-                              initiallyExpanded: true,
-                              tilePadding: EdgeInsets.symmetric(horizontal: 15),
-                              childrenPadding: EdgeInsets.symmetric(horizontal: 15),
-                              children: [
-                                if (!(data.knownFor ?? '').isBlank)
-                                  ProfileInfoTitle(
-                                    title: AppStrings.knownFor,
-                                    value: data.knownFor ?? '',
+                              SizedBox(height: 5),
+                              MovieText(
+                                title: data.biography ?? '',
+                                maxLine: readMoreEnable.value ? null : 4,
+                                overflow: readMoreEnable.value
+                                ? TextOverflow.visible
+                                : TextOverflow.ellipsis,
+                              ),
+                              if ((data.biography ?? '').length > 190)
+                                MovieText(
+                                  onTap: () => readMoreEnable.value = !readMoreEnable.value,
+                                  title: readMoreEnable.value
+                                  ? AppStrings.readLess
+                                  : AppStrings.readMore,
+                                  style: theme.bodyMedium?.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: MovieColors.primaryColor,
                                   ),
-                                if (data.gender != null)
-                                  ProfileInfoTitle(
-                                    title: AppStrings.gender,
-                                    value: data.gender!.parseGender,
+                                ),
+                            ],
+                            SizedBox(height: 10),
+                            if (creditMovieList.isNotEmpty) ...[
+                              MovieText(
+                                title: AppStrings.knownForMovies,
+                                style: theme.bodyMedium?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                  color: MovieColors.textPrimary,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              SizedBox(
+                                height: 230,
+                                child: ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: creditMovieList.length,
+                                  separatorBuilder: (_, _) => SizedBox(
+                                    width: screenType == ScreenType.mobile
+                                    ? 5
+                                    : 12
                                   ),
-                                if (!(data.birthday ?? '').isBlank)
-                                  ProfileInfoTitle(
-                                    title: AppStrings.birthday,
-                                    value: data.birthday!.formatDOB(
-                                      hideYrs: (data.deathDay ?? '').isNotEmpty,
+                                  itemBuilder: (_, index) {
+                                    final cast = creditMovieList[index];
+                                    return MovieCastBanner(
+                                      onTap: () => context.pushNamed(
+                                        AppRoutes.movieDetails,
+                                        queryParameters: {
+                                          'id': cast.id.toString(),
+                                          'type': 'movie',
+                                        },
+                                      ),
+                                      title: cast.title ?? '',
+                                      subTitle: cast.character ?? '',
+                                      imagePath: (cast.posterPath ?? '').generateImageURL,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                            if (creditTvList.isNotEmpty) ...[
+                              SizedBox(height: 10),
+                              MovieText(
+                                title: AppStrings.knownForTv,
+                                style: theme.bodyMedium?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                  color: MovieColors.textPrimary,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              SizedBox(
+                                height: 230,
+                                child: ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: creditTvList.length,
+                                  separatorBuilder: (_, _) => SizedBox(
+                                    width: screenType == ScreenType.mobile
+                                    ? 5
+                                    : 12
+                                  ),
+                                  itemBuilder: (_, index) {
+                                    final cast = creditTvList[index];
+                                    return MovieCastBanner(
+                                      onTap: () => context.pushNamed(
+                                        AppRoutes.movieDetails,
+                                        queryParameters: {
+                                          'id': cast.id.toString(),
+                                          'type': 'tv',
+                                        },
+                                      ),
+                                      title: cast.title ?? '',
+                                      subTitle: cast.character ?? '',
+                                      imagePath: (cast.posterPath ?? '').generateImageURL,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                            Container(
+                              decoration: BoxDecoration(
+                                color: MovieColors.grey.withValues(alpha: 0.1),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Theme(
+                                data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                                child: ExpansionTile(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  title: MovieText(
+                                    title: AppStrings.personalInfo,
+                                    style: theme.bodyMedium?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                      color: MovieColors.textPrimary,
                                     ),
                                   ),
-                                if (!(data.deathDay ?? '').isBlank)
-                                  ProfileInfoTitle(
-                                    title: AppStrings.dayOfDeath,
-                                    value: data.deathDay!.formatDOB(),
-                                  ),
-                                if (!(data.birthPlace ?? '').isBlank)
-                                  ProfileInfoTitle(
-                                    title: AppStrings.placeOfBirth,
-                                    value: data.birthPlace ?? '',
-                                  ),
-                                if ((data.alsoKnownAs ?? []).isNotEmpty)
-                                  ProfileInfoTitle(
-                                    title: AppStrings.alsoKnownAs,
-                                    value: data.alsoKnownAs?.fold('', (previousValue, element) {
-                                      if (previousValue!.toString().isBlank) {
-                                        return element;
-                                      }
-                                      return '${previousValue.toString()}\n$element';
-                                    }) ?? '',
-                                  ),
-                              ],
+                                  initiallyExpanded: true,
+                                  tilePadding: EdgeInsets.symmetric(horizontal: 15),
+                                  childrenPadding: EdgeInsets.symmetric(horizontal: 15),
+                                  children: [
+                                    if (!(data.knownFor ?? '').isBlank)
+                                      ProfileInfoTitle(
+                                        title: AppStrings.knownFor,
+                                        value: data.knownFor ?? '',
+                                      ),
+                                    if (data.gender != null)
+                                      ProfileInfoTitle(
+                                        title: AppStrings.gender,
+                                        value: data.gender!.parseGender,
+                                      ),
+                                    if (!(data.birthday ?? '').isBlank)
+                                      ProfileInfoTitle(
+                                        title: AppStrings.birthday,
+                                        value: data.birthday!.formatDOB(
+                                          hideYrs: (data.deathDay ?? '').isNotEmpty,
+                                        ),
+                                      ),
+                                    if (!(data.deathDay ?? '').isBlank)
+                                      ProfileInfoTitle(
+                                        title: AppStrings.dayOfDeath,
+                                        value: data.deathDay!.formatDOB(),
+                                      ),
+                                    if (!(data.birthPlace ?? '').isBlank)
+                                      ProfileInfoTitle(
+                                        title: AppStrings.placeOfBirth,
+                                        value: data.birthPlace ?? '',
+                                      ),
+                                    if ((data.alsoKnownAs ?? []).isNotEmpty)
+                                      ProfileInfoTitle(
+                                        title: AppStrings.alsoKnownAs,
+                                        value: data.alsoKnownAs?.fold('', (previousValue, element) {
+                                          if (previousValue!.toString().isBlank) {
+                                            return element;
+                                          }
+                                          return '${previousValue.toString()}\n$element';
+                                        }) ?? '',
+                                      ),
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ],
+                  ],
+                );
+              },
+              error: (_, _) => Center(child: MovieText(title: AppStrings.noDataAvailable)),
+              loading: () => ProfileShimmerLoader(),
             );
-          },
-          error: (_, _) => Center(child: MovieText(title: AppStrings.noDataAvailable)),
-          loading: () => ProfileShimmerLoader(),
+          }
         ),
       ),
     );
