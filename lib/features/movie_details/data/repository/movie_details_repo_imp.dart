@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/features/movie_details/domain/entities/movie_award_entity.dart';
+import 'package:my_show/features/movie_details/domain/entities/release_dates_entity.dart';
 import 'package:my_show/features/movie_details/domain/entities/watch_provider_entity.dart';
 import '../../domain/entities/video_entity.dart';
 import '/core/network/check_connectivity.dart';
@@ -314,6 +315,36 @@ class MovieDetailsRepoImp implements MovieDetailsRepository {
             }).toList()
           )
         )),
+      );
+      return Right(watchProvider);
+    } else {
+      return left(CustomFailureException(
+        message: 'No internet connection'
+      ));
+    }
+  }
+
+  @override
+  Future<Either<CustomFailureException, ReleaseDatesEntity>> releaseDates({required String id}) async {
+    if (await connectivity.hasConnection) {
+      final data = await movieDetailsRemoteDatasource.releaseDates(id: id);
+      final watchProvider = ReleaseDatesEntity(
+        id: data.id,
+        results: data.results?.map((item) {
+          return ReleaseResults(
+            iso3166: item.iso3611,
+            releaseDates: item.releaseDates?.map((subItem) {
+              return ReleaseDates(
+                certification: subItem.certification,
+                descriptors: subItem.descriptors ?? [],
+                iso639: subItem.iso639,
+                note: subItem.note,
+                releaseDates: subItem.releaseDate,
+                type: subItem.type
+              );
+            }).toList() ?? []
+          );
+        }).toList() ?? [],
       );
       return Right(watchProvider);
     } else {

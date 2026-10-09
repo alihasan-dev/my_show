@@ -134,7 +134,7 @@ class ProfileScreen extends HookConsumerWidget {
                                   itemCount: creditMovieList.length,
                                   separatorBuilder: (_, _) => SizedBox(
                                     width: screenType == ScreenType.mobile
-                                    ? 5
+                                    ? 4
                                     : 12
                                   ),
                                   itemBuilder: (_, index) {
@@ -150,6 +150,7 @@ class ProfileScreen extends HookConsumerWidget {
                                       title: cast.title ?? '',
                                       subTitle: cast.character ?? '',
                                       imagePath: (cast.posterPath ?? '').generateImageURL,
+                                      radius: 6,
                                     );
                                   },
                                 ),
@@ -173,7 +174,7 @@ class ProfileScreen extends HookConsumerWidget {
                                   itemCount: creditTvList.length,
                                   separatorBuilder: (_, _) => SizedBox(
                                     width: screenType == ScreenType.mobile
-                                    ? 5
+                                    ? 4
                                     : 12
                                   ),
                                   itemBuilder: (_, index) {
@@ -189,6 +190,7 @@ class ProfileScreen extends HookConsumerWidget {
                                       title: cast.title ?? '',
                                       subTitle: cast.character ?? '',
                                       imagePath: (cast.posterPath ?? '').generateImageURL,
+                                      radius: 6,
                                     );
                                   },
                                 ),
@@ -265,7 +267,7 @@ class ProfileScreen extends HookConsumerWidget {
                 );
               },
               error: (_, _) => Center(child: MovieText(title: AppStrings.noDataAvailable)),
-              loading: () => ProfileShimmerLoader(),
+              loading: () => ProfileShimmerLoader(screenType: screenType),
             );
           }
         ),

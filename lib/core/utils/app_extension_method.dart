@@ -107,6 +107,17 @@ extension StringExtensionUtils on String {
     }
   }
 
+  String get releaseYear {
+    try {
+      String input = this;
+      if (input.isBlank) return '';
+      final dob = DateTime.parse(input);
+      return '${dob.year}';
+    } catch (_) {
+      return '';
+    }
+  }
+
   String get formatLanguage {
     try {
       final languageCode = this;

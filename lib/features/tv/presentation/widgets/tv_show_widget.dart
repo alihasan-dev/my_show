@@ -48,7 +48,7 @@ class TvShowWidgets extends StatelessWidget {
                 itemCount: viewAll != null
                 ? tvShowList.length + 1
                 : tvShowList.length,
-                separatorBuilder: (_,_) => SizedBox(width: cardWidth <= 125 ? 6.5 : 15),
+                separatorBuilder: (_,_) => SizedBox(width: cardWidth <= 125 ? 4 : 15),
                 itemBuilder: (_,index) {
                   final tvShow = index == tvShowList.length 
                   ? tvShowList[index - 1]

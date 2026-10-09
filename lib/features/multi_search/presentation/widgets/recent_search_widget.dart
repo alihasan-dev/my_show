@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/core/constants/app_strings.dart';
-import 'package:my_show/core/utils/app_enums.dart';
-import 'package:my_show/core/utils/app_utils.dart';
+import '../../../../core/constants/app_strings.dart';
+import '../../../../core/utils/app_enums.dart';
+import '../../../../core/utils/app_utils.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../providers/recent_search_provider.dart';
 import 'recent_search_title.dart';
@@ -34,6 +34,11 @@ class RecentSearchWidget extends HookConsumerWidget {
     return recentSearch.when(
       data: (search) {
         if (search.isEmpty) return SizedBox.shrink();
+        search.sort((a, b) {
+          final firstCard = DateTime.parse(a.createdDate);
+          final secondCard = DateTime.parse(b.createdDate);
+          return secondCard.compareTo(firstCard);
+        });
         return Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

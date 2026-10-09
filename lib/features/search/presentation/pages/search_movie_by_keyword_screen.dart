@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:my_show/core/constants/movie_colors.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/routes/app_routes.dart';
+import '../../../../core/utils/app_utils.dart';
 import '../../../../core/widgets/movie_tv_search_widget.dart';
 import '../providers/search_movie_keyword_provider.dart';
 import '../widgets/search_empty_widget.dart';
@@ -68,8 +71,9 @@ class SearchMovieByKeywordScreen extends HookConsumerWidget {
               decoration: InputDecoration.collapsed(
                 hintText: 'Search',
                 hintStyle: TextStyle(
-                  fontSize: 18
-                )
+                  fontSize: 18,
+                  color: MovieColors.grey
+                ),
               ),
               autofocus: true,
             )
@@ -77,6 +81,7 @@ class SearchMovieByKeywordScreen extends HookConsumerWidget {
              "${AppStrings.searchFor} '$name'",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 18),
           ),
         ),
         actions: [
@@ -96,44 +101,53 @@ class SearchMovieByKeywordScreen extends HookConsumerWidget {
           ),
         ],
       ),
-      body: SafeArea(
-        top: false,
-        child: searchMovieKeyword.when(
-          data: (_) {
-            if (movieList.isEmpty && !searchQueryController.text.isBlank) return SearchEmptyWidget(searchQuery: searchQueryController.text);
-            return ListView.separated(
-              shrinkWrap: true,
-              controller: scrollController,
-              padding: const EdgeInsets.symmetric(
-                vertical: 14,
-                horizontal: 20
-              ),
-              itemCount: movieList.length,
-              separatorBuilder: (_,_) => SizedBox(height: 12),
-              itemBuilder: (context, index) {
-                final movie = movieList[index];
-                return MovieTvSearchWidget(
-                  onTap: () {
-                    if (movie.id == null || type.isBlank) return;
-                    context.pushNamed(
-                      AppRoutes.movieDetails,
-                      queryParameters: {
-                        'id': '${movie.id}',
-                        'type': type
-                      }
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final screenType = constraints.maxWidth.screenType;
+          return SafeArea(
+            top: false,
+            child: searchMovieKeyword.when(
+              data: (_) {
+                if (movieList.isEmpty && !searchQueryController.text.isBlank) return SearchEmptyWidget(searchQuery: searchQueryController.text);
+                return ListView.separated(
+                  shrinkWrap: true,
+                  controller: scrollController,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 20
+                  ),
+                  itemCount: movieList.length,
+                  separatorBuilder: (_, _) => SizedBox(
+                    height: screenType == ScreenType.mobile
+                    ? AppUtils.cardGapHeightMobile
+                    : AppUtils.cardGapHeightWeb
+                  ),
+                  itemBuilder: (context, index) {
+                    final movie = movieList[index];
+                    return MovieTvSearchWidget(
+                      onTap: () {
+                        if (movie.id == null || type.isBlank) return;
+                        context.pushNamed(
+                          AppRoutes.movieDetails,
+                          queryParameters: {
+                            'id': '${movie.id}',
+                            'type': type
+                          }
+                        );
+                      },
+                      imagePath: movie.posterPath ?? '',
+                      title: movie.title ?? movie.name ?? '',
+                      releaseDate: movie.releaseDate ?? '',
+                      overview: movie.overview ?? '',
                     );
-                  },
-                  imagePath: movie.posterPath ?? '',
-                  title: movie.title ?? movie.name ?? '',
-                  releaseDate: movie.releaseDate ?? '',
-                  overview: movie.overview ?? '',
+                  }
                 );
-              }
-            );
-          }, 
-          error: (_,_) => SearchEmptyWidget(),
-          loading: () => SearchShimmerWidget()
-        ),
+              }, 
+              error: (_, _) => SearchEmptyWidget(),
+              loading: () => SearchShimmerWidget(screenType: screenType)
+            ),
+          );
+        }
       )
     );
   }

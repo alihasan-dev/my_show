@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:my_show/core/utils/app_enums.dart';
+import 'package:my_show/features/movie_details/domain/entities/release_dates_entity.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../domain/entities/video_entity.dart';
-import '/core/widgets/vote_percentage_widget.dart';
+import '../provider/release_dates_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/utils/custom_snackbar.dart';
 import '../provider/watch_provider.dart';
@@ -53,12 +54,19 @@ class MovieDetailsScreen extends HookConsumerWidget {
     final movieRecommendation = ref.watch(movieRecommendationProvider((id: id, type: type)));
     final movieKeywords = ref.watch(movieKeywordProvider((id: id, type: type)));
     final movieTvWatchProvider = ref.watch(watchProvider);
+    final releaseDateProvider = ref.watch(releaseDatesProvider);
     final recommendedMovieList = movieRecommendation.asData?.value.result ?? [];
     final movieCastList = movieCast.asData?.value.cast ?? [];
     final movieCrewList = movieCast.asData?.value.crew ?? [];
     final movieKeywordList = movieKeywords.asData?.value.keywords ?? [];
     final movieVideoList = movieVideo.asData?.value.results ?? [];
     final movieTvWatchData = movieTvWatchProvider.asData?.value;
+    final certificateList = releaseDateProvider.asData?.value?.results ?? [];
+    final certification = certificateList.isEmpty
+    ? ''
+    : (certificateList.first.releaseDates ?? []).isEmpty
+      ? ''
+      : certificateList.first.releaseDates!.firstWhere((item) => !(item.certification ?? '').isBlank, orElse: () => ReleaseDates()).certification ?? '';
     final awards = useState<String>('');
 
     useEffect(() {
@@ -77,6 +85,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final countryCode = locale.countryCode ?? 'US';
         ref.read(watchProvider.notifier).watchProvider(id: id, type: type, countryCode: countryCode);
+        ref.read(releaseDatesProvider.notifier).releaseDates(id: id, countryCode: countryCode);
       });
       return null;
     }, []);
@@ -113,10 +122,12 @@ class MovieDetailsScreen extends HookConsumerWidget {
         child: movieDetails.when(
           data: (data) {
             final movieData = data;
+            final releaseDate = (movieData.releaseDate ?? '').isBlank ? '' : movieData.releaseDate!.formatDOB(hideYrs: true);
+            final runTime = (movieData.runtime ?? 0) <= 0 ? '' : (movieData.runtime ?? 0).formatRuntime;
+            final releaseYear = (movieData.releaseDate ?? '').isBlank ? '' : movieData.releaseDate!.releaseYear;
             return LayoutBuilder(
               builder: (context, constraints) {
                 final screenType = constraints.maxWidth.screenType;
-                // return MovieDetailsShimmer(screenType: screenType);
                 return CustomScrollView(
                   slivers: [
                     CustomSliverAppBar(
@@ -137,6 +148,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                   imagePath: (movieData.posterPath ?? '').generateImageURL,
                                   height: 150,
                                   width: 106,
+                                  radius: 6,
                                 ),
                                 const SizedBox(width: 16),
                                 Expanded(
@@ -154,23 +166,38 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                         ),
                                       ),
                                       const SizedBox(height: 8),
+                                      // if ((movieData.genres ?? []).isNotEmpty)
+                                      //   Wrap(
+                                      //     children: List.generate(
+                                      //       type == 'movie'
+                                      //       ? movieData.genres!.length + 1
+                                      //       : movieData.genres!.length,
+                                      //       (index) {
+                                      //         return index == movieData.genres!.length
+                                      //         ? (movieData.runtime ?? 0) <= 0
+                                      //           ? const SizedBox.shrink()
+                                      //           : MovieText(
+                                      //             title: ' • ${(movieData.runtime ?? 0).formatRuntime}',
+                                      //             style: theme.labelMedium?.copyWith(
+                                      //               color: MovieColors.grey
+                                      //             ),
+                                      //           )
+                                      //         : MovieText(
+                                      //           title: (movieData.genres![index].name ?? '') + 
+                                      //           (index != movieData.genres!.length - 1 ? ', ' : ''),
+                                      //           style: theme.labelMedium?.copyWith(
+                                      //             color: MovieColors.grey
+                                      //           ),
+                                      //         );
+                                      //       }
+                                      //     )
+                                      //   ),
                                       if ((movieData.genres ?? []).isNotEmpty)
                                         Wrap(
                                           children: List.generate(
-                                            type == 'movie'
-                                            ? movieData.genres!.length + 1
-                                            : movieData.genres!.length,
+                                            movieData.genres!.length,
                                             (index) {
-                                              return index == movieData.genres!.length
-                                              ? (movieData.runtime ?? 0) <= 0
-                                                ? const SizedBox.shrink()
-                                                : MovieText(
-                                                  title: ' • ${(movieData.runtime ?? 0).formatRuntime}',
-                                                  style: theme.labelMedium?.copyWith(
-                                                    color: MovieColors.grey
-                                                  ),
-                                                )
-                                              : MovieText(
+                                              return MovieText(
                                                 title: (movieData.genres![index].name ?? '') + 
                                                 (index != movieData.genres!.length - 1 ? ', ' : ''),
                                                 style: theme.labelMedium?.copyWith(
@@ -180,66 +207,174 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                             }
                                           )
                                         ),
-                                      const SizedBox(height: 8),
-                                      Row(
+                                      const SizedBox(height: 6),
+                                      Wrap(
                                         children: [
                                           if ((movieData.voteAverage ?? 0.0) > 0.0) ...[
-                                            VotePercentageWidget(
-                                              height: 40,
-                                              width: 40,
-                                              votePercent: movieData.voteAverage! / 10,
-                                              yTransform: 0,
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(Icons.star, color: MovieColors.primaryColor, size: 14), 
+                                                MovieText(
+                                                  title: ' ${movieData.voteAverage!.toStringAsFixed(1)}',
+                                                  style: theme.labelMedium?.copyWith(
+                                                    color: MovieColors.grey
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            const SizedBox(width: 12),
+                                            MovieText(
+                                              title: ' • ',
+                                              style: theme.labelSmall?.copyWith(
+                                                color: MovieColors.grey.withValues(alpha: 0.6)
+                                              ),
+                                            ),
                                           ],
-                                          IconButton(
-                                            onPressed: () {
-                                              CustomSnackBar.show(
-                                                context, 
-                                                message: AppStrings.comingSoon
-                                              );
-                                            },
-                                            icon: const Icon(Icons.favorite_border),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              CustomSnackBar.show(
-                                                context, 
-                                                message: AppStrings.comingSoon
-                                              );
-                                            },
-                                            icon: const Icon(Icons.bookmark_border),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              String youTubeURL = '';
-                                              if (movieVideoList.isNotEmpty) {
-                                                youTubeURL = movieVideoList.firstWhere((item) => !(item.key ?? '').isBlank, orElse: () => Results()).key ?? '';
-                                              }
-                                              youTubeURL = youTubeURL.generateYouTubeURL;
-                                              // having some issue in youtube video player
-                                              // context.pushNamed(
-                                              //   AppRoutes.videoPlayer,
-                                              //   extra: {
-                                              //     'videos': movieVideoList,
-                                              //     'initialIndex': 0,
-                                              //   },
-                                              // );
-                                              if (youTubeURL.isBlank) {
-                                                CustomSnackBar.show(
-                                                  context, 
-                                                  message: type == 'movie'
-                                                  ? AppStrings.noMovieVideosAvailable
-                                                  : AppStrings.noTvVideosAvailable
-                                                );
-                                                return;
-                                              }
-                                              launchUrl(Uri.parse(youTubeURL));
-                                            },
-                                            icon: const Icon(Icons.play_circle),
-                                          ),
-                                        ],
+                                          if (!releaseYear.isBlank) ...[
+                                            MovieText(
+                                              title: releaseYear,
+                                              style: theme.labelMedium?.copyWith(
+                                                color: MovieColors.grey
+                                              ),
+                                            ),
+                                          ],
+                                          if (!runTime.isBlank) ...[
+                                            MovieText(
+                                              title: ' • ',
+                                              style: theme.labelSmall?.copyWith(
+                                                color: MovieColors.grey.withValues(alpha: 0.6)
+                                              ),
+                                            ),
+                                            MovieText(
+                                              title: runTime,
+                                              style: theme.labelMedium?.copyWith(
+                                                color: MovieColors.grey
+                                              ),
+                                            ),
+                                          ],
+                                          if (!certification.isBlank) ...[
+                                            MovieText(
+                                              title: '  •  ',
+                                              style: theme.labelSmall?.copyWith(
+                                                color: MovieColors.grey.withValues(alpha: 0.6)
+                                              ),
+                                            ),
+                                            Container(
+                                              padding: EdgeInsets.symmetric(horizontal: 2.5),
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(4),
+                                                border: Border.all(color: MovieColors.grey, width: 0.8)
+                                              ),
+                                              child: MovieText(
+                                                title: certification,
+                                                style: theme.labelMedium?.copyWith(
+                                                  color: MovieColors.grey
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ]
                                       ),
+                                      if (movieVideoList.isNotEmpty) ...[
+                                        const SizedBox(height: 14),
+                                        CustomGradientButton(
+                                          onTap: () {
+                                            String youTubeURL = movieVideoList.firstWhere((item) => !(item.key ?? '').isBlank, orElse: () => Results()).key ?? '';
+                                            youTubeURL = youTubeURL.generateYouTubeURL;
+                                            if (youTubeURL.isBlank) {
+                                              CustomSnackBar.show(
+                                                context, 
+                                                message: type == 'movie'
+                                                ? AppStrings.noMovieVideosAvailable
+                                                : AppStrings.noTvVideosAvailable
+                                              );
+                                              return;
+                                            }
+                                            launchUrl(Uri.parse(youTubeURL));
+                                          },
+                                          applyGradient: false,
+                                          color: MovieColors.primaryColor,
+                                          widget: Row(
+                                            spacing: 2,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(Icons.play_arrow_rounded, size: 18, color: MovieColors.black),
+                                              MovieText(
+                                                title: 'Watch Trailer',
+                                                style: theme.titleSmall?.copyWith(
+                                                  color: MovieColors.black,
+                                                  fontSize: 12
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          padding: EdgeInsetsGeometry.only(
+                                            top: 6,
+                                            bottom: 6,
+                                            left: 8,
+                                            right: 14
+                                          ),
+                                        ),
+                                      ],
+                                      // Row(
+                                      //   children: [
+                                      //     // if ((movieData.voteAverage ?? 0.0) > 0.0) ...[
+                                      //     //   VotePercentageWidget(
+                                      //     //     height: 40,
+                                      //     //     width: 40,
+                                      //     //     votePercent: movieData.voteAverage! / 10,
+                                      //     //     yTransform: 0,
+                                      //     //   ),
+                                      //     //   const SizedBox(width: 12),
+                                      //     // ],
+                                      //     IconButton(
+                                      //       onPressed: () {
+                                      //         CustomSnackBar.show(
+                                      //           context, 
+                                      //           message: AppStrings.comingSoon
+                                      //         );
+                                      //       },
+                                      //       icon: const Icon(Icons.favorite_border),
+                                      //     ),
+                                      //     IconButton(
+                                      //       onPressed: () {
+                                      //         CustomSnackBar.show(
+                                      //           context, 
+                                      //           message: AppStrings.comingSoon
+                                      //         );
+                                      //       },
+                                      //       icon: const Icon(Icons.bookmark_border),
+                                      //     ),
+                                      //     IconButton(
+                                      //       onPressed: () {
+                                      //         String youTubeURL = '';
+                                      //         if (movieVideoList.isNotEmpty) {
+                                      //           youTubeURL = movieVideoList.firstWhere((item) => !(item.key ?? '').isBlank, orElse: () => Results()).key ?? '';
+                                      //         }
+                                      //         youTubeURL = youTubeURL.generateYouTubeURL;
+                                      //         // having some issue in youtube video player
+                                      //         // context.pushNamed(
+                                      //         //   AppRoutes.videoPlayer,
+                                      //         //   extra: {
+                                      //         //     'videos': movieVideoList,
+                                      //         //     'initialIndex': 0,
+                                      //         //   },
+                                      //         // );
+                                      //         if (youTubeURL.isBlank) {
+                                      //           CustomSnackBar.show(
+                                      //             context, 
+                                      //             message: type == 'movie'
+                                      //             ? AppStrings.noMovieVideosAvailable
+                                      //             : AppStrings.noTvVideosAvailable
+                                      //           );
+                                      //           return;
+                                      //         }
+                                      //         launchUrl(Uri.parse(youTubeURL));
+                                      //       },
+                                      //       icon: const Icon(Icons.play_circle),
+                                      //     ),
+                                      //   ],
+                                      // ),
                                     ],
                                   ),
                                 ),
@@ -292,7 +427,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                   itemCount: movieCastList.length,
                                   separatorBuilder: (_,_) => SizedBox(
                                     width: screenType == ScreenType.mobile
-                                    ? 5
+                                    ? 4
                                     : 12
                                   ),
                                   itemBuilder: (context, index) {
@@ -301,6 +436,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                       imagePath: (cast.profilePath ?? '').generateImageURL,
                                       title: cast.name ?? '',
                                       subTitle: cast.character ?? '',
+                                      radius: 6,
                                       onTap: () => context.pushNamed(
                                         AppRoutes.profile,
                                         queryParameters: {
@@ -329,7 +465,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                   itemCount: movieCrewList.length,
                                   separatorBuilder: (_,_) => SizedBox(
                                     width: screenType == ScreenType.mobile
-                                    ? 5
+                                    ? 4
                                     : 12
                                   ),
                                   itemBuilder: (context, index) {
@@ -345,6 +481,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                       imagePath: (cast.profilePath ?? '').generateImageURL,
                                       title: cast.name ?? '',
                                       subTitle: cast.job ?? '',
+                                      radius: 6,
                                     );
                                   },
                                 ),
@@ -364,10 +501,10 @@ class MovieDetailsScreen extends HookConsumerWidget {
                               title: AppStrings.status,
                               value: movieData.status ?? ''
                             ),
-                            if (!(movieData.releaseDate ?? '').isBlank)
+                            if (!releaseDate.isBlank)
                               AdditionalInfoTile(
                                 title: AppStrings.releaseDate,
-                                value: movieData.releaseDate!.formatDOB(hideYrs: true)
+                                value: releaseDate
                               ),
                             AdditionalInfoTile(
                               title: AppStrings.originalLanguage,
@@ -470,7 +607,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                         : AppStrings.watchProvider,
                                         padding: EdgeInsetsGeometry.symmetric(vertical: 14),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadiusGeometry.circular(8),
+                                          borderRadius: BorderRadiusGeometry.circular(6),
                                         ),
                                         textAlign: TextAlign.center,
                                         textStyle: theme.labelLarge?.copyWith(
@@ -584,7 +721,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                 itemCount: recommendedMovieList.length,
                                 separatorBuilder: (_,_) => SizedBox(
                                   width: screenType == ScreenType.mobile
-                                  ? 5
+                                  ? 4
                                   : 12
                                 ),
                                 itemBuilder: (context, index) {
@@ -601,6 +738,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                     ),
                                     imagePath: cast.backdropPath.generateImageURL,
                                     title: cast.title,
+                                    radius: 6,
                                   );
                                 },
                               ),
@@ -624,7 +762,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                 itemCount: movieVideoList.length,
                                 separatorBuilder: (_, _) => SizedBox(
                                   width: screenType == ScreenType.mobile
-                                  ? 5
+                                  ? 4
                                   : 12
                                 ),
                                 itemBuilder: (_, index) {
@@ -656,7 +794,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           ClipRRect(
-                                            borderRadius: BorderRadius.circular(8),
+                                            borderRadius: BorderRadius.circular(6),
                                             child: Stack(
                                               alignment: Alignment.center,
                                               children: [
@@ -664,6 +802,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                                   imagePath: thumbnailUrl,
                                                   height: 140,
                                                   width: 250,
+                                                  radius: 6,
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(

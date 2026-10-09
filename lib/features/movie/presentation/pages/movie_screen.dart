@@ -33,7 +33,6 @@ class MoviesScreen extends HookConsumerWidget {
           final screenType = constraints.maxWidth.screenType;
           return trendingMovies.when(
             data: (data) {
-              // return MovieShimmerWidget(screenType: screenType);
               return ListView(
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(16),
@@ -45,7 +44,7 @@ class MoviesScreen extends HookConsumerWidget {
                   // CustomCarouselWidget(
                   //   movies: data.result,
                   // ),
-                  SizedBox(height: 10),
+                  // SizedBox(height: 10),
                   TrendingMoviesWidgets(
                     title: AppStrings.nowPlaying,
                     movieList: nowPlayingMoviesList,
@@ -60,7 +59,7 @@ class MoviesScreen extends HookConsumerWidget {
                       );
                     },
                   ),
-                  SizedBox(height: 10),
+                  // SizedBox(height: 10),
                   TrendingMoviesWidgets(
                     title: AppStrings.popular,
                     movieList: popularMoviesList,
@@ -75,7 +74,7 @@ class MoviesScreen extends HookConsumerWidget {
                       );
                     },
                   ),
-                  SizedBox(height: 10),
+                  // SizedBox(height: 10),
                   TrendingMoviesWidgets(
                     title: AppStrings.topRated,
                     movieList: topRatedMoviesList,
@@ -90,7 +89,7 @@ class MoviesScreen extends HookConsumerWidget {
                       );
                     },
                   ),
-                  SizedBox(height: 10),
+                  // SizedBox(height: 10),
                   TrendingMoviesWidgets(
                     title: AppStrings.upcoming,
                     movieList: upcomingMoviesList,

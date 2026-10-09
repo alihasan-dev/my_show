@@ -2,9 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/core/utils/app_enums.dart';
-import 'package:my_show/features/review/presentation/widgets/review_card.dart';
+import '../../../../core/utils/app_enums.dart';
+import '../../../../features/review/presentation/widgets/review_card.dart';
 import '../../../../core/utils/app_extension_method.dart';
+import '../../../../core/utils/app_utils.dart';
 import '../../../../core/widgets/no_data_widget.dart';
 import '../../../search/presentation/widgets/search_shimmer_widget.dart';
 import '../providers/show_review_provider.dart';
@@ -59,6 +60,7 @@ class ReviewScreen extends HookConsumerWidget {
           'Review  |  $title',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+          style: TextStyle(fontSize: 18),
         ),
       ),
       body: LayoutBuilder(
@@ -110,7 +112,7 @@ class ReviewScreen extends HookConsumerWidget {
                 },
                 separatorBuilder: (_, _) => SizedBox(
                   height: screenType == ScreenType.mobile
-                  ? 5
+                  ? AppUtils.cardGapHeightMobile
                   : 8,
                 ),
               );
@@ -128,6 +130,7 @@ class ReviewScreen extends HookConsumerWidget {
               height: 110, 
               padding: EdgeInsets.symmetric(horizontal: 16),
               radius: 16,
+              screenType: screenType,
             ),
           );
         }

@@ -28,9 +28,7 @@ class MovieDetailsShimmer extends StatelessWidget {
               width: width,
               color: Color(0xFF2C2C2C),
             ),
-
             const SizedBox(height: 16),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
@@ -46,7 +44,6 @@ class MovieDetailsShimmer extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 12),
-
                   // Title + genre shimmer
                   Expanded(
                     child: Column(
@@ -75,9 +72,7 @@ class MovieDetailsShimmer extends StatelessWidget {
                 ],
               ),
             ),
-
             const SizedBox(height: 24),
-
             // Overview title shimmer
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -105,9 +100,7 @@ class MovieDetailsShimmer extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(height: 24),
-
             // Cast title shimmer
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -117,9 +110,7 @@ class MovieDetailsShimmer extends StatelessWidget {
                 color: Color(0xFF2C2C2C),
               ),
             ),
-
             const SizedBox(height: 12),
-
             // Cast list shimmer
             SizedBox(
               height: 200,
@@ -129,7 +120,7 @@ class MovieDetailsShimmer extends StatelessWidget {
                 itemCount: 6,
                 separatorBuilder: (_,_) => SizedBox(
                   width: screenType == ScreenType.mobile
-                  ? 5
+                  ? 4
                   : 12
                 ),
                 itemBuilder: (context, index) => Column(
@@ -174,7 +165,7 @@ class MovieDetailsShimmer extends StatelessWidget {
                 itemCount: 6,
                 separatorBuilder: (_,_) => SizedBox(
                   width: screenType == ScreenType.mobile
-                  ? 5
+                  ? 4
                   : 12
                 ),
                 itemBuilder: (context, index) => Column(

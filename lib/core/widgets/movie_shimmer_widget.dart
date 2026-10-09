@@ -9,7 +9,7 @@ class MovieShimmerWidget extends StatelessWidget {
 
   const MovieShimmerWidget({
     super.key, 
-    this.sectionCount = 3,
+    this.sectionCount = 4,
     this.screenType = ScreenType.mobile
   });
 
@@ -23,10 +23,10 @@ class MovieShimmerWidget extends StatelessWidget {
         itemCount: sectionCount,
         separatorBuilder: (_,_) => SizedBox(
           height: screenType == ScreenType.mobile
-          ? 10
+          ? 0
           : 20
         ),
-        itemBuilder: (_,_) => const _ShimmerSection(),
+        itemBuilder: (_,_) => _ShimmerSection(screenType: screenType),
       ),
     );
   }
@@ -34,7 +34,9 @@ class MovieShimmerWidget extends StatelessWidget {
 }
 
 class _ShimmerSection extends StatelessWidget {
+
   final ScreenType screenType; 
+
   const _ShimmerSection({
     this.screenType = ScreenType.mobile
   });
@@ -54,13 +56,13 @@ class _ShimmerSection extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         SizedBox(
-          height: 301,
+          height: 265,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: 4,
-            separatorBuilder: (_,_) => SizedBox(width: screenType == ScreenType.mobile ? 6.5 : 15),
-            itemBuilder: (_,_) => const _ShimmerCard(),
+            itemCount: 5,
+            separatorBuilder: (_,_) => SizedBox(width: screenType == ScreenType.mobile ? 4 : 15),
+            itemBuilder: (_,_) => _ShimmerCard(screenType: screenType),
           ),
         ),
       ],
@@ -69,7 +71,12 @@ class _ShimmerSection extends StatelessWidget {
 }
 
 class _ShimmerCard extends StatelessWidget {
-  const _ShimmerCard();
+
+  final ScreenType screenType;
+
+  const _ShimmerCard({
+    this.screenType = ScreenType.mobile
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -80,15 +87,15 @@ class _ShimmerCard extends StatelessWidget {
         children: [
           Container(
             width: double.maxFinite,
-            height: 200,
+            height: 195,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: screenType == ScreenType.mobile ? 10 : 12),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -97,16 +104,16 @@ class _ShimmerCard extends StatelessWidget {
                   height: 12,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(3),
                   ),
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: 5),
                 Container(
                   width: 70,
                   height: 10,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(3),
                   ),
                 ),
               ],

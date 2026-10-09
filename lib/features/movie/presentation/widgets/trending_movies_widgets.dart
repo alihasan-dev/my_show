@@ -64,7 +64,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
                 itemCount: viewAll != null
                 ? movieList.length + 1
                 : movieList.length,
-                separatorBuilder: (_,_) => SizedBox(width: cardWidth <= 125 ? 6.5 : 15),
+                separatorBuilder: (_,_) => SizedBox(width: cardWidth <= 125 ? 4 : 15),
                 itemBuilder: (_,index) {
                   final movie = index == movieList.length 
                   ? movieList[index - 1]

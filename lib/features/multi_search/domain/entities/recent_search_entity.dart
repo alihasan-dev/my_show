@@ -4,13 +4,15 @@ class RecentSearchEntity {
   String mediaType;
   String posterPath;
   String subtitle;
+  String createdDate;
 
   RecentSearchEntity({
     this.id = '',
     this.title = '',
     this.mediaType = '',
     this.posterPath = '',
-    this.subtitle = ''
+    this.subtitle = '',
+    this.createdDate = ''
   });
 }
 

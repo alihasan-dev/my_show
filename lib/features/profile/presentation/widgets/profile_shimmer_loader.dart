@@ -84,14 +84,14 @@ class ProfileShimmerLoader extends StatelessWidget {
                   itemCount: 5,
                   separatorBuilder: (_, _) => SizedBox(
                     width: screenType == ScreenType.mobile
-                    ? 5
+                    ? 4
                     : 12
                   ),
                   itemBuilder: (_, _) => Container(
                     height: 150,
                     width: 100,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(6),
                       color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
                     ),
                   ),
@@ -116,14 +116,14 @@ class ProfileShimmerLoader extends StatelessWidget {
                   itemCount: 5,
                   separatorBuilder: (_, _) => SizedBox(
                     width: screenType == ScreenType.mobile
-                    ? 5
+                    ? 4
                     : 12
                   ),
                   itemBuilder: (_, _) => Container(
                     height: 150,
                     width: 100,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(6),
                       color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
                     ),
                   ),
@@ -148,14 +148,14 @@ class ProfileShimmerLoader extends StatelessWidget {
                   itemCount: 5,
                   separatorBuilder: (_, _) => SizedBox(
                     width: screenType == ScreenType.mobile
-                    ? 5
+                    ? 4
                     : 12
                   ),
                   itemBuilder: (_, _) => Container(
                     height: 150,
                     width: 100,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(6),
                       color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
                     ),
                   ),

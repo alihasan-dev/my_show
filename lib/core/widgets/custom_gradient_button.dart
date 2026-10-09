@@ -12,6 +12,9 @@ class CustomGradientButton extends StatelessWidget {
   final Widget? widget;
   final double radius;
   final TextAlign? textAlign;
+  final bool applyGradient;
+  final Color? borderColor;
+  final Color? color;
   
   const CustomGradientButton({
     this.label = '',
@@ -23,6 +26,9 @@ class CustomGradientButton extends StatelessWidget {
     this.widget,
     this.radius = 20,
     this.textAlign,
+    this.applyGradient = true,
+    this.borderColor,
+    this.color,
     super.key
   });
 
@@ -38,18 +44,21 @@ class CustomGradientButton extends StatelessWidget {
         decoration: ShapeDecoration(
           shape: shape ?? StadiumBorder(
             side: BorderSide(
-              color: MovieColors.white.withValues(alpha: 0.25),
+              color: borderColor ?? color ?? MovieColors.white.withValues(alpha: 0.25),
               width: 1.5,
             )
           ),
-          gradient: LinearGradient(
+          gradient: applyGradient
+          ? LinearGradient(
             colors: [
               MovieColors.white.withValues(alpha: 0.20),
               MovieColors.white.withValues(alpha: 0.05),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-          ),
+          )
+          : null,
+          color: color
         ),
         child: widget ?? MovieText(
           title: label,

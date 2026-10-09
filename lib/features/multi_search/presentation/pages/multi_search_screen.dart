@@ -211,13 +211,13 @@ class MultiSearchScreen extends HookConsumerWidget {
                                           label: AppStrings.viewProfile,
                                           onTap: () {
                                             if (movie.id == null) return;
-                                            ///save as recent search locally
                                             final entity = RecentSearchEntity(
                                               id: movie.id.toString(),
                                               mediaType: movie.mediaType ?? '',
                                               title: movie.originalName ?? '',
                                               posterPath: movie.profilePath ?? '',
-                                              subtitle: movie.knownForDepartment ?? ''
+                                              subtitle: movie.knownForDepartment ?? '',
+                                              createdDate: DateTime.now().toString()
                                             );
                                             recentSearchProviderRead.saveSearch(entity: entity);
                                             context.pushNamed(
@@ -240,13 +240,13 @@ class MultiSearchScreen extends HookConsumerWidget {
                                       return MovieTvSearchWidget(
                                         onTap: () {
                                           if (item.id == null || (item.mediaType ?? '').isBlank) return;
-                                          ///save as recent search locally
                                           final entity = RecentSearchEntity(
                                             id: item.id.toString(),
                                             mediaType: item.mediaType ?? '',
                                             title: item.title ?? item.name ?? '',
                                             posterPath: item.backdropPath ?? '',
-                                            subtitle: item.releaseDate ?? ''
+                                            subtitle: item.releaseDate ?? '',
+                                            createdDate: DateTime.now().toString()
                                           );
                                           recentSearchProviderRead.saveSearch(entity: entity);
                                           context.pushNamed(
@@ -272,16 +272,15 @@ class MultiSearchScreen extends HookConsumerWidget {
                         : MovieTvSearchWidget(
                           onTap: () {
                             if (movie.id == null || (movie.mediaType ?? '').isBlank) return;
-                            ///save as recent search local
                             final entity = RecentSearchEntity(
                               id: movie.id.toString(),
                               mediaType: movie.mediaType ?? '',
                               title: movie.title ?? movie.name ?? '',
                               posterPath: movie.posterPath ?? '',
-                              subtitle: movie.releaseDate ?? ''
+                              subtitle: movie.releaseDate ?? '',
+                              createdDate: DateTime.now().toString()
                             );
                             recentSearchProviderRead.saveSearch(entity: entity);
-                            ///navigate to details screen
                             context.pushNamed(
                               AppRoutes.movieDetails,
                               queryParameters: {

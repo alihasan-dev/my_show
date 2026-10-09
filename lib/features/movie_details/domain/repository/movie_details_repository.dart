@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../entities/movie_award_entity.dart';
+import '../entities/release_dates_entity.dart';
 import '../entities/video_entity.dart';
 import '../entities/watch_provider_entity.dart';
 import '/core/utils/custom_exception.dart';
@@ -23,5 +24,7 @@ abstract interface class MovieDetailsRepository {
   Future<Either<CustomFailureException, MovieAwardEntity>> movieAwards({required String id});
 
   Future<Either<CustomFailureException, WatchProviderEntity>> watchProvider({required String id, required String type});
+
+  Future<Either<CustomFailureException, ReleaseDatesEntity>> releaseDates({required String id});
 
 }

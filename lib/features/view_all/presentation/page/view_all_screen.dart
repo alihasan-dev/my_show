@@ -67,8 +67,9 @@ class ViewAllScreen extends HookConsumerWidget {
               decoration: InputDecoration.collapsed(
                 hintText: 'Search',
                 hintStyle: TextStyle(
-                  fontSize: 18
-                )
+                  fontSize: 18,
+                  color: MovieColors.grey
+                ),
               ),
               autofocus: true,
             )
@@ -76,6 +77,7 @@ class ViewAllScreen extends HookConsumerWidget {
             label.capitalizeWord,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 18),
           ),
         ),
         actions: [
