@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/core/utils/app_extension_method.dart';
 import '../widgets/trending_movies_widgets.dart';
 import '../provider/now_playing_provider.dart';
 import '../provider/popular_movies_provider.dart';
 import '../provider/trending_movies_provider.dart';
 import '../provider/upcoming_movie_provider.dart';
 import '../provider/top_rated_movies_provider.dart';
+import '../../../../core/utils/app_enums.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/routes/app_routes.dart';
+import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_shimmer_widget.dart';
 
 class MoviesScreen extends HookConsumerWidget {
@@ -40,14 +41,16 @@ class MoviesScreen extends HookConsumerWidget {
                   TrendingMoviesWidgets(
                     title: AppStrings.trending,
                     movieList: data.result,
+                    screenType: screenType,
                   ),
                   // CustomCarouselWidget(
                   //   movies: data.result,
                   // ),
-                  // SizedBox(height: 10),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
                   TrendingMoviesWidgets(
                     title: AppStrings.nowPlaying,
                     movieList: nowPlayingMoviesList,
+                    screenType: screenType,
                     viewAll: () {
                       context.pushNamed(
                         AppRoutes.viewAll,
@@ -59,10 +62,11 @@ class MoviesScreen extends HookConsumerWidget {
                       );
                     },
                   ),
-                  // SizedBox(height: 10),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
                   TrendingMoviesWidgets(
                     title: AppStrings.popular,
                     movieList: popularMoviesList,
+                    screenType: screenType,
                     viewAll: () {
                       context.pushNamed(
                         AppRoutes.viewAll,
@@ -74,10 +78,11 @@ class MoviesScreen extends HookConsumerWidget {
                       );
                     },
                   ),
-                  // SizedBox(height: 10),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
                   TrendingMoviesWidgets(
                     title: AppStrings.topRated,
                     movieList: topRatedMoviesList,
+                    screenType: screenType,
                     viewAll: () {
                       context.pushNamed(
                         AppRoutes.viewAll,
@@ -89,10 +94,11 @@ class MoviesScreen extends HookConsumerWidget {
                       );
                     },
                   ),
-                  // SizedBox(height: 10),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
                   TrendingMoviesWidgets(
                     title: AppStrings.upcoming,
                     movieList: upcomingMoviesList,
+                    screenType: screenType,
                     viewAll: () {
                       context.pushNamed(
                         AppRoutes.viewAll,

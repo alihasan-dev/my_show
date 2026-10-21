@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../core/widgets/movie_image_widget.dart';
-import '../constants/movie_colors.dart';
 
 class CustomSliverAppBar extends StatelessWidget {
 

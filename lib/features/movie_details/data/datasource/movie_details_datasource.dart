@@ -109,7 +109,7 @@ class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
     try {
       final response = await dioClient.get(
         'https://www.omdbapi.com/?i=$id&apikey=$omdbApiKey',
-        options: Options(headers: null)
+        options: Options(headers: {'Accept': 'application/json'})
       );
       if (response.statusCode == 200) {
         return AwardModel.fromJson(response.data);

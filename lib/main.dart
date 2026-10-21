@@ -1,10 +1,11 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/routes/app_routes.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-
 import 'core/storage/storage_provider.dart';
 
 Future<void> main() async {
@@ -16,16 +17,22 @@ Future<void> main() async {
       // Adds request headers and IP for users, for more info visit:
       // https://docs.sentry.io/platforms/dart/guides/flutter/data-management/data-collected/
       options.sendDefaultPii = true;
-      options.enableLogs = true;
+      // options.enableLogs = kReleaseMode;
       // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
       // We recommend adjusting this value in production.
-      options.tracesSampleRate = 1.0;
+      options.tracesSampleRate = kReleaseMode ? 1.0 : 0.0;
       // The sampling rate for profiling is relative to tracesSampleRate
       // Setting to 1.0 will profile 100% of sampled transactions:
       // options.profilesSampleRate = 1.0;
       // Configure Session Replay
-      options.replay.sessionSampleRate = 0.1;
-      options.replay.onErrorSampleRate = 1.0;
+      options.replay.sessionSampleRate = kReleaseMode ? 0.1 : 0.0;
+      options.replay.onErrorSampleRate = kReleaseMode ? 1.0 : 0.0;
+      options.beforeSend = (event, hint) {
+      if (!kReleaseMode) {
+        return null; // Returning null blocks the log from being sent
+      }
+      return event; // Allows the log to be sent in release mode
+    };
     },
     appRunner: () => runApp(
       SentryWidget(
@@ -33,37 +40,43 @@ Future<void> main() async {
           overrides: [
             sharedPreferencesProvider.overrideWithValue(prefs),
           ],
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1300),
-              child: const MyApp()
+          child: ColoredBox(
+            color: Color(0xFF121212),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1200),
+                child: const MyApp()
+              ),
             ),
-          )
-          // child: const MyApp()
-        )
-      )
+          ),
+        ),
+      ),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'MyShow',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
-      // Remove persistent web scrollbars globally
       scrollBehavior: const MaterialScrollBehavior().copyWith(
         scrollbars: false,
+        dragDevices: {
+          PointerDeviceKind.touch,
+          PointerDeviceKind.mouse,
+          PointerDeviceKind.stylus,
+          PointerDeviceKind.trackpad,
+        }
       ),
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFF121212),
-        // scaffoldBackgroundColor: const Color(0xFF121212),
         cardColor: const Color(0xFF1E1E1E),
         colorScheme: const ColorScheme.dark(
           primary: Color(0xFF03DAC6),
@@ -76,9 +89,6 @@ class MyApp extends StatelessWidget {
         ),
         dividerColor: const Color(0xFF2C2C2C),
       ),
-      // theme: ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      // ),
       routerConfig: AppRoutes.routes,
     );
   }

@@ -1,18 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/utils/app_enums.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '/core/constants/movie_colors.dart';
 import '/core/utils/app_extension_method.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/popular_people_provider.dart';
+import '../../../../core/utils/app_enums.dart';
 import '../../../../core/routes/app_routes.dart';
-import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/widgets/no_data_widget.dart';
+import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/widgets/people_shimmer_widget.dart';
-
 class PeopleScreen extends HookConsumerWidget {
 
   const PeopleScreen({super.key});
@@ -127,7 +126,7 @@ class PeopleScreen extends HookConsumerWidget {
               loading: () => PeopleShimmerWidget(
                 crossAxisCount: constraints.maxWidth.getCrossAxisCount,
                 screenType: constraints.maxWidth.screenType,
-              )
+              ),
             );
           }
         ),

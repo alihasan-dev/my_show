@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_show/core/utils/app_enums.dart';
 import 'package:my_show/core/utils/app_utils.dart';
+import '../../../../features/movie/presentation/widgets/view_all_widget.dart';
 import '../../../../core/constants/app_strings.dart';
-import 'view_all_widget.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/routes/app_routes.dart';
@@ -16,11 +17,13 @@ class TrendingMoviesWidgets extends StatelessWidget {
   final String title;
   final List<TrendingMovie> movieList;
   final Function()? viewAll;
+  final ScreenType screenType;
 
   const TrendingMoviesWidgets({
     this.title = '',
     this.movieList = const [],
     this.viewAll,
+    this.screenType = ScreenType.mobile,
     super.key
   });
 
@@ -28,6 +31,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     if (movieList.isEmpty) return SizedBox.shrink();
+
     movieList.sort((a, b) {
       final first = a.releaseDate;
       final second = b.releaseDate;
@@ -42,6 +46,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
       if (secondDate == null) return -1;
       return secondDate.compareTo(firstDate);
     });
+
     return LayoutBuilder(
       builder: (contex, constraints) {
         final cardWidth = getTrendingCardWidth(constraints.maxWidth, canCalculate: title == AppStrings.trending);
@@ -56,16 +61,18 @@ class TrendingMoviesWidgets extends StatelessWidget {
                 color: MovieColors.white.withValues(alpha: 0.9)
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: screenType == ScreenType.mobile ? 10 : 15),
             SizedBox(
-              height: cardWidth <= 125 ? 285 : 265,
+              height: screenType == ScreenType.mobile
+              ? 270
+              : 295,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: viewAll != null
                 ? movieList.length + 1
                 : movieList.length,
-                separatorBuilder: (_,_) => SizedBox(width: cardWidth <= 125 ? 4 : 15),
-                itemBuilder: (_,index) {
+                separatorBuilder: (_, _) => SizedBox(width: screenType == ScreenType.mobile ? 4 : 15),
+                itemBuilder: (_, index) {
                   final movie = index == movieList.length 
                   ? movieList[index - 1]
                   : movieList[index];
@@ -96,7 +103,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
                           Stack(
                             children: [
                               index == movieList.length
-                              ? ViewAllWidget()
+                              ? ViewAllWidget(screenType: screenType)
                               : MovieImageWidget(
                                 imagePath: backgroundImage(
                                   movie, 
@@ -104,7 +111,9 @@ class TrendingMoviesWidgets extends StatelessWidget {
                                   canCalculate: title == AppStrings.trending
                                 ),
                                 width: double.maxFinite,
-                                height: 200
+                                height: screenType == ScreenType.mobile
+                                ? 200
+                                : 225,
                               ),
                               if (movie.voteAverage > 0.0 && index != movieList.length)
                                 Positioned(
@@ -147,7 +156,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
                       ),
                     ),
                   );
-                }
+                },
               ),
             ),
           ],
@@ -168,7 +177,7 @@ class TrendingMoviesWidgets extends StatelessWidget {
   }
 
   double getTrendingCardWidth(double screenWidth, {bool canCalculate = false}) {
-    if (!canCalculate) return 125.0;
+    if (!canCalculate) return screenType == ScreenType.mobile ? 125 : 150;
     if (screenWidth < 600) {
       // Mobile: Strictly 125 as defined
       return 125.0; 

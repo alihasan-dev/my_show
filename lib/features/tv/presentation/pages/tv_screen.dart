@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/core/utils/app_enums.dart';
-import '../../../../core/utils/app_extension_method.dart';
 import '../provider/nowplaying_provider.dart';
 import '../provider/popular_show_provider.dart';
 import '../provider/trending_tv_show_provider.dart';
 import '../widgets/tv_show_widget.dart';
+import '../../../../core/utils/app_enums.dart';
+import '../../../../core/routes/app_routes.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_shimmer_widget.dart';
 import '../../../../features/tv/presentation/provider/top_rated_show_provider.dart';
 import '../../../../features/tv/presentation/provider/upcoming_show_provider.dart';
-import '../../../../core/routes/app_routes.dart';
-
 class TvScreen extends HookConsumerWidget {
 
   const TvScreen({super.key});
@@ -40,7 +39,9 @@ class TvScreen extends HookConsumerWidget {
                   TvShowWidgets(
                     title: AppStrings.trending,
                     tvShowList: data.result,
+                    screenType: screenType,
                   ),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
                   TvShowWidgets(
                     title: AppStrings.nowPlaying,
                     tvShowList: nowPlayingShowList,
@@ -54,7 +55,9 @@ class TvScreen extends HookConsumerWidget {
                         }
                       );
                     },
+                    screenType: screenType,
                   ),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
                   TvShowWidgets(
                     title: AppStrings.popular,
                     tvShowList: popularShowsList,
@@ -68,7 +71,9 @@ class TvScreen extends HookConsumerWidget {
                         }
                       );
                     },
+                    screenType: screenType,
                   ),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
                   TvShowWidgets(
                     title: AppStrings.topRated,
                     tvShowList: topRatedShowsList,
@@ -82,7 +87,9 @@ class TvScreen extends HookConsumerWidget {
                         }
                       );
                     },
+                    screenType: screenType,
                   ),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
                   TvShowWidgets(
                     title: AppStrings.upcoming,
                     tvShowList: upcomingShowsList,
@@ -97,6 +104,7 @@ class TvScreen extends HookConsumerWidget {
                         }
                       );
                     },
+                    screenType: screenType,
                   ),
                 ],
               );

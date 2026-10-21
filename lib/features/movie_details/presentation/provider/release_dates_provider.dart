@@ -18,13 +18,11 @@ class ReleaseDatesNotifier extends StateNotifier<AsyncValue<ReleaseDatesEntity?>
       (provider) {
         final result = (provider.results ?? []);
         if (result.isEmpty) {
-          print('country >>>>> empty');
           state = AsyncValue.error('Unable to fetch the provider', StackTrace.current); 
         } else {
           final releaseDate = result.firstWhere((item) => item.iso3166 == countryCode,
             orElse: () => result.first
           );
-          print('country >>>>> $releaseDate id $id');
           state = AsyncValue.data(ReleaseDatesEntity(id: provider.id, results: [releaseDate]));
         }
       },

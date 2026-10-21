@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../features/tv/domain/entities/trending_tvshow_entity.dart';
 import '../../../../core/constants/movie_colors.dart';
@@ -14,10 +15,12 @@ class TvShowWidgets extends StatelessWidget {
   final String title;
   final List<TrendingShow> tvShowList;
   final Function()? viewAll;
+  final ScreenType screenType;
 
   const TvShowWidgets({
     this.title = '',
     this.tvShowList = const [],
+    this.screenType = ScreenType.mobile,
     this.viewAll,
     super.key
   });
@@ -40,15 +43,17 @@ class TvShowWidgets extends StatelessWidget {
                 color: MovieColors.white.withValues(alpha: 0.9)
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: screenType == ScreenType.mobile ? 10 : 15),
             SizedBox(
-              height: 285,
+              height: screenType == ScreenType.mobile
+              ? 270
+              : 295,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: viewAll != null
                 ? tvShowList.length + 1
                 : tvShowList.length,
-                separatorBuilder: (_,_) => SizedBox(width: cardWidth <= 125 ? 4 : 15),
+                separatorBuilder: (_, _) => SizedBox(width: screenType == ScreenType.mobile ? 4 : 15),
                 itemBuilder: (_,index) {
                   final tvShow = index == tvShowList.length 
                   ? tvShowList[index - 1]
@@ -73,17 +78,14 @@ class TvShowWidgets extends StatelessWidget {
                       );
                     },
                     child: SizedBox(
-                      width: getTrendingCardWidth(
-                        constraints.maxWidth, 
-                        canCalculate: title == AppStrings.trending
-                      ),
+                      width: cardWidth,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Stack(
                             children: [
                               index == tvShowList.length
-                              ? ViewAllWidget()
+                              ? ViewAllWidget(screenType: screenType)
                               : MovieImageWidget(
                                   imagePath: backgroundImage(
                                     tvShow,
@@ -91,7 +93,9 @@ class TvShowWidgets extends StatelessWidget {
                                     canCalculate: title == AppStrings.trending
                                   ),
                                   width: double.maxFinite,
-                                  height: 200
+                                  height: screenType == ScreenType.mobile
+                                  ? 200
+                                  : 225,
                                 ),
                               if (index != tvShowList.length && tvShow.voteAverage > 0.0)
                                 Positioned(
@@ -159,7 +163,7 @@ class TvShowWidgets extends StatelessWidget {
   }
 
   double getTrendingCardWidth(double screenWidth, {bool canCalculate = false}) {
-    if (!canCalculate) return 125.0;
+    if (!canCalculate) return screenType == ScreenType.mobile ? 125 : 150;
     if (screenWidth < 600) {
       // Mobile: Strictly 125 as defined
       return 125.0; 
