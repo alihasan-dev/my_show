@@ -107,6 +107,25 @@ extension StringExtensionUtils on String {
     }
   }
 
+  String ageDifference({required String birthDay}) {
+    try {
+      final deathDay = this;
+      if (deathDay.isBlank && birthDay.isBlank) return '-';
+      if (deathDay.isBlank && !birthDay.isBlank) {
+        return birthDay.formatDOB();
+      }
+      if (!deathDay.isBlank && birthDay.isBlank) {
+        return 'N/A - ${birthDay.formatDOB()}';
+      }
+      final birthDate = DateTime.parse(birthDay);
+      final deathDate = DateTime.parse(deathDay);
+      final ageDiff = calculateAge(birthDate, from: deathDate);
+      return '${birthDay.formatDOB(hideYrs: true)} - ${deathDay.formatDOB(hideYrs: true)} ($ageDiff)';
+    } catch (e) {
+      return '-';
+    }
+  }
+
   String get releaseYear {
     try {
       String input = this;
@@ -212,8 +231,8 @@ extension ImageErrorExtensionUtils on ImageErrorIconSize {
   }
 }
 
-String calculateAge(DateTime birthDate) {
-  final today = DateTime.now();
+String calculateAge(DateTime birthDate, {DateTime? from}) {
+  final today = from ?? DateTime.now();
   int age = today.year - birthDate.year;
   int months = today.month - birthDate.month;
   int days = today.day - birthDate.day;

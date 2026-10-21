@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:my_show/features/profile/presentation/widgets/profile_age_widget.dart';
 import '../../../../core/utils/app_enums.dart';
+import '../../../../core/widgets/movie_image_widget.dart';
+import '../../domain/entities/profile_details_entity.dart';
 import '../provider/credit_tv_provider.dart';
 import '../widgets/profile_shimmer_loader.dart';
 import '../provider/credit_movies_provider.dart';
@@ -63,61 +66,73 @@ class ProfileScreen extends HookConsumerWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final screenType = constraints.maxWidth.screenType;
+            final mobileView = screenType == ScreenType.mobile || screenType == ScreenType.tablet;
             return profileDetails.when(
               data: (data) {
                 return CustomScrollView(
                   slivers: [
+                    if (mobileView) ...[
                     CustomSliverAppBar(
                       expandedHeight: MediaQuery.of(context).size.height * 0.52,
                       title: data.name ?? '',
                       imagePath: (data.profilePath ?? '').generateImageURL,
                     ),
+                    ] else ...[
+                      SliverToBoxAdapter(
+                        child: ProfileWidgetWeb(
+                          profileData: data,
+                          id: userId,
+                        ),
+                      ),
+                    ],
                     SliverToBoxAdapter(
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            MovieText(
-                              title: data.name ?? '',
-                              style: theme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: MovieColors.textPrimary,
-                              ),
-                            ),
-                            SizedBox(height: 12),
-                            if (!(data.biography ?? '').isBlank) ...[
+                            if (mobileView) ... [
                               MovieText(
-                                title: AppStrings.biography,
+                                title: data.name ?? '',
                                 style: theme.bodyMedium?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
                                   color: MovieColors.textPrimary,
                                 ),
                               ),
-                              SizedBox(height: 5),
-                              MovieText(
-                                title: data.biography ?? '',
-                                maxLine: readMoreEnable.value ? null : 4,
-                                overflow: readMoreEnable.value
-                                ? TextOverflow.visible
-                                : TextOverflow.ellipsis,
-                              ),
-                              if ((data.biography ?? '').length > 190)
+                              SizedBox(height: 12),
+                              if (!(data.biography ?? '').isBlank) ...[
                                 MovieText(
-                                  onTap: () => readMoreEnable.value = !readMoreEnable.value,
-                                  title: readMoreEnable.value
-                                  ? AppStrings.readLess
-                                  : AppStrings.readMore,
+                                  title: AppStrings.biography,
                                   style: theme.bodyMedium?.copyWith(
-                                    fontWeight: FontWeight.w400,
-                                    color: MovieColors.primaryColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    color: MovieColors.textPrimary,
                                   ),
                                 ),
+                                SizedBox(height: 5),
+                                MovieText(
+                                  title: data.biography ?? '',
+                                  maxLine: readMoreEnable.value ? null : 4,
+                                  overflow: readMoreEnable.value
+                                  ? TextOverflow.visible
+                                  : TextOverflow.ellipsis,
+                                ),
+                                if ((data.biography ?? '').length > 190)
+                                  MovieText(
+                                    onTap: () => readMoreEnable.value = !readMoreEnable.value,
+                                    title: readMoreEnable.value
+                                    ? AppStrings.readLess
+                                    : AppStrings.readMore,
+                                    style: theme.bodyMedium?.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: MovieColors.primaryColor,
+                                    ),
+                                  ),
+                              ],
                             ],
-                            SizedBox(height: 10),
                             if (creditMovieList.isNotEmpty) ...[
+                              SizedBox(height: 10),
                               MovieText(
                                 title: AppStrings.knownForMovies,
                                 style: theme.bodyMedium?.copyWith(
@@ -274,4 +289,175 @@ class ProfileScreen extends HookConsumerWidget {
       ),
     );
   }
+}
+
+
+class ProfileWidgetWeb extends HookConsumerWidget {
+
+  final ProfileDetailsEntity profileData;
+  final String id;
+
+  const ProfileWidgetWeb({
+    super.key, 
+    required this.profileData,
+    this.id = ''
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        final screenType = width.screenType;
+
+        final horizontalPadding = screenType == ScreenType.mobile
+        ? 20.0
+        : screenType == ScreenType.tablet
+            ? 20.0
+            : (width * 0.043).clamp(20.0, 30.0);
+
+        final heroHeight = screenType == ScreenType.tablet
+        ? 410.0
+        : 460.0;
+
+        return SizedBox(
+          width: double.infinity,
+          height: heroHeight,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              // Background image
+              MovieImageWidget(
+                imagePath: (profileData.profilePath ?? '').generateImageURL,
+                radius: 0,
+              ),
+              // Left-to-right gradient
+              const DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color(0xF2121212),
+                      Color(0xD9121212),
+                      Color(0x88121212),
+                      Color(0x18121212)
+                    ],
+                    stops: [0.0, 0.38, 0.67, 1.0],
+                  ),
+                ),
+              ),
+              // Bottom gradient
+              const DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                      Color(0xD9121212),
+                      Color(0x00121212)
+                    ],
+                  ),
+                ),
+              ),
+              // Keep your existing foreground content here.
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  horizontalPadding  - 8,
+                  screenType == ScreenType.mobile ? 20 : 30,
+                  horizontalPadding,
+                  28,
+                ),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: screenType == ScreenType.mobile ? 560 : width,
+                    ),
+                    child: buildMovieContent(
+                      context: context,
+                      isMobile: screenType == ScreenType.mobile,
+                      isTablet: screenType == ScreenType.tablet,
+                      theme: theme
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+
+  Widget buildMovieContent({
+    required BuildContext context,
+    required bool isMobile,
+    required bool isTablet,
+    required ThemeData theme
+  }) {
+    return Row(
+      spacing: 16,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        MovieImageWidget(
+          imagePath: (profileData.profilePath ?? '').generateImageURL,
+          height: 290,
+          width: 195,
+          radius: 6,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 575),
+              child: Text(
+                profileData.name ?? '',
+                style: TextStyle(
+                  fontSize: isMobile ? 37 : 48,
+                  fontWeight: FontWeight.w900,
+                  height: 1.0,
+                  letterSpacing: isMobile ? -1.2 : -1.8,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            MovieText(
+              title: '${profileData.gender!.parseGender} - ${profileData.knownFor ?? ''}',
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: MovieColors.grey
+              ),
+            ),
+            const SizedBox(height: 8),
+            ProfileAgeWidget(
+              profileData: profileData,
+            ),
+            const SizedBox(height: 8),
+            const Spacer(),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 800),
+              child: Expanded(
+                child: Text(
+                  profileData.biography ?? '',
+                  style: TextStyle(
+                    color: MovieColors.white.withValues(alpha: 0.6),
+                    fontSize: 12,
+                    height: 1.4,
+                    fontWeight: FontWeight.w100
+                  ),
+                  // maxLines: 4,
+                  // overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
 }
