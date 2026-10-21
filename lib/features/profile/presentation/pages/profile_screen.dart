@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/features/profile/presentation/widgets/profile_age_widget.dart';
-import '../../../../core/utils/app_enums.dart';
-import '../../../../core/widgets/movie_image_widget.dart';
-import '../../domain/entities/profile_details_entity.dart';
+import '../widgets/profile_info_title.dart';
 import '../provider/credit_tv_provider.dart';
 import '../widgets/profile_shimmer_loader.dart';
 import '../provider/credit_movies_provider.dart';
 import '../provider/profile_details_provider.dart';
-import '../widgets/profile_info_title.dart';
+import '../../domain/entities/profile_details_entity.dart';
+import '../../../../core/utils/app_enums.dart';
+import '../../../../core/routes/app_routes.dart';
+import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/movie_colors.dart';
-import '../../../../core/routes/app_routes.dart';
-import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_cast_banner.dart';
-import '../../../../core/widgets/movie_text.dart';
+import '../../../../core/widgets/movie_image_widget.dart';
+import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/custom_sliver_app_bar.dart';
+import '../../../../features/profile/presentation/widgets/profile_age_widget.dart';
 
 class ProfileScreen extends HookConsumerWidget {
 
@@ -408,53 +408,63 @@ class ProfileWidgetWeb extends HookConsumerWidget {
           width: 195,
           radius: 6,
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 575),
-              child: Text(
-                profileData.name ?? '',
-                style: TextStyle(
-                  fontSize: isMobile ? 37 : 48,
-                  fontWeight: FontWeight.w900,
-                  height: 1.0,
-                  letterSpacing: isMobile ? -1.2 : -1.8,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            MovieText(
-              title: '${profileData.gender!.parseGender} - ${profileData.knownFor ?? ''}',
-              style: theme.textTheme.labelMedium?.copyWith(
-                color: MovieColors.grey
-              ),
-            ),
-            const SizedBox(height: 8),
-            ProfileAgeWidget(
-              profileData: profileData,
-            ),
-            const SizedBox(height: 8),
-            const Spacer(),
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 800),
-              child: Expanded(
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 575),
                 child: Text(
-                  profileData.biography ?? '',
+                  profileData.name ?? '',
                   style: TextStyle(
-                    color: MovieColors.white.withValues(alpha: 0.6),
-                    fontSize: 12,
-                    height: 1.4,
-                    fontWeight: FontWeight.w100
+                    fontSize: isMobile ? 37 : 48,
+                    fontWeight: FontWeight.w900,
+                    height: 1.0,
+                    letterSpacing: isMobile ? -1.2 : -1.8,
+                    color: Colors.white,
                   ),
-                  // maxLines: 4,
-                  // overflow: TextOverflow.ellipsis,
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 12),
+              MovieText(
+                title: '${profileData.gender!.parseGender} - ${profileData.knownFor ?? ''}',
+                style: theme.textTheme.labelMedium?.copyWith(
+                  color: MovieColors.grey
+                ),
+              ),
+              const SizedBox(height: 8),
+              ProfileAgeWidget(
+                profileData: profileData,
+              ),
+              const SizedBox(height: 12),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: LayoutBuilder(
+                    builder: (context, box) {
+                      const fontSize = 12.0;
+                      const lineHeight = 1.4;
+                      final lines = (box.maxHeight / (fontSize * lineHeight))
+                      .floor()
+                      .clamp(1, 100);
+                      return Text(
+                        profileData.biography ?? '',
+                        maxLines: lines,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: MovieColors.white.withValues(alpha: 0.6),
+                          fontSize: fontSize,
+                          height: lineHeight,
+                          fontWeight: FontWeight.w100,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
