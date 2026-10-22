@@ -6,6 +6,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:my_show/core/utils/app_enums.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../domain/entities/movie_watchlist_entity.dart';
+import '../provider/movie_favourite_provider.dart';
+import '../provider/movie_watchlist_provider.dart';
 import '../widget/genres_widget.dart';
 import '../provider/watch_provider.dart';
 import '../provider/movie_cast_provider.dart';
@@ -68,6 +71,11 @@ class MovieDetailsScreen extends HookConsumerWidget {
     final certificateList = releaseDateProvider.asData?.value?.results ?? [];
     final awards = useState<String>('');
     String watchTrailerYouTubeId = movieVideoList.firstWhere((item) => !(item.key ?? '').isBlank, orElse: () => Results()).key ?? '';
+    final movieWatchlistState = ref.watch(movieWatchlistProvider);
+    final hasWatchlistMarked = movieWatchlistState.value != null;
+    final movieFavouriteState = ref.watch(movieFavouriteProvider);
+    final hasFavouriteMarked = movieFavouriteState.value != null;
+
 
     useEffect(() {
       movieDetails.whenData((data) async {
@@ -86,6 +94,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
         final countryCode = locale.countryCode ?? 'US';
         ref.read(watchProvider.notifier).watchProvider(id: id, type: type, countryCode: countryCode);
         ref.read(releaseDatesProvider.notifier).releaseDates(id: id, countryCode: countryCode);
+        ref.read(movieWatchlistProvider.notifier).getWatchlist(id);
       });
       return null;
     }, []);
@@ -143,6 +152,8 @@ class MovieDetailsScreen extends HookConsumerWidget {
                           certificateList: certificateList,
                           movieTvWatchData: movieTvWatchData,
                           watchTrailerYouTubeId: watchTrailerYouTubeId,
+                          hasWatchlistMarked: hasWatchlistMarked,
+                          hasFavouriteMarked: hasFavouriteMarked,
                         ),
                       ),
                     ],
@@ -772,6 +783,8 @@ class MovieDetailsHero extends HookConsumerWidget {
   final List<ReleaseResults> certificateList;
   final WatchProviderModal? movieTvWatchData;
   final String watchTrailerYouTubeId;
+  final bool hasWatchlistMarked;
+  final bool hasFavouriteMarked;
 
   const MovieDetailsHero({
     super.key, 
@@ -780,7 +793,9 @@ class MovieDetailsHero extends HookConsumerWidget {
     this.type = '',
     this.certificateList = const [],
     this.movieTvWatchData,
-    this.watchTrailerYouTubeId = ''
+    this.watchTrailerYouTubeId = '',
+    this.hasWatchlistMarked = false,
+    this.hasFavouriteMarked = false,
   });
 
   @override
@@ -865,7 +880,8 @@ class MovieDetailsHero extends HookConsumerWidget {
                       context: context,
                       isMobile: screenType == ScreenType.mobile,
                       isTablet: screenType == ScreenType.tablet,
-                      theme: theme
+                      theme: theme,
+                      ref: ref
                     ),
                   ),
                 ),
@@ -882,7 +898,8 @@ class MovieDetailsHero extends HookConsumerWidget {
     required BuildContext context,
     required bool isMobile,
     required bool isTablet,
-    required ThemeData theme
+    required ThemeData theme,
+    required WidgetRef ref
   }) {
     return Row(
       spacing: 16,
@@ -973,9 +990,56 @@ class MovieDetailsHero extends HookConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   _MovieAction(
-                    icon: Icons.bookmark_border_outlined,
+                    icon: hasFavouriteMarked
+                    ? Icons.favorite
+                    : Icons.favorite_border,
+                    label: 'Favourite',
+                    iconColor: hasFavouriteMarked 
+                    ? MovieColors.red
+                    : null,
+                    onTap: () {
+                      final watchlistNotifier = ref.read(movieFavouriteProvider.notifier);
+                      if (hasFavouriteMarked) {
+                        watchlistNotifier.removeFavourite(id: id);
+                        return;
+                      }
+                      final entity = MovieWatchlistEntity(
+                        id: id,
+                        title: type == 'movie'
+                        ? movieData.title ?? ''
+                        : movieData.name ?? '',
+                        mediaType: type,
+                        posterPath: movieData.posterPath ?? '',
+                        createdDate: DateTime.now().toString()
+                      );
+                      watchlistNotifier.saveFavourite(entity: entity);
+                    },
+                  ),
+                  _MovieAction(
+                    icon: hasWatchlistMarked
+                    ? Icons.bookmark
+                    : Icons.bookmark_border_outlined,
                     label: 'Watchlist',
-                    onTap: () {},
+                    iconColor: hasWatchlistMarked 
+                    ? MovieColors.primaryColor
+                    : null,
+                    onTap: () {
+                      final watchlistNotifier = ref.read(movieWatchlistProvider.notifier);
+                      if (hasWatchlistMarked) {
+                        watchlistNotifier.removeWatchlist(id: id);
+                        return;
+                      }
+                      final entity = MovieWatchlistEntity(
+                        id: id,
+                        title: type == 'movie'
+                        ? movieData.title ?? ''
+                        : movieData.name ?? '',
+                        mediaType: type,
+                        posterPath: movieData.posterPath ?? '',
+                        createdDate: DateTime.now().toString()
+                      );
+                      watchlistNotifier.saveWatchlist(entity: entity);
+                    },
                   ),
                   _MovieAction(
                     icon: Icons.rate_review_outlined,
@@ -1072,12 +1136,14 @@ class _MovieAction extends StatelessWidget {
   const _MovieAction({
     required this.icon,
     required this.label,
+    this.iconColor,
     this.onTap
   });
 
   final IconData icon;
   final String label;
   final Function()? onTap;
+  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -1098,7 +1164,7 @@ class _MovieAction extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: MovieColors.white.withValues(alpha: 0.7),
+              color: iconColor ?? MovieColors.white.withValues(alpha: 0.7),
               size: 20,
             ),
             const SizedBox(height: 5),

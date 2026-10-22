@@ -4,6 +4,8 @@ class SharedPrefKeys {
 
   static const watchlist = 'WATCHLIST';
 
+  static const favouriteList = 'FAVOURITE_LIST';
+
   static const theme = 'THEME';
 
   static const locale = 'LOCALE';

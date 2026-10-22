@@ -33,9 +33,9 @@ class RecentSearchNotifier extends StateNotifier<AsyncValue<List<RecentSearchEnt
     getRecentSearch();
   }
 
-  bool get isRecentSearchAvailable {
-    return (state.value ?? []).isNotEmpty;
-  }
+  // bool get isRecentSearchAvailable {
+  //   return (state.value ?? []).isNotEmpty;
+  // }
 }
 
 final recentSearchProvider = StateNotifierProvider.autoDispose<RecentSearchNotifier, AsyncValue<List<RecentSearchEntity>>>((ref) {

@@ -1,9 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/features/movie_details/domain/entities/movie_award_entity.dart';
+import 'package:my_show/features/movie_details/domain/entities/movie_watchlist_entity.dart';
 import 'package:my_show/features/movie_details/domain/entities/release_dates_entity.dart';
 import 'package:my_show/features/movie_details/domain/entities/watch_provider_entity.dart';
 import '../../domain/entities/video_entity.dart';
+import '../datasource/movie_details_local_datasource.dart';
+import '../models/movie_watchlist_model.dart';
 import '/core/network/check_connectivity.dart';
 import '/core/utils/custom_exception.dart';
 import '/features/movie/domain/entities/trending_movie_entity.dart';
@@ -16,10 +19,15 @@ import '../../domain/repository/movie_details_repository.dart';
 class MovieDetailsRepoImp implements MovieDetailsRepository {
 
   final MovieDetailsRemoteDatasource movieDetailsRemoteDatasource;
+  final MovieDetailsLocalDataSource movieDetailsLocalDatasource;
 
   final CheckConnectivity connectivity;
 
-  MovieDetailsRepoImp(this.movieDetailsRemoteDatasource, this.connectivity);
+  MovieDetailsRepoImp(
+    this.movieDetailsRemoteDatasource, 
+    this.movieDetailsLocalDatasource,
+    this.connectivity
+  );
 
   @override
   Future<Either<CustomFailureException, MovieDetailEntity>> movieDetails({required String id, required String type}) async {
@@ -354,12 +362,50 @@ class MovieDetailsRepoImp implements MovieDetailsRepository {
     }
   }
 
+  @override
+  Future<MovieWatchlistEntity?> getWatchlist(String id) async {
+    return await movieDetailsLocalDatasource.getWatchlist(id);
+  }
+
+  @override
+  Future<void> removeWatchlist(String id) async {
+    movieDetailsLocalDatasource.removeWatchlist(id);
+  }
+
+  @override
+  Future<void> saveWatchlist(MovieWatchlistEntity entity) async {
+    final model = MovieWatchlistModel.fromEntity(entity);
+    movieDetailsLocalDatasource.saveWatchlist(model);
+  }
+
+
+  @override
+  Future<MovieWatchlistEntity?> getFavourite(String id) async {
+    return await movieDetailsLocalDatasource.getFavourite(id);
+  }
+
+  @override
+  Future<void> removeFavourite(String id) async {
+    movieDetailsLocalDatasource.removeFavourite(id);
+  }
+
+  @override
+  Future<void> saveFavourite(MovieWatchlistEntity entity) async {
+    final model = MovieWatchlistModel.fromEntity(entity);
+    movieDetailsLocalDatasource.saveFavourite(model);
+  }
+
 }
 
 final movieDetailsRepoProvider = Provider<MovieDetailsRepository>((ref) {
   final connection = ref.read(connectivityProvider);
   final movieDetailsDataProvider = ref.read(movieDetailsRemoteDataSourceProvider);
-  return MovieDetailsRepoImp(movieDetailsDataProvider, connection);
+  final movieDetailsLocalDataProvider = ref.read(movieDetailsLocalDataSourceProvider);
+  return MovieDetailsRepoImp(
+    movieDetailsDataProvider, 
+    movieDetailsLocalDataProvider,
+    connection
+  );
 });
 
 
