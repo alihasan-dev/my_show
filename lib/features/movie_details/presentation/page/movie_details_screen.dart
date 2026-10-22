@@ -894,143 +894,171 @@ class MovieDetailsHero extends HookConsumerWidget {
           width: 195,
           radius: 6,
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 575),
-              child: Text(
-                type == 'movie'
-                ? movieData.title ?? ''
-                : movieData.name ?? '',
-                style: TextStyle(
-                  fontSize: isMobile ? 37 : 48,
-                  fontWeight: FontWeight.w900,
-                  height: 1.0,
-                  letterSpacing: isMobile ? -1.2 : -1.8,
-                  color: Colors.white,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 575),
+                child: Text(
+                  type == 'movie'
+                  ? movieData.title ?? ''
+                  : movieData.name ?? '',
+                  style: TextStyle(
+                    fontSize: isMobile ? 37 : 48,
+                    fontWeight: FontWeight.w900,
+                    height: 1.0,
+                    letterSpacing: isMobile ? -1.2 : -1.8,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 14),
-            GenresWidget(
-              movieData: movieData,
-            ),
-            const SizedBox(height: 8),
-            RatingReleaseYearWidget(
-              movieData: movieData, 
-              certificateList: certificateList
-            ),
-            const SizedBox(height: 16),
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 575),
-              child: CustomGradientButton(
-                onTap: () {
-                  final youTubeURL = watchTrailerYouTubeId.generateYouTubeURL;
-                  if (youTubeURL.isBlank) {
-                    CustomSnackBar.show(
-                      context, 
-                      message: type == 'movie'
-                      ? AppStrings.noMovieVideosAvailable
-                      : AppStrings.noTvVideosAvailable
-                    );
-                    return;
-                  }
-                  launchUrl(Uri.parse(youTubeURL));
-                },
-                applyGradient: false,
-                color: MovieColors.primaryColor,
-                widget: Row(
-                  spacing: 4,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.play_arrow_rounded, size: 20, color: MovieColors.black),
-                    MovieText(
-                      title: 'Watch Trailer',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        color: MovieColors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500
-                      ),
-                    ),
-                  ],
-                ),
-                padding: EdgeInsetsGeometry.only(
-                  top: 8,
-                  bottom: 8,
-                  left: 10,
-                  right: 16
-                ),
+              const SizedBox(height: 14),
+              GenresWidget(
+                movieData: movieData,
               ),
-            ),
-        
-            const SizedBox(height: 18),
-        
-            Row(
-              spacing: 8,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _MovieAction(
-                  icon: Icons.bookmark_border_outlined,
-                  label: 'Watchlist',
-                  onTap: () {},
-                ),
-                _MovieAction(
-                  icon: Icons.rate_review_outlined,
-                  label: 'Review',
+              const SizedBox(height: 8),
+              RatingReleaseYearWidget(
+                movieData: movieData, 
+                certificateList: certificateList
+              ),
+              const SizedBox(height: 16),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 575),
+                child: CustomGradientButton(
                   onTap: () {
-                    context.pushNamed(
-                      AppRoutes.review,
-                      queryParameters: {
-                        'id': id,
-                        'showType': type,
-                        'title': type == 'movie' ? movieData.title : movieData.name
-                      }
-                    );
+                    final youTubeURL = watchTrailerYouTubeId.generateYouTubeURL;
+                    if (youTubeURL.isBlank) {
+                      CustomSnackBar.show(
+                        context, 
+                        message: type == 'movie'
+                        ? AppStrings.noMovieVideosAvailable
+                        : AppStrings.noTvVideosAvailable
+                      );
+                      return;
+                    }
+                    launchUrl(Uri.parse(youTubeURL));
                   },
+                  applyGradient: false,
+                  color: MovieColors.primaryColor,
+                  widget: Row(
+                    spacing: 4,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.play_arrow_rounded, size: 20, color: MovieColors.black),
+                      MovieText(
+                        title: 'Watch Trailer',
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          color: MovieColors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
+                    ],
+                  ),
+                  padding: EdgeInsetsGeometry.only(
+                    top: 8,
+                    bottom: 8,
+                    left: 10,
+                    right: 16
+                  ),
                 ),
-                if (movieTvWatchData?.watchRegion != null) ...[
+              ),
+          
+              const SizedBox(height: 18),
+          
+              Row(
+                spacing: 8,
+                mainAxisSize: MainAxisSize.min,
+                children: [
                   _MovieAction(
-                    icon: Icons.movie_outlined,
-                    label: 'Watch Provider',
+                    icon: Icons.bookmark_border_outlined,
+                    label: 'Watchlist',
+                    onTap: () {},
+                  ),
+                  _MovieAction(
+                    icon: Icons.rate_review_outlined,
+                    label: 'Review',
                     onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (_) {
-                          return AlertDialog(
-                            contentPadding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            content: SizedBox(
-                              width: 500,
-                              height: 500,
-                              child: WatchProviderBottomSheet(
-                                watchProvider: movieTvWatchData,
-                                screenType: ScreenType.mediumDesktop,
-                              ),
-                            ),
-                          );
+                      context.pushNamed(
+                        AppRoutes.review,
+                        queryParameters: {
+                          'id': id,
+                          'showType': type,
+                          'title': type == 'movie' ? movieData.title : movieData.name
                         }
                       );
                     },
                   ),
-                ]
-              ],
-            ),
-            const Spacer(),
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 575),
-              child: Text(
-                movieData.overview ?? '',
-                style: TextStyle(
-                  color: MovieColors.white.withValues(alpha: 0.6),
-                  fontSize: 12,
-                  height: 1.4,
-                  fontWeight: FontWeight.w100
+                  if (movieTvWatchData?.watchRegion != null) ...[
+                    _MovieAction(
+                      icon: Icons.movie_outlined,
+                      label: 'Watch Provider',
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialog(
+                              contentPadding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                              content: SizedBox(
+                                width: 500,
+                                height: 500,
+                                child: WatchProviderBottomSheet(
+                                  watchProvider: movieTvWatchData,
+                                  screenType: ScreenType.mediumDesktop,
+                                ),
+                              ),
+                            );
+                          }
+                        );
+                      },
+                    ),
+                  ]
+                ],
+              ),
+              // const Spacer(),
+              // ConstrainedBox(
+              //   constraints: const BoxConstraints(maxWidth: 575),
+              //   child: Text(
+              //     movieData.overview ?? '',
+              //     style: TextStyle(
+              //       color: MovieColors.white.withValues(alpha: 0.6),
+              //       fontSize: 12,
+              //       height: 1.4,
+              //       fontWeight: FontWeight.w100
+              //     ),
+              //   ),
+              // ),
+              const SizedBox(height: 12),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: LayoutBuilder(
+                    builder: (context, box) {
+                      const fontSize = 12.0;
+                      const lineHeight = 1.4;
+                      final lines = (box.maxHeight / (fontSize * lineHeight))
+                      .floor()
+                      .clamp(1, 100);
+                      return Text(
+                        movieData.overview ?? '',
+                        maxLines: lines,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: MovieColors.white.withValues(alpha: 0.6),
+                          fontSize: fontSize,
+                          height: lineHeight,
+                          fontWeight: FontWeight.w100,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
