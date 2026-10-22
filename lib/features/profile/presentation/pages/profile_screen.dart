@@ -2,23 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../domain/entities/profile_external_id_entity.dart';
+import '../widgets/profile_id_widget.dart';
 import '../widgets/profile_info_title.dart';
 import '../provider/credit_tv_provider.dart';
 import '../widgets/profile_shimmer_loader.dart';
 import '../provider/credit_movies_provider.dart';
 import '../provider/profile_details_provider.dart';
+import '../provider/profile_external_id_provider.dart';
 import '../../domain/entities/profile_details_entity.dart';
 import '../../../../core/utils/app_enums.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/movie_colors.dart';
+import '../../../../core/widgets/label_chip_widget.dart';
 import '../../../../core/widgets/movie_cast_banner.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/custom_sliver_app_bar.dart';
 import '../../../../features/profile/presentation/widgets/profile_age_widget.dart';
-
 class ProfileScreen extends HookConsumerWidget {
 
   final String userId;
@@ -31,8 +34,10 @@ class ProfileScreen extends HookConsumerWidget {
     final creditMoviesData = ref.watch(movieCreditDataProvider(userId));
     final creditTvData = ref.watch(tvCreditDataProvider(userId));
     final profileDetails = ref.watch(profileDetailsProvider(userId));
+    final profileExternalIds = ref.watch(profileExternalIdProvider(userId));
     final creditMovieList = creditMoviesData.asData?.value.castEntity ?? [];
     final creditTvList = creditTvData.asData?.value.castEntity ?? [];
+    final externalIds = profileExternalIds.asData?.value;
 
     creditMovieList.sort((a, b) {
       if ((a.releaseDate ?? '').isBlank && (b.releaseDate ?? '').isBlank) return 0;
@@ -82,6 +87,7 @@ class ProfileScreen extends HookConsumerWidget {
                         child: ProfileWidgetWeb(
                           profileData: data,
                           id: userId,
+                          externalIds: externalIds,
                         ),
                       ),
                     ],
@@ -296,11 +302,13 @@ class ProfileWidgetWeb extends HookConsumerWidget {
 
   final ProfileDetailsEntity profileData;
   final String id;
+  final ProfileExternalIdEntity? externalIds; 
 
   const ProfileWidgetWeb({
     super.key, 
     required this.profileData,
-    this.id = ''
+    this.id = '',
+    this.externalIds
   });
 
   @override
@@ -436,6 +444,16 @@ class ProfileWidgetWeb extends HookConsumerWidget {
               const SizedBox(height: 8),
               ProfileAgeWidget(
                 profileData: profileData,
+              ),
+              const SizedBox(height: 12),
+              LabeChipWidget(
+                icon: Icons.location_pin,
+                label: profileData.birthPlace ?? '',
+              ),
+              const SizedBox(height: 12),
+              ProfileIdWidget(
+                webpage: profileData.homepage,
+                externalIds: externalIds,
               ),
               const SizedBox(height: 12),
               Expanded(

@@ -29,16 +29,21 @@ $ReleaseDatesModelCopyWith<ReleaseDatesModel> get copyWith => _$ReleaseDatesMode
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReleaseDatesModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.results, results));
+  final _this = this as ReleaseDatesModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReleaseDatesModel&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.results, _this.results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(results));
+int get hashCode {
+  final _this = this as ReleaseDatesModel;
+  return Object.hash(runtimeType,_this.id,const DeepCollectionEquality().hash(_this.results));
+}
 
 @override
 String toString() {
-  return 'ReleaseDatesModel(id: $id, results: $results)';
+  final _this = this as ReleaseDatesModel;
+  return 'ReleaseDatesModel(id: ${_this.id}, results: ${_this.results})';
 }
 
 
@@ -232,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReleaseDatesModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._results, _results));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReleaseDatesModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.results, _results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_results));
+int get hashCode {
+    return Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_results));
+}
 
 @override
 String toString() {
-  return 'ReleaseDatesModel(id: $id, results: $results)';
+    return 'ReleaseDatesModel(id: $id, results: $results)';
 }
 
 
@@ -297,16 +304,21 @@ $ResultsCopyWith<Results> get copyWith => _$ResultsCopyWithImpl<Results>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Results&&(identical(other.iso3611, iso3611) || other.iso3611 == iso3611)&&const DeepCollectionEquality().equals(other.releaseDates, releaseDates));
+  final _this = this as Results;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Results&&(identical(other.iso3611, _this.iso3611) || other.iso3611 == _this.iso3611)&&const DeepCollectionEquality().equals(other.releaseDates, _this.releaseDates));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,iso3611,const DeepCollectionEquality().hash(releaseDates));
+int get hashCode {
+  final _this = this as Results;
+  return Object.hash(runtimeType,_this.iso3611,const DeepCollectionEquality().hash(_this.releaseDates));
+}
 
 @override
 String toString() {
-  return 'Results(iso3611: $iso3611, releaseDates: $releaseDates)';
+  final _this = this as Results;
+  return 'Results(iso3611: ${_this.iso3611}, releaseDates: ${_this.releaseDates})';
 }
 
 
@@ -500,16 +512,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Results&&(identical(other.iso3611, iso3611) || other.iso3611 == iso3611)&&const DeepCollectionEquality().equals(other._releaseDates, _releaseDates));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Results&&(identical(other.iso3611, iso3611) || other.iso3611 == iso3611)&&const DeepCollectionEquality().equals(other.releaseDates, _releaseDates));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,iso3611,const DeepCollectionEquality().hash(_releaseDates));
+int get hashCode {
+    return Object.hash(runtimeType,iso3611,const DeepCollectionEquality().hash(_releaseDates));
+}
 
 @override
 String toString() {
-  return 'Results(iso3611: $iso3611, releaseDates: $releaseDates)';
+    return 'Results(iso3611: $iso3611, releaseDates: $releaseDates)';
 }
 
 
@@ -565,16 +579,21 @@ $ReleaseDatesCopyWith<ReleaseDates> get copyWith => _$ReleaseDatesCopyWithImpl<R
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReleaseDates&&(identical(other.certification, certification) || other.certification == certification)&&const DeepCollectionEquality().equals(other.descriptors, descriptors)&&(identical(other.iso639, iso639) || other.iso639 == iso639)&&(identical(other.note, note) || other.note == note)&&(identical(other.releaseDate, releaseDate) || other.releaseDate == releaseDate)&&(identical(other.type, type) || other.type == type));
+  final _this = this as ReleaseDates;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReleaseDates&&(identical(other.certification, _this.certification) || other.certification == _this.certification)&&const DeepCollectionEquality().equals(other.descriptors, _this.descriptors)&&(identical(other.iso639, _this.iso639) || other.iso639 == _this.iso639)&&(identical(other.note, _this.note) || other.note == _this.note)&&(identical(other.releaseDate, _this.releaseDate) || other.releaseDate == _this.releaseDate)&&(identical(other.type, _this.type) || other.type == _this.type));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,certification,const DeepCollectionEquality().hash(descriptors),iso639,note,releaseDate,type);
+int get hashCode {
+  final _this = this as ReleaseDates;
+  return Object.hash(runtimeType,_this.certification,const DeepCollectionEquality().hash(_this.descriptors),_this.iso639,_this.note,_this.releaseDate,_this.type);
+}
 
 @override
 String toString() {
-  return 'ReleaseDates(certification: $certification, descriptors: $descriptors, iso639: $iso639, note: $note, releaseDate: $releaseDate, type: $type)';
+  final _this = this as ReleaseDates;
+  return 'ReleaseDates(certification: ${_this.certification}, descriptors: ${_this.descriptors}, iso639: ${_this.iso639}, note: ${_this.note}, releaseDate: ${_this.releaseDate}, type: ${_this.type})';
 }
 
 
@@ -776,16 +795,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReleaseDates&&(identical(other.certification, certification) || other.certification == certification)&&const DeepCollectionEquality().equals(other._descriptors, _descriptors)&&(identical(other.iso639, iso639) || other.iso639 == iso639)&&(identical(other.note, note) || other.note == note)&&(identical(other.releaseDate, releaseDate) || other.releaseDate == releaseDate)&&(identical(other.type, type) || other.type == type));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReleaseDates&&(identical(other.certification, certification) || other.certification == certification)&&const DeepCollectionEquality().equals(other.descriptors, _descriptors)&&(identical(other.iso639, iso639) || other.iso639 == iso639)&&(identical(other.note, note) || other.note == note)&&(identical(other.releaseDate, releaseDate) || other.releaseDate == releaseDate)&&(identical(other.type, type) || other.type == type));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,certification,const DeepCollectionEquality().hash(_descriptors),iso639,note,releaseDate,type);
+int get hashCode {
+    return Object.hash(runtimeType,certification,const DeepCollectionEquality().hash(_descriptors),iso639,note,releaseDate,type);
+}
 
 @override
 String toString() {
-  return 'ReleaseDates(certification: $certification, descriptors: $descriptors, iso639: $iso639, note: $note, releaseDate: $releaseDate, type: $type)';
+    return 'ReleaseDates(certification: $certification, descriptors: $descriptors, iso639: $iso639, note: $note, releaseDate: $releaseDate, type: $type)';
 }
 
 

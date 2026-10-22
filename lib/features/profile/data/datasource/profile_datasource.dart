@@ -3,12 +3,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/network/dio_provider.dart';
 import '../../../../core/utils/custom_exception.dart';
 import '../../../../features/profile/data/models/movie_credit_model.dart';
+import '../models/external_id_model.dart';
 import '../models/profile_details_model.dart';
 
 abstract class ProfileDatasource {
 
   Future<MovieCreditModel> creditMovies({required String userId, required String type});
   Future<ProfileDetailsModel> profileDetails({required String userId});
+  Future<ExternlIDModel> profileExternalIds({required String userId});
 }
 
 class ProfileDatasourceImp implements ProfileDatasource {
@@ -32,6 +34,15 @@ class ProfileDatasourceImp implements ProfileDatasource {
     final response = await dioClient.get('/3/person/$userId');
     if (response.statusCode == 200) {
       return ProfileDetailsModel.fromJson(response.data);
+    }
+    throw CustomFailureException(message: 'Something went wrong');
+  }
+
+  @override
+  Future<ExternlIDModel> profileExternalIds({required String userId}) async {
+    final response = await dioClient.get('/3/person/$userId/external_ids');
+    if (response.statusCode == 200) {
+      return ExternlIDModel.fromJson(response.data);
     }
     throw CustomFailureException(message: 'Something went wrong');
   }

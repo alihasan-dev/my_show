@@ -29,16 +29,21 @@ $VideoModelCopyWith<VideoModel> get copyWith => _$VideoModelCopyWithImpl<VideoMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is VideoModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.results, results));
+  final _this = this as VideoModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is VideoModel&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.results, _this.results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(results));
+int get hashCode {
+  final _this = this as VideoModel;
+  return Object.hash(runtimeType,_this.id,const DeepCollectionEquality().hash(_this.results));
+}
 
 @override
 String toString() {
-  return 'VideoModel(id: $id, results: $results)';
+  final _this = this as VideoModel;
+  return 'VideoModel(id: ${_this.id}, results: ${_this.results})';
 }
 
 
@@ -232,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VideoModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._results, _results));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _VideoModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.results, _results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_results));
+int get hashCode {
+    return Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_results));
+}
 
 @override
 String toString() {
-  return 'VideoModel(id: $id, results: $results)';
+    return 'VideoModel(id: $id, results: $results)';
 }
 
 
@@ -297,16 +304,21 @@ $ResultsCopyWith<Results> get copyWith => _$ResultsCopyWithImpl<Results>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Results&&(identical(other.id, id) || other.id == id)&&(identical(other.iso6391, iso6391) || other.iso6391 == iso6391)&&(identical(other.iso31661, iso31661) || other.iso31661 == iso31661)&&(identical(other.key, key) || other.key == key)&&(identical(other.name, name) || other.name == name)&&(identical(other.site, site) || other.site == site)&&(identical(other.size, size) || other.size == size)&&(identical(other.type, type) || other.type == type)&&(identical(other.official, official) || other.official == official)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt));
+  final _this = this as Results;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Results&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.iso6391, _this.iso6391) || other.iso6391 == _this.iso6391)&&(identical(other.iso31661, _this.iso31661) || other.iso31661 == _this.iso31661)&&(identical(other.key, _this.key) || other.key == _this.key)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.site, _this.site) || other.site == _this.site)&&(identical(other.size, _this.size) || other.size == _this.size)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.official, _this.official) || other.official == _this.official)&&(identical(other.publishedAt, _this.publishedAt) || other.publishedAt == _this.publishedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,iso6391,iso31661,key,name,site,size,type,official,publishedAt);
+int get hashCode {
+  final _this = this as Results;
+  return Object.hash(runtimeType,_this.id,_this.iso6391,_this.iso31661,_this.key,_this.name,_this.site,_this.size,_this.type,_this.official,_this.publishedAt);
+}
 
 @override
 String toString() {
-  return 'Results(id: $id, iso6391: $iso6391, iso31661: $iso31661, key: $key, name: $name, site: $site, size: $size, type: $type, official: $official, publishedAt: $publishedAt)';
+  final _this = this as Results;
+  return 'Results(id: ${_this.id}, iso6391: ${_this.iso6391}, iso31661: ${_this.iso31661}, key: ${_this.key}, name: ${_this.name}, site: ${_this.site}, size: ${_this.size}, type: ${_this.type}, official: ${_this.official}, publishedAt: ${_this.publishedAt})';
 }
 
 
@@ -508,16 +520,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Results&&(identical(other.id, id) || other.id == id)&&(identical(other.iso6391, iso6391) || other.iso6391 == iso6391)&&(identical(other.iso31661, iso31661) || other.iso31661 == iso31661)&&(identical(other.key, key) || other.key == key)&&(identical(other.name, name) || other.name == name)&&(identical(other.site, site) || other.site == site)&&(identical(other.size, size) || other.size == size)&&(identical(other.type, type) || other.type == type)&&(identical(other.official, official) || other.official == official)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Results&&(identical(other.id, id) || other.id == id)&&(identical(other.iso6391, iso6391) || other.iso6391 == iso6391)&&(identical(other.iso31661, iso31661) || other.iso31661 == iso31661)&&(identical(other.key, key) || other.key == key)&&(identical(other.name, name) || other.name == name)&&(identical(other.site, site) || other.site == site)&&(identical(other.size, size) || other.size == size)&&(identical(other.type, type) || other.type == type)&&(identical(other.official, official) || other.official == official)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,iso6391,iso31661,key,name,site,size,type,official,publishedAt);
+int get hashCode {
+    return Object.hash(runtimeType,id,iso6391,iso31661,key,name,site,size,type,official,publishedAt);
+}
 
 @override
 String toString() {
-  return 'Results(id: $id, iso6391: $iso6391, iso31661: $iso31661, key: $key, name: $name, site: $site, size: $size, type: $type, official: $official, publishedAt: $publishedAt)';
+    return 'Results(id: $id, iso6391: $iso6391, iso31661: $iso31661, key: $key, name: $name, site: $site, size: $size, type: $type, official: $official, publishedAt: $publishedAt)';
 }
 
 

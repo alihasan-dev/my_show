@@ -29,16 +29,21 @@ $MovieDetailsModelCopyWith<MovieDetailsModel> get copyWith => _$MovieDetailsMode
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MovieDetailsModel&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.backdropPath, backdropPath) || other.backdropPath == backdropPath)&&const DeepCollectionEquality().equals(other.belongsToCollection, belongsToCollection)&&(identical(other.budget, budget) || other.budget == budget)&&const DeepCollectionEquality().equals(other.genres, genres)&&(identical(other.homepage, homepage) || other.homepage == homepage)&&(identical(other.id, id) || other.id == id)&&(identical(other.imdbId, imdbId) || other.imdbId == imdbId)&&const DeepCollectionEquality().equals(other.originCountry, originCountry)&&(identical(other.originalLanguage, originalLanguage) || other.originalLanguage == originalLanguage)&&(identical(other.originalTitle, originalTitle) || other.originalTitle == originalTitle)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&const DeepCollectionEquality().equals(other.productionCompanies, productionCompanies)&&const DeepCollectionEquality().equals(other.productionCountries, productionCountries)&&(identical(other.releaseDate, releaseDate) || other.releaseDate == releaseDate)&&(identical(other.firstAirDate, firstAirDate) || other.firstAirDate == firstAirDate)&&(identical(other.revenue, revenue) || other.revenue == revenue)&&(identical(other.runtime, runtime) || other.runtime == runtime)&&const DeepCollectionEquality().equals(other.spokenLanguages, spokenLanguages)&&(identical(other.status, status) || other.status == status)&&(identical(other.tagline, tagline) || other.tagline == tagline)&&(identical(other.type, type) || other.type == type)&&(identical(other.title, title) || other.title == title)&&(identical(other.name, name) || other.name == name)&&(identical(other.video, video) || other.video == video)&&(identical(other.numberOfEpisodes, numberOfEpisodes) || other.numberOfEpisodes == numberOfEpisodes)&&(identical(other.numberOfSeasons, numberOfSeasons) || other.numberOfSeasons == numberOfSeasons)&&const DeepCollectionEquality().equals(other.networks, networks)&&const DeepCollectionEquality().equals(other.seasons, seasons)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount));
+  final _this = this as MovieDetailsModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MovieDetailsModel&&(identical(other.adult, _this.adult) || other.adult == _this.adult)&&(identical(other.backdropPath, _this.backdropPath) || other.backdropPath == _this.backdropPath)&&const DeepCollectionEquality().equals(other.belongsToCollection, _this.belongsToCollection)&&(identical(other.budget, _this.budget) || other.budget == _this.budget)&&const DeepCollectionEquality().equals(other.genres, _this.genres)&&(identical(other.homepage, _this.homepage) || other.homepage == _this.homepage)&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.imdbId, _this.imdbId) || other.imdbId == _this.imdbId)&&const DeepCollectionEquality().equals(other.originCountry, _this.originCountry)&&(identical(other.originalLanguage, _this.originalLanguage) || other.originalLanguage == _this.originalLanguage)&&(identical(other.originalTitle, _this.originalTitle) || other.originalTitle == _this.originalTitle)&&(identical(other.originalName, _this.originalName) || other.originalName == _this.originalName)&&(identical(other.overview, _this.overview) || other.overview == _this.overview)&&(identical(other.popularity, _this.popularity) || other.popularity == _this.popularity)&&(identical(other.posterPath, _this.posterPath) || other.posterPath == _this.posterPath)&&const DeepCollectionEquality().equals(other.productionCompanies, _this.productionCompanies)&&const DeepCollectionEquality().equals(other.productionCountries, _this.productionCountries)&&(identical(other.releaseDate, _this.releaseDate) || other.releaseDate == _this.releaseDate)&&(identical(other.firstAirDate, _this.firstAirDate) || other.firstAirDate == _this.firstAirDate)&&(identical(other.revenue, _this.revenue) || other.revenue == _this.revenue)&&(identical(other.runtime, _this.runtime) || other.runtime == _this.runtime)&&const DeepCollectionEquality().equals(other.spokenLanguages, _this.spokenLanguages)&&(identical(other.status, _this.status) || other.status == _this.status)&&(identical(other.tagline, _this.tagline) || other.tagline == _this.tagline)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.video, _this.video) || other.video == _this.video)&&(identical(other.numberOfEpisodes, _this.numberOfEpisodes) || other.numberOfEpisodes == _this.numberOfEpisodes)&&(identical(other.numberOfSeasons, _this.numberOfSeasons) || other.numberOfSeasons == _this.numberOfSeasons)&&const DeepCollectionEquality().equals(other.networks, _this.networks)&&const DeepCollectionEquality().equals(other.seasons, _this.seasons)&&(identical(other.voteAverage, _this.voteAverage) || other.voteAverage == _this.voteAverage)&&(identical(other.voteCount, _this.voteCount) || other.voteCount == _this.voteCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,adult,backdropPath,const DeepCollectionEquality().hash(belongsToCollection),budget,const DeepCollectionEquality().hash(genres),homepage,id,imdbId,const DeepCollectionEquality().hash(originCountry),originalLanguage,originalTitle,originalName,overview,popularity,posterPath,const DeepCollectionEquality().hash(productionCompanies),const DeepCollectionEquality().hash(productionCountries),releaseDate,firstAirDate,revenue,runtime,const DeepCollectionEquality().hash(spokenLanguages),status,tagline,type,title,name,video,numberOfEpisodes,numberOfSeasons,const DeepCollectionEquality().hash(networks),const DeepCollectionEquality().hash(seasons),voteAverage,voteCount]);
+int get hashCode {
+  final _this = this as MovieDetailsModel;
+  return Object.hashAll([runtimeType,_this.adult,_this.backdropPath,const DeepCollectionEquality().hash(_this.belongsToCollection),_this.budget,const DeepCollectionEquality().hash(_this.genres),_this.homepage,_this.id,_this.imdbId,const DeepCollectionEquality().hash(_this.originCountry),_this.originalLanguage,_this.originalTitle,_this.originalName,_this.overview,_this.popularity,_this.posterPath,const DeepCollectionEquality().hash(_this.productionCompanies),const DeepCollectionEquality().hash(_this.productionCountries),_this.releaseDate,_this.firstAirDate,_this.revenue,_this.runtime,const DeepCollectionEquality().hash(_this.spokenLanguages),_this.status,_this.tagline,_this.type,_this.title,_this.name,_this.video,_this.numberOfEpisodes,_this.numberOfSeasons,const DeepCollectionEquality().hash(_this.networks),const DeepCollectionEquality().hash(_this.seasons),_this.voteAverage,_this.voteCount]);
+}
 
 @override
 String toString() {
-  return 'MovieDetailsModel(adult: $adult, backdropPath: $backdropPath, belongsToCollection: $belongsToCollection, budget: $budget, genres: $genres, homepage: $homepage, id: $id, imdbId: $imdbId, originCountry: $originCountry, originalLanguage: $originalLanguage, originalTitle: $originalTitle, originalName: $originalName, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, releaseDate: $releaseDate, firstAirDate: $firstAirDate, revenue: $revenue, runtime: $runtime, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, type: $type, title: $title, name: $name, video: $video, numberOfEpisodes: $numberOfEpisodes, numberOfSeasons: $numberOfSeasons, networks: $networks, seasons: $seasons, voteAverage: $voteAverage, voteCount: $voteCount)';
+  final _this = this as MovieDetailsModel;
+  return 'MovieDetailsModel(adult: ${_this.adult}, backdropPath: ${_this.backdropPath}, belongsToCollection: ${_this.belongsToCollection}, budget: ${_this.budget}, genres: ${_this.genres}, homepage: ${_this.homepage}, id: ${_this.id}, imdbId: ${_this.imdbId}, originCountry: ${_this.originCountry}, originalLanguage: ${_this.originalLanguage}, originalTitle: ${_this.originalTitle}, originalName: ${_this.originalName}, overview: ${_this.overview}, popularity: ${_this.popularity}, posterPath: ${_this.posterPath}, productionCompanies: ${_this.productionCompanies}, productionCountries: ${_this.productionCountries}, releaseDate: ${_this.releaseDate}, firstAirDate: ${_this.firstAirDate}, revenue: ${_this.revenue}, runtime: ${_this.runtime}, spokenLanguages: ${_this.spokenLanguages}, status: ${_this.status}, tagline: ${_this.tagline}, type: ${_this.type}, title: ${_this.title}, name: ${_this.name}, video: ${_this.video}, numberOfEpisodes: ${_this.numberOfEpisodes}, numberOfSeasons: ${_this.numberOfSeasons}, networks: ${_this.networks}, seasons: ${_this.seasons}, voteAverage: ${_this.voteAverage}, voteCount: ${_this.voteCount})';
 }
 
 
@@ -344,16 +349,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MovieDetailsModel&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.backdropPath, backdropPath) || other.backdropPath == backdropPath)&&const DeepCollectionEquality().equals(other.belongsToCollection, belongsToCollection)&&(identical(other.budget, budget) || other.budget == budget)&&const DeepCollectionEquality().equals(other._genres, _genres)&&(identical(other.homepage, homepage) || other.homepage == homepage)&&(identical(other.id, id) || other.id == id)&&(identical(other.imdbId, imdbId) || other.imdbId == imdbId)&&const DeepCollectionEquality().equals(other._originCountry, _originCountry)&&(identical(other.originalLanguage, originalLanguage) || other.originalLanguage == originalLanguage)&&(identical(other.originalTitle, originalTitle) || other.originalTitle == originalTitle)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&const DeepCollectionEquality().equals(other._productionCompanies, _productionCompanies)&&const DeepCollectionEquality().equals(other._productionCountries, _productionCountries)&&(identical(other.releaseDate, releaseDate) || other.releaseDate == releaseDate)&&(identical(other.firstAirDate, firstAirDate) || other.firstAirDate == firstAirDate)&&(identical(other.revenue, revenue) || other.revenue == revenue)&&(identical(other.runtime, runtime) || other.runtime == runtime)&&const DeepCollectionEquality().equals(other._spokenLanguages, _spokenLanguages)&&(identical(other.status, status) || other.status == status)&&(identical(other.tagline, tagline) || other.tagline == tagline)&&(identical(other.type, type) || other.type == type)&&(identical(other.title, title) || other.title == title)&&(identical(other.name, name) || other.name == name)&&(identical(other.video, video) || other.video == video)&&(identical(other.numberOfEpisodes, numberOfEpisodes) || other.numberOfEpisodes == numberOfEpisodes)&&(identical(other.numberOfSeasons, numberOfSeasons) || other.numberOfSeasons == numberOfSeasons)&&const DeepCollectionEquality().equals(other._networks, _networks)&&const DeepCollectionEquality().equals(other._seasons, _seasons)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _MovieDetailsModel&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.backdropPath, backdropPath) || other.backdropPath == backdropPath)&&const DeepCollectionEquality().equals(other.belongsToCollection, belongsToCollection)&&(identical(other.budget, budget) || other.budget == budget)&&const DeepCollectionEquality().equals(other.genres, _genres)&&(identical(other.homepage, homepage) || other.homepage == homepage)&&(identical(other.id, id) || other.id == id)&&(identical(other.imdbId, imdbId) || other.imdbId == imdbId)&&const DeepCollectionEquality().equals(other.originCountry, _originCountry)&&(identical(other.originalLanguage, originalLanguage) || other.originalLanguage == originalLanguage)&&(identical(other.originalTitle, originalTitle) || other.originalTitle == originalTitle)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&const DeepCollectionEquality().equals(other.productionCompanies, _productionCompanies)&&const DeepCollectionEquality().equals(other.productionCountries, _productionCountries)&&(identical(other.releaseDate, releaseDate) || other.releaseDate == releaseDate)&&(identical(other.firstAirDate, firstAirDate) || other.firstAirDate == firstAirDate)&&(identical(other.revenue, revenue) || other.revenue == revenue)&&(identical(other.runtime, runtime) || other.runtime == runtime)&&const DeepCollectionEquality().equals(other.spokenLanguages, _spokenLanguages)&&(identical(other.status, status) || other.status == status)&&(identical(other.tagline, tagline) || other.tagline == tagline)&&(identical(other.type, type) || other.type == type)&&(identical(other.title, title) || other.title == title)&&(identical(other.name, name) || other.name == name)&&(identical(other.video, video) || other.video == video)&&(identical(other.numberOfEpisodes, numberOfEpisodes) || other.numberOfEpisodes == numberOfEpisodes)&&(identical(other.numberOfSeasons, numberOfSeasons) || other.numberOfSeasons == numberOfSeasons)&&const DeepCollectionEquality().equals(other.networks, _networks)&&const DeepCollectionEquality().equals(other.seasons, _seasons)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,adult,backdropPath,const DeepCollectionEquality().hash(belongsToCollection),budget,const DeepCollectionEquality().hash(_genres),homepage,id,imdbId,const DeepCollectionEquality().hash(_originCountry),originalLanguage,originalTitle,originalName,overview,popularity,posterPath,const DeepCollectionEquality().hash(_productionCompanies),const DeepCollectionEquality().hash(_productionCountries),releaseDate,firstAirDate,revenue,runtime,const DeepCollectionEquality().hash(_spokenLanguages),status,tagline,type,title,name,video,numberOfEpisodes,numberOfSeasons,const DeepCollectionEquality().hash(_networks),const DeepCollectionEquality().hash(_seasons),voteAverage,voteCount]);
+int get hashCode {
+    return Object.hashAll([runtimeType,adult,backdropPath,const DeepCollectionEquality().hash(belongsToCollection),budget,const DeepCollectionEquality().hash(_genres),homepage,id,imdbId,const DeepCollectionEquality().hash(_originCountry),originalLanguage,originalTitle,originalName,overview,popularity,posterPath,const DeepCollectionEquality().hash(_productionCompanies),const DeepCollectionEquality().hash(_productionCountries),releaseDate,firstAirDate,revenue,runtime,const DeepCollectionEquality().hash(_spokenLanguages),status,tagline,type,title,name,video,numberOfEpisodes,numberOfSeasons,const DeepCollectionEquality().hash(_networks),const DeepCollectionEquality().hash(_seasons),voteAverage,voteCount]);
+}
 
 @override
 String toString() {
-  return 'MovieDetailsModel(adult: $adult, backdropPath: $backdropPath, belongsToCollection: $belongsToCollection, budget: $budget, genres: $genres, homepage: $homepage, id: $id, imdbId: $imdbId, originCountry: $originCountry, originalLanguage: $originalLanguage, originalTitle: $originalTitle, originalName: $originalName, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, releaseDate: $releaseDate, firstAirDate: $firstAirDate, revenue: $revenue, runtime: $runtime, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, type: $type, title: $title, name: $name, video: $video, numberOfEpisodes: $numberOfEpisodes, numberOfSeasons: $numberOfSeasons, networks: $networks, seasons: $seasons, voteAverage: $voteAverage, voteCount: $voteCount)';
+    return 'MovieDetailsModel(adult: $adult, backdropPath: $backdropPath, belongsToCollection: $belongsToCollection, budget: $budget, genres: $genres, homepage: $homepage, id: $id, imdbId: $imdbId, originCountry: $originCountry, originalLanguage: $originalLanguage, originalTitle: $originalTitle, originalName: $originalName, overview: $overview, popularity: $popularity, posterPath: $posterPath, productionCompanies: $productionCompanies, productionCountries: $productionCountries, releaseDate: $releaseDate, firstAirDate: $firstAirDate, revenue: $revenue, runtime: $runtime, spokenLanguages: $spokenLanguages, status: $status, tagline: $tagline, type: $type, title: $title, name: $name, video: $video, numberOfEpisodes: $numberOfEpisodes, numberOfSeasons: $numberOfSeasons, networks: $networks, seasons: $seasons, voteAverage: $voteAverage, voteCount: $voteCount)';
 }
 
 
@@ -441,16 +448,21 @@ $GenreCopyWith<Genre> get copyWith => _$GenreCopyWithImpl<Genre>(this as Genre, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Genre&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name));
+  final _this = this as Genre;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Genre&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.name, _this.name) || other.name == _this.name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name);
+int get hashCode {
+  final _this = this as Genre;
+  return Object.hash(runtimeType,_this.id,_this.name);
+}
 
 @override
 String toString() {
-  return 'Genre(id: $id, name: $name)';
+  final _this = this as Genre;
+  return 'Genre(id: ${_this.id}, name: ${_this.name})';
 }
 
 
@@ -636,16 +648,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Genre&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Genre&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name);
+int get hashCode {
+    return Object.hash(runtimeType,id,name);
+}
 
 @override
 String toString() {
-  return 'Genre(id: $id, name: $name)';
+    return 'Genre(id: $id, name: $name)';
 }
 
 
@@ -701,16 +715,21 @@ $ProductionCompanyCopyWith<ProductionCompany> get copyWith => _$ProductionCompan
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductionCompany&&(identical(other.id, id) || other.id == id)&&(identical(other.logoPath, logoPath) || other.logoPath == logoPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.originCountry, originCountry) || other.originCountry == originCountry));
+  final _this = this as ProductionCompany;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductionCompany&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.logoPath, _this.logoPath) || other.logoPath == _this.logoPath)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.originCountry, _this.originCountry) || other.originCountry == _this.originCountry));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,logoPath,name,originCountry);
+int get hashCode {
+  final _this = this as ProductionCompany;
+  return Object.hash(runtimeType,_this.id,_this.logoPath,_this.name,_this.originCountry);
+}
 
 @override
 String toString() {
-  return 'ProductionCompany(id: $id, logoPath: $logoPath, name: $name, originCountry: $originCountry)';
+  final _this = this as ProductionCompany;
+  return 'ProductionCompany(id: ${_this.id}, logoPath: ${_this.logoPath}, name: ${_this.name}, originCountry: ${_this.originCountry})';
 }
 
 
@@ -900,16 +919,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductionCompany&&(identical(other.id, id) || other.id == id)&&(identical(other.logoPath, logoPath) || other.logoPath == logoPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.originCountry, originCountry) || other.originCountry == originCountry));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductionCompany&&(identical(other.id, id) || other.id == id)&&(identical(other.logoPath, logoPath) || other.logoPath == logoPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.originCountry, originCountry) || other.originCountry == originCountry));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,logoPath,name,originCountry);
+int get hashCode {
+    return Object.hash(runtimeType,id,logoPath,name,originCountry);
+}
 
 @override
 String toString() {
-  return 'ProductionCompany(id: $id, logoPath: $logoPath, name: $name, originCountry: $originCountry)';
+    return 'ProductionCompany(id: $id, logoPath: $logoPath, name: $name, originCountry: $originCountry)';
 }
 
 
@@ -967,16 +988,21 @@ $ProductionCountryCopyWith<ProductionCountry> get copyWith => _$ProductionCountr
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductionCountry&&(identical(other.iso31661, iso31661) || other.iso31661 == iso31661)&&(identical(other.name, name) || other.name == name));
+  final _this = this as ProductionCountry;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductionCountry&&(identical(other.iso31661, _this.iso31661) || other.iso31661 == _this.iso31661)&&(identical(other.name, _this.name) || other.name == _this.name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,iso31661,name);
+int get hashCode {
+  final _this = this as ProductionCountry;
+  return Object.hash(runtimeType,_this.iso31661,_this.name);
+}
 
 @override
 String toString() {
-  return 'ProductionCountry(iso31661: $iso31661, name: $name)';
+  final _this = this as ProductionCountry;
+  return 'ProductionCountry(iso31661: ${_this.iso31661}, name: ${_this.name})';
 }
 
 
@@ -1162,16 +1188,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductionCountry&&(identical(other.iso31661, iso31661) || other.iso31661 == iso31661)&&(identical(other.name, name) || other.name == name));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductionCountry&&(identical(other.iso31661, iso31661) || other.iso31661 == iso31661)&&(identical(other.name, name) || other.name == name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,iso31661,name);
+int get hashCode {
+    return Object.hash(runtimeType,iso31661,name);
+}
 
 @override
 String toString() {
-  return 'ProductionCountry(iso31661: $iso31661, name: $name)';
+    return 'ProductionCountry(iso31661: $iso31661, name: $name)';
 }
 
 
@@ -1227,16 +1255,21 @@ $SpokenLanguageCopyWith<SpokenLanguage> get copyWith => _$SpokenLanguageCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SpokenLanguage&&(identical(other.englishName, englishName) || other.englishName == englishName)&&(identical(other.iso6391, iso6391) || other.iso6391 == iso6391)&&(identical(other.name, name) || other.name == name));
+  final _this = this as SpokenLanguage;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SpokenLanguage&&(identical(other.englishName, _this.englishName) || other.englishName == _this.englishName)&&(identical(other.iso6391, _this.iso6391) || other.iso6391 == _this.iso6391)&&(identical(other.name, _this.name) || other.name == _this.name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,englishName,iso6391,name);
+int get hashCode {
+  final _this = this as SpokenLanguage;
+  return Object.hash(runtimeType,_this.englishName,_this.iso6391,_this.name);
+}
 
 @override
 String toString() {
-  return 'SpokenLanguage(englishName: $englishName, iso6391: $iso6391, name: $name)';
+  final _this = this as SpokenLanguage;
+  return 'SpokenLanguage(englishName: ${_this.englishName}, iso6391: ${_this.iso6391}, name: ${_this.name})';
 }
 
 
@@ -1424,16 +1457,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SpokenLanguage&&(identical(other.englishName, englishName) || other.englishName == englishName)&&(identical(other.iso6391, iso6391) || other.iso6391 == iso6391)&&(identical(other.name, name) || other.name == name));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SpokenLanguage&&(identical(other.englishName, englishName) || other.englishName == englishName)&&(identical(other.iso6391, iso6391) || other.iso6391 == iso6391)&&(identical(other.name, name) || other.name == name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,englishName,iso6391,name);
+int get hashCode {
+    return Object.hash(runtimeType,englishName,iso6391,name);
+}
 
 @override
 String toString() {
-  return 'SpokenLanguage(englishName: $englishName, iso6391: $iso6391, name: $name)';
+    return 'SpokenLanguage(englishName: $englishName, iso6391: $iso6391, name: $name)';
 }
 
 
@@ -1490,16 +1525,21 @@ $NetworksCopyWith<Networks> get copyWith => _$NetworksCopyWithImpl<Networks>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Networks&&(identical(other.id, id) || other.id == id)&&(identical(other.logoPath, logoPath) || other.logoPath == logoPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.originCountry, originCountry) || other.originCountry == originCountry));
+  final _this = this as Networks;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Networks&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.logoPath, _this.logoPath) || other.logoPath == _this.logoPath)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.originCountry, _this.originCountry) || other.originCountry == _this.originCountry));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,logoPath,name,originCountry);
+int get hashCode {
+  final _this = this as Networks;
+  return Object.hash(runtimeType,_this.id,_this.logoPath,_this.name,_this.originCountry);
+}
 
 @override
 String toString() {
-  return 'Networks(id: $id, logoPath: $logoPath, name: $name, originCountry: $originCountry)';
+  final _this = this as Networks;
+  return 'Networks(id: ${_this.id}, logoPath: ${_this.logoPath}, name: ${_this.name}, originCountry: ${_this.originCountry})';
 }
 
 
@@ -1689,16 +1729,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Networks&&(identical(other.id, id) || other.id == id)&&(identical(other.logoPath, logoPath) || other.logoPath == logoPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.originCountry, originCountry) || other.originCountry == originCountry));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Networks&&(identical(other.id, id) || other.id == id)&&(identical(other.logoPath, logoPath) || other.logoPath == logoPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.originCountry, originCountry) || other.originCountry == originCountry));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,logoPath,name,originCountry);
+int get hashCode {
+    return Object.hash(runtimeType,id,logoPath,name,originCountry);
+}
 
 @override
 String toString() {
-  return 'Networks(id: $id, logoPath: $logoPath, name: $name, originCountry: $originCountry)';
+    return 'Networks(id: $id, logoPath: $logoPath, name: $name, originCountry: $originCountry)';
 }
 
 
@@ -1756,16 +1798,21 @@ $SeasonsCopyWith<Seasons> get copyWith => _$SeasonsCopyWithImpl<Seasons>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Seasons&&(identical(other.airDate, airDate) || other.airDate == airDate)&&(identical(other.episodeCount, episodeCount) || other.episodeCount == episodeCount)&&(identical(other.id, id) || other.id == id)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.seasonNumber, seasonNumber) || other.seasonNumber == seasonNumber)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage));
+  final _this = this as Seasons;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Seasons&&(identical(other.airDate, _this.airDate) || other.airDate == _this.airDate)&&(identical(other.episodeCount, _this.episodeCount) || other.episodeCount == _this.episodeCount)&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.posterPath, _this.posterPath) || other.posterPath == _this.posterPath)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.overview, _this.overview) || other.overview == _this.overview)&&(identical(other.seasonNumber, _this.seasonNumber) || other.seasonNumber == _this.seasonNumber)&&(identical(other.voteAverage, _this.voteAverage) || other.voteAverage == _this.voteAverage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,airDate,episodeCount,id,posterPath,name,overview,seasonNumber,voteAverage);
+int get hashCode {
+  final _this = this as Seasons;
+  return Object.hash(runtimeType,_this.airDate,_this.episodeCount,_this.id,_this.posterPath,_this.name,_this.overview,_this.seasonNumber,_this.voteAverage);
+}
 
 @override
 String toString() {
-  return 'Seasons(airDate: $airDate, episodeCount: $episodeCount, id: $id, posterPath: $posterPath, name: $name, overview: $overview, seasonNumber: $seasonNumber, voteAverage: $voteAverage)';
+  final _this = this as Seasons;
+  return 'Seasons(airDate: ${_this.airDate}, episodeCount: ${_this.episodeCount}, id: ${_this.id}, posterPath: ${_this.posterPath}, name: ${_this.name}, overview: ${_this.overview}, seasonNumber: ${_this.seasonNumber}, voteAverage: ${_this.voteAverage})';
 }
 
 
@@ -1963,16 +2010,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Seasons&&(identical(other.airDate, airDate) || other.airDate == airDate)&&(identical(other.episodeCount, episodeCount) || other.episodeCount == episodeCount)&&(identical(other.id, id) || other.id == id)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.seasonNumber, seasonNumber) || other.seasonNumber == seasonNumber)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Seasons&&(identical(other.airDate, airDate) || other.airDate == airDate)&&(identical(other.episodeCount, episodeCount) || other.episodeCount == episodeCount)&&(identical(other.id, id) || other.id == id)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.seasonNumber, seasonNumber) || other.seasonNumber == seasonNumber)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,airDate,episodeCount,id,posterPath,name,overview,seasonNumber,voteAverage);
+int get hashCode {
+    return Object.hash(runtimeType,airDate,episodeCount,id,posterPath,name,overview,seasonNumber,voteAverage);
+}
 
 @override
 String toString() {
-  return 'Seasons(airDate: $airDate, episodeCount: $episodeCount, id: $id, posterPath: $posterPath, name: $name, overview: $overview, seasonNumber: $seasonNumber, voteAverage: $voteAverage)';
+    return 'Seasons(airDate: $airDate, episodeCount: $episodeCount, id: $id, posterPath: $posterPath, name: $name, overview: $overview, seasonNumber: $seasonNumber, voteAverage: $voteAverage)';
 }
 
 

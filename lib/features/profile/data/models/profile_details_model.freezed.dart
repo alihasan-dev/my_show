@@ -29,16 +29,21 @@ $ProfileDetailsModelCopyWith<ProfileDetailsModel> get copyWith => _$ProfileDetai
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileDetailsModel&&(identical(other.adult, adult) || other.adult == adult)&&const DeepCollectionEquality().equals(other.knownFor, knownFor)&&(identical(other.biography, biography) || other.biography == biography)&&(identical(other.birthday, birthday) || other.birthday == birthday)&&(identical(other.deathday, deathday) || other.deathday == deathday)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.homepage, homepage) || other.homepage == homepage)&&(identical(other.id, id) || other.id == id)&&(identical(other.imdbId, imdbId) || other.imdbId == imdbId)&&(identical(other.knownForDepartment, knownForDepartment) || other.knownForDepartment == knownForDepartment)&&(identical(other.name, name) || other.name == name)&&(identical(other.birthPlace, birthPlace) || other.birthPlace == birthPlace)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath));
+  final _this = this as ProfileDetailsModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileDetailsModel&&(identical(other.adult, _this.adult) || other.adult == _this.adult)&&const DeepCollectionEquality().equals(other.knownFor, _this.knownFor)&&(identical(other.biography, _this.biography) || other.biography == _this.biography)&&(identical(other.birthday, _this.birthday) || other.birthday == _this.birthday)&&(identical(other.deathday, _this.deathday) || other.deathday == _this.deathday)&&(identical(other.gender, _this.gender) || other.gender == _this.gender)&&(identical(other.homepage, _this.homepage) || other.homepage == _this.homepage)&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.imdbId, _this.imdbId) || other.imdbId == _this.imdbId)&&(identical(other.knownForDepartment, _this.knownForDepartment) || other.knownForDepartment == _this.knownForDepartment)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.birthPlace, _this.birthPlace) || other.birthPlace == _this.birthPlace)&&(identical(other.popularity, _this.popularity) || other.popularity == _this.popularity)&&(identical(other.profilePath, _this.profilePath) || other.profilePath == _this.profilePath));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,adult,const DeepCollectionEquality().hash(knownFor),biography,birthday,deathday,gender,homepage,id,imdbId,knownForDepartment,name,birthPlace,popularity,profilePath);
+int get hashCode {
+  final _this = this as ProfileDetailsModel;
+  return Object.hash(runtimeType,_this.adult,const DeepCollectionEquality().hash(_this.knownFor),_this.biography,_this.birthday,_this.deathday,_this.gender,_this.homepage,_this.id,_this.imdbId,_this.knownForDepartment,_this.name,_this.birthPlace,_this.popularity,_this.profilePath);
+}
 
 @override
 String toString() {
-  return 'ProfileDetailsModel(adult: $adult, knownFor: $knownFor, biography: $biography, birthday: $birthday, deathday: $deathday, gender: $gender, homepage: $homepage, id: $id, imdbId: $imdbId, knownForDepartment: $knownForDepartment, name: $name, birthPlace: $birthPlace, popularity: $popularity, profilePath: $profilePath)';
+  final _this = this as ProfileDetailsModel;
+  return 'ProfileDetailsModel(adult: ${_this.adult}, knownFor: ${_this.knownFor}, biography: ${_this.biography}, birthday: ${_this.birthday}, deathday: ${_this.deathday}, gender: ${_this.gender}, homepage: ${_this.homepage}, id: ${_this.id}, imdbId: ${_this.imdbId}, knownForDepartment: ${_this.knownForDepartment}, name: ${_this.name}, birthPlace: ${_this.birthPlace}, popularity: ${_this.popularity}, profilePath: ${_this.profilePath})';
 }
 
 
@@ -256,16 +261,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileDetailsModel&&(identical(other.adult, adult) || other.adult == adult)&&const DeepCollectionEquality().equals(other._knownFor, _knownFor)&&(identical(other.biography, biography) || other.biography == biography)&&(identical(other.birthday, birthday) || other.birthday == birthday)&&(identical(other.deathday, deathday) || other.deathday == deathday)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.homepage, homepage) || other.homepage == homepage)&&(identical(other.id, id) || other.id == id)&&(identical(other.imdbId, imdbId) || other.imdbId == imdbId)&&(identical(other.knownForDepartment, knownForDepartment) || other.knownForDepartment == knownForDepartment)&&(identical(other.name, name) || other.name == name)&&(identical(other.birthPlace, birthPlace) || other.birthPlace == birthPlace)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileDetailsModel&&(identical(other.adult, adult) || other.adult == adult)&&const DeepCollectionEquality().equals(other.knownFor, _knownFor)&&(identical(other.biography, biography) || other.biography == biography)&&(identical(other.birthday, birthday) || other.birthday == birthday)&&(identical(other.deathday, deathday) || other.deathday == deathday)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.homepage, homepage) || other.homepage == homepage)&&(identical(other.id, id) || other.id == id)&&(identical(other.imdbId, imdbId) || other.imdbId == imdbId)&&(identical(other.knownForDepartment, knownForDepartment) || other.knownForDepartment == knownForDepartment)&&(identical(other.name, name) || other.name == name)&&(identical(other.birthPlace, birthPlace) || other.birthPlace == birthPlace)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,adult,const DeepCollectionEquality().hash(_knownFor),biography,birthday,deathday,gender,homepage,id,imdbId,knownForDepartment,name,birthPlace,popularity,profilePath);
+int get hashCode {
+    return Object.hash(runtimeType,adult,const DeepCollectionEquality().hash(_knownFor),biography,birthday,deathday,gender,homepage,id,imdbId,knownForDepartment,name,birthPlace,popularity,profilePath);
+}
 
 @override
 String toString() {
-  return 'ProfileDetailsModel(adult: $adult, knownFor: $knownFor, biography: $biography, birthday: $birthday, deathday: $deathday, gender: $gender, homepage: $homepage, id: $id, imdbId: $imdbId, knownForDepartment: $knownForDepartment, name: $name, birthPlace: $birthPlace, popularity: $popularity, profilePath: $profilePath)';
+    return 'ProfileDetailsModel(adult: $adult, knownFor: $knownFor, biography: $biography, birthday: $birthday, deathday: $deathday, gender: $gender, homepage: $homepage, id: $id, imdbId: $imdbId, knownForDepartment: $knownForDepartment, name: $name, birthPlace: $birthPlace, popularity: $popularity, profilePath: $profilePath)';
 }
 
 

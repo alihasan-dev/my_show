@@ -29,16 +29,21 @@ $CastModelCopyWith<CastModel> get copyWith => _$CastModelCopyWithImpl<CastModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CastModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.cast, cast)&&const DeepCollectionEquality().equals(other.crew, crew));
+  final _this = this as CastModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CastModel&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.cast, _this.cast)&&const DeepCollectionEquality().equals(other.crew, _this.crew));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(cast),const DeepCollectionEquality().hash(crew));
+int get hashCode {
+  final _this = this as CastModel;
+  return Object.hash(runtimeType,_this.id,const DeepCollectionEquality().hash(_this.cast),const DeepCollectionEquality().hash(_this.crew));
+}
 
 @override
 String toString() {
-  return 'CastModel(id: $id, cast: $cast, crew: $crew)';
+  final _this = this as CastModel;
+  return 'CastModel(id: ${_this.id}, cast: ${_this.cast}, crew: ${_this.crew})';
 }
 
 
@@ -242,16 +247,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CastModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._cast, _cast)&&const DeepCollectionEquality().equals(other._crew, _crew));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CastModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.cast, _cast)&&const DeepCollectionEquality().equals(other.crew, _crew));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_cast),const DeepCollectionEquality().hash(_crew));
+int get hashCode {
+    return Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_cast),const DeepCollectionEquality().hash(_crew));
+}
 
 @override
 String toString() {
-  return 'CastModel(id: $id, cast: $cast, crew: $crew)';
+    return 'CastModel(id: $id, cast: $cast, crew: $crew)';
 }
 
 
@@ -308,16 +315,21 @@ $CastCopyWith<Cast> get copyWith => _$CastCopyWithImpl<Cast>(this as Cast, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Cast&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.id, id) || other.id == id)&&(identical(other.knownFordepartment, knownFordepartment) || other.knownFordepartment == knownFordepartment)&&(identical(other.name, name) || other.name == name)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath)&&(identical(other.castId, castId) || other.castId == castId)&&(identical(other.character, character) || other.character == character)&&(identical(other.creditId, creditId) || other.creditId == creditId)&&(identical(other.order, order) || other.order == order));
+  final _this = this as Cast;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Cast&&(identical(other.adult, _this.adult) || other.adult == _this.adult)&&(identical(other.gender, _this.gender) || other.gender == _this.gender)&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.knownFordepartment, _this.knownFordepartment) || other.knownFordepartment == _this.knownFordepartment)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.originalName, _this.originalName) || other.originalName == _this.originalName)&&(identical(other.popularity, _this.popularity) || other.popularity == _this.popularity)&&(identical(other.profilePath, _this.profilePath) || other.profilePath == _this.profilePath)&&(identical(other.castId, _this.castId) || other.castId == _this.castId)&&(identical(other.character, _this.character) || other.character == _this.character)&&(identical(other.creditId, _this.creditId) || other.creditId == _this.creditId)&&(identical(other.order, _this.order) || other.order == _this.order));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,adult,gender,id,knownFordepartment,name,originalName,popularity,profilePath,castId,character,creditId,order);
+int get hashCode {
+  final _this = this as Cast;
+  return Object.hash(runtimeType,_this.adult,_this.gender,_this.id,_this.knownFordepartment,_this.name,_this.originalName,_this.popularity,_this.profilePath,_this.castId,_this.character,_this.creditId,_this.order);
+}
 
 @override
 String toString() {
-  return 'Cast(adult: $adult, gender: $gender, id: $id, knownFordepartment: $knownFordepartment, name: $name, originalName: $originalName, popularity: $popularity, profilePath: $profilePath, castId: $castId, character: $character, creditId: $creditId, order: $order)';
+  final _this = this as Cast;
+  return 'Cast(adult: ${_this.adult}, gender: ${_this.gender}, id: ${_this.id}, knownFordepartment: ${_this.knownFordepartment}, name: ${_this.name}, originalName: ${_this.originalName}, popularity: ${_this.popularity}, profilePath: ${_this.profilePath}, castId: ${_this.castId}, character: ${_this.character}, creditId: ${_this.creditId}, order: ${_this.order})';
 }
 
 
@@ -523,16 +535,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Cast&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.id, id) || other.id == id)&&(identical(other.knownFordepartment, knownFordepartment) || other.knownFordepartment == knownFordepartment)&&(identical(other.name, name) || other.name == name)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath)&&(identical(other.castId, castId) || other.castId == castId)&&(identical(other.character, character) || other.character == character)&&(identical(other.creditId, creditId) || other.creditId == creditId)&&(identical(other.order, order) || other.order == order));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Cast&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.id, id) || other.id == id)&&(identical(other.knownFordepartment, knownFordepartment) || other.knownFordepartment == knownFordepartment)&&(identical(other.name, name) || other.name == name)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath)&&(identical(other.castId, castId) || other.castId == castId)&&(identical(other.character, character) || other.character == character)&&(identical(other.creditId, creditId) || other.creditId == creditId)&&(identical(other.order, order) || other.order == order));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,adult,gender,id,knownFordepartment,name,originalName,popularity,profilePath,castId,character,creditId,order);
+int get hashCode {
+    return Object.hash(runtimeType,adult,gender,id,knownFordepartment,name,originalName,popularity,profilePath,castId,character,creditId,order);
+}
 
 @override
 String toString() {
-  return 'Cast(adult: $adult, gender: $gender, id: $id, knownFordepartment: $knownFordepartment, name: $name, originalName: $originalName, popularity: $popularity, profilePath: $profilePath, castId: $castId, character: $character, creditId: $creditId, order: $order)';
+    return 'Cast(adult: $adult, gender: $gender, id: $id, knownFordepartment: $knownFordepartment, name: $name, originalName: $originalName, popularity: $popularity, profilePath: $profilePath, castId: $castId, character: $character, creditId: $creditId, order: $order)';
 }
 
 
@@ -598,16 +612,21 @@ $CrewCopyWith<Crew> get copyWith => _$CrewCopyWithImpl<Crew>(this as Crew, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Crew&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.id, id) || other.id == id)&&(identical(other.knownFordepartment, knownFordepartment) || other.knownFordepartment == knownFordepartment)&&(identical(other.name, name) || other.name == name)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath)&&(identical(other.creditId, creditId) || other.creditId == creditId)&&(identical(other.department, department) || other.department == department)&&(identical(other.job, job) || other.job == job));
+  final _this = this as Crew;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Crew&&(identical(other.adult, _this.adult) || other.adult == _this.adult)&&(identical(other.gender, _this.gender) || other.gender == _this.gender)&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.knownFordepartment, _this.knownFordepartment) || other.knownFordepartment == _this.knownFordepartment)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.originalName, _this.originalName) || other.originalName == _this.originalName)&&(identical(other.popularity, _this.popularity) || other.popularity == _this.popularity)&&(identical(other.profilePath, _this.profilePath) || other.profilePath == _this.profilePath)&&(identical(other.creditId, _this.creditId) || other.creditId == _this.creditId)&&(identical(other.department, _this.department) || other.department == _this.department)&&(identical(other.job, _this.job) || other.job == _this.job));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,adult,gender,id,knownFordepartment,name,originalName,popularity,profilePath,creditId,department,job);
+int get hashCode {
+  final _this = this as Crew;
+  return Object.hash(runtimeType,_this.adult,_this.gender,_this.id,_this.knownFordepartment,_this.name,_this.originalName,_this.popularity,_this.profilePath,_this.creditId,_this.department,_this.job);
+}
 
 @override
 String toString() {
-  return 'Crew(adult: $adult, gender: $gender, id: $id, knownFordepartment: $knownFordepartment, name: $name, originalName: $originalName, popularity: $popularity, profilePath: $profilePath, creditId: $creditId, department: $department, job: $job)';
+  final _this = this as Crew;
+  return 'Crew(adult: ${_this.adult}, gender: ${_this.gender}, id: ${_this.id}, knownFordepartment: ${_this.knownFordepartment}, name: ${_this.name}, originalName: ${_this.originalName}, popularity: ${_this.popularity}, profilePath: ${_this.profilePath}, creditId: ${_this.creditId}, department: ${_this.department}, job: ${_this.job})';
 }
 
 
@@ -811,16 +830,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Crew&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.id, id) || other.id == id)&&(identical(other.knownFordepartment, knownFordepartment) || other.knownFordepartment == knownFordepartment)&&(identical(other.name, name) || other.name == name)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath)&&(identical(other.creditId, creditId) || other.creditId == creditId)&&(identical(other.department, department) || other.department == department)&&(identical(other.job, job) || other.job == job));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Crew&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.id, id) || other.id == id)&&(identical(other.knownFordepartment, knownFordepartment) || other.knownFordepartment == knownFordepartment)&&(identical(other.name, name) || other.name == name)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath)&&(identical(other.creditId, creditId) || other.creditId == creditId)&&(identical(other.department, department) || other.department == department)&&(identical(other.job, job) || other.job == job));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,adult,gender,id,knownFordepartment,name,originalName,popularity,profilePath,creditId,department,job);
+int get hashCode {
+    return Object.hash(runtimeType,adult,gender,id,knownFordepartment,name,originalName,popularity,profilePath,creditId,department,job);
+}
 
 @override
 String toString() {
-  return 'Crew(adult: $adult, gender: $gender, id: $id, knownFordepartment: $knownFordepartment, name: $name, originalName: $originalName, popularity: $popularity, profilePath: $profilePath, creditId: $creditId, department: $department, job: $job)';
+    return 'Crew(adult: $adult, gender: $gender, id: $id, knownFordepartment: $knownFordepartment, name: $name, originalName: $originalName, popularity: $popularity, profilePath: $profilePath, creditId: $creditId, department: $department, job: $job)';
 }
 
 

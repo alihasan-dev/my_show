@@ -19,6 +19,7 @@ class MovieImageWidget extends HookConsumerWidget {
   final BorderRadius? borderRadius;
   final String tooltipMessage;
   final ImageErrorIconSize? errorIconSize;
+  final Color? imageColor;
   
   const MovieImageWidget({
     required this.imagePath,
@@ -30,6 +31,7 @@ class MovieImageWidget extends HookConsumerWidget {
     this.borderRadius,
     this.tooltipMessage = '',
     this.errorIconSize,
+    this.imageColor,
     super.key
   });
 
@@ -110,6 +112,12 @@ class MovieImageWidget extends HookConsumerWidget {
     width: width,
     height: height,
     fit: fit,
+    colorFilter: imageColor == null
+    ? null
+    : ColorFilter.mode(
+      imageColor!, 
+      BlendMode.srcIn
+    ),
     errorBuilder: (_, _, _) => _imageErrorBuilder,
     placeholderBuilder: (_) => _imageShimmerLoader,
   );

@@ -29,16 +29,21 @@ $PopularPeopleModelCopyWith<PopularPeopleModel> get copyWith => _$PopularPeopleM
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PopularPeopleModel&&(identical(other.page, page) || other.page == page)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults)&&const DeepCollectionEquality().equals(other.results, results));
+  final _this = this as PopularPeopleModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PopularPeopleModel&&(identical(other.page, _this.page) || other.page == _this.page)&&(identical(other.totalPages, _this.totalPages) || other.totalPages == _this.totalPages)&&(identical(other.totalResults, _this.totalResults) || other.totalResults == _this.totalResults)&&const DeepCollectionEquality().equals(other.results, _this.results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,page,totalPages,totalResults,const DeepCollectionEquality().hash(results));
+int get hashCode {
+  final _this = this as PopularPeopleModel;
+  return Object.hash(runtimeType,_this.page,_this.totalPages,_this.totalResults,const DeepCollectionEquality().hash(_this.results));
+}
 
 @override
 String toString() {
-  return 'PopularPeopleModel(page: $page, totalPages: $totalPages, totalResults: $totalResults, results: $results)';
+  final _this = this as PopularPeopleModel;
+  return 'PopularPeopleModel(page: ${_this.page}, totalPages: ${_this.totalPages}, totalResults: ${_this.totalResults}, results: ${_this.results})';
 }
 
 
@@ -236,16 +241,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PopularPeopleModel&&(identical(other.page, page) || other.page == page)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults)&&const DeepCollectionEquality().equals(other._results, _results));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PopularPeopleModel&&(identical(other.page, page) || other.page == page)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults)&&const DeepCollectionEquality().equals(other.results, _results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,page,totalPages,totalResults,const DeepCollectionEquality().hash(_results));
+int get hashCode {
+    return Object.hash(runtimeType,page,totalPages,totalResults,const DeepCollectionEquality().hash(_results));
+}
 
 @override
 String toString() {
-  return 'PopularPeopleModel(page: $page, totalPages: $totalPages, totalResults: $totalResults, results: $results)';
+    return 'PopularPeopleModel(page: $page, totalPages: $totalPages, totalResults: $totalResults, results: $results)';
 }
 
 
@@ -303,16 +310,21 @@ $PeopleCopyWith<People> get copyWith => _$PeopleCopyWithImpl<People>(this as Peo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is People&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.id, id) || other.id == id)&&(identical(other.knownForDepartment, knownForDepartment) || other.knownForDepartment == knownForDepartment)&&(identical(other.name, name) || other.name == name)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath));
+  final _this = this as People;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is People&&(identical(other.adult, _this.adult) || other.adult == _this.adult)&&(identical(other.gender, _this.gender) || other.gender == _this.gender)&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.knownForDepartment, _this.knownForDepartment) || other.knownForDepartment == _this.knownForDepartment)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.originalName, _this.originalName) || other.originalName == _this.originalName)&&(identical(other.popularity, _this.popularity) || other.popularity == _this.popularity)&&(identical(other.profilePath, _this.profilePath) || other.profilePath == _this.profilePath));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,adult,gender,id,knownForDepartment,name,originalName,popularity,profilePath);
+int get hashCode {
+  final _this = this as People;
+  return Object.hash(runtimeType,_this.adult,_this.gender,_this.id,_this.knownForDepartment,_this.name,_this.originalName,_this.popularity,_this.profilePath);
+}
 
 @override
 String toString() {
-  return 'People(adult: $adult, gender: $gender, id: $id, knownForDepartment: $knownForDepartment, name: $name, originalName: $originalName, popularity: $popularity, profilePath: $profilePath)';
+  final _this = this as People;
+  return 'People(adult: ${_this.adult}, gender: ${_this.gender}, id: ${_this.id}, knownForDepartment: ${_this.knownForDepartment}, name: ${_this.name}, originalName: ${_this.originalName}, popularity: ${_this.popularity}, profilePath: ${_this.profilePath})';
 }
 
 
@@ -510,16 +522,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _People&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.id, id) || other.id == id)&&(identical(other.knownForDepartment, knownForDepartment) || other.knownForDepartment == knownForDepartment)&&(identical(other.name, name) || other.name == name)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _People&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.id, id) || other.id == id)&&(identical(other.knownForDepartment, knownForDepartment) || other.knownForDepartment == knownForDepartment)&&(identical(other.name, name) || other.name == name)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,adult,gender,id,knownForDepartment,name,originalName,popularity,profilePath);
+int get hashCode {
+    return Object.hash(runtimeType,adult,gender,id,knownForDepartment,name,originalName,popularity,profilePath);
+}
 
 @override
 String toString() {
-  return 'People(adult: $adult, gender: $gender, id: $id, knownForDepartment: $knownForDepartment, name: $name, originalName: $originalName, popularity: $popularity, profilePath: $profilePath)';
+    return 'People(adult: $adult, gender: $gender, id: $id, knownForDepartment: $knownForDepartment, name: $name, originalName: $originalName, popularity: $popularity, profilePath: $profilePath)';
 }
 
 

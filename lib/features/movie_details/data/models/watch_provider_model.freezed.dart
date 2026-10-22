@@ -29,16 +29,21 @@ $WatchProviderModelCopyWith<WatchProviderModel> get copyWith => _$WatchProviderM
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WatchProviderModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.results, results));
+  final _this = this as WatchProviderModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WatchProviderModel&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.results, _this.results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(results));
+int get hashCode {
+  final _this = this as WatchProviderModel;
+  return Object.hash(runtimeType,_this.id,const DeepCollectionEquality().hash(_this.results));
+}
 
 @override
 String toString() {
-  return 'WatchProviderModel(id: $id, results: $results)';
+  final _this = this as WatchProviderModel;
+  return 'WatchProviderModel(id: ${_this.id}, results: ${_this.results})';
 }
 
 
@@ -232,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WatchProviderModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._results, _results));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _WatchProviderModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.results, _results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_results));
+int get hashCode {
+    return Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_results));
+}
 
 @override
 String toString() {
-  return 'WatchProviderModel(id: $id, results: $results)';
+    return 'WatchProviderModel(id: $id, results: $results)';
 }
 
 
@@ -297,16 +304,21 @@ $WatchProviderRegionCopyWith<WatchProviderRegion> get copyWith => _$WatchProvide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WatchProviderRegion&&(identical(other.link, link) || other.link == link)&&const DeepCollectionEquality().equals(other.flatrate, flatrate)&&const DeepCollectionEquality().equals(other.buy, buy)&&const DeepCollectionEquality().equals(other.rent, rent)&&const DeepCollectionEquality().equals(other.free, free));
+  final _this = this as WatchProviderRegion;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WatchProviderRegion&&(identical(other.link, _this.link) || other.link == _this.link)&&const DeepCollectionEquality().equals(other.flatrate, _this.flatrate)&&const DeepCollectionEquality().equals(other.buy, _this.buy)&&const DeepCollectionEquality().equals(other.rent, _this.rent)&&const DeepCollectionEquality().equals(other.free, _this.free));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,link,const DeepCollectionEquality().hash(flatrate),const DeepCollectionEquality().hash(buy),const DeepCollectionEquality().hash(rent),const DeepCollectionEquality().hash(free));
+int get hashCode {
+  final _this = this as WatchProviderRegion;
+  return Object.hash(runtimeType,_this.link,const DeepCollectionEquality().hash(_this.flatrate),const DeepCollectionEquality().hash(_this.buy),const DeepCollectionEquality().hash(_this.rent),const DeepCollectionEquality().hash(_this.free));
+}
 
 @override
 String toString() {
-  return 'WatchProviderRegion(link: $link, flatrate: $flatrate, buy: $buy, rent: $rent, free: $free)';
+  final _this = this as WatchProviderRegion;
+  return 'WatchProviderRegion(link: ${_this.link}, flatrate: ${_this.flatrate}, buy: ${_this.buy}, rent: ${_this.rent}, free: ${_this.free})';
 }
 
 
@@ -530,16 +542,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WatchProviderRegion&&(identical(other.link, link) || other.link == link)&&const DeepCollectionEquality().equals(other._flatrate, _flatrate)&&const DeepCollectionEquality().equals(other._buy, _buy)&&const DeepCollectionEquality().equals(other._rent, _rent)&&const DeepCollectionEquality().equals(other._free, _free));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _WatchProviderRegion&&(identical(other.link, link) || other.link == link)&&const DeepCollectionEquality().equals(other.flatrate, _flatrate)&&const DeepCollectionEquality().equals(other.buy, _buy)&&const DeepCollectionEquality().equals(other.rent, _rent)&&const DeepCollectionEquality().equals(other.free, _free));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,link,const DeepCollectionEquality().hash(_flatrate),const DeepCollectionEquality().hash(_buy),const DeepCollectionEquality().hash(_rent),const DeepCollectionEquality().hash(_free));
+int get hashCode {
+    return Object.hash(runtimeType,link,const DeepCollectionEquality().hash(_flatrate),const DeepCollectionEquality().hash(_buy),const DeepCollectionEquality().hash(_rent),const DeepCollectionEquality().hash(_free));
+}
 
 @override
 String toString() {
-  return 'WatchProviderRegion(link: $link, flatrate: $flatrate, buy: $buy, rent: $rent, free: $free)';
+    return 'WatchProviderRegion(link: $link, flatrate: $flatrate, buy: $buy, rent: $rent, free: $free)';
 }
 
 
@@ -598,16 +612,21 @@ $ProviderDetailCopyWith<ProviderDetail> get copyWith => _$ProviderDetailCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProviderDetail&&(identical(other.logoPath, logoPath) || other.logoPath == logoPath)&&(identical(other.providerId, providerId) || other.providerId == providerId)&&(identical(other.providerName, providerName) || other.providerName == providerName)&&(identical(other.displayPriority, displayPriority) || other.displayPriority == displayPriority));
+  final _this = this as ProviderDetail;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProviderDetail&&(identical(other.logoPath, _this.logoPath) || other.logoPath == _this.logoPath)&&(identical(other.providerId, _this.providerId) || other.providerId == _this.providerId)&&(identical(other.providerName, _this.providerName) || other.providerName == _this.providerName)&&(identical(other.displayPriority, _this.displayPriority) || other.displayPriority == _this.displayPriority));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,logoPath,providerId,providerName,displayPriority);
+int get hashCode {
+  final _this = this as ProviderDetail;
+  return Object.hash(runtimeType,_this.logoPath,_this.providerId,_this.providerName,_this.displayPriority);
+}
 
 @override
 String toString() {
-  return 'ProviderDetail(logoPath: $logoPath, providerId: $providerId, providerName: $providerName, displayPriority: $displayPriority)';
+  final _this = this as ProviderDetail;
+  return 'ProviderDetail(logoPath: ${_this.logoPath}, providerId: ${_this.providerId}, providerName: ${_this.providerName}, displayPriority: ${_this.displayPriority})';
 }
 
 
@@ -797,16 +816,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProviderDetail&&(identical(other.logoPath, logoPath) || other.logoPath == logoPath)&&(identical(other.providerId, providerId) || other.providerId == providerId)&&(identical(other.providerName, providerName) || other.providerName == providerName)&&(identical(other.displayPriority, displayPriority) || other.displayPriority == displayPriority));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProviderDetail&&(identical(other.logoPath, logoPath) || other.logoPath == logoPath)&&(identical(other.providerId, providerId) || other.providerId == providerId)&&(identical(other.providerName, providerName) || other.providerName == providerName)&&(identical(other.displayPriority, displayPriority) || other.displayPriority == displayPriority));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,logoPath,providerId,providerName,displayPriority);
+int get hashCode {
+    return Object.hash(runtimeType,logoPath,providerId,providerName,displayPriority);
+}
 
 @override
 String toString() {
-  return 'ProviderDetail(logoPath: $logoPath, providerId: $providerId, providerName: $providerName, displayPriority: $displayPriority)';
+    return 'ProviderDetail(logoPath: $logoPath, providerId: $providerId, providerName: $providerName, displayPriority: $displayPriority)';
 }
 
 

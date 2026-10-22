@@ -29,16 +29,21 @@ $AwardModelCopyWith<AwardModel> get copyWith => _$AwardModelCopyWithImpl<AwardMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AwardModel&&(identical(other.title, title) || other.title == title)&&(identical(other.year, year) || other.year == year)&&(identical(other.rated, rated) || other.rated == rated)&&(identical(other.released, released) || other.released == released)&&(identical(other.runtime, runtime) || other.runtime == runtime)&&(identical(other.genre, genre) || other.genre == genre)&&(identical(other.director, director) || other.director == director)&&(identical(other.writer, writer) || other.writer == writer)&&(identical(other.actors, actors) || other.actors == actors)&&(identical(other.plot, plot) || other.plot == plot)&&(identical(other.language, language) || other.language == language)&&(identical(other.country, country) || other.country == country)&&(identical(other.awards, awards) || other.awards == awards)&&(identical(other.poster, poster) || other.poster == poster)&&const DeepCollectionEquality().equals(other.ratings, ratings)&&(identical(other.metascrore, metascrore) || other.metascrore == metascrore)&&(identical(other.imdbRating, imdbRating) || other.imdbRating == imdbRating)&&(identical(other.imdbVotes, imdbVotes) || other.imdbVotes == imdbVotes)&&(identical(other.imdbID, imdbID) || other.imdbID == imdbID)&&(identical(other.type, type) || other.type == type)&&(identical(other.dvd, dvd) || other.dvd == dvd)&&(identical(other.boxOffice, boxOffice) || other.boxOffice == boxOffice)&&(identical(other.production, production) || other.production == production)&&(identical(other.website, website) || other.website == website)&&(identical(other.respnse, respnse) || other.respnse == respnse));
+  final _this = this as AwardModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AwardModel&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.year, _this.year) || other.year == _this.year)&&(identical(other.rated, _this.rated) || other.rated == _this.rated)&&(identical(other.released, _this.released) || other.released == _this.released)&&(identical(other.runtime, _this.runtime) || other.runtime == _this.runtime)&&(identical(other.genre, _this.genre) || other.genre == _this.genre)&&(identical(other.director, _this.director) || other.director == _this.director)&&(identical(other.writer, _this.writer) || other.writer == _this.writer)&&(identical(other.actors, _this.actors) || other.actors == _this.actors)&&(identical(other.plot, _this.plot) || other.plot == _this.plot)&&(identical(other.language, _this.language) || other.language == _this.language)&&(identical(other.country, _this.country) || other.country == _this.country)&&(identical(other.awards, _this.awards) || other.awards == _this.awards)&&(identical(other.poster, _this.poster) || other.poster == _this.poster)&&const DeepCollectionEquality().equals(other.ratings, _this.ratings)&&(identical(other.metascrore, _this.metascrore) || other.metascrore == _this.metascrore)&&(identical(other.imdbRating, _this.imdbRating) || other.imdbRating == _this.imdbRating)&&(identical(other.imdbVotes, _this.imdbVotes) || other.imdbVotes == _this.imdbVotes)&&(identical(other.imdbID, _this.imdbID) || other.imdbID == _this.imdbID)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.dvd, _this.dvd) || other.dvd == _this.dvd)&&(identical(other.boxOffice, _this.boxOffice) || other.boxOffice == _this.boxOffice)&&(identical(other.production, _this.production) || other.production == _this.production)&&(identical(other.website, _this.website) || other.website == _this.website)&&(identical(other.respnse, _this.respnse) || other.respnse == _this.respnse));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,title,year,rated,released,runtime,genre,director,writer,actors,plot,language,country,awards,poster,const DeepCollectionEquality().hash(ratings),metascrore,imdbRating,imdbVotes,imdbID,type,dvd,boxOffice,production,website,respnse]);
+int get hashCode {
+  final _this = this as AwardModel;
+  return Object.hashAll([runtimeType,_this.title,_this.year,_this.rated,_this.released,_this.runtime,_this.genre,_this.director,_this.writer,_this.actors,_this.plot,_this.language,_this.country,_this.awards,_this.poster,const DeepCollectionEquality().hash(_this.ratings),_this.metascrore,_this.imdbRating,_this.imdbVotes,_this.imdbID,_this.type,_this.dvd,_this.boxOffice,_this.production,_this.website,_this.respnse]);
+}
 
 @override
 String toString() {
-  return 'AwardModel(title: $title, year: $year, rated: $rated, released: $released, runtime: $runtime, genre: $genre, director: $director, writer: $writer, actors: $actors, plot: $plot, language: $language, country: $country, awards: $awards, poster: $poster, ratings: $ratings, metascrore: $metascrore, imdbRating: $imdbRating, imdbVotes: $imdbVotes, imdbID: $imdbID, type: $type, dvd: $dvd, boxOffice: $boxOffice, production: $production, website: $website, respnse: $respnse)';
+  final _this = this as AwardModel;
+  return 'AwardModel(title: ${_this.title}, year: ${_this.year}, rated: ${_this.rated}, released: ${_this.released}, runtime: ${_this.runtime}, genre: ${_this.genre}, director: ${_this.director}, writer: ${_this.writer}, actors: ${_this.actors}, plot: ${_this.plot}, language: ${_this.language}, country: ${_this.country}, awards: ${_this.awards}, poster: ${_this.poster}, ratings: ${_this.ratings}, metascrore: ${_this.metascrore}, imdbRating: ${_this.imdbRating}, imdbVotes: ${_this.imdbVotes}, imdbID: ${_this.imdbID}, type: ${_this.type}, dvd: ${_this.dvd}, boxOffice: ${_this.boxOffice}, production: ${_this.production}, website: ${_this.website}, respnse: ${_this.respnse})';
 }
 
 
@@ -278,16 +283,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AwardModel&&(identical(other.title, title) || other.title == title)&&(identical(other.year, year) || other.year == year)&&(identical(other.rated, rated) || other.rated == rated)&&(identical(other.released, released) || other.released == released)&&(identical(other.runtime, runtime) || other.runtime == runtime)&&(identical(other.genre, genre) || other.genre == genre)&&(identical(other.director, director) || other.director == director)&&(identical(other.writer, writer) || other.writer == writer)&&(identical(other.actors, actors) || other.actors == actors)&&(identical(other.plot, plot) || other.plot == plot)&&(identical(other.language, language) || other.language == language)&&(identical(other.country, country) || other.country == country)&&(identical(other.awards, awards) || other.awards == awards)&&(identical(other.poster, poster) || other.poster == poster)&&const DeepCollectionEquality().equals(other._ratings, _ratings)&&(identical(other.metascrore, metascrore) || other.metascrore == metascrore)&&(identical(other.imdbRating, imdbRating) || other.imdbRating == imdbRating)&&(identical(other.imdbVotes, imdbVotes) || other.imdbVotes == imdbVotes)&&(identical(other.imdbID, imdbID) || other.imdbID == imdbID)&&(identical(other.type, type) || other.type == type)&&(identical(other.dvd, dvd) || other.dvd == dvd)&&(identical(other.boxOffice, boxOffice) || other.boxOffice == boxOffice)&&(identical(other.production, production) || other.production == production)&&(identical(other.website, website) || other.website == website)&&(identical(other.respnse, respnse) || other.respnse == respnse));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AwardModel&&(identical(other.title, title) || other.title == title)&&(identical(other.year, year) || other.year == year)&&(identical(other.rated, rated) || other.rated == rated)&&(identical(other.released, released) || other.released == released)&&(identical(other.runtime, runtime) || other.runtime == runtime)&&(identical(other.genre, genre) || other.genre == genre)&&(identical(other.director, director) || other.director == director)&&(identical(other.writer, writer) || other.writer == writer)&&(identical(other.actors, actors) || other.actors == actors)&&(identical(other.plot, plot) || other.plot == plot)&&(identical(other.language, language) || other.language == language)&&(identical(other.country, country) || other.country == country)&&(identical(other.awards, awards) || other.awards == awards)&&(identical(other.poster, poster) || other.poster == poster)&&const DeepCollectionEquality().equals(other.ratings, _ratings)&&(identical(other.metascrore, metascrore) || other.metascrore == metascrore)&&(identical(other.imdbRating, imdbRating) || other.imdbRating == imdbRating)&&(identical(other.imdbVotes, imdbVotes) || other.imdbVotes == imdbVotes)&&(identical(other.imdbID, imdbID) || other.imdbID == imdbID)&&(identical(other.type, type) || other.type == type)&&(identical(other.dvd, dvd) || other.dvd == dvd)&&(identical(other.boxOffice, boxOffice) || other.boxOffice == boxOffice)&&(identical(other.production, production) || other.production == production)&&(identical(other.website, website) || other.website == website)&&(identical(other.respnse, respnse) || other.respnse == respnse));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,title,year,rated,released,runtime,genre,director,writer,actors,plot,language,country,awards,poster,const DeepCollectionEquality().hash(_ratings),metascrore,imdbRating,imdbVotes,imdbID,type,dvd,boxOffice,production,website,respnse]);
+int get hashCode {
+    return Object.hashAll([runtimeType,title,year,rated,released,runtime,genre,director,writer,actors,plot,language,country,awards,poster,const DeepCollectionEquality().hash(_ratings),metascrore,imdbRating,imdbVotes,imdbID,type,dvd,boxOffice,production,website,respnse]);
+}
 
 @override
 String toString() {
-  return 'AwardModel(title: $title, year: $year, rated: $rated, released: $released, runtime: $runtime, genre: $genre, director: $director, writer: $writer, actors: $actors, plot: $plot, language: $language, country: $country, awards: $awards, poster: $poster, ratings: $ratings, metascrore: $metascrore, imdbRating: $imdbRating, imdbVotes: $imdbVotes, imdbID: $imdbID, type: $type, dvd: $dvd, boxOffice: $boxOffice, production: $production, website: $website, respnse: $respnse)';
+    return 'AwardModel(title: $title, year: $year, rated: $rated, released: $released, runtime: $runtime, genre: $genre, director: $director, writer: $writer, actors: $actors, plot: $plot, language: $language, country: $country, awards: $awards, poster: $poster, ratings: $ratings, metascrore: $metascrore, imdbRating: $imdbRating, imdbVotes: $imdbVotes, imdbID: $imdbID, type: $type, dvd: $dvd, boxOffice: $boxOffice, production: $production, website: $website, respnse: $respnse)';
 }
 
 
@@ -366,16 +373,21 @@ $RatingsCopyWith<Ratings> get copyWith => _$RatingsCopyWithImpl<Ratings>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Ratings&&(identical(other.source, source) || other.source == source)&&(identical(other.value, value) || other.value == value));
+  final _this = this as Ratings;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Ratings&&(identical(other.source, _this.source) || other.source == _this.source)&&(identical(other.value, _this.value) || other.value == _this.value));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,source,value);
+int get hashCode {
+  final _this = this as Ratings;
+  return Object.hash(runtimeType,_this.source,_this.value);
+}
 
 @override
 String toString() {
-  return 'Ratings(source: $source, value: $value)';
+  final _this = this as Ratings;
+  return 'Ratings(source: ${_this.source}, value: ${_this.value})';
 }
 
 
@@ -561,16 +573,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ratings&&(identical(other.source, source) || other.source == source)&&(identical(other.value, value) || other.value == value));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ratings&&(identical(other.source, source) || other.source == source)&&(identical(other.value, value) || other.value == value));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,source,value);
+int get hashCode {
+    return Object.hash(runtimeType,source,value);
+}
 
 @override
 String toString() {
-  return 'Ratings(source: $source, value: $value)';
+    return 'Ratings(source: $source, value: $value)';
 }
 
 

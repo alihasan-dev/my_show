@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../domain/entities/profile_external_id_entity.dart';
 import '/core/utils/custom_exception.dart';
 import '/features/profile/data/datasource/profile_datasource.dart';
 import '/features/profile/domain/entities/movie_credit_entity.dart';
@@ -74,6 +75,28 @@ class ProfileRepositoryImp implements ProfileRepository {
       return Left(CustomFailureException(
         message: 'No internet connection'
       ));
+    }
+  }
+
+  @override
+  Future<Either<CustomFailureException, ProfileExternalIdEntity>> profileExternalId({required String userId}) async {
+    if (await connectivity.hasConnection) {
+      final response = await profileDatasource.profileExternalIds(userId: userId);
+      return Right(ProfileExternalIdEntity(
+        id: response.id,
+        freebaseMid: response.freebaseMid,
+        freebaseId: response.freebaseId,
+        imdbId: response.imdbId,
+        tvrageId: response.tvrageId,
+        wikidataId: response.wikidataId,
+        facebookId: response.facebookId,
+        instagramId: response.instagramId,
+        tiktokId: response.tiktokId,
+        twitterId: response.twitterId,
+        youtubeId: response.youtubeId,
+      ));
+    } else {
+      return Left(CustomFailureException(message: 'No internet connection'));
     }
   }
 

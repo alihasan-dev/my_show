@@ -29,16 +29,21 @@ $MovieCreditModelCopyWith<MovieCreditModel> get copyWith => _$MovieCreditModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MovieCreditModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.cast, cast));
+  final _this = this as MovieCreditModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MovieCreditModel&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.cast, _this.cast));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(cast));
+int get hashCode {
+  final _this = this as MovieCreditModel;
+  return Object.hash(runtimeType,_this.id,const DeepCollectionEquality().hash(_this.cast));
+}
 
 @override
 String toString() {
-  return 'MovieCreditModel(id: $id, cast: $cast)';
+  final _this = this as MovieCreditModel;
+  return 'MovieCreditModel(id: ${_this.id}, cast: ${_this.cast})';
 }
 
 
@@ -232,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MovieCreditModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._cast, _cast));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _MovieCreditModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.cast, _cast));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_cast));
+int get hashCode {
+    return Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_cast));
+}
 
 @override
 String toString() {
-  return 'MovieCreditModel(id: $id, cast: $cast)';
+    return 'MovieCreditModel(id: $id, cast: $cast)';
 }
 
 
@@ -297,16 +304,21 @@ $CastCopyWith<Cast> get copyWith => _$CastCopyWithImpl<Cast>(this as Cast, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Cast&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.backdropPath, backdropPath) || other.backdropPath == backdropPath)&&const DeepCollectionEquality().equals(other.genreId, genreId)&&(identical(other.id, id) || other.id == id)&&(identical(other.originalLanguage, originalLanguage) || other.originalLanguage == originalLanguage)&&(identical(other.originalTitle, originalTitle) || other.originalTitle == originalTitle)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&(identical(other.releaseDate, releaseDate) || other.releaseDate == releaseDate)&&(identical(other.title, title) || other.title == title)&&(identical(other.video, video) || other.video == video)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount)&&(identical(other.character, character) || other.character == character)&&(identical(other.creditId, creditId) || other.creditId == creditId)&&(identical(other.order, order) || other.order == order));
+  final _this = this as Cast;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Cast&&(identical(other.adult, _this.adult) || other.adult == _this.adult)&&(identical(other.backdropPath, _this.backdropPath) || other.backdropPath == _this.backdropPath)&&const DeepCollectionEquality().equals(other.genreId, _this.genreId)&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.originalLanguage, _this.originalLanguage) || other.originalLanguage == _this.originalLanguage)&&(identical(other.originalTitle, _this.originalTitle) || other.originalTitle == _this.originalTitle)&&(identical(other.overview, _this.overview) || other.overview == _this.overview)&&(identical(other.popularity, _this.popularity) || other.popularity == _this.popularity)&&(identical(other.posterPath, _this.posterPath) || other.posterPath == _this.posterPath)&&(identical(other.releaseDate, _this.releaseDate) || other.releaseDate == _this.releaseDate)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.video, _this.video) || other.video == _this.video)&&(identical(other.voteAverage, _this.voteAverage) || other.voteAverage == _this.voteAverage)&&(identical(other.voteCount, _this.voteCount) || other.voteCount == _this.voteCount)&&(identical(other.character, _this.character) || other.character == _this.character)&&(identical(other.creditId, _this.creditId) || other.creditId == _this.creditId)&&(identical(other.order, _this.order) || other.order == _this.order));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,adult,backdropPath,const DeepCollectionEquality().hash(genreId),id,originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,title,video,voteAverage,voteCount,character,creditId,order);
+int get hashCode {
+  final _this = this as Cast;
+  return Object.hash(runtimeType,_this.adult,_this.backdropPath,const DeepCollectionEquality().hash(_this.genreId),_this.id,_this.originalLanguage,_this.originalTitle,_this.overview,_this.popularity,_this.posterPath,_this.releaseDate,_this.title,_this.video,_this.voteAverage,_this.voteCount,_this.character,_this.creditId,_this.order);
+}
 
 @override
 String toString() {
-  return 'Cast(adult: $adult, backdropPath: $backdropPath, genreId: $genreId, id: $id, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, releaseDate: $releaseDate, title: $title, video: $video, voteAverage: $voteAverage, voteCount: $voteCount, character: $character, creditId: $creditId, order: $order)';
+  final _this = this as Cast;
+  return 'Cast(adult: ${_this.adult}, backdropPath: ${_this.backdropPath}, genreId: ${_this.genreId}, id: ${_this.id}, originalLanguage: ${_this.originalLanguage}, originalTitle: ${_this.originalTitle}, overview: ${_this.overview}, popularity: ${_this.popularity}, posterPath: ${_this.posterPath}, releaseDate: ${_this.releaseDate}, title: ${_this.title}, video: ${_this.video}, voteAverage: ${_this.voteAverage}, voteCount: ${_this.voteCount}, character: ${_this.character}, creditId: ${_this.creditId}, order: ${_this.order})';
 }
 
 
@@ -530,16 +542,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Cast&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.backdropPath, backdropPath) || other.backdropPath == backdropPath)&&const DeepCollectionEquality().equals(other._genreId, _genreId)&&(identical(other.id, id) || other.id == id)&&(identical(other.originalLanguage, originalLanguage) || other.originalLanguage == originalLanguage)&&(identical(other.originalTitle, originalTitle) || other.originalTitle == originalTitle)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&(identical(other.releaseDate, releaseDate) || other.releaseDate == releaseDate)&&(identical(other.title, title) || other.title == title)&&(identical(other.video, video) || other.video == video)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount)&&(identical(other.character, character) || other.character == character)&&(identical(other.creditId, creditId) || other.creditId == creditId)&&(identical(other.order, order) || other.order == order));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Cast&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.backdropPath, backdropPath) || other.backdropPath == backdropPath)&&const DeepCollectionEquality().equals(other.genreId, _genreId)&&(identical(other.id, id) || other.id == id)&&(identical(other.originalLanguage, originalLanguage) || other.originalLanguage == originalLanguage)&&(identical(other.originalTitle, originalTitle) || other.originalTitle == originalTitle)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&(identical(other.releaseDate, releaseDate) || other.releaseDate == releaseDate)&&(identical(other.title, title) || other.title == title)&&(identical(other.video, video) || other.video == video)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount)&&(identical(other.character, character) || other.character == character)&&(identical(other.creditId, creditId) || other.creditId == creditId)&&(identical(other.order, order) || other.order == order));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,adult,backdropPath,const DeepCollectionEquality().hash(_genreId),id,originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,title,video,voteAverage,voteCount,character,creditId,order);
+int get hashCode {
+    return Object.hash(runtimeType,adult,backdropPath,const DeepCollectionEquality().hash(_genreId),id,originalLanguage,originalTitle,overview,popularity,posterPath,releaseDate,title,video,voteAverage,voteCount,character,creditId,order);
+}
 
 @override
 String toString() {
-  return 'Cast(adult: $adult, backdropPath: $backdropPath, genreId: $genreId, id: $id, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, releaseDate: $releaseDate, title: $title, video: $video, voteAverage: $voteAverage, voteCount: $voteCount, character: $character, creditId: $creditId, order: $order)';
+    return 'Cast(adult: $adult, backdropPath: $backdropPath, genreId: $genreId, id: $id, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, releaseDate: $releaseDate, title: $title, video: $video, voteAverage: $voteAverage, voteCount: $voteCount, character: $character, creditId: $creditId, order: $order)';
 }
 
 

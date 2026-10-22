@@ -29,16 +29,21 @@ $MovieKeywordModelCopyWith<MovieKeywordModel> get copyWith => _$MovieKeywordMode
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MovieKeywordModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.keywords, keywords)&&const DeepCollectionEquality().equals(other.results, results));
+  final _this = this as MovieKeywordModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MovieKeywordModel&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.keywords, _this.keywords)&&const DeepCollectionEquality().equals(other.results, _this.results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(keywords),const DeepCollectionEquality().hash(results));
+int get hashCode {
+  final _this = this as MovieKeywordModel;
+  return Object.hash(runtimeType,_this.id,const DeepCollectionEquality().hash(_this.keywords),const DeepCollectionEquality().hash(_this.results));
+}
 
 @override
 String toString() {
-  return 'MovieKeywordModel(id: $id, keywords: $keywords, results: $results)';
+  final _this = this as MovieKeywordModel;
+  return 'MovieKeywordModel(id: ${_this.id}, keywords: ${_this.keywords}, results: ${_this.results})';
 }
 
 
@@ -242,16 +247,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MovieKeywordModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._keywords, _keywords)&&const DeepCollectionEquality().equals(other._results, _results));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _MovieKeywordModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.keywords, _keywords)&&const DeepCollectionEquality().equals(other.results, _results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_keywords),const DeepCollectionEquality().hash(_results));
+int get hashCode {
+    return Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_keywords),const DeepCollectionEquality().hash(_results));
+}
 
 @override
 String toString() {
-  return 'MovieKeywordModel(id: $id, keywords: $keywords, results: $results)';
+    return 'MovieKeywordModel(id: $id, keywords: $keywords, results: $results)';
 }
 
 
@@ -308,16 +315,21 @@ $KeywordCopyWith<Keyword> get copyWith => _$KeywordCopyWithImpl<Keyword>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Keyword&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name));
+  final _this = this as Keyword;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Keyword&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.name, _this.name) || other.name == _this.name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name);
+int get hashCode {
+  final _this = this as Keyword;
+  return Object.hash(runtimeType,_this.id,_this.name);
+}
 
 @override
 String toString() {
-  return 'Keyword(id: $id, name: $name)';
+  final _this = this as Keyword;
+  return 'Keyword(id: ${_this.id}, name: ${_this.name})';
 }
 
 
@@ -503,16 +515,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Keyword&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Keyword&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name);
+int get hashCode {
+    return Object.hash(runtimeType,id,name);
+}
 
 @override
 String toString() {
-  return 'Keyword(id: $id, name: $name)';
+    return 'Keyword(id: $id, name: $name)';
 }
 
 
