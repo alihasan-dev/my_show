@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/constants/app_strings.dart';
 import 'package:my_show/core/constants/movie_colors.dart';
 import 'package:my_show/core/utils/app_enums.dart';
 import 'package:my_show/core/utils/app_extension_method.dart';
 import 'package:my_show/core/widgets/movie_text.dart';
+import '../../../../core/routes/app_routes.dart';
 import '../../../multi_search/presentation/pages/multi_search_screen.dart';
 import '../../../../features/movie/presentation/pages/movie_screen.dart';
 import '../../../../features/tv/presentation/pages/tv_screen.dart';
@@ -157,7 +159,12 @@ class Header extends HookConsumerWidget {
             Row(
               children: [
                 TextButton.icon(
-                  onPressed: () {  }, 
+                  onPressed: () => context.pushNamed(
+                    AppRoutes.watchlistFav,
+                    queryParameters: {
+                      'type': WatchlistFavType.watchlist.name
+                    }
+                  ), 
                   label: MovieText(
                     title: 'Watchlist',
                     style: TextStyle(
@@ -172,7 +179,12 @@ class Header extends HookConsumerWidget {
                   ),
                 ),
                 TextButton.icon(
-                  onPressed: () {  }, 
+                  onPressed: () => context.pushNamed(
+                    AppRoutes.watchlistFav,
+                    queryParameters: {
+                      'type': WatchlistFavType.favourite.name
+                    }
+                  ), 
                   label: MovieText(
                     title: 'Favorite',
                     style: TextStyle(

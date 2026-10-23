@@ -5,3 +5,8 @@ enum ScreenType {
   mediumDesktop,
   largeDesktop,
 }
+
+enum WatchlistFavType {
+  watchlist,
+  favourite
+}

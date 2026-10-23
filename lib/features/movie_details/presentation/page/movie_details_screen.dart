@@ -95,6 +95,7 @@ class MovieDetailsScreen extends HookConsumerWidget {
         ref.read(watchProvider.notifier).watchProvider(id: id, type: type, countryCode: countryCode);
         ref.read(releaseDatesProvider.notifier).releaseDates(id: id, countryCode: countryCode);
         ref.read(movieWatchlistProvider.notifier).getWatchlist(id);
+        ref.read(movieFavouriteProvider.notifier).getFavourite(id);
       });
       return null;
     }, []);
@@ -982,9 +983,7 @@ class MovieDetailsHero extends HookConsumerWidget {
                   ),
                 ),
               ),
-          
               const SizedBox(height: 18),
-          
               Row(
                 spacing: 8,
                 mainAxisSize: MainAxisSize.min,
@@ -998,9 +997,9 @@ class MovieDetailsHero extends HookConsumerWidget {
                     ? MovieColors.red
                     : null,
                     onTap: () {
-                      final watchlistNotifier = ref.read(movieFavouriteProvider.notifier);
+                      final favouriteNotifier = ref.read(movieFavouriteProvider.notifier);
                       if (hasFavouriteMarked) {
-                        watchlistNotifier.removeFavourite(id: id);
+                        favouriteNotifier.removeFavourite(id: id);
                         return;
                       }
                       final entity = MovieWatchlistEntity(
@@ -1012,7 +1011,7 @@ class MovieDetailsHero extends HookConsumerWidget {
                         posterPath: movieData.posterPath ?? '',
                         createdDate: DateTime.now().toString()
                       );
-                      watchlistNotifier.saveFavourite(entity: entity);
+                      favouriteNotifier.saveFavourite(entity: entity);
                     },
                   ),
                   _MovieAction(
