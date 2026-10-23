@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:my_show/core/widgets/custom_gradient_button.dart';
 import '../provider/watchlist_fav_provider.dart';
 import '/core/constants/movie_colors.dart';
 import '/core/utils/app_extension_method.dart';
@@ -22,8 +24,10 @@ class WatchlistFavouriteScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final watchFavList = ref.watch(watchlistFavProvider(type));
+    final watchFavList = ref.watch(watchlistFavProvider);
+    final watchFavDataList = watchFavList.asData?.value;
     final scrollController = useScrollController();
+    final textTheme = Theme.of(context).textTheme;
     // Timer? timer;
     // useEffect(() {
     //   void listener() {
@@ -41,14 +45,149 @@ class WatchlistFavouriteScreen extends HookConsumerWidget {
     //   };
     // }, [scrollController]);
     
-    // useEffect(() { 
-    //   ref.read(popularPeopleProvider.notifier).popularPeople();
-    //   return null;
-    // }, []);
+    useEffect(() { 
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(watchlistFavProvider.notifier).getWatchFavList(type);
+      });
+      return null;
+    }, []);
     
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(toolbarHeight: 0),
+        appBar: AppBar(
+          scrolledUnderElevation: 0,
+          centerTitle: false,
+          title: Text(
+            type == WatchlistFavType.watchlist
+            ? 'Watchlist'
+            : 'Favourite',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 18),
+          ),
+          actions: [
+            if ((watchFavDataList ?? []).isNotEmpty) ...[
+              PopupMenuButton<String>(
+                tooltip: 'More options',
+                onSelected: (value) {
+                  if (value == 'clear') {
+                    showDialog(
+                      context: context,
+                      builder: (_) {
+                        return AlertDialog(
+                          contentPadding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                          content: SizedBox(
+                            width: 420,
+                            // height: 400,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: MovieColors.white.withValues(alpha: 0.05),
+                                borderRadius: kIsWeb
+                                ? BorderRadius.all(Radius.circular(20))
+                                : BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20)
+                                ),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                vertical: 16,
+                                horizontal: 20
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  MovieText(
+                                    title: type == WatchlistFavType.watchlist
+                                    ? 'Clear your Watchlist?'
+                                    : 'Clear your Favourites?',
+                                    style: textTheme.titleMedium?.copyWith(
+                                      color: MovieColors.textPrimary,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  MovieText(
+                                    title: 'Are you sure you want to remove all movies and shows from your ${type == WatchlistFavType.watchlist ? 'watchlist': 'favourites'}? This action cannot be undone.',
+                                    style: textTheme.titleMedium?.copyWith(
+                                      color: MovieColors.white.withValues(alpha: 0.7),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w300
+                                    ),
+                                  ),
+                                  SizedBox(height: 16),
+                                  Row(
+                                    spacing: 12,
+                                    children: [
+                                      Expanded(
+                                        child: CustomGradientButton(
+                                          label: 'Cancel',
+                                          applyGradient: false,
+                                          textAlign: TextAlign.center,
+                                          textStyle: textTheme.labelMedium?.copyWith(
+                                            fontSize: 14,
+                                            color: MovieColors.white.withValues(alpha: 0.8)
+                                          ),
+                                          padding: EdgeInsetsGeometry.symmetric(vertical: 10),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadiusGeometry.circular(10),
+                                            side: BorderSide(
+                                              width: 1.0,
+                                              color: MovieColors.grey.withValues(alpha: 0.6)
+                                            ),
+                                          ),
+                                          onTap: () => context.pop(),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: CustomGradientButton(
+                                          label: 'Clear All',
+                                          applyGradient: false,
+                                          textAlign: TextAlign.center,
+                                          textStyle: TextStyle(color: MovieColors.white),
+                                          padding: EdgeInsetsGeometry.symmetric(vertical: 10),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadiusGeometry.circular(10),
+                                            side: BorderSide(
+                                              width: 1.0,
+                                              color: MovieColors.red
+                                            ),
+                                          ),
+                                          color: MovieColors.red,
+                                          onTap: () {
+                                            context.pop();
+                                            ref.read(watchlistFavProvider.notifier).clearAllWatchFavList(type);
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          ),
+                        );
+                      }
+                    );
+                  }
+                },
+                itemBuilder: (context) => [
+                  PopupMenuItem<String>(
+                    value: 'clear',
+                    child: MovieText(
+                      title: 'Clear All',
+                      style: textTheme.bodyLarge?.copyWith(
+                        color: MovieColors.red
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ]
+          ],
+        ),
         body: LayoutBuilder(
           builder: (context, constraints) {
             return watchFavList.when(

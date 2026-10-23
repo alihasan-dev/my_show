@@ -9,6 +9,8 @@ import 'package:riverpod/riverpod.dart';
 abstract interface class WatchlistFavLocalDataSource {
 
   Future<List<WatchlistFavouriteModel>> getWatchFavList({required WatchlistFavType type});
+
+  Future<void> clearAll({required WatchlistFavType type});
 }
 
 class WatchlistFavLocalDataSourceImp implements WatchlistFavLocalDataSource {
@@ -27,6 +29,15 @@ class WatchlistFavLocalDataSourceImp implements WatchlistFavLocalDataSource {
     return savedData.map((item) {
       return WatchlistFavouriteModel.fromJson(jsonDecode(item));
     }).toList();
+  }
+
+  @override
+  Future<void> clearAll({required WatchlistFavType type}) async {
+    await localStorage.remove(
+      type == WatchlistFavType.favourite
+      ? SharedPrefKeys.favouriteList
+      : SharedPrefKeys.watchlist
+    );
   }
 
 }

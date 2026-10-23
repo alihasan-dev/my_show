@@ -13,6 +13,10 @@ class WatchlistFavUsecase {
   Future<List<WatchlistFavEntity>> getWatchFavList({required WatchlistFavType type}) async {
     return await watchlistFavRepository.getWatchFavList(type: type);
   }
+
+  Future<void> clearAll({required WatchlistFavType type}) async {
+    await watchlistFavRepository.clearAll(type: type);
+  }
 }
 
 final watchFavUseCaseProvider = Provider<WatchlistFavUsecase>((ref) {

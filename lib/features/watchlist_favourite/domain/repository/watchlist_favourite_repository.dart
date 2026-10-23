@@ -5,4 +5,6 @@ abstract interface class WatchlistFavRepository {
 
   Future<List<WatchlistFavEntity>> getWatchFavList({required WatchlistFavType type});
 
+  Future<void> clearAll({required WatchlistFavType type});
+
 }

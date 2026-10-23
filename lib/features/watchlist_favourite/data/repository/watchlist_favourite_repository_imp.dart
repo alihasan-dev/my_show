@@ -24,6 +24,11 @@ class WatchlistFavRepositoryImp implements WatchlistFavRepository {
     }).toList();
   }
 
+  @override
+  Future<void> clearAll({required WatchlistFavType type}) async {
+    await localDataSource.clearAll(type: type);
+  }
+
 }
 
 final watchlistFavRepoProvider = Provider<WatchlistFavRepository>((ref) {
