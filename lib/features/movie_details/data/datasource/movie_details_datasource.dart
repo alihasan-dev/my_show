@@ -111,7 +111,6 @@ class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
     } else {
       omdbApiKey = dotenv.get('OMDB_API_KEY');
     }
-    // String omdbApiKey = dotenv.get('OMDB_API_kEY');
     if (omdbApiKey.isBlank) throw Exception('Invalid OMDB API Key');
     try {
       final response = await dioClient.get(
