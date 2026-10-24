@@ -16,7 +16,7 @@ class MovieDetailsShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final mobileView = screenType == ScreenType.mobile || screenType == ScreenType.tablet;
+    final mobileView = screenType == ScreenType.mobile;
     return SingleChildScrollView(
       child: Shimmer.fromColors(
         baseColor: Color(0xFF2A2A2A),
@@ -321,22 +321,26 @@ class MovieDetailsWebShimmer extends StatelessWidget {
                         )
                       ),
                       SizedBox(height: 18),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        spacing: 10,
-                        children: List.generate(
-                          5, 
-                          (_) {
-                            return Container(
-                              height: 36,
-                              width: 120,
-                              decoration: ShapeDecoration(
-                                shape: StadiumBorder(),
-                                color: Color(0xFF2C2C2C),
-                              )
-                            );
-                          }
-                        )
+                      SizedBox(
+                        height: 35,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          children: List.generate(
+                            5, 
+                            (_) {
+                              return Container(
+                                height: 35,
+                                width: 120,
+                                margin: EdgeInsets.only(right: 8),
+                                decoration: ShapeDecoration(
+                                  shape: StadiumBorder(),
+                                  color: Color(0xFF2C2C2C),
+                                )
+                              );
+                            }
+                          )
+                        ),
                       ),
                       SizedBox(height: 18),
                       Column(

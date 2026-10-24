@@ -71,7 +71,7 @@ class ProfileScreen extends HookConsumerWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final screenType = constraints.maxWidth.screenType;
-            final mobileView = screenType == ScreenType.mobile || screenType == ScreenType.tablet;
+            final mobileView = screenType == ScreenType.mobile;
             return profileDetails.when(
               data: (data) {
                 return CustomScrollView(

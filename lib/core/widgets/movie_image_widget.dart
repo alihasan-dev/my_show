@@ -47,7 +47,6 @@ class MovieImageWidget extends HookConsumerWidget {
       decoration: BoxDecoration(
         color: backgroundColor ?? Color(0xFF121212),
         borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 8.0),
-        // Applies a border when hovered, and an invisible border when not
         border: isHovered.value
         ? Border.all(
           color: MovieColors.white,
@@ -100,7 +99,7 @@ class MovieImageWidget extends HookConsumerWidget {
     height: height,
     width: width,
     fit: fit,
-    loadingBuilder: (context, child, progress) {
+    loadingBuilder: (_, child, progress) {
       if (progress == null) return child;
       return _imageShimmerLoader;
     },

@@ -18,7 +18,7 @@ class ProfileShimmerLoader extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    final mobileView = screenType == ScreenType.mobile || screenType == ScreenType.tablet;
+    final mobileView = screenType == ScreenType.mobile;
     return Scaffold(
       body: Shimmer.fromColors(
         baseColor: isDark ? Color(0xFF2A2A2A) : Colors.grey.shade300,
