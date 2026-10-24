@@ -100,8 +100,8 @@ class WatchlistFavouriteScreen extends HookConsumerWidget {
                                 children: [
                                   MovieText(
                                     title: type == WatchlistFavType.watchlist
-                                    ? 'Clear your Watchlist?'
-                                    : 'Clear your Favourites?',
+                                    ? 'Clear your watchlist?'
+                                    : 'Clear your favourites?',
                                     style: textTheme.titleMedium?.copyWith(
                                       color: MovieColors.textPrimary,
                                       fontSize: 16,
@@ -206,6 +206,12 @@ class WatchlistFavouriteScreen extends HookConsumerWidget {
                     // onRetry: () => ref.read(popularPeopleProvider.notifier).popularPeople(),
                   );
                 }
+                ///sort based on created date
+                data.sort((a, b) {
+                  final firstCard = DateTime.parse(a.createdDate);
+                  final secondCard = DateTime.parse(b.createdDate);
+                  return secondCard.compareTo(firstCard);
+                });
                 return Column(
                   children: [
                     const SizedBox(height: 10),

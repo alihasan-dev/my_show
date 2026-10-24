@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../constants/movie_colors.dart';
 import '../../core/utils/app_extension_method.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -20,6 +20,8 @@ class MovieImageWidget extends HookConsumerWidget {
   final String tooltipMessage;
   final ImageErrorIconSize? errorIconSize;
   final Color? imageColor;
+  final bool disableHover;
+  final Color? backgroundColor;
   
   const MovieImageWidget({
     required this.imagePath,
@@ -32,6 +34,8 @@ class MovieImageWidget extends HookConsumerWidget {
     this.tooltipMessage = '',
     this.errorIconSize,
     this.imageColor,
+    this.disableHover = false,
+    this.backgroundColor,
     super.key
   });
 
@@ -41,6 +45,7 @@ class MovieImageWidget extends HookConsumerWidget {
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
       decoration: BoxDecoration(
+        color: backgroundColor ?? Color(0xFF121212),
         borderRadius: BorderRadius.circular(12),
         // Applies a border when hovered, and an invisible border when not
         border: Border.all(
@@ -50,7 +55,9 @@ class MovieImageWidget extends HookConsumerWidget {
       ),
       child: InkWell(
         onTap: onTap,
-        onHover: (value) => isHovered.value = value,
+        onHover: disableHover
+        ? null
+        : (value) => isHovered.value = value,
         child: Tooltip(
           message: tooltipMessage,
           child: ClipRRect(
