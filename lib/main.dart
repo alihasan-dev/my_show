@@ -9,6 +9,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'core/storage/storage_provider.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
   final prefs = await SharedPreferences.getInstance();
   await SentryFlutter.init(
@@ -45,7 +46,7 @@ Future<void> main() async {
             child: Align(
               alignment: Alignment.topCenter,
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 1200),
+                constraints: const BoxConstraints(maxWidth: 1400),
                 child: const MyApp()
               ),
             ),
