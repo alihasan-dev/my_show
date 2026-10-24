@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_extension_method.dart';
+import '../../../../core/utils/app_utils.dart';
 import '../../../../features/tv/domain/entities/trending_tvshow_entity.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/routes/app_routes.dart';
@@ -31,7 +32,11 @@ class TvShowWidgets extends StatelessWidget {
     if (tvShowList.isEmpty) return SizedBox.shrink();
     return LayoutBuilder(
       builder: (context, constraints) {
-        final cardWidth = getTrendingCardWidth(constraints.maxWidth, canCalculate: title == AppStrings.trending);
+        final cardWidth = AppUtils.getTrendingCardWidth(
+          constraints.maxWidth, 
+          canCalculate: title == AppStrings.trending,
+          screenType: screenType
+        );
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -159,20 +164,6 @@ class TvShowWidgets extends StatelessWidget {
     } else {
       // Large Desktop: Cap max width
       return movie.backdropPath.generateImageURL; 
-    }
-  }
-
-  double getTrendingCardWidth(double screenWidth, {bool canCalculate = false}) {
-    if (!canCalculate) return screenType == ScreenType.mobile ? 125 : 150;
-    if (screenWidth < 600) {
-      // Mobile: Strictly 125 as defined
-      return 125.0; 
-    } else if (screenWidth < 1100) {
-      // Tablet / Laptop: Scale dynamically between mobile and desktop
-      return (screenWidth - 48) / 2.5;
-    } else {
-      // Large Desktop: Cap max width
-      return 380.0; 
     }
   }
 }

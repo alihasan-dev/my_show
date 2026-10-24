@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/core/constants/movie_colors.dart';
-import 'package:my_show/core/utils/app_enums.dart';
-import 'package:my_show/core/utils/app_extension_method.dart';
-import 'package:my_show/core/widgets/movie_image_widget.dart';
-import 'package:my_show/core/widgets/movie_text.dart';
+import '../../../../core/constants/movie_colors.dart';
+import '../../../../core/utils/app_enums.dart';
+import '../../../../core/utils/app_extension_method.dart';
+import '../../../../core/widgets/movie_image_widget.dart';
+import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../multi_search/presentation/pages/multi_search_screen.dart';
 import '../../../../features/movie/presentation/pages/movie_screen.dart';
@@ -53,33 +53,6 @@ class DashboardScreen extends HookConsumerWidget {
               ],
             ),
           ),
-          // body: Align(
-          //   alignment: Alignment.topCenter,
-          //   child: ConstrainedBox(
-          //     constraints: const BoxConstraints(maxWidth: 1300),
-          //     child: Container(
-          //       padding: EdgeInsets.symmetric(horizontal: isMobileOrTablet ? 0.0 : 16.0),
-          //       child: Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           // 1. Constrained Header
-          //           if (!isMobileOrTablet) ...[
-          //             Header(
-          //               selectedIndex: bottomSelectedIndex.value,
-          //               onTap: (index) {
-          //                 bottomSelectedIndex.value = index;
-          //               },
-          //             )
-          //           ],
-          //           // 2. Constrained Body Area
-          //           Expanded(
-          //             child: widgetList[bottomSelectedIndex.value]
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
           bottomNavigationBar: !isMobileOrTablet
           ? null
           : ValueListenableBuilder<int>(
@@ -205,7 +178,7 @@ class Header extends HookConsumerWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

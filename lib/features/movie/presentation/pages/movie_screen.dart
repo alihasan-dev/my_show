@@ -43,9 +43,6 @@ class MoviesScreen extends HookConsumerWidget {
                     movieList: data.result,
                     screenType: screenType,
                   ),
-                  // CustomCarouselWidget(
-                  //   movies: data.result,
-                  // ),
                   if (screenType != ScreenType.mobile) SizedBox(height: 14),
                   TrendingMoviesWidgets(
                     title: AppStrings.nowPlaying,
@@ -114,7 +111,10 @@ class MoviesScreen extends HookConsumerWidget {
               );
             },
             error: (message, _) => Center(child: Text('$message')), 
-            loading: () => MovieShimmerWidget(screenType: screenType)
+            loading: () => MovieShimmerWidget(
+              screenType: screenType,
+              maxWidth: constraints.maxWidth,
+            )
           );
         }
       ),

@@ -288,7 +288,10 @@ class ProfileScreen extends HookConsumerWidget {
                 );
               },
               error: (_, _) => Center(child: MovieText(title: AppStrings.noDataAvailable)),
-              loading: () => ProfileShimmerLoader(screenType: screenType),
+              loading: () =>  ProfileShimmerLoader(
+                screenType: screenType, 
+                maxWidth: constraints.maxWidth
+              )
             );
           }
         ),

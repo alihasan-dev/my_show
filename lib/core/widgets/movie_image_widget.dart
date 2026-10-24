@@ -46,12 +46,14 @@ class MovieImageWidget extends HookConsumerWidget {
       duration: Duration(milliseconds: 200),
       decoration: BoxDecoration(
         color: backgroundColor ?? Color(0xFF121212),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 8.0),
         // Applies a border when hovered, and an invisible border when not
-        border: Border.all(
-          color: isHovered.value ? MovieColors.white : MovieColors.transparent,
+        border: isHovered.value
+        ? Border.all(
+          color: MovieColors.white,
           width: 2,
-        ),
+          )
+        : null
       ),
       child: InkWell(
         onTap: onTap,

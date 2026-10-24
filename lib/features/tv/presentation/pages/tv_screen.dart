@@ -110,7 +110,10 @@ class TvScreen extends HookConsumerWidget {
               );
             },
             error: (message,_) => Center(child: Text('$message')), 
-            loading: () => MovieShimmerWidget(screenType: screenType)
+            loading: () => MovieShimmerWidget(
+              screenType: screenType,
+              maxWidth: constraints.maxWidth,
+            )
           );
         }
       ),
