@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'review_model.dart';
@@ -9,6 +9,7 @@ part of 'review_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $ReviewModelCopyWith<ReviewModel> get copyWith => _$ReviewModelCopyWithImpl<Revi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReviewModel&&(identical(other.id, id) || other.id == id)&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other.results, results)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults));
+  final _this = this as ReviewModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReviewModel&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.page, _this.page) || other.page == _this.page)&&const DeepCollectionEquality().equals(other.results, _this.results)&&(identical(other.totalPages, _this.totalPages) || other.totalPages == _this.totalPages)&&(identical(other.totalResults, _this.totalResults) || other.totalResults == _this.totalResults));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,page,const DeepCollectionEquality().hash(results),totalPages,totalResults);
+int get hashCode {
+  final _this = this as ReviewModel;
+  return Object.hash(runtimeType,_this.id,_this.page,const DeepCollectionEquality().hash(_this.results),_this.totalPages,_this.totalResults);
+}
 
 @override
 String toString() {
-  return 'ReviewModel(id: $id, page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
+  final _this = this as ReviewModel;
+  return 'ReviewModel(id: ${_this.id}, page: ${_this.page}, results: ${_this.results}, totalPages: ${_this.totalPages}, totalResults: ${_this.totalResults})';
 }
 
 
@@ -66,7 +72,7 @@ class _$ReviewModelCopyWithImpl<$Res>
 /// Create a copy of ReviewModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? page = freezed,Object? results = freezed,Object? totalPages = freezed,Object? totalResults = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ReviewModel(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,page: freezed == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int?,results: freezed == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
@@ -207,7 +213,7 @@ return $default(_that.id,_that.page,_that.results,_that.totalPages,_that.totalRe
 @JsonSerializable()
 
 class _ReviewModel implements ReviewModel {
-  const _ReviewModel({this.id, this.page, final  List<Review>? results, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults}): _results = results;
+  const _ReviewModel({this.id, this.page,  List<Review>? results, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults}): _results = results;
   factory _ReviewModel.fromJson(Map<String, dynamic> json) => _$ReviewModelFromJson(json);
 
 @override final  int? id;
@@ -237,16 +243,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReviewModel&&(identical(other.id, id) || other.id == id)&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other._results, _results)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReviewModel&&(identical(other.id, id) || other.id == id)&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other.results, _results)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,page,const DeepCollectionEquality().hash(_results),totalPages,totalResults);
+int get hashCode {
+    return Object.hash(runtimeType,id,page,const DeepCollectionEquality().hash(_results),totalPages,totalResults);
+}
 
 @override
 String toString() {
-  return 'ReviewModel(id: $id, page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
+    return 'ReviewModel(id: $id, page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
 }
 
 
@@ -305,16 +313,21 @@ $ReviewCopyWith<Review> get copyWith => _$ReviewCopyWithImpl<Review>(this as Rev
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Review&&(identical(other.author, author) || other.author == author)&&(identical(other.authorDetails, authorDetails) || other.authorDetails == authorDetails)&&(identical(other.content, content) || other.content == content)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.id, id) || other.id == id)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.url, url) || other.url == url));
+  final _this = this as Review;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Review&&(identical(other.author, _this.author) || other.author == _this.author)&&(identical(other.authorDetails, _this.authorDetails) || other.authorDetails == _this.authorDetails)&&(identical(other.content, _this.content) || other.content == _this.content)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.updatedAt, _this.updatedAt) || other.updatedAt == _this.updatedAt)&&(identical(other.url, _this.url) || other.url == _this.url));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,author,authorDetails,content,createdAt,id,updatedAt,url);
+int get hashCode {
+  final _this = this as Review;
+  return Object.hash(runtimeType,_this.author,_this.authorDetails,_this.content,_this.createdAt,_this.id,_this.updatedAt,_this.url);
+}
 
 @override
 String toString() {
-  return 'Review(author: $author, authorDetails: $authorDetails, content: $content, createdAt: $createdAt, id: $id, updatedAt: $updatedAt, url: $url)';
+  final _this = this as Review;
+  return 'Review(author: ${_this.author}, authorDetails: ${_this.authorDetails}, content: ${_this.content}, createdAt: ${_this.createdAt}, id: ${_this.id}, updatedAt: ${_this.updatedAt}, url: ${_this.url})';
 }
 
 
@@ -343,7 +356,7 @@ class _$ReviewCopyWithImpl<$Res>
 /// Create a copy of Review
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? author = freezed,Object? authorDetails = freezed,Object? content = freezed,Object? createdAt = freezed,Object? id = freezed,Object? updatedAt = freezed,Object? url = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Review(
 author: freezed == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as String?,authorDetails: freezed == authorDetails ? _self.authorDetails : authorDetails // ignore: cast_nullable_to_non_nullable
 as AuthorDetails?,content: freezed == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
@@ -522,16 +535,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Review&&(identical(other.author, author) || other.author == author)&&(identical(other.authorDetails, authorDetails) || other.authorDetails == authorDetails)&&(identical(other.content, content) || other.content == content)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.id, id) || other.id == id)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.url, url) || other.url == url));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Review&&(identical(other.author, author) || other.author == author)&&(identical(other.authorDetails, authorDetails) || other.authorDetails == authorDetails)&&(identical(other.content, content) || other.content == content)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.id, id) || other.id == id)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.url, url) || other.url == url));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,author,authorDetails,content,createdAt,id,updatedAt,url);
+int get hashCode {
+    return Object.hash(runtimeType,author,authorDetails,content,createdAt,id,updatedAt,url);
+}
 
 @override
 String toString() {
-  return 'Review(author: $author, authorDetails: $authorDetails, content: $content, createdAt: $createdAt, id: $id, updatedAt: $updatedAt, url: $url)';
+    return 'Review(author: $author, authorDetails: $authorDetails, content: $content, createdAt: $createdAt, id: $id, updatedAt: $updatedAt, url: $url)';
 }
 
 
@@ -604,16 +619,21 @@ $AuthorDetailsCopyWith<AuthorDetails> get copyWith => _$AuthorDetailsCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthorDetails&&(identical(other.name, name) || other.name == name)&&(identical(other.username, username) || other.username == username)&&(identical(other.avatarPath, avatarPath) || other.avatarPath == avatarPath)&&(identical(other.rating, rating) || other.rating == rating));
+  final _this = this as AuthorDetails;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthorDetails&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.username, _this.username) || other.username == _this.username)&&(identical(other.avatarPath, _this.avatarPath) || other.avatarPath == _this.avatarPath)&&(identical(other.rating, _this.rating) || other.rating == _this.rating));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,username,avatarPath,rating);
+int get hashCode {
+  final _this = this as AuthorDetails;
+  return Object.hash(runtimeType,_this.name,_this.username,_this.avatarPath,_this.rating);
+}
 
 @override
 String toString() {
-  return 'AuthorDetails(name: $name, username: $username, avatarPath: $avatarPath, rating: $rating)';
+  final _this = this as AuthorDetails;
+  return 'AuthorDetails(name: ${_this.name}, username: ${_this.username}, avatarPath: ${_this.avatarPath}, rating: ${_this.rating})';
 }
 
 
@@ -642,7 +662,7 @@ class _$AuthorDetailsCopyWithImpl<$Res>
 /// Create a copy of AuthorDetails
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? username = freezed,Object? avatarPath = freezed,Object? rating = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(AuthorDetails(
 name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,username: freezed == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
 as String?,avatarPath: freezed == avatarPath ? _self.avatarPath : avatarPath // ignore: cast_nullable_to_non_nullable
@@ -803,16 +823,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthorDetails&&(identical(other.name, name) || other.name == name)&&(identical(other.username, username) || other.username == username)&&(identical(other.avatarPath, avatarPath) || other.avatarPath == avatarPath)&&(identical(other.rating, rating) || other.rating == rating));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthorDetails&&(identical(other.name, name) || other.name == name)&&(identical(other.username, username) || other.username == username)&&(identical(other.avatarPath, avatarPath) || other.avatarPath == avatarPath)&&(identical(other.rating, rating) || other.rating == rating));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,username,avatarPath,rating);
+int get hashCode {
+    return Object.hash(runtimeType,name,username,avatarPath,rating);
+}
 
 @override
 String toString() {
-  return 'AuthorDetails(name: $name, username: $username, avatarPath: $avatarPath, rating: $rating)';
+    return 'AuthorDetails(name: $name, username: $username, avatarPath: $avatarPath, rating: $rating)';
 }
 
 

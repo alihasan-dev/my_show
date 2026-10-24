@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'trending_tv_show_model.dart';
@@ -9,6 +9,7 @@ part of 'trending_tv_show_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $TrendingTVShowModelCopyWith<TrendingTVShowModel> get copyWith => _$TrendingTVSh
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TrendingTVShowModel&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other.results, results)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults));
+  final _this = this as TrendingTVShowModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TrendingTVShowModel&&(identical(other.page, _this.page) || other.page == _this.page)&&const DeepCollectionEquality().equals(other.results, _this.results)&&(identical(other.totalPages, _this.totalPages) || other.totalPages == _this.totalPages)&&(identical(other.totalResults, _this.totalResults) || other.totalResults == _this.totalResults));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,page,const DeepCollectionEquality().hash(results),totalPages,totalResults);
+int get hashCode {
+  final _this = this as TrendingTVShowModel;
+  return Object.hash(runtimeType,_this.page,const DeepCollectionEquality().hash(_this.results),_this.totalPages,_this.totalResults);
+}
 
 @override
 String toString() {
-  return 'TrendingTVShowModel(page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
+  final _this = this as TrendingTVShowModel;
+  return 'TrendingTVShowModel(page: ${_this.page}, results: ${_this.results}, totalPages: ${_this.totalPages}, totalResults: ${_this.totalResults})';
 }
 
 
@@ -66,7 +72,7 @@ class _$TrendingTVShowModelCopyWithImpl<$Res>
 /// Create a copy of TrendingTVShowModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? page = freezed,Object? results = freezed,Object? totalPages = freezed,Object? totalResults = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(TrendingTVShowModel(
 page: freezed == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int?,results: freezed == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
 as List<TvShow>?,totalPages: freezed == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
@@ -206,7 +212,7 @@ return $default(_that.page,_that.results,_that.totalPages,_that.totalResults);ca
 @JsonSerializable()
 
 class _TrendingTVShowModel implements TrendingTVShowModel {
-   _TrendingTVShowModel({this.page, final  List<TvShow>? results, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults}): _results = results;
+   _TrendingTVShowModel({this.page,  List<TvShow>? results, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults}): _results = results;
   factory _TrendingTVShowModel.fromJson(Map<String, dynamic> json) => _$TrendingTVShowModelFromJson(json);
 
 @override final  int? page;
@@ -235,16 +241,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TrendingTVShowModel&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other._results, _results)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TrendingTVShowModel&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other.results, _results)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,page,const DeepCollectionEquality().hash(_results),totalPages,totalResults);
+int get hashCode {
+    return Object.hash(runtimeType,page,const DeepCollectionEquality().hash(_results),totalPages,totalResults);
+}
 
 @override
 String toString() {
-  return 'TrendingTVShowModel(page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
+    return 'TrendingTVShowModel(page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
 }
 
 
@@ -302,16 +310,21 @@ $TvShowCopyWith<TvShow> get copyWith => _$TvShowCopyWithImpl<TvShow>(this as TvS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TvShow&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.backdropPath, backdropPath) || other.backdropPath == backdropPath)&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.originalTitle, originalTitle) || other.originalTitle == originalTitle)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.originalLanguage, originalLanguage) || other.originalLanguage == originalLanguage)&&const DeepCollectionEquality().equals(other.genreIds, genreIds)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.firstAirDate, firstAirDate) || other.firstAirDate == firstAirDate)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount)&&const DeepCollectionEquality().equals(other.originCountry, originCountry));
+  final _this = this as TvShow;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TvShow&&(identical(other.adult, _this.adult) || other.adult == _this.adult)&&(identical(other.backdropPath, _this.backdropPath) || other.backdropPath == _this.backdropPath)&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.originalTitle, _this.originalTitle) || other.originalTitle == _this.originalTitle)&&(identical(other.overview, _this.overview) || other.overview == _this.overview)&&(identical(other.posterPath, _this.posterPath) || other.posterPath == _this.posterPath)&&(identical(other.mediaType, _this.mediaType) || other.mediaType == _this.mediaType)&&(identical(other.originalLanguage, _this.originalLanguage) || other.originalLanguage == _this.originalLanguage)&&const DeepCollectionEquality().equals(other.genreIds, _this.genreIds)&&(identical(other.popularity, _this.popularity) || other.popularity == _this.popularity)&&(identical(other.firstAirDate, _this.firstAirDate) || other.firstAirDate == _this.firstAirDate)&&(identical(other.voteAverage, _this.voteAverage) || other.voteAverage == _this.voteAverage)&&(identical(other.voteCount, _this.voteCount) || other.voteCount == _this.voteCount)&&const DeepCollectionEquality().equals(other.originCountry, _this.originCountry));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,adult,backdropPath,id,name,originalTitle,overview,posterPath,mediaType,originalLanguage,const DeepCollectionEquality().hash(genreIds),popularity,firstAirDate,voteAverage,voteCount,const DeepCollectionEquality().hash(originCountry));
+int get hashCode {
+  final _this = this as TvShow;
+  return Object.hash(runtimeType,_this.adult,_this.backdropPath,_this.id,_this.name,_this.originalTitle,_this.overview,_this.posterPath,_this.mediaType,_this.originalLanguage,const DeepCollectionEquality().hash(_this.genreIds),_this.popularity,_this.firstAirDate,_this.voteAverage,_this.voteCount,const DeepCollectionEquality().hash(_this.originCountry));
+}
 
 @override
 String toString() {
-  return 'TvShow(adult: $adult, backdropPath: $backdropPath, id: $id, name: $name, originalTitle: $originalTitle, overview: $overview, posterPath: $posterPath, mediaType: $mediaType, originalLanguage: $originalLanguage, genreIds: $genreIds, popularity: $popularity, firstAirDate: $firstAirDate, voteAverage: $voteAverage, voteCount: $voteCount, originCountry: $originCountry)';
+  final _this = this as TvShow;
+  return 'TvShow(adult: ${_this.adult}, backdropPath: ${_this.backdropPath}, id: ${_this.id}, name: ${_this.name}, originalTitle: ${_this.originalTitle}, overview: ${_this.overview}, posterPath: ${_this.posterPath}, mediaType: ${_this.mediaType}, originalLanguage: ${_this.originalLanguage}, genreIds: ${_this.genreIds}, popularity: ${_this.popularity}, firstAirDate: ${_this.firstAirDate}, voteAverage: ${_this.voteAverage}, voteCount: ${_this.voteCount}, originCountry: ${_this.originCountry})';
 }
 
 
@@ -340,7 +353,7 @@ class _$TvShowCopyWithImpl<$Res>
 /// Create a copy of TvShow
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? adult = freezed,Object? backdropPath = freezed,Object? id = freezed,Object? name = freezed,Object? originalTitle = freezed,Object? overview = freezed,Object? posterPath = freezed,Object? mediaType = freezed,Object? originalLanguage = freezed,Object? genreIds = freezed,Object? popularity = freezed,Object? firstAirDate = freezed,Object? voteAverage = freezed,Object? voteCount = freezed,Object? originCountry = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(TvShow(
 adult: freezed == adult ? _self.adult : adult // ignore: cast_nullable_to_non_nullable
 as bool?,backdropPath: freezed == backdropPath ? _self.backdropPath : backdropPath // ignore: cast_nullable_to_non_nullable
 as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
@@ -491,7 +504,7 @@ return $default(_that.adult,_that.backdropPath,_that.id,_that.name,_that.origina
 @JsonSerializable()
 
 class _TvShow implements TvShow {
-   _TvShow({this.adult, @JsonKey(name: 'backdrop_path') this.backdropPath, this.id, this.name, @JsonKey(name: 'original_name') this.originalTitle, this.overview, @JsonKey(name: 'poster_path') this.posterPath, @JsonKey(name: 'media_type') this.mediaType, @JsonKey(name: 'original_language') this.originalLanguage, @JsonKey(name: 'genre_ids') final  List<int>? genreIds, this.popularity, @JsonKey(name: 'first_air_date') this.firstAirDate, @JsonKey(name: 'vote_average') this.voteAverage, @JsonKey(name: 'vote_count') this.voteCount, @JsonKey(name: 'origin_country') final  List<String>? originCountry}): _genreIds = genreIds,_originCountry = originCountry;
+   _TvShow({this.adult, @JsonKey(name: 'backdrop_path') this.backdropPath, this.id, this.name, @JsonKey(name: 'original_name') this.originalTitle, this.overview, @JsonKey(name: 'poster_path') this.posterPath, @JsonKey(name: 'media_type') this.mediaType, @JsonKey(name: 'original_language') this.originalLanguage, @JsonKey(name: 'genre_ids')  List<int>? genreIds, this.popularity, @JsonKey(name: 'first_air_date') this.firstAirDate, @JsonKey(name: 'vote_average') this.voteAverage, @JsonKey(name: 'vote_count') this.voteCount, @JsonKey(name: 'origin_country')  List<String>? originCountry}): _genreIds = genreIds,_originCountry = originCountry;
   factory _TvShow.fromJson(Map<String, dynamic> json) => _$TvShowFromJson(json);
 
 @override final  bool? adult;
@@ -539,16 +552,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TvShow&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.backdropPath, backdropPath) || other.backdropPath == backdropPath)&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.originalTitle, originalTitle) || other.originalTitle == originalTitle)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.originalLanguage, originalLanguage) || other.originalLanguage == originalLanguage)&&const DeepCollectionEquality().equals(other._genreIds, _genreIds)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.firstAirDate, firstAirDate) || other.firstAirDate == firstAirDate)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount)&&const DeepCollectionEquality().equals(other._originCountry, _originCountry));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TvShow&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.backdropPath, backdropPath) || other.backdropPath == backdropPath)&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.originalTitle, originalTitle) || other.originalTitle == originalTitle)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.originalLanguage, originalLanguage) || other.originalLanguage == originalLanguage)&&const DeepCollectionEquality().equals(other.genreIds, _genreIds)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.firstAirDate, firstAirDate) || other.firstAirDate == firstAirDate)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount)&&const DeepCollectionEquality().equals(other.originCountry, _originCountry));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,adult,backdropPath,id,name,originalTitle,overview,posterPath,mediaType,originalLanguage,const DeepCollectionEquality().hash(_genreIds),popularity,firstAirDate,voteAverage,voteCount,const DeepCollectionEquality().hash(_originCountry));
+int get hashCode {
+    return Object.hash(runtimeType,adult,backdropPath,id,name,originalTitle,overview,posterPath,mediaType,originalLanguage,const DeepCollectionEquality().hash(_genreIds),popularity,firstAirDate,voteAverage,voteCount,const DeepCollectionEquality().hash(_originCountry));
+}
 
 @override
 String toString() {
-  return 'TvShow(adult: $adult, backdropPath: $backdropPath, id: $id, name: $name, originalTitle: $originalTitle, overview: $overview, posterPath: $posterPath, mediaType: $mediaType, originalLanguage: $originalLanguage, genreIds: $genreIds, popularity: $popularity, firstAirDate: $firstAirDate, voteAverage: $voteAverage, voteCount: $voteCount, originCountry: $originCountry)';
+    return 'TvShow(adult: $adult, backdropPath: $backdropPath, id: $id, name: $name, originalTitle: $originalTitle, overview: $overview, posterPath: $posterPath, mediaType: $mediaType, originalLanguage: $originalLanguage, genreIds: $genreIds, popularity: $popularity, firstAirDate: $firstAirDate, voteAverage: $voteAverage, voteCount: $voteCount, originCountry: $originCountry)';
 }
 
 

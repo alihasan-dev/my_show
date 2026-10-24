@@ -1,11 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../constants/movie_colors.dart';
 import '../../core/utils/app_extension_method.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class MovieImageWidget extends StatelessWidget {
+class MovieImageWidget extends HookConsumerWidget {
   
   final String imagePath;
   final double? height;
@@ -15,6 +18,10 @@ class MovieImageWidget extends StatelessWidget {
   final double? radius;
   final BorderRadius? borderRadius;
   final String tooltipMessage;
+  final ImageErrorIconSize? errorIconSize;
+  final Color? imageColor;
+  final bool disableHover;
+  final Color? backgroundColor;
   
   const MovieImageWidget({
     required this.imagePath,
@@ -25,20 +32,41 @@ class MovieImageWidget extends StatelessWidget {
     this.radius,
     this.borderRadius,
     this.tooltipMessage = '',
+    this.errorIconSize,
+    this.imageColor,
+    this.disableHover = false,
+    this.backgroundColor,
     super.key
   });
 
   @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Tooltip(
-        message: tooltipMessage,
-        child: ClipRRect(
-          borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 8.0),
-          child: _imageBuilder
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isHovered = useState<bool>(false);
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 200),
+      decoration: BoxDecoration(
+        color: backgroundColor ?? Color(0xFF121212),
+        borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 8.0),
+        border: isHovered.value
+        ? Border.all(
+          color: MovieColors.white,
+          width: 2,
+          )
+        : null
+      ),
+      child: InkWell(
+        onTap: onTap,
+        onHover: disableHover
+        ? null
+        : (value) => isHovered.value = value,
+        child: Tooltip(
+          message: tooltipMessage,
+          child: ClipRRect(
+            borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 8.0),
+            child: _imageBuilder
+          ),
         ),
-      )
+      ),
     );
   }
 
@@ -48,7 +76,7 @@ class MovieImageWidget extends StatelessWidget {
       if (imagePath.endsWith('.svg')) {
         return _svgNetworkImageBuilder;
       }
-      return _networkImageBuilder;
+      return kIsWeb || kIsWasm ? _networkImageBuilderWeb : _networkImageBuilder;
     } else {
       if (imagePath.endsWith('.svg')) {
         return _svgAssetImageBuilder;
@@ -62,8 +90,20 @@ class MovieImageWidget extends StatelessWidget {
     height: height,
     width: width,
     fit: fit,
-    placeholder: (_,_) => _imageShimmerLoader,
-    errorWidget: (_,_,_) => _imageErrorBuilder,
+    placeholder: (_, _) => _imageShimmerLoader,
+    errorWidget: (_, _, _) => _imageErrorBuilder,
+  );
+
+  Widget get _networkImageBuilderWeb => Image.network(
+    imagePath,
+    height: height,
+    width: width,
+    fit: fit,
+    loadingBuilder: (_, child, progress) {
+      if (progress == null) return child;
+      return _imageShimmerLoader;
+    },
+    errorBuilder: (_, _, _) => _imageErrorBuilder,
   );
 
   Widget get _svgNetworkImageBuilder => SvgPicture.network(
@@ -71,7 +111,7 @@ class MovieImageWidget extends StatelessWidget {
     width: width,
     height: height,
     fit: fit,
-    errorBuilder: (_,_,_) => _imageErrorBuilder,
+    errorBuilder: (_, _, _) => _imageErrorBuilder,
     placeholderBuilder: (_) => _imageShimmerLoader,
   );
 
@@ -80,7 +120,13 @@ class MovieImageWidget extends StatelessWidget {
     width: width,
     height: height,
     fit: fit,
-    errorBuilder: (_,_,_) => _imageErrorBuilder,
+    colorFilter: imageColor == null
+    ? null
+    : ColorFilter.mode(
+      imageColor!, 
+      BlendMode.srcIn
+    ),
+    errorBuilder: (_, _, _) => _imageErrorBuilder,
     placeholderBuilder: (_) => _imageShimmerLoader,
   );
 
@@ -89,7 +135,7 @@ class MovieImageWidget extends StatelessWidget {
     width: width,
     height: height,
     fit: fit,
-    errorBuilder: (_,_,_) => _imageErrorBuilder
+    errorBuilder: (_, _, _) => _imageErrorBuilder
   );
 
   Widget get _imageShimmerLoader => Shimmer.fromColors(
@@ -109,10 +155,12 @@ class MovieImageWidget extends StatelessWidget {
     child: Center(
       child: Icon(
         Icons.broken_image,
-        size: 40,
+        size: (errorIconSize ?? ImageErrorIconSize.medium).errorIconSize,
         color: MovieColors.grey,
       ),
     ),
   );
 
 }
+
+enum ImageErrorIconSize {large, medium, small}

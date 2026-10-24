@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import '../../features/watchlist_favourite/presentation/pages/watchlist_favourite_screen.dart';
 import '../../features/dashboard/presentation/pages/dashboard_screen.dart';
 import '../../features/movie/presentation/pages/movie_screen.dart';
 import '../../features/movie_details/presentation/page/movie_details_screen.dart';
@@ -8,6 +9,7 @@ import '../../features/view_all/presentation/page/view_all_screen.dart';
 import '../../features/search/presentation/pages/search_movie_by_keyword_screen.dart';
 import '../../features/movie_details/presentation/page/video_player_screen.dart';
 import '../../features/movie_details/domain/entities/video_entity.dart';
+import '../utils/app_enums.dart';
 class AppRoutes {
 
   AppRoutes._();
@@ -21,6 +23,7 @@ class AppRoutes {
   static const String viewAll = '/view_all';
   static const String videoPlayer = '/video_player';
   static const String review = '/review';
+  static const String watchlistFav = '/watchlistFav';
 
   static final GoRouter routes = GoRouter(
     routes: [
@@ -105,6 +108,20 @@ class AppRoutes {
             id: id,
             title: title
           );
+        },
+      ),
+      GoRoute(
+        name: watchlistFav,
+        path: watchlistFav,
+        builder: (_, state) {
+          // 1. Extract the string parameter
+          final typeString = state.uri.queryParameters['type'];
+          // 2. Safely look up the matching enum or provide a fallback
+          final enumType = WatchlistFavType.values.firstWhere(
+            (e) => e.name == typeString,
+            orElse: () => WatchlistFavType.watchlist,
+          );
+          return WatchlistFavouriteScreen(type: enumType);
         },
       ),
     ]

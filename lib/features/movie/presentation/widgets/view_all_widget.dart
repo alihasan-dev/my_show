@@ -1,17 +1,25 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:my_show/core/constants/app_strings.dart';
+import 'package:my_show/core/utils/app_enums.dart';
 import '../../../../core/constants/movie_colors.dart';
 
 class ViewAllWidget extends StatelessWidget {
 
-  const ViewAllWidget({super.key});
+  final ScreenType screenType;
+
+  const ViewAllWidget({
+    super.key, 
+    this.screenType = ScreenType.mobile
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
-      height: 200,
+      height: screenType == ScreenType.mobile
+      ? 200
+      : 225,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         border: Border.all(

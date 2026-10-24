@@ -5,12 +5,13 @@ import '../provider/nowplaying_provider.dart';
 import '../provider/popular_show_provider.dart';
 import '../provider/trending_tv_show_provider.dart';
 import '../widgets/tv_show_widget.dart';
+import '../../../../core/utils/app_enums.dart';
+import '../../../../core/routes/app_routes.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_shimmer_widget.dart';
 import '../../../../features/tv/presentation/provider/top_rated_show_provider.dart';
 import '../../../../features/tv/presentation/provider/upcoming_show_provider.dart';
-import '../../../../core/routes/app_routes.dart';
-
 class TvScreen extends HookConsumerWidget {
 
   const TvScreen({super.key});
@@ -27,77 +28,94 @@ class TvScreen extends HookConsumerWidget {
     final nowPlayingShowList = nowPlayingShows.asData?.value.result ?? [];
     final upcomingShowsList = upcomingShows.asData?.value.result ?? [];
     return SafeArea(
-      child: trendingTVShow.when(
-        data: (data) {
-          return ListView(
-            padding: const EdgeInsets.all(16),
-            children: [
-              TvShowWidgets(
-                title: AppStrings.trending,
-                tvShowList: data.result,
-              ),
-              TvShowWidgets(
-                title: AppStrings.nowPlaying,
-                tvShowList: nowPlayingShowList,
-                viewAll: () {
-                  context.pushNamed(
-                    AppRoutes.viewAll,
-                    queryParameters: {
-                      'showType': 'tv',
-                      'label': AppStrings.nowPlaying,
-                      'showCategory': 'on_the_air'
-                    }
-                  );
-                },
-              ),
-              TvShowWidgets(
-                title: AppStrings.popular,
-                tvShowList: popularShowsList,
-                viewAll: () {
-                  context.pushNamed(
-                    AppRoutes.viewAll,
-                    queryParameters: {
-                      'showType': 'tv',
-                      'label': AppStrings.popular,
-                      'showCategory': 'popular'
-                    }
-                  );
-                },
-              ),
-              TvShowWidgets(
-                title: AppStrings.topRated,
-                tvShowList: topRatedShowsList,
-                viewAll: () {
-                  context.pushNamed(
-                    AppRoutes.viewAll,
-                    queryParameters: {
-                      'showType': 'tv',
-                      'label': AppStrings.topRated,
-                      'showCategory': 'top_rated'
-                    }
-                  );
-                },
-              ),
-              TvShowWidgets(
-                title: AppStrings.upcoming,
-                tvShowList: upcomingShowsList,
-                viewAll: () {
-                  context.pushNamed(
-                    AppRoutes.viewAll,
-                    queryParameters: {
-                      'showType': 'tv',
-                      'label': AppStrings.upcoming,
-                      'showCategory': 'airing_today',
-
-                    }
-                  );
-                },
-              ),
-            ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final screenType = constraints.maxWidth.screenType;
+          return trendingTVShow.when(
+            data: (data) {
+              return ListView(
+                padding: const EdgeInsets.all(16),
+                children: [
+                  TvShowWidgets(
+                    title: AppStrings.trending,
+                    tvShowList: data.result,
+                    screenType: screenType,
+                  ),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
+                  TvShowWidgets(
+                    title: AppStrings.nowPlaying,
+                    tvShowList: nowPlayingShowList,
+                    viewAll: () {
+                      context.pushNamed(
+                        AppRoutes.viewAll,
+                        queryParameters: {
+                          'showType': 'tv',
+                          'label': AppStrings.nowPlaying,
+                          'showCategory': 'on_the_air'
+                        }
+                      );
+                    },
+                    screenType: screenType,
+                  ),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
+                  TvShowWidgets(
+                    title: AppStrings.popular,
+                    tvShowList: popularShowsList,
+                    viewAll: () {
+                      context.pushNamed(
+                        AppRoutes.viewAll,
+                        queryParameters: {
+                          'showType': 'tv',
+                          'label': AppStrings.popular,
+                          'showCategory': 'popular'
+                        }
+                      );
+                    },
+                    screenType: screenType,
+                  ),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
+                  TvShowWidgets(
+                    title: AppStrings.topRated,
+                    tvShowList: topRatedShowsList,
+                    viewAll: () {
+                      context.pushNamed(
+                        AppRoutes.viewAll,
+                        queryParameters: {
+                          'showType': 'tv',
+                          'label': AppStrings.topRated,
+                          'showCategory': 'top_rated'
+                        }
+                      );
+                    },
+                    screenType: screenType,
+                  ),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
+                  TvShowWidgets(
+                    title: AppStrings.upcoming,
+                    tvShowList: upcomingShowsList,
+                    viewAll: () {
+                      context.pushNamed(
+                        AppRoutes.viewAll,
+                        queryParameters: {
+                          'showType': 'tv',
+                          'label': AppStrings.upcoming,
+                          'showCategory': 'airing_today',
+          
+                        }
+                      );
+                    },
+                    screenType: screenType,
+                  ),
+                ],
+              );
+            },
+            error: (message,_) => Center(child: Text('$message')), 
+            loading: () => MovieShimmerWidget(
+              screenType: screenType,
+              maxWidth: constraints.maxWidth,
+            )
           );
-        },
-        error: (message,_) => Center(child: Text('$message')), 
-        loading: () => const MovieShimmerWidget()
+        }
       ),
     );
   }

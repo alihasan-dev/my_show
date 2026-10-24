@@ -7,8 +7,10 @@ import '../provider/popular_movies_provider.dart';
 import '../provider/trending_movies_provider.dart';
 import '../provider/upcoming_movie_provider.dart';
 import '../provider/top_rated_movies_provider.dart';
+import '../../../../core/utils/app_enums.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/routes/app_routes.dart';
+import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_shimmer_widget.dart';
 
 class MoviesScreen extends HookConsumerWidget {
@@ -27,82 +29,94 @@ class MoviesScreen extends HookConsumerWidget {
     final nowPlayingMoviesList = nowPlayingMovies.asData?.value.result ?? [];
     final upcomingMoviesList = upcomingMovies.asData?.value.result ?? [];
     return SafeArea(
-      child: trendingMovies.when(
-        data: (data) {
-          // return MovieShimmerWidget();
-          return ListView(
-            shrinkWrap: true,
-            padding: const EdgeInsets.all(16),
-            children: [
-              TrendingMoviesWidgets(
-                title: AppStrings.trending,
-                movieList: data.result,
-              ),
-              SizedBox(height: 10),
-              TrendingMoviesWidgets(
-                title: AppStrings.nowPlaying,
-                movieList: nowPlayingMoviesList,
-                viewAll: () {
-                  context.pushNamed(
-                    AppRoutes.viewAll,
-                    queryParameters: {
-                      'showType': 'movie',
-                      'label': AppStrings.nowPlaying,
-                      'showCategory': 'now_playing'
-                    }
-                  );
-                },
-              ),
-              SizedBox(height: 10),
-              TrendingMoviesWidgets(
-                title: AppStrings.popular,
-                movieList: popularMoviesList,
-                viewAll: () {
-                  context.pushNamed(
-                    AppRoutes.viewAll,
-                    queryParameters: {
-                      'showType': 'movie',
-                      'label': AppStrings.popular,
-                      'showCategory': 'popular'
-                    }
-                  );
-                },
-              ),
-              SizedBox(height: 10),
-              TrendingMoviesWidgets(
-                title: AppStrings.topRated,
-                movieList: topRatedMoviesList,
-                viewAll: () {
-                  context.pushNamed(
-                    AppRoutes.viewAll,
-                    queryParameters: {
-                      'showType': 'movie',
-                      'label': AppStrings.topRated,
-                      'showCategory': 'top_rated'
-                    }
-                  );
-                },
-              ),
-              SizedBox(height: 10),
-              TrendingMoviesWidgets(
-                title: AppStrings.upcoming,
-                movieList: upcomingMoviesList,
-                viewAll: () {
-                  context.pushNamed(
-                    AppRoutes.viewAll,
-                    queryParameters: {
-                      'showType': 'movie',
-                      'label': AppStrings.upcoming,
-                      'showCategory': 'upcoming'
-                    }
-                  );
-                },
-              ),
-            ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final screenType = constraints.maxWidth.screenType;
+          return trendingMovies.when(
+            data: (data) {
+              return ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(16),
+                children: [
+                  TrendingMoviesWidgets(
+                    title: AppStrings.trending,
+                    movieList: data.result,
+                    screenType: screenType,
+                  ),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
+                  TrendingMoviesWidgets(
+                    title: AppStrings.nowPlaying,
+                    movieList: nowPlayingMoviesList,
+                    screenType: screenType,
+                    viewAll: () {
+                      context.pushNamed(
+                        AppRoutes.viewAll,
+                        queryParameters: {
+                          'showType': 'movie',
+                          'label': AppStrings.nowPlaying,
+                          'showCategory': 'now_playing'
+                        }
+                      );
+                    },
+                  ),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
+                  TrendingMoviesWidgets(
+                    title: AppStrings.popular,
+                    movieList: popularMoviesList,
+                    screenType: screenType,
+                    viewAll: () {
+                      context.pushNamed(
+                        AppRoutes.viewAll,
+                        queryParameters: {
+                          'showType': 'movie',
+                          'label': AppStrings.popular,
+                          'showCategory': 'popular'
+                        }
+                      );
+                    },
+                  ),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
+                  TrendingMoviesWidgets(
+                    title: AppStrings.topRated,
+                    movieList: topRatedMoviesList,
+                    screenType: screenType,
+                    viewAll: () {
+                      context.pushNamed(
+                        AppRoutes.viewAll,
+                        queryParameters: {
+                          'showType': 'movie',
+                          'label': AppStrings.topRated,
+                          'showCategory': 'top_rated'
+                        }
+                      );
+                    },
+                  ),
+                  if (screenType != ScreenType.mobile) SizedBox(height: 14),
+                  TrendingMoviesWidgets(
+                    title: AppStrings.upcoming,
+                    movieList: upcomingMoviesList,
+                    screenType: screenType,
+                    viewAll: () {
+                      context.pushNamed(
+                        AppRoutes.viewAll,
+                        queryParameters: {
+                          'showType': 'movie',
+                          'label': AppStrings.upcoming,
+                          'showCategory': 'upcoming'
+                        }
+                      );
+                    },
+                  ),
+                ],
+              );
+            },
+            error: (message, _) => Center(child: Text('$message')), 
+            loading: () => MovieShimmerWidget(
+              screenType: screenType,
+              maxWidth: constraints.maxWidth,
+            )
           );
-        },
-        error: (message, _) => Center(child: Text('$message')), 
-        loading: () => const MovieShimmerWidget()
+        }
       ),
     );
   }

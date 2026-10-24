@@ -1,6 +1,9 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:my_show/core/utils/app_enums.dart';
 import '../../core/utils/language_code.dart';
+import '../constants/app_strings.dart';
+import '../widgets/movie_image_widget.dart';
 
 extension NumExtensionUtils on num {
 
@@ -37,6 +40,53 @@ extension NumExtensionUtils on num {
     : toString();
   }
 
+  Color get getRatingColor {
+    var rating = clamp(0.0, 1.0);
+    if (rating >= 0.90) {
+      return const Color(0xFF2E7D32); // Dark Green
+    } else if (rating >= 0.80) {
+      return const Color(0xFF43A047); // Green
+    } else if (rating >= 0.70) {
+      return const Color(0xFF7CB342); // Light Green
+    } else if (rating >= 0.60) {
+      return const Color(0xFFFDD835); // Yellow
+    } else if (rating >= 0.50) {
+      return const Color(0xFFFFB300); // Amber
+    } else if (rating >= 0.40) {
+      return const Color(0xFFFB8C00); // Orange
+    } else if (rating >= 0.30) {
+      return const Color(0xFFF4511E); // Deep Orange
+    } else {
+      return const Color(0xFFD32F2F); // Red
+    }
+  }
+
+  int get getCrossAxisCount {
+    final width = this;
+    if (width < 650) return 3;       // Mobile
+    if (width < 1000) return 4;       // Tablet
+    if (width < 1200) return 5;      // Small Desktop
+    if (width < 1500) return 6;      // Medium Desktop
+    return 7;                        // Large Desktop
+  }
+
+  ScreenType get screenType {
+    final width = this;
+    if (width < 650) {
+      return ScreenType.mobile;
+    }
+    if (width < 1000) {
+      return ScreenType.tablet;
+    }
+    if (width < 1200) {
+      return ScreenType.smallDesktop;
+    }
+    if (width < 1500) {
+      return ScreenType.mediumDesktop;
+    }
+    return ScreenType.largeDesktop;
+  }
+
 }
 
 extension StringExtensionUtils on String {
@@ -54,6 +104,36 @@ extension StringExtensionUtils on String {
       return "$formattedDate ($age)";
     } catch (e) {
       return '-';
+    }
+  }
+
+  String ageDifference({required String birthDay}) {
+    try {
+      final deathDay = this;
+      if (deathDay.isBlank && birthDay.isBlank) return '-';
+      if (deathDay.isBlank && !birthDay.isBlank) {
+        return birthDay.formatDOB();
+      }
+      if (!deathDay.isBlank && birthDay.isBlank) {
+        return 'N/A - ${birthDay.formatDOB()}';
+      }
+      final birthDate = DateTime.parse(birthDay);
+      final deathDate = DateTime.parse(deathDay);
+      final ageDiff = calculateAge(birthDate, from: deathDate);
+      return '${birthDay.formatDOB(hideYrs: true)} - ${deathDay.formatDOB(hideYrs: true)} ($ageDiff)';
+    } catch (e) {
+      return '-';
+    }
+  }
+
+  String get releaseYear {
+    try {
+      String input = this;
+      if (input.isBlank) return '';
+      final dob = DateTime.parse(input);
+      return '${dob.year}';
+    } catch (_) {
+      return '';
     }
   }
 
@@ -111,7 +191,7 @@ extension StringExtensionUtils on String {
 
   String get generateImageURL {
     try {
-      return "${dotenv.get('IMAGE_BASE_URL')}$this";
+      return "${AppStrings.imageBaseURL}$this";
     } catch (e) {
       return this;
     }
@@ -121,20 +201,50 @@ extension StringExtensionUtils on String {
     return toLowerCase().contains('n/a') ? '-' : this;
   }
 
+  String get generateYouTubeThumbnail {
+    final videoId = this;
+    return videoId.isBlank
+    ? ''
+    : "https://img.youtube.com/vi/$videoId/sddefault.jpg";
+  }
+
+  String get generateYouTubeURL {
+    final videoId = this;
+    return videoId.isBlank
+    ? ''
+    : "https://www.youtube.com/watch?v=$videoId";
+  }
+
 }
 
-String calculateAge(DateTime birthDate) {
-  final today = DateTime.now();
+extension ImageErrorExtensionUtils on ImageErrorIconSize {
+  
+  double get errorIconSize {
+    switch (this) {
+      case ImageErrorIconSize.small:
+        return 30.0;
+      case ImageErrorIconSize.medium:
+        return 40.0;
+      case ImageErrorIconSize.large:
+        return 54.0;
+    }
+  }
+}
+
+String calculateAge(DateTime birthDate, {DateTime? from}) {
+  final today = from ?? DateTime.now();
   int age = today.year - birthDate.year;
+  int months = today.month - birthDate.month;
+  int days = today.day - birthDate.day;
+  if (months.isNegative) age-=1;
   if (age != 0) {
     return '$age Yrs';
   } else {
-    int months = today.month - birthDate.month;
-    if (months != 0) {
+    if (months != 0 && !days.isNegative) {
       return '$months Mths';
     } else {
-      int days = today.day - birthDate.day;
       return days == 0 ? 'Today' : '$days Days';
     }
   }
 }
+

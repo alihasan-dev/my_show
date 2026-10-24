@@ -13,6 +13,7 @@ class MovieTvSearchWidget extends StatelessWidget {
   final bool hideYrs;
   final String overview;
   final int maxLine;
+  final double height;
 
   const MovieTvSearchWidget({
     super.key,
@@ -23,6 +24,7 @@ class MovieTvSearchWidget extends StatelessWidget {
     this.hideYrs = true,
     this.overview = '',
     this.maxLine = 4,
+    this.height = 140,
   });
 
   @override
@@ -32,7 +34,7 @@ class MovieTvSearchWidget extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(8),
       child: Container(
-        height: 140,
+        height: height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: MovieColors.grey.withValues(alpha: 0.1),

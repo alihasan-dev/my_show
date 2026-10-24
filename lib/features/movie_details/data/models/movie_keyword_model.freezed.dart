@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'movie_keyword_model.dart';
@@ -9,6 +9,7 @@ part of 'movie_keyword_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $MovieKeywordModelCopyWith<MovieKeywordModel> get copyWith => _$MovieKeywordMode
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MovieKeywordModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.keywords, keywords)&&const DeepCollectionEquality().equals(other.results, results));
+  final _this = this as MovieKeywordModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MovieKeywordModel&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.keywords, _this.keywords)&&const DeepCollectionEquality().equals(other.results, _this.results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(keywords),const DeepCollectionEquality().hash(results));
+int get hashCode {
+  final _this = this as MovieKeywordModel;
+  return Object.hash(runtimeType,_this.id,const DeepCollectionEquality().hash(_this.keywords),const DeepCollectionEquality().hash(_this.results));
+}
 
 @override
 String toString() {
-  return 'MovieKeywordModel(id: $id, keywords: $keywords, results: $results)';
+  final _this = this as MovieKeywordModel;
+  return 'MovieKeywordModel(id: ${_this.id}, keywords: ${_this.keywords}, results: ${_this.results})';
 }
 
 
@@ -66,7 +72,7 @@ class _$MovieKeywordModelCopyWithImpl<$Res>
 /// Create a copy of MovieKeywordModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? keywords = freezed,Object? results = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(MovieKeywordModel(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,keywords: freezed == keywords ? _self.keywords : keywords // ignore: cast_nullable_to_non_nullable
 as List<Keyword>?,results: freezed == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
@@ -205,7 +211,7 @@ return $default(_that.id,_that.keywords,_that.results);case _:
 @JsonSerializable()
 
 class _MovieKeywordModel implements MovieKeywordModel {
-  const _MovieKeywordModel({this.id, final  List<Keyword>? keywords, @JsonKey(name: 'results') final  List<Keyword>? results}): _keywords = keywords,_results = results;
+  const _MovieKeywordModel({this.id,  List<Keyword>? keywords, @JsonKey(name: 'results')  List<Keyword>? results}): _keywords = keywords,_results = results;
   factory _MovieKeywordModel.fromJson(Map<String, dynamic> json) => _$MovieKeywordModelFromJson(json);
 
 @override final  int? id;
@@ -241,16 +247,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MovieKeywordModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._keywords, _keywords)&&const DeepCollectionEquality().equals(other._results, _results));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _MovieKeywordModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.keywords, _keywords)&&const DeepCollectionEquality().equals(other.results, _results));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_keywords),const DeepCollectionEquality().hash(_results));
+int get hashCode {
+    return Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_keywords),const DeepCollectionEquality().hash(_results));
+}
 
 @override
 String toString() {
-  return 'MovieKeywordModel(id: $id, keywords: $keywords, results: $results)';
+    return 'MovieKeywordModel(id: $id, keywords: $keywords, results: $results)';
 }
 
 
@@ -307,16 +315,21 @@ $KeywordCopyWith<Keyword> get copyWith => _$KeywordCopyWithImpl<Keyword>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Keyword&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name));
+  final _this = this as Keyword;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Keyword&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.name, _this.name) || other.name == _this.name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name);
+int get hashCode {
+  final _this = this as Keyword;
+  return Object.hash(runtimeType,_this.id,_this.name);
+}
 
 @override
 String toString() {
-  return 'Keyword(id: $id, name: $name)';
+  final _this = this as Keyword;
+  return 'Keyword(id: ${_this.id}, name: ${_this.name})';
 }
 
 
@@ -345,7 +358,7 @@ class _$KeywordCopyWithImpl<$Res>
 /// Create a copy of Keyword
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Keyword(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -502,16 +515,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Keyword&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Keyword&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name);
+int get hashCode {
+    return Object.hash(runtimeType,id,name);
+}
 
 @override
 String toString() {
-  return 'Keyword(id: $id, name: $name)';
+    return 'Keyword(id: $id, name: $name)';
 }
 
 

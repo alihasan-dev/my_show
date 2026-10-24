@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/core/widgets/people_shimmer_widget.dart';
+import '../provider/view_all_provider.dart';
+import '../../../../core/utils/app_enums.dart';
+import '../../../../core/routes/app_routes.dart';
+import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/widgets/no_data_widget.dart';
-import '../provider/view_all_provider.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
-import '../../../../core/widgets/movie_text.dart';
-import '../../../../core/routes/app_routes.dart';
-
+import '../../../../core/widgets/people_shimmer_widget.dart';
 class ViewAllScreen extends HookConsumerWidget {
   
   final String showType;
@@ -29,6 +29,8 @@ class ViewAllScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final showList = ref.watch(viewAllProvider);
     final scrollController = useScrollController();
+    final searchQueryController = useTextEditingController();
+    final enableSearch = useState<bool>(false);
     Timer? timer;
     useEffect(() {
       void listener() {
@@ -55,86 +57,132 @@ class ViewAllScreen extends HookConsumerWidget {
       appBar: AppBar(
         centerTitle: false,
         scrolledUnderElevation: 0,
-        title: Text(
-          label.capitalizeWord,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+        title: AnimatedSize(
+          duration: Duration(milliseconds: 250),
+          child: enableSearch.value
+          ? TextField(
+              controller: searchQueryController,
+              onChanged: (value) => ref.read(viewAllProvider.notifier).search(query: value),
+              decoration: InputDecoration.collapsed(
+                hintText: 'Search',
+                hintStyle: TextStyle(
+                  fontSize: 18,
+                  color: MovieColors.grey
+                ),
+              ),
+              autofocus: true,
+            )
+          : Text(
+            label.capitalizeWord,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 18),
+          ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              if (enableSearch.value) {
+                searchQueryController.clear();
+                ref.read(viewAllProvider.notifier).search(query: '');
+              }
+              enableSearch.value = !enableSearch.value;
+            }, 
+            icon: Icon(
+              enableSearch.value 
+              ? Icons.clear 
+              : Icons.search
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         top: false,
-        child: showList.when(
-          data: (data) {
-            if (data.result.isEmpty) {
-              return NoDataWidget(
-                icon: Icons.people_outline_rounded,
-                title: 'No ${label.capitalizeWord} Found',
-                subtitle: '${label.capitalizeWord} aren\'t available right now.\nPlease try again later.',
-                onRetry: () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory),
-              );
-            }
-            return GridView.builder(
-              controller: scrollController,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                childAspectRatio: 0.7
-              ), 
-              padding: EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 16
-              ),
-              itemCount: data.result.length,
-              itemBuilder: (context, index) {
-                final show = data.result[index];
-                return Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    MovieImageWidget(
-                      onTap: () {
-                        if (show.id.isNegative || showType.isBlank) return;
-                        context.pushNamed(
-                          AppRoutes.movieDetails,
-                          queryParameters: {
-                            'id': '${show.id}',
-                            'type': showType
-                          }
-                        );
-                      },
-                      imagePath: show.posterPath.generateImageURL
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-                        color: MovieColors.black.withValues(alpha: 0.4),
-                        child: Center(
-                          child: MovieText(
-                            title: show.title,
-                            maxLine: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 11
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return showList.when(
+              data: (data) {
+                if (data.result.isEmpty) {
+                  return NoDataWidget(
+                    icon: searchQueryController.text.isBlank
+                    ? Icons.people_outline_rounded
+                    : Icons.search_off,
+                    title: searchQueryController.text.isBlank
+                    ? 'No ${label.capitalizeWord} Found'
+                    : "No matches for ${searchQueryController.text}.",
+                    subtitle: searchQueryController.text.isBlank
+                    ? '${label.capitalizeWord} aren\'t available right now.\nPlease try again later.'
+                    : 'Check the spelling or try another search.',
+                    onRetry: searchQueryController.text.isBlank
+                    ? () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory)
+                    : null,
+                  );
+                }
+                return GridView.builder(
+                  controller: scrollController,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: constraints.maxWidth.getCrossAxisCount,
+                    mainAxisSpacing: constraints.maxWidth.screenType == ScreenType.mobile ? 4 : 8,
+                    crossAxisSpacing: constraints.maxWidth.screenType == ScreenType.mobile ? 4 : 8,
+                    childAspectRatio: 0.7
+                  ), 
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 16
+                  ),
+                  itemCount: data.result.length,
+                  itemBuilder: (context, index) {
+                    final show = data.result[index];
+                    return Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        MovieImageWidget(
+                          onTap: () {
+                            if (show.id.isNegative || showType.isBlank) return;
+                            context.pushNamed(
+                              AppRoutes.movieDetails,
+                              queryParameters: {
+                                'id': '${show.id}',
+                                'type': showType
+                              }
+                            );
+                          },
+                          imagePath: show.posterPath.generateImageURL
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                            color: MovieColors.black.withValues(alpha: 0.4),
+                            child: Center(
+                              child: MovieText(
+                                title: show.title,
+                                maxLine: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(fontSize: 11),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
+                      ],
+                    );
+                  }
                 );
-              }
+              }, 
+              error: (_, _) => NoDataWidget(
+                icon: Icons.error_outline_rounded,
+                title: 'Something Went Wrong',
+                subtitle: 'We couldn\'t load the ${label.toLowerCase()} list.\nPlease check your connection and try again.',
+                onRetry: () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory),
+              ), 
+              loading: () => PeopleShimmerWidget(
+                crossAxisCount: constraints.maxWidth.getCrossAxisCount,
+                screenType:  constraints.maxWidth.screenType
+              ),
             );
-          }, 
-          error: (_,_) => NoDataWidget(
-            icon: Icons.error_outline_rounded,
-            title: 'Something Went Wrong',
-            subtitle: 'We couldn\'t load the ${label.toLowerCase()} list.\nPlease check your connection and try again.',
-            onRetry: () => ref.read(viewAllProvider.notifier).viewAllShow(showType: showType, showCategory: showCategory),
-          ), 
-          loading: () => const PeopleShimmerWidget()
+          },
         ),
       ),
     );

@@ -16,6 +16,7 @@ class MovieCastBanner extends StatelessWidget {
   final double? radius;
   final EdgeInsetsGeometry? padding;
   final TextAlign? textAlign;
+  final ImageErrorIconSize? errorIconSize;
   
   const MovieCastBanner({
     this.onTap,
@@ -28,6 +29,7 @@ class MovieCastBanner extends StatelessWidget {
     this.radius,
     this.padding,
     this.textAlign,
+    this.errorIconSize,
     super.key
   });
 
@@ -46,6 +48,7 @@ class MovieCastBanner extends StatelessWidget {
               height: height,
               width: double.maxFinite,
               radius: radius,
+              errorIconSize: errorIconSize,
             ),
             Padding(
               padding: padding ?? const EdgeInsets.symmetric(

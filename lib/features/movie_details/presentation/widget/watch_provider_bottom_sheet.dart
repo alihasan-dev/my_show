@@ -1,44 +1,53 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/constants/movie_colors.dart';
+import 'package:my_show/core/utils/app_enums.dart';
+import 'package:my_show/core/widgets/movie_image_widget.dart';
 import '../../domain/entities/watch_provider_entity.dart';
 import '../../../../core/widgets/movie_text.dart';
+import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_cast_banner.dart';
 
 class WatchProviderBottomSheet extends HookConsumerWidget {
   
   final WatchProviderModal? watchProvider;
+  final ScreenType screenType;
   
   const WatchProviderBottomSheet({
     super.key, 
-    this.watchProvider
+    this.watchProvider,
+    this.screenType = ScreenType.mobile
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (watchProvider?.watchRegion == null) return SizedBox.shrink();
     final theme = Theme.of(context).textTheme;
+    final mobileView = screenType == ScreenType.mobile;
     return Container(
       decoration: BoxDecoration(
         color: MovieColors.white.withValues(alpha: 0.05),
-        borderRadius: BorderRadius.only(
+        borderRadius: kIsWeb
+        ? BorderRadius.all(Radius.circular(20))
+        : BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20)
-        ) 
+        ),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 6),
+          SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 18.0),
+                padding: const EdgeInsets.only(left: 20.0),
                 child: MovieText(
-                  title: 'Watch Providers',
+                  title: AppStrings.watchProvider,
                   style: theme.titleMedium?.copyWith(
                     color: MovieColors.textPrimary,
                     fontSize: 18,
@@ -47,7 +56,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                 ),
               ),
               Transform.translate(
-                offset: Offset(-4, 0),
+                offset: Offset(-6, 0),
                 child: CloseButton()
               ),
             ],
@@ -55,10 +64,10 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
           Flexible(
             child: ListView(
               shrinkWrap: true,
-              padding: EdgeInsets.symmetric(horizontal: 18),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               children: [
                 if ((watchProvider?.watchRegion?.flatrate ?? []).isNotEmpty) ...[
-                  SizedBox(height: 10),
+                  SizedBox(height: mobileView ? 10 : 12),
                   MovieText(
                     title: 'STREAM',
                     style: theme.bodyMedium?.copyWith(
@@ -66,7 +75,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                       color: MovieColors.textPrimary
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: mobileView ? 10 : 7),
                   SizedBox(
                     height: 95,
                     child: ListView.separated(
@@ -81,6 +90,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                           radius: 12,
                           imagePath: item.logoPath!.generateImageURL,
                           subTitle: item.providerName ?? '',
+                          errorIconSize: ImageErrorIconSize.small,
                           padding: EdgeInsets.symmetric(
                             vertical: 5,
                             horizontal: 1
@@ -97,7 +107,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                   ),
                 ],
                 if ((watchProvider?.watchRegion?.free ?? []).isNotEmpty) ...[
-                  SizedBox(height: 4),
+                  SizedBox(height: mobileView ? 4 : 10),
                   MovieText(
                     title: 'FREE',
                     style: theme.bodyMedium?.copyWith(
@@ -105,7 +115,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                       color: MovieColors.textPrimary
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: mobileView ? 10 : 7),
                   SizedBox(
                     height: 95,
                     child: ListView.separated(
@@ -120,6 +130,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                           radius: 12,
                           imagePath: item.logoPath!.generateImageURL,
                           subTitle: item.providerName ?? '',
+                          errorIconSize: ImageErrorIconSize.small,
                           padding: EdgeInsets.symmetric(
                             vertical: 5,
                             horizontal: 1
@@ -136,7 +147,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                   ),
                 ],
                 if ((watchProvider?.watchRegion?.rent ?? []).isNotEmpty) ...[
-                  SizedBox(height: 4),
+                  SizedBox(height: mobileView ? 4 : 10),
                   MovieText(
                     title: 'RENT',
                     style: theme.bodyMedium?.copyWith(
@@ -144,7 +155,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                       color: MovieColors.textPrimary
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: mobileView ? 10 : 7),
                   SizedBox(
                     height: 95,
                     child: ListView.separated(
@@ -159,6 +170,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                           radius: 12,
                           imagePath: item.logoPath!.generateImageURL,
                           subTitle: item.providerName ?? '',
+                          errorIconSize: ImageErrorIconSize.small,
                           padding: EdgeInsets.symmetric(
                             vertical: 5,
                             horizontal: 1
@@ -175,7 +187,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                   )
                 ],
                 if ((watchProvider?.watchRegion?.buy ?? []).isNotEmpty) ...[
-                  SizedBox(height: 4),
+                  SizedBox(height: mobileView ? 4 : 10),
                   MovieText(
                     title: 'BUY',
                     style: theme.bodyMedium?.copyWith(
@@ -183,7 +195,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                       color: MovieColors.textPrimary
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: mobileView ? 10 : 7),
                   SizedBox(
                     height: 95,
                     child: ListView.separated(
@@ -198,6 +210,7 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
                           radius: 12,
                           imagePath: item.logoPath!.generateImageURL,
                           subTitle: item.providerName ?? '',
+                          errorIconSize: ImageErrorIconSize.small,
                           padding: EdgeInsets.symmetric(
                             vertical: 5,
                             horizontal: 1

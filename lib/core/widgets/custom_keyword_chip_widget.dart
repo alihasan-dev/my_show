@@ -20,8 +20,8 @@ class CustomKeywordChipWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Container(
         padding: const EdgeInsets.symmetric(
-          vertical: 6.0,
-          horizontal: 12.0
+          vertical: 7.0,
+          horizontal: 14.0
         ),
         decoration: ShapeDecoration(
           color: MovieColors.grey.withValues(alpha: 0.2),

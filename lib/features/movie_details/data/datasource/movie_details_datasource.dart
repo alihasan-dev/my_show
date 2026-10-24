@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/utils/app_extension_method.dart';
 import '../models/movie_award_model.dart';
+import '../models/release_dates_model.dart';
 import '../models/video_model.dart';
 import '../models/watch_provider_model.dart';
 import '/core/network/api_end_points.dart';
@@ -27,6 +29,8 @@ abstract interface class MovieDetailsRemoteDatasource {
   Future<AwardModel> movieAwards({required String id}); 
 
   Future<WatchProviderModel> watchProvider({required String id, required String type}); 
+
+  Future<ReleaseDatesModel> releaseDates({required String id}); 
 }
 
 class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
@@ -101,12 +105,17 @@ class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
   
   @override
   Future<AwardModel> movieAwards({required String id}) async {
-    final omdbApiKey = dotenv.get('OMDB_API_kEY');
+    String omdbApiKey = '';
+    if (kIsWeb || kIsWasm) {
+      omdbApiKey = const String.fromEnvironment('OMDB_API_KEY');
+    } else {
+      omdbApiKey = dotenv.get('OMDB_API_KEY');
+    }
     if (omdbApiKey.isBlank) throw Exception('Invalid OMDB API Key');
     try {
       final response = await dioClient.get(
         'https://www.omdbapi.com/?i=$id&apikey=$omdbApiKey',
-        options: Options(headers: null)
+        options: Options(headers: {'Accept': 'application/json'})
       );
       if (response.statusCode == 200) {
         return AwardModel.fromJson(response.data);
@@ -129,6 +138,20 @@ class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
       throw Exception();   
     }
   }
+
+  @override
+  Future<ReleaseDatesModel> releaseDates({required String id}) async {
+    try {
+      final response = await dioClient.get('${ApiEndPoints.movieDetails}movie/$id/release_dates');
+      if (response.statusCode == 200) {
+        return ReleaseDatesModel.fromJson(response.data);
+      }
+      throw Exception();
+    } catch (e) {
+      throw Exception();   
+    }
+  }
+  
 }
 
 final movieDetailsRemoteDataSourceProvider = Provider<MovieDetailsRemoteDatasource>((ref) {

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'view_all_widget.dart';
+import 'package:my_show/core/utils/app_enums.dart';
+import 'package:my_show/core/utils/app_utils.dart';
+import '../../../../features/movie/presentation/widgets/view_all_widget.dart';
+import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/routes/app_routes.dart';
@@ -14,11 +17,13 @@ class TrendingMoviesWidgets extends StatelessWidget {
   final String title;
   final List<TrendingMovie> movieList;
   final Function()? viewAll;
+  final ScreenType screenType;
 
   const TrendingMoviesWidgets({
     this.title = '',
     this.movieList = const [],
     this.viewAll,
+    this.screenType = ScreenType.mobile,
     super.key
   });
 
@@ -26,108 +31,167 @@ class TrendingMoviesWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     if (movieList.isEmpty) return SizedBox.shrink();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        MovieText(
-          title: title,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: MovieColors.white.withValues(alpha: 0.9)
-          ),
-        ),
-        SizedBox(height: 10),
-        SizedBox(
-          height: 301,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: viewAll != null
-            ? movieList.length + 1
-            : movieList.length,
-            separatorBuilder: (_,_) => SizedBox(width: 15),
-            itemBuilder: (_,index) {
-              final movie = index == movieList.length 
-              ? movieList[index - 1]
-              : movieList[index];
-              return InkWell(
-                borderRadius: BorderRadius.circular(12),
-                highlightColor: index != movieList.length
-                ? null
-                :Colors.transparent,
-                splashColor: index != movieList.length
-                ? null
-                :Colors.transparent,
-                onTap: () {
-                  index == movieList.length
-                  ? viewAll?.call()
-                  : context.pushNamed(
-                    AppRoutes.movieDetails,
-                    queryParameters: {
-                      'id': '${movie.id}',
-                      'type': movie.mediaType
-                    }
-                  );
-                },
-                child: SizedBox(
-                  width: 125,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Stack(
+
+    movieList.sort((a, b) {
+      final first = a.releaseDate;
+      final second = b.releaseDate;
+      if (first.isBlank && second.isBlank) return 0;
+      if (first.isBlank) return 1;
+      if (second.isBlank) return -1;
+      final firstDate = DateTime.tryParse(first);
+      final secondDate = DateTime.tryParse(second);
+      // Invalid dates also go to the end
+      if (firstDate == null && secondDate == null) return 0;
+      if (firstDate == null) return 1;
+      if (secondDate == null) return -1;
+      return secondDate.compareTo(firstDate);
+    });
+
+    return LayoutBuilder(
+      builder: (contex, constraints) {
+        final cardWidth = AppUtils.getTrendingCardWidth(
+          constraints.maxWidth, 
+          canCalculate: title == AppStrings.trending,
+          screenType: screenType
+        );
+        // final cardWidth = getTrendingCardWidth(constraints.maxWidth, canCalculate: title == AppStrings.trending);
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MovieText(
+              title: title,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: MovieColors.white.withValues(alpha: 0.9)
+              ),
+            ),
+            SizedBox(height: screenType == ScreenType.mobile ? 10 : 15),
+            SizedBox(
+              height: screenType == ScreenType.mobile
+              ? 270
+              : 295,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: viewAll != null
+                ? movieList.length + 1
+                : movieList.length,
+                separatorBuilder: (_, _) => SizedBox(width: screenType == ScreenType.mobile ? 4 : 15),
+                itemBuilder: (_, index) {
+                  final movie = index == movieList.length 
+                  ? movieList[index - 1]
+                  : movieList[index];
+                  return InkWell(
+                    borderRadius: BorderRadius.circular(AppUtils.cardRadius),
+                    highlightColor: index != movieList.length
+                    ? null
+                    :Colors.transparent,
+                    splashColor: index != movieList.length
+                    ? null
+                    :Colors.transparent,
+                    onTap: () {
+                      index == movieList.length
+                      ? viewAll?.call()
+                      : context.pushNamed(
+                        AppRoutes.movieDetails,
+                        queryParameters: {
+                          'id': '${movie.id}',
+                          'type': movie.mediaType
+                        }
+                      );
+                    },
+                    child: SizedBox(
+                      width: cardWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          index == movieList.length
-                          ? ViewAllWidget()
-                          : MovieImageWidget(
-                            imagePath: movie.posterPath.generateImageURL,
-                            width: double.maxFinite,
-                            height: 200
+                          Stack(
+                            children: [
+                              index == movieList.length
+                              ? ViewAllWidget(screenType: screenType)
+                              : MovieImageWidget(
+                                imagePath: backgroundImage(
+                                  movie, 
+                                  constraints.maxWidth, 
+                                  canCalculate: title == AppStrings.trending
+                                ),
+                                width: double.maxFinite,
+                                height: screenType == ScreenType.mobile
+                                ? 200
+                                : 225,
+                              ),
+                              if (movie.voteAverage > 0.0 && index != movieList.length)
+                                Positioned(
+                                  bottom: 5,
+                                  right: 5,
+                                  child: VotePercentageWidget(
+                                    votePercent: movie.voteAverage / 10,
+                                    yTransform: 0,
+                                  ),
+                                ),
+                            ],
                           ),
+                          SizedBox(height: 8),
                           if (index != movieList.length)
-                            Positioned(
-                              bottom: 0,
-                              left: 12,
-                              child: VotePercentageWidget(
-                                votePercent: movie.voteAverage / 10,
-                                title: (movie.voteAverage * 10).toStringAsFixed(0),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Column(
+                                spacing: 2,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  MovieText(
+                                    title: movie.title,
+                                    maxLine: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: theme.textTheme.bodyMedium?.copyWith(
+                                      color: MovieColors.white.withValues(alpha: 0.9)
+                                    ),
+                                  ),
+                                  MovieText(
+                                    title: movie.releaseDate.formatDOB(hideYrs: true),
+                                    maxLine: 1,
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: MovieColors.textSecondary
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                         ],
                       ),
-                      SizedBox(height: 24),
-                      if (index != movieList.length)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Column(
-                            spacing: 2,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              MovieText(
-                                title: movie.title,
-                                maxLine: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: MovieColors.white.withValues(alpha: 0.9)
-                                ),
-                              ),
-                              MovieText(
-                                title: movie.releaseDate.formatDOB(hideYrs: true),
-                                maxLine: 1,
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  color: MovieColors.textSecondary
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              );
-            }
-          ),
-        ),
-      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      }
     );
   }
+
+  String backgroundImage(TrendingMovie movie, double screenWidth, {bool canCalculate = false}) {
+    if (!canCalculate) return movie.posterPath.generateImageURL;
+    if (screenWidth < 600) {
+      return movie.posterPath.generateImageURL; 
+    } else if (screenWidth < 1100) {
+      return movie.backdropPath.generateImageURL;
+    } else {
+      return movie.backdropPath.generateImageURL; 
+    }
+  }
+
+  // double getTrendingCardWidth(double screenWidth, {bool canCalculate = false}) {
+  //   if (!canCalculate) return screenType == ScreenType.mobile ? 125 : 150;
+  //   if (screenWidth < 600) {
+  //     // Mobile: Strictly 125 as defined
+  //     return 125.0; 
+  //   } else if (screenWidth < 1100) {
+  //     // Tablet / Laptop: Scale dynamically between mobile and desktop
+  //     return (screenWidth - 48) / 2.5;
+  //   } else {
+  //     // Large Desktop: Cap max width
+  //     return 380.0; 
+  //   }
+  // }
 }

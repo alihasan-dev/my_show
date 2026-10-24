@@ -1,6 +1,11 @@
 class AppStrings {
   AppStrings._();
 
+  ////BASR URL
+  static const String baseURL = "https://api.themoviedb.org";
+  static const String imageBaseURL = "https://image.tmdb.org/t/p/w500";
+
+  static const String appName = 'MyShow';
   static const String biography = 'Biography';
   static const String readMore = 'Read More';
   static const String readLess = 'Read Less';
@@ -28,6 +33,12 @@ class AppStrings {
   static const String searchFor = 'Search for ';
   static const String videos = 'Videos';
   static const String retry = 'Retry';
+  static const String remove = 'Remove';
+  static const String recentSearch = 'Recent Searches';
+  static const String clearAll = 'Clear All';
+  static const String readAllReviews = 'Read All Reviews';
+  static const String watchProvider = 'Watch Providers';
+  static const String awards = 'Awards';
 
   static const String overview = 'Overview';
   static const String cast = 'Cast';
@@ -82,4 +93,6 @@ class AppStrings {
     'Try "Matt Damon", "The Martian"...',
     'Try "Joaquin Phoenix", "Joker"...',
   ];
+
+  
 }

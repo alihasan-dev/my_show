@@ -37,9 +37,50 @@ class CustomSliverAppBar extends StatelessWidget {
           return FlexibleSpaceBar(
             titlePadding: EdgeInsets.only(bottom: 16, left: 52),
             expandedTitleScale: 1.0,
-            background: MovieImageWidget(
-              imagePath: imagePath,
-              radius: 0.0,
+            background: SizedBox(
+              height: 250,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  MovieImageWidget(
+                    imagePath: imagePath,
+                    radius: 0.0,
+                  ),
+                  // Positioned(
+                  //   bottom: 14,
+                  //   right: 14,
+                  //   child: Row(
+                  //     mainAxisSize: MainAxisSize.min,
+                  //     children: [
+                  //       Container(
+                  //         width: 48,
+                  //         height: 48,
+                  //         decoration: BoxDecoration(
+                  //           shape: BoxShape.circle,
+                  //           border: Border.all(
+                  //             color: MovieColors.white.withValues(alpha: 0.25),
+                  //             width: 1.5,
+                  //           ),
+                  //           gradient: LinearGradient(
+                  //             colors: [
+                  //               MovieColors.white.withValues(alpha: 0.20),
+                  //               MovieColors.white.withValues(alpha: 0.05),
+                  //             ],
+                  //             begin: Alignment.topLeft,
+                  //             end: Alignment.bottomRight,
+                  //           ),
+                  //         ),
+                  //         child: Icon(
+                  //           Icons.arrow_forward_ios_rounded,
+                  //           size: 20,
+                  //           color: MovieColors.white.withValues(alpha: 0.8),
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+                ],
+              ),
             ),
           );
         }

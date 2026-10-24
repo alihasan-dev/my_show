@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'search_movie_by_keyword_model.dart';
@@ -9,6 +9,7 @@ part of 'search_movie_by_keyword_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $SearchMovieByKeywordModelCopyWith<SearchMovieByKeywordModel> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchMovieByKeywordModel&&(identical(other.id, id) || other.id == id)&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other.results, results)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults));
+  final _this = this as SearchMovieByKeywordModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchMovieByKeywordModel&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.page, _this.page) || other.page == _this.page)&&const DeepCollectionEquality().equals(other.results, _this.results)&&(identical(other.totalPages, _this.totalPages) || other.totalPages == _this.totalPages)&&(identical(other.totalResults, _this.totalResults) || other.totalResults == _this.totalResults));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,page,const DeepCollectionEquality().hash(results),totalPages,totalResults);
+int get hashCode {
+  final _this = this as SearchMovieByKeywordModel;
+  return Object.hash(runtimeType,_this.id,_this.page,const DeepCollectionEquality().hash(_this.results),_this.totalPages,_this.totalResults);
+}
 
 @override
 String toString() {
-  return 'SearchMovieByKeywordModel(id: $id, page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
+  final _this = this as SearchMovieByKeywordModel;
+  return 'SearchMovieByKeywordModel(id: ${_this.id}, page: ${_this.page}, results: ${_this.results}, totalPages: ${_this.totalPages}, totalResults: ${_this.totalResults})';
 }
 
 
@@ -66,7 +72,7 @@ class _$SearchMovieByKeywordModelCopyWithImpl<$Res>
 /// Create a copy of SearchMovieByKeywordModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? page = freezed,Object? results = freezed,Object? totalPages = freezed,Object? totalResults = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(SearchMovieByKeywordModel(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,page: freezed == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int?,results: freezed == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
@@ -207,7 +213,7 @@ return $default(_that.id,_that.page,_that.results,_that.totalPages,_that.totalRe
 @JsonSerializable()
 
 class _SearchMovieByKeywordModel implements SearchMovieByKeywordModel {
-  const _SearchMovieByKeywordModel({this.id, this.page, final  List<SearchMovieKeyword>? results, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults}): _results = results;
+  const _SearchMovieByKeywordModel({this.id, this.page,  List<SearchMovieKeyword>? results, @JsonKey(name: 'total_pages') this.totalPages, @JsonKey(name: 'total_results') this.totalResults}): _results = results;
   factory _SearchMovieByKeywordModel.fromJson(Map<String, dynamic> json) => _$SearchMovieByKeywordModelFromJson(json);
 
 @override final  int? id;
@@ -237,16 +243,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchMovieByKeywordModel&&(identical(other.id, id) || other.id == id)&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other._results, _results)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchMovieByKeywordModel&&(identical(other.id, id) || other.id == id)&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other.results, _results)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,page,const DeepCollectionEquality().hash(_results),totalPages,totalResults);
+int get hashCode {
+    return Object.hash(runtimeType,id,page,const DeepCollectionEquality().hash(_results),totalPages,totalResults);
+}
 
 @override
 String toString() {
-  return 'SearchMovieByKeywordModel(id: $id, page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
+    return 'SearchMovieByKeywordModel(id: $id, page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
 }
 
 
@@ -305,16 +313,21 @@ $SearchMovieKeywordCopyWith<SearchMovieKeyword> get copyWith => _$SearchMovieKey
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchMovieKeyword&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.backdropPath, backdropPath) || other.backdropPath == backdropPath)&&const DeepCollectionEquality().equals(other.genreIds, genreIds)&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.originCountry, originCountry)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.originalTitle, originalTitle) || other.originalTitle == originalTitle)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.title, title) || other.title == title)&&(identical(other.name, name) || other.name == name)&&(identical(other.gender, gender) || other.gender == gender)&&const DeepCollectionEquality().equals(other.knownFor, knownFor)&&(identical(other.knownForDepartment, knownForDepartment) || other.knownForDepartment == knownForDepartment)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath)&&(identical(other.originalLanguage, originalLanguage) || other.originalLanguage == originalLanguage)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.firstAirDate, firstAirDate) || other.firstAirDate == firstAirDate)&&(identical(other.releaseDate, releaseDate) || other.releaseDate == releaseDate)&&(identical(other.video, video) || other.video == video)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount));
+  final _this = this as SearchMovieKeyword;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchMovieKeyword&&(identical(other.adult, _this.adult) || other.adult == _this.adult)&&(identical(other.backdropPath, _this.backdropPath) || other.backdropPath == _this.backdropPath)&&const DeepCollectionEquality().equals(other.genreIds, _this.genreIds)&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.originCountry, _this.originCountry)&&(identical(other.originalName, _this.originalName) || other.originalName == _this.originalName)&&(identical(other.mediaType, _this.mediaType) || other.mediaType == _this.mediaType)&&(identical(other.originalTitle, _this.originalTitle) || other.originalTitle == _this.originalTitle)&&(identical(other.overview, _this.overview) || other.overview == _this.overview)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.gender, _this.gender) || other.gender == _this.gender)&&const DeepCollectionEquality().equals(other.knownFor, _this.knownFor)&&(identical(other.knownForDepartment, _this.knownForDepartment) || other.knownForDepartment == _this.knownForDepartment)&&(identical(other.posterPath, _this.posterPath) || other.posterPath == _this.posterPath)&&(identical(other.profilePath, _this.profilePath) || other.profilePath == _this.profilePath)&&(identical(other.originalLanguage, _this.originalLanguage) || other.originalLanguage == _this.originalLanguage)&&(identical(other.popularity, _this.popularity) || other.popularity == _this.popularity)&&(identical(other.firstAirDate, _this.firstAirDate) || other.firstAirDate == _this.firstAirDate)&&(identical(other.releaseDate, _this.releaseDate) || other.releaseDate == _this.releaseDate)&&(identical(other.video, _this.video) || other.video == _this.video)&&(identical(other.voteAverage, _this.voteAverage) || other.voteAverage == _this.voteAverage)&&(identical(other.voteCount, _this.voteCount) || other.voteCount == _this.voteCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,adult,backdropPath,const DeepCollectionEquality().hash(genreIds),id,const DeepCollectionEquality().hash(originCountry),originalName,mediaType,originalTitle,overview,title,name,gender,const DeepCollectionEquality().hash(knownFor),knownForDepartment,posterPath,profilePath,originalLanguage,popularity,firstAirDate,releaseDate,video,voteAverage,voteCount]);
+int get hashCode {
+  final _this = this as SearchMovieKeyword;
+  return Object.hashAll([runtimeType,_this.adult,_this.backdropPath,const DeepCollectionEquality().hash(_this.genreIds),_this.id,const DeepCollectionEquality().hash(_this.originCountry),_this.originalName,_this.mediaType,_this.originalTitle,_this.overview,_this.title,_this.name,_this.gender,const DeepCollectionEquality().hash(_this.knownFor),_this.knownForDepartment,_this.posterPath,_this.profilePath,_this.originalLanguage,_this.popularity,_this.firstAirDate,_this.releaseDate,_this.video,_this.voteAverage,_this.voteCount]);
+}
 
 @override
 String toString() {
-  return 'SearchMovieKeyword(adult: $adult, backdropPath: $backdropPath, genreIds: $genreIds, id: $id, originCountry: $originCountry, originalName: $originalName, mediaType: $mediaType, originalTitle: $originalTitle, overview: $overview, title: $title, name: $name, gender: $gender, knownFor: $knownFor, knownForDepartment: $knownForDepartment, posterPath: $posterPath, profilePath: $profilePath, originalLanguage: $originalLanguage, popularity: $popularity, firstAirDate: $firstAirDate, releaseDate: $releaseDate, video: $video, voteAverage: $voteAverage, voteCount: $voteCount)';
+  final _this = this as SearchMovieKeyword;
+  return 'SearchMovieKeyword(adult: ${_this.adult}, backdropPath: ${_this.backdropPath}, genreIds: ${_this.genreIds}, id: ${_this.id}, originCountry: ${_this.originCountry}, originalName: ${_this.originalName}, mediaType: ${_this.mediaType}, originalTitle: ${_this.originalTitle}, overview: ${_this.overview}, title: ${_this.title}, name: ${_this.name}, gender: ${_this.gender}, knownFor: ${_this.knownFor}, knownForDepartment: ${_this.knownForDepartment}, posterPath: ${_this.posterPath}, profilePath: ${_this.profilePath}, originalLanguage: ${_this.originalLanguage}, popularity: ${_this.popularity}, firstAirDate: ${_this.firstAirDate}, releaseDate: ${_this.releaseDate}, video: ${_this.video}, voteAverage: ${_this.voteAverage}, voteCount: ${_this.voteCount})';
 }
 
 
@@ -343,7 +356,7 @@ class _$SearchMovieKeywordCopyWithImpl<$Res>
 /// Create a copy of SearchMovieKeyword
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? adult = freezed,Object? backdropPath = freezed,Object? genreIds = freezed,Object? id = freezed,Object? originCountry = freezed,Object? originalName = freezed,Object? mediaType = freezed,Object? originalTitle = freezed,Object? overview = freezed,Object? title = freezed,Object? name = freezed,Object? gender = freezed,Object? knownFor = freezed,Object? knownForDepartment = freezed,Object? posterPath = freezed,Object? profilePath = freezed,Object? originalLanguage = freezed,Object? popularity = freezed,Object? firstAirDate = freezed,Object? releaseDate = freezed,Object? video = freezed,Object? voteAverage = freezed,Object? voteCount = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(SearchMovieKeyword(
 adult: freezed == adult ? _self.adult : adult // ignore: cast_nullable_to_non_nullable
 as bool?,backdropPath: freezed == backdropPath ? _self.backdropPath : backdropPath // ignore: cast_nullable_to_non_nullable
 as String?,genreIds: freezed == genreIds ? _self.genreIds : genreIds // ignore: cast_nullable_to_non_nullable
@@ -502,7 +515,7 @@ return $default(_that.adult,_that.backdropPath,_that.genreIds,_that.id,_that.ori
 @JsonSerializable()
 
 class _SearchMovieKeyword implements SearchMovieKeyword {
-  const _SearchMovieKeyword({this.adult, @JsonKey(name: 'backdrop_path') this.backdropPath, @JsonKey(name: 'genre_ids') final  List<int>? genreIds, this.id, @JsonKey(name: "origin_country") final  List<String>? originCountry, @JsonKey(name: 'original_name') this.originalName, @JsonKey(name: 'media_type') this.mediaType, @JsonKey(name: 'original_title') this.originalTitle, this.overview, this.title, this.name, this.gender, @JsonKey(name: 'known_for') final  List<SearchMovieKeyword>? knownFor, @JsonKey(name: 'known_for_department') this.knownForDepartment, @JsonKey(name: 'poster_path') this.posterPath, @JsonKey(name: 'profile_path') this.profilePath, @JsonKey(name: 'original_language') this.originalLanguage, this.popularity, @JsonKey(name: 'first_air_date') this.firstAirDate, @JsonKey(name: 'release_date') this.releaseDate, this.video, @JsonKey(name: 'vote_average') this.voteAverage, @JsonKey(name: 'vote_count') this.voteCount}): _genreIds = genreIds,_originCountry = originCountry,_knownFor = knownFor;
+  const _SearchMovieKeyword({this.adult, @JsonKey(name: 'backdrop_path') this.backdropPath, @JsonKey(name: 'genre_ids')  List<int>? genreIds, this.id, @JsonKey(name: "origin_country")  List<String>? originCountry, @JsonKey(name: 'original_name') this.originalName, @JsonKey(name: 'media_type') this.mediaType, @JsonKey(name: 'original_title') this.originalTitle, this.overview, this.title, this.name, this.gender, @JsonKey(name: 'known_for')  List<SearchMovieKeyword>? knownFor, @JsonKey(name: 'known_for_department') this.knownForDepartment, @JsonKey(name: 'poster_path') this.posterPath, @JsonKey(name: 'profile_path') this.profilePath, @JsonKey(name: 'original_language') this.originalLanguage, this.popularity, @JsonKey(name: 'first_air_date') this.firstAirDate, @JsonKey(name: 'release_date') this.releaseDate, this.video, @JsonKey(name: 'vote_average') this.voteAverage, @JsonKey(name: 'vote_count') this.voteCount}): _genreIds = genreIds,_originCountry = originCountry,_knownFor = knownFor;
   factory _SearchMovieKeyword.fromJson(Map<String, dynamic> json) => _$SearchMovieKeywordFromJson(json);
 
 @override final  bool? adult;
@@ -566,16 +579,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchMovieKeyword&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.backdropPath, backdropPath) || other.backdropPath == backdropPath)&&const DeepCollectionEquality().equals(other._genreIds, _genreIds)&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._originCountry, _originCountry)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.originalTitle, originalTitle) || other.originalTitle == originalTitle)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.title, title) || other.title == title)&&(identical(other.name, name) || other.name == name)&&(identical(other.gender, gender) || other.gender == gender)&&const DeepCollectionEquality().equals(other._knownFor, _knownFor)&&(identical(other.knownForDepartment, knownForDepartment) || other.knownForDepartment == knownForDepartment)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath)&&(identical(other.originalLanguage, originalLanguage) || other.originalLanguage == originalLanguage)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.firstAirDate, firstAirDate) || other.firstAirDate == firstAirDate)&&(identical(other.releaseDate, releaseDate) || other.releaseDate == releaseDate)&&(identical(other.video, video) || other.video == video)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchMovieKeyword&&(identical(other.adult, adult) || other.adult == adult)&&(identical(other.backdropPath, backdropPath) || other.backdropPath == backdropPath)&&const DeepCollectionEquality().equals(other.genreIds, _genreIds)&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.originCountry, _originCountry)&&(identical(other.originalName, originalName) || other.originalName == originalName)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.originalTitle, originalTitle) || other.originalTitle == originalTitle)&&(identical(other.overview, overview) || other.overview == overview)&&(identical(other.title, title) || other.title == title)&&(identical(other.name, name) || other.name == name)&&(identical(other.gender, gender) || other.gender == gender)&&const DeepCollectionEquality().equals(other.knownFor, _knownFor)&&(identical(other.knownForDepartment, knownForDepartment) || other.knownForDepartment == knownForDepartment)&&(identical(other.posterPath, posterPath) || other.posterPath == posterPath)&&(identical(other.profilePath, profilePath) || other.profilePath == profilePath)&&(identical(other.originalLanguage, originalLanguage) || other.originalLanguage == originalLanguage)&&(identical(other.popularity, popularity) || other.popularity == popularity)&&(identical(other.firstAirDate, firstAirDate) || other.firstAirDate == firstAirDate)&&(identical(other.releaseDate, releaseDate) || other.releaseDate == releaseDate)&&(identical(other.video, video) || other.video == video)&&(identical(other.voteAverage, voteAverage) || other.voteAverage == voteAverage)&&(identical(other.voteCount, voteCount) || other.voteCount == voteCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,adult,backdropPath,const DeepCollectionEquality().hash(_genreIds),id,const DeepCollectionEquality().hash(_originCountry),originalName,mediaType,originalTitle,overview,title,name,gender,const DeepCollectionEquality().hash(_knownFor),knownForDepartment,posterPath,profilePath,originalLanguage,popularity,firstAirDate,releaseDate,video,voteAverage,voteCount]);
+int get hashCode {
+    return Object.hashAll([runtimeType,adult,backdropPath,const DeepCollectionEquality().hash(_genreIds),id,const DeepCollectionEquality().hash(_originCountry),originalName,mediaType,originalTitle,overview,title,name,gender,const DeepCollectionEquality().hash(_knownFor),knownForDepartment,posterPath,profilePath,originalLanguage,popularity,firstAirDate,releaseDate,video,voteAverage,voteCount]);
+}
 
 @override
 String toString() {
-  return 'SearchMovieKeyword(adult: $adult, backdropPath: $backdropPath, genreIds: $genreIds, id: $id, originCountry: $originCountry, originalName: $originalName, mediaType: $mediaType, originalTitle: $originalTitle, overview: $overview, title: $title, name: $name, gender: $gender, knownFor: $knownFor, knownForDepartment: $knownForDepartment, posterPath: $posterPath, profilePath: $profilePath, originalLanguage: $originalLanguage, popularity: $popularity, firstAirDate: $firstAirDate, releaseDate: $releaseDate, video: $video, voteAverage: $voteAverage, voteCount: $voteCount)';
+    return 'SearchMovieKeyword(adult: $adult, backdropPath: $backdropPath, genreIds: $genreIds, id: $id, originCountry: $originCountry, originalName: $originalName, mediaType: $mediaType, originalTitle: $originalTitle, overview: $overview, title: $title, name: $name, gender: $gender, knownFor: $knownFor, knownForDepartment: $knownForDepartment, posterPath: $posterPath, profilePath: $profilePath, originalLanguage: $originalLanguage, popularity: $popularity, firstAirDate: $firstAirDate, releaseDate: $releaseDate, video: $video, voteAverage: $voteAverage, voteCount: $voteCount)';
 }
 
 

@@ -32,6 +32,26 @@ class ViewAllMoviesNotifier extends StateNotifier<AsyncValue<TrendingMoviesEntit
     return state;
   }
 
+  AsyncValue<TrendingMoviesEntity> search({required String query}) {
+    if (movieList.isEmpty) return state;
+
+    final q = query.trim().toLowerCase();
+
+    final filteredMovies = q.length < 3
+    ? movieList
+    : movieList.where((movie) {
+        return movie.title.toLowerCase().contains(q) || movie.originalTitle.toLowerCase().contains(q);
+      }).toList();
+
+    final current = state.value;
+    if (current != null) {
+      state = AsyncValue.data(
+        current.copyWith(result: filteredMovies),
+      );
+    }
+    return state;
+  }
+
 }
 
 final viewAllProvider = StateNotifierProvider.autoDispose<ViewAllMoviesNotifier, AsyncValue<TrendingMoviesEntity>>((ref) {
