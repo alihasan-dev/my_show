@@ -117,7 +117,7 @@ class PeopleScreen extends HookConsumerWidget {
                   ],
                 );
               }, 
-              error: (_,_) => NoDataWidget(
+              error: (_, _) => NoDataWidget(
                 icon: Icons.error_outline_rounded,
                 title: 'Something Went Wrong',
                 subtitle: 'We couldn\'t load the people list.\nPlease check your connection and try again.',

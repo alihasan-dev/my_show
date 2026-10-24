@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/utils/app_extension_method.dart';
@@ -104,7 +105,13 @@ class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
   
   @override
   Future<AwardModel> movieAwards({required String id}) async {
-    final omdbApiKey = dotenv.get('OMDB_API_kEY');
+    String omdbApiKey = '';
+    if (kIsWeb || kIsWasm) {
+      omdbApiKey = const String.fromEnvironment('OMDB_API_KEY');
+    } else {
+      omdbApiKey = dotenv.get('OMDB_API_KEY');
+    }
+    // String omdbApiKey = dotenv.get('OMDB_API_kEY');
     if (omdbApiKey.isBlank) throw Exception('Invalid OMDB API Key');
     try {
       final response = await dioClient.get(

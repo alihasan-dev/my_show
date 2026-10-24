@@ -1,13 +1,20 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../constants/app_strings.dart';
+
 final dioProvider = Provider<Dio>((ref) {
-  final baseURL = dotenv.get('BASE_URL');
-  final key = dotenv.get('API_KEY');
+  String key = '';
+  if (kIsWeb || kIsWasm) {
+    key = const String.fromEnvironment('API_KEY');
+  } else {
+    key = dotenv.get('API_KEY');
+  }
   final dio = Dio(
     BaseOptions(
-      baseUrl: baseURL,
+      baseUrl: AppStrings.baseURL,
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(minutes: 5),
       headers: {
