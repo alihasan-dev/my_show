@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -92,6 +93,12 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(color: Color(0xFFB3B3B3)),
         ),
         dividerColor: const Color(0xFF2C2C2C),
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: <TargetPlatform, PageTransitionsBuilder>{
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(), // ⬅ forces iOS-style slide on Android
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          }
+        )
       ),
       routerConfig: AppRoutes.routes,
     );

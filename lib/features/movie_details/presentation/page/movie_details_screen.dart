@@ -16,6 +16,7 @@ import '../provider/movie_awards_provider.dart';
 import '../provider/release_dates_provider.dart';
 import '../provider/movie_details_provider.dart';
 import '../provider/movie_keyword_provider.dart';
+import '../widget/movie_action_widget.dart';
 import '../widget/rating_release_year_widget.dart';
 import '../widget/watch_provider_bottom_sheet.dart';
 import '../widget/movie_details_shimmer_widget.dart';
@@ -133,7 +134,6 @@ class MovieDetailsScreen extends HookConsumerWidget {
           builder: (context, constraints) {
             final screenType = constraints.maxWidth.screenType;
             final mobileView = screenType == ScreenType.mobile;
-            // return MovieDetailsShimmer(screenType: screenType);
             return movieDetails.when(
               data: (data) {
                 final movieData = data;
@@ -144,6 +144,8 @@ class MovieDetailsScreen extends HookConsumerWidget {
                       CustomSliverAppBar(
                         imagePath: (movieData.backdropPath ?? '').generateImageURL,
                         title: movieData.title ?? movieData.name ?? '',
+                        expandedHeight: 300,
+                        showShadow: true,
                       ),
                     ] else ...[
                       SliverToBoxAdapter(
@@ -240,65 +242,120 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                             ),
                                           ),
                                         ],
-                                        // Row(
-                                        //   children: [
-                                        //     // if ((movieData.voteAverage ?? 0.0) > 0.0) ...[
-                                        //     //   VotePercentageWidget(
-                                        //     //     height: 40,
-                                        //     //     width: 40,
-                                        //     //     votePercent: movieData.voteAverage! / 10,
-                                        //     //     yTransform: 0,
-                                        //     //   ),
-                                        //     //   const SizedBox(width: 12),
-                                        //     // ],
-                                        //     IconButton(
-                                        //       onPressed: () {
-                                        //         CustomSnackBar.show(
-                                        //           context, 
-                                        //           message: AppStrings.comingSoon
-                                        //         );
-                                        //       },
-                                        //       icon: const Icon(Icons.favorite_border),
-                                        //     ),
-                                        //     IconButton(
-                                        //       onPressed: () {
-                                        //         CustomSnackBar.show(
-                                        //           context, 
-                                        //           message: AppStrings.comingSoon
-                                        //         );
-                                        //       },
-                                        //       icon: const Icon(Icons.bookmark_border),
-                                        //     ),
-                                        //     IconButton(
-                                        //       onPressed: () {
-                                        //         String youTubeURL = '';
-                                        //         if (movieVideoList.isNotEmpty) {
-                                        //           youTubeURL = movieVideoList.firstWhere((item) => !(item.key ?? '').isBlank, orElse: () => Results()).key ?? '';
-                                        //         }
-                                        //         youTubeURL = youTubeURL.generateYouTubeURL;
-                                        //         // having some issue in youtube video player
-                                        //         // context.pushNamed(
-                                        //         //   AppRoutes.videoPlayer,
-                                        //         //   extra: {
-                                        //         //     'videos': movieVideoList,
-                                        //         //     'initialIndex': 0,
-                                        //         //   },
-                                        //         // );
-                                        //         if (youTubeURL.isBlank) {
-                                        //           CustomSnackBar.show(
-                                        //             context, 
-                                        //             message: type == 'movie'
-                                        //             ? AppStrings.noMovieVideosAvailable
-                                        //             : AppStrings.noTvVideosAvailable
-                                        //           );
-                                        //           return;
-                                        //         }
-                                        //         launchUrl(Uri.parse(youTubeURL));
-                                        //       },
-                                        //       icon: const Icon(Icons.play_circle),
-                                        //     ),
-                                        //   ],
-                                        // ),
+                                        const SizedBox(height: 14),
+                                        Wrap(
+                                          spacing: 8,
+                                          runSpacing: 8,
+                                          children: [
+                                            MovieActionWidget(
+                                              icon: hasFavouriteMarked
+                                              ? Icons.favorite
+                                              : Icons.favorite_border,
+                                              label: 'Favourite',
+                                              iconColor: hasFavouriteMarked 
+                                              ? MovieColors.red
+                                              : null,
+                                              onTap: () {
+                                                final favouriteNotifier = ref.read(movieFavouriteProvider.notifier);
+                                                if (hasFavouriteMarked) {
+                                                  favouriteNotifier.removeFavourite(id: id);
+                                                  return;
+                                                }
+                                                final entity = MovieWatchlistEntity(
+                                                  id: id,
+                                                  title: type == 'movie'
+                                                  ? movieData.title ?? ''
+                                                  : movieData.name ?? '',
+                                                  mediaType: type,
+                                                  posterPath: movieData.posterPath ?? '',
+                                                  createdDate: DateTime.now().toString()
+                                                );
+                                                favouriteNotifier.saveFavourite(entity: entity);
+                                              },
+                                            ),
+                                            MovieActionWidget(
+                                              icon: hasWatchlistMarked
+                                              ? Icons.bookmark
+                                              : Icons.bookmark_border_outlined,
+                                              label: 'Watchlist',
+                                              iconColor: hasWatchlistMarked 
+                                              ? MovieColors.primaryColor
+                                              : null,
+                                              onTap: () {
+                                                final watchlistNotifier = ref.read(movieWatchlistProvider.notifier);
+                                                if (hasWatchlistMarked) {
+                                                  watchlistNotifier.removeWatchlist(id: id);
+                                                  return;
+                                                }
+                                                final entity = MovieWatchlistEntity(
+                                                  id: id,
+                                                  title: type == 'movie'
+                                                  ? movieData.title ?? ''
+                                                  : movieData.name ?? '',
+                                                  mediaType: type,
+                                                  posterPath: movieData.posterPath ?? '',
+                                                  createdDate: DateTime.now().toString()
+                                                );
+                                                watchlistNotifier.saveWatchlist(entity: entity);
+                                              },
+                                            ),
+                                            MovieActionWidget(
+                                              icon: Icons.rate_review_outlined,
+                                              label: 'Review',
+                                              onTap: () {
+                                                context.pushNamed(
+                                                  AppRoutes.review,
+                                                  queryParameters: {
+                                                    'id': id,
+                                                    'showType': type,
+                                                    'title': type == 'movie' ? movieData.title : movieData.name
+                                                  }
+                                                );
+                                              },
+                                            ),
+                                            if (movieTvWatchData?.watchRegion != null) ...[
+                                              MovieActionWidget(
+                                                icon: Icons.movie_outlined,
+                                                label: 'Watch Provider',
+                                                onTap: () {
+                                                  if (kIsWeb || kIsWasm) {
+                                                    showDialog(
+                                                      context: context,
+                                                      barrierColor: MovieColors.transparent,
+                                                      builder: (_) {
+                                                        return AlertDialog(
+                                                          contentPadding: EdgeInsets.zero,
+                                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                                          content: SizedBox(
+                                                            width: 400,
+                                                            height: 400,
+                                                            child: WatchProviderBottomSheet(
+                                                              watchProvider: movieTvWatchData,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                    );
+                                                  } else {
+                                                    showModalBottomSheet(
+                                                      context: context, 
+                                                      isScrollControlled: true,
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.only(
+                                                          topLeft: Radius.circular(20),
+                                                          topRight: Radius.circular(20)
+                                                        )
+                                                      ),
+                                                      builder: (_) => WatchProviderBottomSheet(
+                                                        watchProvider: movieTvWatchData,
+                                                      )
+                                                    );
+                                                  }
+                                                },
+                                              )
+                                            ]
+                                          ],
+                                        )
                                       ],
                                     ),
                                   ),
@@ -511,88 +568,6 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                 value: awards.value.replaceNA
                               ),
                               SizedBox(height: 5)
-                            ],
-                            if (mobileView) ...[
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 6),
-                                child: Row(
-                                  spacing:screenType == ScreenType.mobile
-                                  ? 6
-                                  : 12,
-                                  children: List.generate(
-                                    movieTvWatchData?.watchRegion == null
-                                    ? 1
-                                    : 2, 
-                                    (watchIndex) {
-                                      return Expanded(
-                                        child: CustomGradientButton(
-                                          label: watchIndex == 0
-                                          ? AppStrings.readAllReviews
-                                          : AppStrings.watchProvider,
-                                          padding: EdgeInsetsGeometry.symmetric(vertical: 14),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadiusGeometry.circular(6),
-                                          ),
-                                          textAlign: TextAlign.center,
-                                          textStyle: theme.labelLarge?.copyWith(
-                                            color: MovieColors.white.withValues(alpha: 0.8)
-                                          ),
-                                          radius: 8,
-                                          onTap: () {
-                                            switch (watchIndex) {
-                                              case 0:
-                                                context.pushNamed(
-                                                  AppRoutes.review,
-                                                  queryParameters: {
-                                                    'id': id,
-                                                    'showType': type,
-                                                    'title': type == 'movie' ? movieData.title : movieData.name
-                                                  }
-                                                );
-                                                break;
-                                              case 1: 
-                                                if (kIsWeb || kIsWasm) {
-                                                  showDialog(
-                                                    context: context,
-                                                    barrierColor: MovieColors.transparent,
-                                                    builder: (_) {
-                                                      return AlertDialog(
-                                                        contentPadding: EdgeInsets.zero,
-                                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                                                        content: SizedBox(
-                                                          width: 400,
-                                                          height: 400,
-                                                          child: WatchProviderBottomSheet(
-                                                            watchProvider: movieTvWatchData,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }
-                                                  );
-                                                } else {
-                                                  showModalBottomSheet(
-                                                    context: context, 
-                                                    isScrollControlled: true,
-                                                    shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.only(
-                                                        topLeft: Radius.circular(20),
-                                                        topRight: Radius.circular(20)
-                                                      )
-                                                    ),
-                                                    builder: (_) => WatchProviderBottomSheet(
-                                                      watchProvider: movieTvWatchData,
-                                                    )
-                                                  );
-                                                }
-                                              default:
-                                            }
-                                          }
-                                        ),
-                                      );
-                                    }
-                                  ),
-                                ),
-                              ),
                             ],
                             const SizedBox(height: 10),
                             MovieText(
@@ -1472,10 +1447,6 @@ class MovieDetailsHero extends HookConsumerWidget {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [
-                      // Color(0xF222160A),
-                      // Color(0xD94A2B0D),
-                      // Color(0x884A2B0D),
-                      // Color(0x18201005),
                       Color(0xF2121212), // Strong dark overlay
                       Color(0xD9121212), // Medium-dark overlay
                       Color(0x88121212), // Subtle overlay
@@ -1492,8 +1463,6 @@ class MovieDetailsHero extends HookConsumerWidget {
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                     colors: [
-                      // Color(0xD92E1B0B),
-                      // Color(0x00000000)
                       Color(0xD9121212), // Fade into app background
                       Color(0x00121212), // Transparent at the top
                     ],
@@ -1627,7 +1596,7 @@ class MovieDetailsHero extends HookConsumerWidget {
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   children: [
-                    _MovieAction(
+                    MovieActionWidget(
                       icon: hasFavouriteMarked
                       ? Icons.favorite
                       : Icons.favorite_border,
@@ -1654,7 +1623,7 @@ class MovieDetailsHero extends HookConsumerWidget {
                       },
                     ),
                     SizedBox(width: 8),
-                    _MovieAction(
+                    MovieActionWidget(
                       icon: hasWatchlistMarked
                       ? Icons.bookmark
                       : Icons.bookmark_border_outlined,
@@ -1681,7 +1650,7 @@ class MovieDetailsHero extends HookConsumerWidget {
                       },
                     ),
                     SizedBox(width: 8),
-                    _MovieAction(
+                    MovieActionWidget(
                       icon: Icons.rate_review_outlined,
                       label: 'Review',
                       onTap: () {
@@ -1697,7 +1666,7 @@ class MovieDetailsHero extends HookConsumerWidget {
                     ),
                     SizedBox(width: 8),
                     if (movieTvWatchData?.watchRegion != null) ...[
-                      _MovieAction(
+                      MovieActionWidget(
                         icon: Icons.movie_outlined,
                         label: 'Watch Provider',
                         onTap: () {
@@ -1757,58 +1726,4 @@ class MovieDetailsHero extends HookConsumerWidget {
     );
   }
 
-}
-
-
-class _MovieAction extends StatelessWidget {
-  
-  const _MovieAction({
-    required this.icon,
-    required this.label,
-    this.iconColor,
-    this.onTap
-  });
-
-  final IconData icon;
-  final String label;
-  final Function()? onTap;
-  final Color? iconColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 6
-        ),
-        decoration: ShapeDecoration(
-          color: MovieColors.white.withValues(alpha: 0.1),
-          shape: StadiumBorder()
-        ),
-        child: Row(
-          spacing: 2,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              color: iconColor ?? MovieColors.white.withValues(alpha: 0.7),
-              size: 20,
-            ),
-            const SizedBox(height: 5),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: MovieColors.white.withValues(alpha: 0.7),
-                fontSize: 12,
-                height: 1.25,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
