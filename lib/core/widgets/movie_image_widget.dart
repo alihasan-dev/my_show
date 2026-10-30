@@ -59,6 +59,9 @@ class MovieImageWidget extends HookConsumerWidget {
         onHover: disableHover
         ? null
         : (value) => isHovered.value = value,
+        splashFactory: NoSplash.splashFactory,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         child: Tooltip(
           message: tooltipMessage,
           child: ClipRRect(

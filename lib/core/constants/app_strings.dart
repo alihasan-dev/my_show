@@ -65,6 +65,7 @@ class AppStrings {
   static const String noMovieVideosAvailable = 'No trailer/video available for this movie';
   static const String noTvVideosAvailable = 'No trailer/video available for this show';
   static const String comingSoon = 'Coming soon';
+  static const String about = 'About';
 
   static const List<String> searchHints = [
     'Try "Inception", "Breaking Bad"...',

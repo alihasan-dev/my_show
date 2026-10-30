@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_extension_method.dart';
+import '../../../../core/widgets/about_us_widget.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/routes/app_routes.dart';
@@ -43,6 +44,18 @@ class DashboardScreen extends HookConsumerWidget {
                   Header(
                     selectedIndex: bottomSelectedIndex.value,
                     onTap: (index) {
+                      if (index == bottomBarIconList.length - 1) {
+                        showGeneralDialog(
+                          context: context, 
+                          barrierDismissible: true,
+                          barrierLabel: 'close',
+                          pageBuilder: (_, a1, _) => ScaleTransition(
+                            scale: Tween<double>(begin: 0.8, end: 1.0).animate(a1),
+                            child: const AboutScreen()
+                          ),
+                        );
+                        return;
+                      }
                       bottomSelectedIndex.value = index;
                     },
                   )
