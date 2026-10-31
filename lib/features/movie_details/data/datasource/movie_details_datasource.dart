@@ -3,15 +3,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_show/core/utils/app_extension_method.dart';
-import '../models/movie_award_model.dart';
-import '../models/release_dates_model.dart';
-import '../models/video_model.dart';
-import '../models/watch_provider_model.dart';
 import '/core/network/api_end_points.dart';
 import '/core/network/dio_provider.dart';
 import '/features/movie/data/models/trending_movies_model.dart';
 import '/features/movie_details/data/models/cast_model.dart';
 import '/features/movie_details/data/models/movie_keyword_model.dart';
+import '../models/episode_details_model.dart';
+import '../models/movie_award_model.dart';
+import '../models/release_dates_model.dart';
+import '../models/season_details_model.dart';
+import '../models/video_model.dart';
+import '../models/watch_provider_model.dart';
 import '../models/movie_details_model.dart';
 
 abstract interface class MovieDetailsRemoteDatasource {
@@ -31,6 +33,10 @@ abstract interface class MovieDetailsRemoteDatasource {
   Future<WatchProviderModel> watchProvider({required String id, required String type}); 
 
   Future<ReleaseDatesModel> releaseDates({required String id}); 
+
+  Future<SeasonDetailsModel> seasonDetails({required String id, required String seasonNumber}); 
+
+  Future<EpisodeDetailsModel> episodeDetails({required String id, required String seasonNumber, required String episodeNumber}); 
 }
 
 class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
@@ -145,6 +151,32 @@ class MovieDetailsRemoteDatasourceImp implements MovieDetailsRemoteDatasource {
       final response = await dioClient.get('${ApiEndPoints.movieDetails}movie/$id/release_dates');
       if (response.statusCode == 200) {
         return ReleaseDatesModel.fromJson(response.data);
+      }
+      throw Exception();
+    } catch (e) {
+      throw Exception();   
+    }
+  }
+
+  @override
+  Future<EpisodeDetailsModel> episodeDetails({required String id, required String seasonNumber, required String episodeNumber}) async {
+    try {
+      final response = await dioClient.get('${ApiEndPoints.movieDetails}tv/$id/season/$seasonNumber/episode/$episodeNumber?language=en-US');
+      if (response.statusCode == 200) {
+        return EpisodeDetailsModel.fromJson(response.data);
+      }
+      throw Exception();
+    } catch (e) {
+      throw Exception();   
+    }
+  }
+
+  @override
+  Future<SeasonDetailsModel> seasonDetails({required String id, required String seasonNumber}) async {
+    try {
+      final response = await dioClient.get('${ApiEndPoints.movieDetails}tv/$id/season/$seasonNumber?language=en-US');
+      if (response.statusCode == 200) {
+        return SeasonDetailsModel.fromJson(response.data);
       }
       throw Exception();
     } catch (e) {

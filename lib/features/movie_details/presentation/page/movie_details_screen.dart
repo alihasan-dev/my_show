@@ -7,7 +7,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:my_show/core/utils/app_enums.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/utils/app_utils.dart';
-import '../../../../core/widgets/movie_carousel_widget.dart';
 import '../provider/movie_favourite_provider.dart';
 import '../provider/movie_watchlist_provider.dart';
 import '../widget/genres_widget.dart';
@@ -20,6 +19,7 @@ import '../provider/movie_details_provider.dart';
 import '../provider/movie_keyword_provider.dart';
 import '../widget/movie_action_widget.dart';
 import '../widget/rating_release_year_widget.dart';
+import '../widget/season_details_widget.dart';
 import '../widget/watch_provider_bottom_sheet.dart';
 import '../widget/movie_details_shimmer_widget.dart';
 import '../../domain/entities/video_entity.dart';
@@ -489,7 +489,9 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                   itemBuilder: (context, subIndex) {
                                     final item = (movieData.seasons ?? [])[(movieData.seasons ?? []).length - 1 - subIndex];
                                     return InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        showSeasonDetailsDialog(context, season: item.seasonNumber);
+                                      },
                                       borderRadius: BorderRadius.circular(8),
                                       child: Container(
                                         height: double.maxFinite,
@@ -885,4 +887,30 @@ class MovieDetailsScreen extends HookConsumerWidget {
       ),
     );
   }
+
+  Future<void> showSeasonDetailsDialog(BuildContext context, {int? season}) async {
+    if (id.isBlank || (season ?? -1).isNegative || !context.mounted) return;
+    showGeneralDialog(
+      context: context, 
+      barrierDismissible: true,
+      barrierLabel: 'close',
+      pageBuilder: (_, a1, _) => ScaleTransition(
+        scale: Tween<double>(begin: 0.8, end: 1.0).animate(a1),
+        child: AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          insetPadding: const EdgeInsets.all(14),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+          content: SizedBox(
+            height: 520,
+            width: 520,
+            child: SeasonDetailsWidget(
+              seasonId: id,
+              seasonNumber: season.toString(),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
 }
