@@ -31,6 +31,7 @@ extension NumExtensionUtils on num {
     final minutes = this;
     final hours = minutes ~/ 60; // integer division
     final mins = minutes % 60;   // remainder
+    if (hours <=0 ) return '$mins min';
     return "${hours}h ${mins}m";
   }
 

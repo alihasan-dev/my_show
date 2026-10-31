@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_extension_method.dart';
+import '../../../../core/widgets/about_us_widget.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/routes/app_routes.dart';
@@ -30,21 +31,97 @@ class DashboardScreen extends HookConsumerWidget {
     ];
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isMobileOrTablet = constraints.maxWidth.screenType == ScreenType.mobile || constraints.maxWidth.screenType == ScreenType.tablet;
+        final mobileView = constraints.maxWidth.screenType == ScreenType.mobile;
         return Scaffold(
+          // appBar: AppBar(toolbarHeight: 0,),
           body: Container(
-            padding: EdgeInsets.symmetric(horizontal: isMobileOrTablet ? 0.0 : 16.0),
+            padding: EdgeInsets.symmetric(horizontal: mobileView ? 0.0 : 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // 1. Constrained Header
-                if (!isMobileOrTablet) ...[
+                if (!mobileView) ...[
                   Header(
                     selectedIndex: bottomSelectedIndex.value,
                     onTap: (index) {
+                      if (index == bottomBarIconList.length - 1) {
+                        showGeneralDialog(
+                          context: context, 
+                          barrierDismissible: true,
+                          barrierLabel: 'close',
+                          pageBuilder: (_, a1, _) => ScaleTransition(
+                            scale: Tween<double>(begin: 0.8, end: 1.0).animate(a1),
+                            child: const AboutScreen()
+                          ),
+                        );
+                        return;
+                      }
                       bottomSelectedIndex.value = index;
                     },
                   )
+                ] else ... [
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 14),
+                  //   child: SizedBox(
+                  //     height: 54,
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //       children: [
+                  //         MovieImageWidget(
+                  //           imagePath: 'lib/core/assets/images/my_show_logo.png',
+                  //           onTap: () => bottomSelectedIndex.value = 0,
+                  //           disableHover: true,
+                  //           height: 36,
+                  //           width: 36,
+                  //         ),
+                  //         Row(
+                  //           children: [
+                  //             TextButton.icon(
+                  //               onPressed: () => context.pushNamed(
+                  //                 AppRoutes.watchlistFav,
+                  //                 queryParameters: {
+                  //                   'type': WatchlistFavType.watchlist.name
+                  //                 }
+                  //               ), 
+                  //               label: MovieText(
+                  //                 title: 'Watchlist',
+                  //                 style: TextStyle(
+                  //                   fontSize: 13,
+                  //                   color: MovieColors.white
+                  //                 ),
+                  //               ),
+                  //               icon: Icon(
+                  //                 Icons.bookmark_border, 
+                  //                 size: 18, 
+                  //                 color: MovieColors.white
+                  //               ),
+                  //             ),
+                  //             TextButton.icon(
+                  //               onPressed: () => context.pushNamed(
+                  //                 AppRoutes.watchlistFav,
+                  //                 queryParameters: {
+                  //                   'type': WatchlistFavType.favourite.name
+                  //                 }
+                  //               ), 
+                  //               label: MovieText(
+                  //                 title: 'Favorite',
+                  //                 style: TextStyle(
+                  //                   fontSize: 13,
+                  //                   color: MovieColors.white
+                  //                 ),
+                  //               ),
+                  //               icon: Icon(
+                  //                 Icons.favorite_border, 
+                  //                 size: 18, 
+                  //                 color: MovieColors.white
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // )
                 ],
                 // 2. Constrained Body Area
                 Expanded(
@@ -53,7 +130,7 @@ class DashboardScreen extends HookConsumerWidget {
               ],
             ),
           ),
-          bottomNavigationBar: !isMobileOrTablet
+          bottomNavigationBar: !mobileView
           ? null
           : ValueListenableBuilder<int>(
             valueListenable: bottomSelectedIndex,

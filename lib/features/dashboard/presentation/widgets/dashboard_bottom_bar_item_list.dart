@@ -6,5 +6,6 @@ List<LabelIcon> bottomBarIconList = [
   LabelIcon(title: AppStrings.movies, iconData: Icons.movie_outlined),
   LabelIcon(title: AppStrings.tvShows, iconData: Icons.tv),
   LabelIcon(title: AppStrings.people, iconData: Icons.groups_2),
-  LabelIcon(title: AppStrings.search, iconData: Icons.search)
+  LabelIcon(title: AppStrings.search, iconData: Icons.search),
+  LabelIcon(title: AppStrings.about, iconData: Icons.info)
 ];

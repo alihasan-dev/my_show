@@ -237,7 +237,7 @@ class MultiSearchScreen extends HookConsumerWidget {
                                               }
                                             ),
                                           ],
-                                        )
+                                        ),
                                       ],
                                     ),
                                     if (movie.knownFor.isNotEmpty) ...[

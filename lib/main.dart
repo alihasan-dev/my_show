@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,11 @@ import 'core/routes/app_routes.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'core/storage/storage_provider.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
+
 
 Future<void> main() async {
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
   final prefs = await SharedPreferences.getInstance();
@@ -89,6 +93,12 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(color: Color(0xFFB3B3B3)),
         ),
         dividerColor: const Color(0xFF2C2C2C),
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: <TargetPlatform, PageTransitionsBuilder>{
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(), // ⬅ forces iOS-style slide on Android
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          }
+        )
       ),
       routerConfig: AppRoutes.routes,
     );

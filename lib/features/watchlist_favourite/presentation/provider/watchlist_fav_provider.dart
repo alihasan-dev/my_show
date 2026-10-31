@@ -28,7 +28,3 @@ class WatchlistFavNotifier extends StateNotifier<AsyncValue<List<WatchlistFavEnt
 final watchlistFavProvider = StateNotifierProvider.autoDispose<WatchlistFavNotifier, AsyncValue<List<WatchlistFavEntity>>>((ref) {
   return WatchlistFavNotifier(ref.read(watchFavUseCaseProvider));
 });
-// final watchlistFavProvider = FutureProvider.autoDispose.family<List<WatchlistFavEntity>, WatchlistFavType>((ref, type) async {
-//   final watchFavUseCase = ref.read(watchFavUseCaseProvider);
-//   return await watchFavUseCase.getWatchFavList(type: type);
-// });

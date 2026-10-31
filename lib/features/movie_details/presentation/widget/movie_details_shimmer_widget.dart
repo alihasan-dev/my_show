@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_show/core/utils/app_enums.dart';
 import 'package:shimmer/shimmer.dart';
-
+import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_extension_method.dart';
 
 class MovieDetailsShimmer extends StatelessWidget {
@@ -195,34 +194,7 @@ class MovieDetailsShimmer extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 18),
-            // Additional info shimmer
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            //   child: Container(
-            //     height: 18,
-            //     width: 100,
-            //     color: Color(0xFF2C2C2C),
-            //   ),
-            // ),
-            // const SizedBox(height: 12),
-            // // Additional info text shimmer
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            //   child: Column(
-            //     children: List.generate(
-            //       3,
-            //       (index) => Padding(
-            //         padding: const EdgeInsets.only(bottom: 8.0),
-            //         child: Container(
-            //           height: 14,
-            //           width: width * 0.9,
-            //           color: Color(0xFF2C2C2C),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            const SizedBox(height: 18)
           ],
         ),
       ),
@@ -265,16 +237,9 @@ class MovieDetailsWebShimmer extends StatelessWidget {
               spacing: 16,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // MovieImageWidget(
-                //   imagePath: (profileData.profilePath ?? '').generateImageURL,
-                //   height: 290,
-                //   width: 195,
-                //   radius: 6,
-                // )
                 Container(
                   height: 290,
                   width: 195,
-                  // color: isDark ? Color(0xFF2C2C2C) : Colors.grey.shade800,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
                     color: Color(0xFF2C2C2C),
@@ -300,7 +265,7 @@ class MovieDetailsWebShimmer extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
                           color: Color(0xFF2C2C2C),
-                        )
+                        ),
                       ),
                       SizedBox(height: 10),
                       Container(
@@ -309,7 +274,7 @@ class MovieDetailsWebShimmer extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
                           color: Color(0xFF2C2C2C),
-                        )
+                        ),
                       ),
                       SizedBox(height: 18),
                       Container(
@@ -318,7 +283,7 @@ class MovieDetailsWebShimmer extends StatelessWidget {
                         decoration: ShapeDecoration(
                           shape: StadiumBorder(),
                           color: Color(0xFF2C2C2C),
-                        )
+                        ),
                       ),
                       SizedBox(height: 18),
                       SizedBox(
@@ -338,8 +303,8 @@ class MovieDetailsWebShimmer extends StatelessWidget {
                                   color: Color(0xFF2C2C2C),
                                 )
                               );
-                            }
-                          )
+                            },
+                          ),
                         ),
                       ),
                       SizedBox(height: 18),
@@ -359,15 +324,15 @@ class MovieDetailsWebShimmer extends StatelessWidget {
                                 color: Color(0xFF2C2C2C),
                               )
                             );
-                          }
-                        )
-                      )
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
-          )
+          ),
         );
       },
     );

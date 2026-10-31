@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_show/core/utils/app_enums.dart';
 import 'package:my_show/core/utils/app_utils.dart';
-import '../../../../features/movie/presentation/widgets/view_all_widget.dart';
+import '../../domain/entities/trending_movie_entity.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/constants/movie_colors.dart';
@@ -10,7 +10,8 @@ import '../../../../core/routes/app_routes.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/widgets/vote_percentage_widget.dart';
-import '../../domain/entities/trending_movie_entity.dart';
+import '../../../../features/movie/presentation/widgets/view_all_widget.dart';
+
 
 class TrendingMoviesWidgets extends StatelessWidget {
 
@@ -181,17 +182,4 @@ class TrendingMoviesWidgets extends StatelessWidget {
     }
   }
 
-  // double getTrendingCardWidth(double screenWidth, {bool canCalculate = false}) {
-  //   if (!canCalculate) return screenType == ScreenType.mobile ? 125 : 150;
-  //   if (screenWidth < 600) {
-  //     // Mobile: Strictly 125 as defined
-  //     return 125.0; 
-  //   } else if (screenWidth < 1100) {
-  //     // Tablet / Laptop: Scale dynamically between mobile and desktop
-  //     return (screenWidth - 48) / 2.5;
-  //   } else {
-  //     // Large Desktop: Cap max width
-  //     return 380.0; 
-  //   }
-  // }
 }

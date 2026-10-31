@@ -6,11 +6,13 @@ class CustomSliverAppBar extends StatelessWidget {
   final String title;
   final String imagePath;
   final double expandedHeight;
+  final bool showShadow;
   
   const CustomSliverAppBar({
     this.title = '',
     this.imagePath = '',
     this.expandedHeight = 250,
+    this.showShadow = false,
     super.key
   });
 
@@ -46,36 +48,88 @@ class CustomSliverAppBar extends StatelessWidget {
                     imagePath: imagePath,
                     radius: 0.0,
                   ),
+                  if (showShadow) ...[
+                    ///show only in movie details screen 
+                    Container(
+                      width: double.maxFinite,
+                      height: double.maxFinite,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: AlignmentGeometry.bottomCenter,
+                          end: AlignmentGeometry.topCenter,
+                          colors: [
+                            Color(0x88121212), // Subtle overlay
+                            Color(0x18121212), // Nearly transparent
+                          ]
+                        ),
+                      ),
+                    ),
+                  ]
                   // Positioned(
                   //   bottom: 14,
                   //   right: 14,
                   //   child: Row(
+                  //     spacing: 14,
                   //     mainAxisSize: MainAxisSize.min,
                   //     children: [
-                  //       Container(
-                  //         width: 48,
-                  //         height: 48,
-                  //         decoration: BoxDecoration(
-                  //           shape: BoxShape.circle,
-                  //           border: Border.all(
-                  //             color: MovieColors.white.withValues(alpha: 0.25),
-                  //             width: 1.5,
+                  //       InkWell(
+                  //         onTap: () {
+                            
+                  //         },
+                  //         child: Container(
+                  //           width: 42,
+                  //           height: 42,
+                  //           decoration: BoxDecoration(
+                  //             shape: BoxShape.circle,
+                  //             border: Border.all(
+                  //               color: MovieColors.white.withValues(alpha: 0.15),
+                  //               width: 1.5,
+                  //             ),
+                  //             gradient: LinearGradient(
+                  //               colors: [
+                  //                 MovieColors.white.withValues(alpha: 0.18),
+                  //                 MovieColors.white.withValues(alpha: 0.03),
+                  //               ],
+                  //               begin: Alignment.topLeft,
+                  //               end: Alignment.bottomRight,
+                  //             ),
                   //           ),
-                  //           gradient: LinearGradient(
-                  //             colors: [
-                  //               MovieColors.white.withValues(alpha: 0.20),
-                  //               MovieColors.white.withValues(alpha: 0.05),
-                  //             ],
-                  //             begin: Alignment.topLeft,
-                  //             end: Alignment.bottomRight,
+                  //           child: Icon(
+                  //             Icons.bookmark_outline,
+                  //             size: 18,
+                  //             color: MovieColors.white.withValues(alpha: 0.5),
                   //           ),
                   //         ),
-                  //         child: Icon(
-                  //           Icons.arrow_forward_ios_rounded,
-                  //           size: 20,
-                  //           color: MovieColors.white.withValues(alpha: 0.8),
+                  //       ),
+                  //       InkWell(
+                  //         onTap: () {
+                            
+                  //         },
+                  //         child: Container(
+                  //           width: 42,
+                  //           height: 42,
+                  //           decoration: BoxDecoration(
+                  //             shape: BoxShape.circle,
+                  //             border: Border.all(
+                  //               color: MovieColors.white.withValues(alpha: 0.15),
+                  //               width: 1.5,
+                  //             ),
+                  //             gradient: LinearGradient(
+                  //               colors: [
+                  //                 MovieColors.white.withValues(alpha: 0.18),
+                  //                 MovieColors.white.withValues(alpha: 0.03),
+                  //               ],
+                  //               begin: Alignment.topLeft,
+                  //               end: Alignment.bottomRight,
+                  //             ),
+                  //           ),
+                  //           child: Icon(
+                  //             Icons.bookmark_outline,
+                  //             size: 18,
+                  //             color: MovieColors.white.withValues(alpha: 0.5),
+                  //           ),
                   //         ),
-                  //       )
+                  //       ),
                   //     ],
                   //   ),
                   // ),

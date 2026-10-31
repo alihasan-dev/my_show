@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_utils.dart';
 import '../../../../core/constants/movie_colors.dart';
+import '../../../../core/widgets/confirmation_dialog_widget.dart';
 import '../providers/recent_search_provider.dart';
 import 'recent_search_title.dart';
 
@@ -56,7 +58,28 @@ class RecentSearchWidget extends HookConsumerWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => ref.read(recentSearchProvider.notifier).clearRecentSearch(),
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) {
+                          return AlertDialog(
+                            contentPadding: EdgeInsets.zero,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                            content: SizedBox(
+                              width: 420,
+                              child: ConfirmationDialogWidget(
+                                title: 'Remove all recent searches?',
+                                subTitle: 'Are you sure you want to remove all recent searches? This action cannot be undone.',
+                                onConfirm: () {
+                                  context.pop();
+                                  ref.read(recentSearchProvider.notifier).clearRecentSearch();
+                                },
+                              ),
+                            ),
+                          );
+                        }
+                      );
+                    },
                     child: Text(
                       AppStrings.clearAll,
                       style: theme.textTheme.labelMedium?.copyWith(

@@ -27,15 +27,6 @@ class MovieWatchlistNotifier extends StateNotifier<AsyncValue<MovieWatchlistEnti
     await movieWatchlistUsecase.removeWatchlist(id: id);
     getWatchlist(id);
   }
-
-  // Future<void> clearRecentSearch() async {
-  //   await recentSearchUsecase.clearRecentSearch();
-  //   getRecentSearch();
-  // }
-
-  // bool get markedAsWatchlist {
-  //   return state.value != null;
-  // }
 }
 
 final movieWatchlistProvider = StateNotifierProvider.autoDispose<MovieWatchlistNotifier, AsyncValue<MovieWatchlistEntity?>>((ref) {

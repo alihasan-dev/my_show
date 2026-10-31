@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:my_show/features/movie_details/domain/entities/episode_details_entity.dart';
 import 'package:my_show/features/movie_details/domain/entities/movie_award_entity.dart';
 import 'package:my_show/features/movie_details/domain/entities/movie_watchlist_entity.dart';
 import 'package:my_show/features/movie_details/domain/entities/release_dates_entity.dart';
+import 'package:my_show/features/movie_details/domain/entities/season_details_entity.dart';
 import 'package:my_show/features/movie_details/domain/entities/watch_provider_entity.dart';
 import '../../domain/entities/video_entity.dart';
 import '../datasource/movie_details_local_datasource.dart';
@@ -393,6 +395,139 @@ class MovieDetailsRepoImp implements MovieDetailsRepository {
   Future<void> saveFavourite(MovieWatchlistEntity entity) async {
     final model = MovieWatchlistModel.fromEntity(entity);
     movieDetailsLocalDatasource.saveFavourite(model);
+  }
+
+  @override
+  Future<Either<CustomFailureException, EpisodeDetailsEntity>> episodeDetails({required String id, required String seasonNumber, required String episodeNumber}) async {
+    if (await connectivity.hasConnection) {
+      final data = await movieDetailsRemoteDatasource.episodeDetails(id: id, seasonNumber: seasonNumber, episodeNumber: episodeNumber);
+      final seasonDetails = EpisodeDetailsEntity(
+        id: data.id,
+        airDate: data.airDate,
+        crew: data.crew?.map((subItem) {
+          return EpisodeCrewEntity(
+            adult: subItem.adult,
+            creditId: subItem.creditId,
+            department: subItem.department,
+            gender: subItem.gender,
+            id: subItem.id,
+            job: subItem.job,
+            knownForDepartment: subItem.knownFordepartment,
+            name: subItem.name,
+            originalName: subItem.originalName,
+            profilePath: subItem.profilePath,
+            popularity: subItem.popularity
+          );
+        }).toList(),
+        episodeNumber: data.episodeNumber,
+        episodeType: data.episodeType,
+        guestStars: data.guestStars?.map((subItem) {
+          return EpisodeGuestStarEntity(
+            adult: subItem.adult,
+            creditId: subItem.creditId,
+            gender: subItem.gender,
+            id: subItem.id,
+            knownForDepartment: subItem.knownFordepartment,
+            name: subItem.name,
+            originalName: subItem.originalName,
+            profilePath: subItem.profilePath,
+            popularity: subItem.popularity,
+            character: subItem.character,
+            order: subItem.order
+          );
+        }).toList(),
+        name: data.name,
+        overview: data.overview,
+        productionCode: data.productionCode,
+        runtime: data.runtime,
+        seasonNumber: data.seasonNumber,
+        stillPath: data.stillPath,
+        voteAverage: data.voteAverage,
+        voteCount: data.voteCount
+      );
+      return Right(seasonDetails);
+    } else {
+      return left(CustomFailureException(
+        message: 'No internet connection'
+      ));
+    }
+  }
+
+  @override
+  Future<Either<CustomFailureException, SeasonDetailsEntity>> seasonDetails({required String id, required String seasonNumber}) async {
+    if (await connectivity.hasConnection) {
+      final data = await movieDetailsRemoteDatasource.seasonDetails(id: id, seasonNumber: seasonNumber);
+      final seasonDetails = SeasonDetailsEntity(
+        id: data.id,
+        mongoId: data.hashId,
+        airDate: data.airDate,
+        episodes: data.episodes?.map((item) {
+          return EpisodeEntity(
+            airDate: item.airDate,
+            crew: item.crew?.map((subItem) {
+              return CrewEntity(
+                adult: subItem.adult,
+                creditId: subItem.creditId,
+                department: subItem.department,
+                gender: subItem.gender,
+                id: subItem.id,
+                job: subItem.job,
+                knownForDepartment: subItem.knownFordepartment,
+                name: subItem.name,
+                originalName: subItem.originalName,
+                profilePath: subItem.profilePath,
+                popularity: subItem.popularity
+              );
+            }).toList(),
+            episodeNumber: item.episodeNumber,
+            episodeType: item.episodeType,
+            guestStars: item.guestStars?.map((subItem) {
+              return GuestStarEntity(
+                adult: subItem.adult,
+                character: subItem.character,
+                creditId: subItem.creditId,
+                gender: subItem.gender,
+                id: subItem.id,
+                knownForDepartment: subItem.knownFordepartment,
+                name: subItem.name,
+                order: subItem.order,
+                originalName: subItem.originalName,
+                profilePath: subItem.profilePath,
+                popularity: subItem.popularity
+              );
+            }).toList(),
+            id: item.id,
+            name: item.name,
+            voteAverage: item.voteAverage,
+            voteCount: item.voteCount,
+            overview: item.overview,
+            runtime: item.runtime,
+            productionCode: item.productionCode,
+            seasonNumber: item.seasonNumber,
+            showId: item.showId,
+            stillPath: item.stillPath
+          );
+        }).toList(),
+        name: data.name,
+        networks: data.networks?.map((item) {
+          return NetworkEntity(
+            id: item.id,
+            logoPath: item.logoPath,
+            name: item.name,
+            originCountry: item.originalCountry
+          );
+        }).toList(),
+        overview: data.overview,
+        posterPath: data.posterPath,
+        seasonNumber: data.seasonNumber,
+        voteAverage: data.voteAverage
+      );
+      return Right(seasonDetails);
+    } else {
+      return left(CustomFailureException(
+        message: 'No internet connection'
+      ));
+    }
   }
 
 }

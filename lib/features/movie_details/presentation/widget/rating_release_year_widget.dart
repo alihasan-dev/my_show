@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../domain/entities/movie_details_entity.dart';
+import '../../domain/entities/release_dates_entity.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_text.dart';
-import '../../domain/entities/movie_details_entity.dart';
-import '../../domain/entities/release_dates_entity.dart';
-
 class RatingReleaseYearWidget extends HookConsumerWidget {
 
   final MovieDetailEntity movieData;
