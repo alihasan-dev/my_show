@@ -1,9 +1,9 @@
-class SessionDetailsParam {
+class SeasonDetailsParam {
   String id;
-  String sessionNumber;
+  String seasonNumber;
 
-  SessionDetailsParam({
+  SeasonDetailsParam({
     required this.id, 
-    required this.sessionNumber
+    required this.seasonNumber
   });
 }

@@ -901,8 +901,8 @@ class MovieDetailsScreen extends HookConsumerWidget {
           insetPadding: const EdgeInsets.all(14),
           contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
           content: SizedBox(
-            height: 520,
-            width: 520,
+            height: 600,
+            width: 600,
             child: SeasonDetailsWidget(
               seasonId: id,
               seasonNumber: season.toString(),
