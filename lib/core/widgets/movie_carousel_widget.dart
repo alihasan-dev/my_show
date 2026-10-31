@@ -7,6 +7,7 @@ class MovieCarouselWidget extends StatefulWidget {
   final IndexedWidgetBuilder itemBuilder;
   final Color activeColor;
   final Color inactiveColor;
+  final double viewPortFraction;
 
   const MovieCarouselWidget({
     super.key,
@@ -15,6 +16,7 @@ class MovieCarouselWidget extends StatefulWidget {
     required this.itemBuilder,
     this.activeColor = MovieColors.white,
     this.inactiveColor = MovieColors.grey,
+    this.viewPortFraction = 1.0
   });
 
   @override
@@ -25,14 +27,30 @@ class _MovieCarouselWidgetState extends State<MovieCarouselWidget> {
   
   int _currentPage = 0;
 
+  late PageController pageViewController;
+
+  @override
+  void initState() {
+    pageViewController = PageController(viewportFraction: widget.viewPortFraction);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    pageViewController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: widget.height,
           child: PageView.builder(
+            controller: pageViewController,
             itemCount: widget.itemCount,
             onPageChanged: (index) => setState(() => _currentPage = index),
             itemBuilder: widget.itemBuilder,

@@ -1,4 +1,5 @@
 class AppStrings {
+  
   AppStrings._();
 
   ////BASR URL
@@ -39,6 +40,10 @@ class AppStrings {
   static const String readAllReviews = 'Read All Reviews';
   static const String watchProvider = 'Watch Providers';
   static const String awards = 'Awards';
+  static const String watchTrailer = 'Watch Trailer';
+  static const String favourite = 'Favourite';
+  static const String watchlist = 'Watchlist';
+  static const String review = 'Review';
 
   static const String overview = 'Overview';
   static const String cast = 'Cast';
@@ -66,6 +71,17 @@ class AppStrings {
   static const String noTvVideosAvailable = 'No trailer/video available for this show';
   static const String comingSoon = 'Coming soon';
   static const String about = 'About';
+  static const String clearYourWatchlist = 'Clear your watchlist?';
+  static const String clearYourWatchlistMsg = 'Are you sure you want to remove all movies and shows from your watchlist? This action cannot be undone.';
+  static const String clearYourFavourite = 'Clear your favourites?';
+  static const String clearYourFavouriteMsg = 'Are you sure you want to remove all movies and shows from your favourites? This action cannot be undone.';
+  static const String emptyFavourite = 'No Favourites Yet';
+  static const String emptyFavouriteMsg = 'Found a movie or show you love.\nAdd it to your favourites and keep your personal collection close.';
+  static const String errorFavouriteMsg = 'We couldn\'t load the favourites.\nPlease try again.';
+  static const String emptyWatchlist = 'Your watchlist is empty';
+  static const String emptyWatchlistMsg = 'Keep track of movies and shows you want to watch.\nAdd your next favourite to watch later.';
+  static const String errorWatchlistMsg = 'We couldn\'t load the watchlist.\nPlease try again.';
+  static const String somethingWentWrong = 'Something went wrong';
 
   static const List<String> searchHints = [
     'Try "Inception", "Breaking Bad"...',

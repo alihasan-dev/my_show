@@ -1,5 +1,4 @@
 import 'package:riverpod/riverpod.dart';
-
 import '../../domain/entities/trending_movie_entity.dart';
 import '../../domain/usecases/top_rated_movies_usecase.dart';
 

@@ -10,7 +10,7 @@ class AboutScreen extends StatelessWidget {
   static const Color _surface = Color(0xFF222222);
   static const Color _border = Color(0xFF303030);
   static const Color _secondary = Color(0xFFAAAAAA);
-  static Color white = MovieColors.white.withValues(alpha: 0.9);
+  static Color white = MovieColors.white.withValues(alpha: 0.8);
 
   @override
   Widget build(BuildContext context) {

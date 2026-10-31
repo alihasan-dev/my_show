@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../../core/constants/movie_colors.dart';
 import 'dashboard_bottom_bar_item_list.dart';
 

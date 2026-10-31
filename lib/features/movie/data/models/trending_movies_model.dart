@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 part 'trending_movies_model.freezed.dart';
-part 'trending_movies_model.g.dart'; // for json_serializable
+part 'trending_movies_model.g.dart';
 
 @freezed
 sealed class TrendingMoviesResponse with _$TrendingMoviesResponse {
