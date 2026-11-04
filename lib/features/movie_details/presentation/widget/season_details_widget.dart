@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/features/movie_details/presentation/provider/params/session_details_param.dart';
-import 'package:my_show/features/movie_details/presentation/provider/season_details_provider.dart';
-import 'package:my_show/features/movie_details/presentation/widget/movie_action_widget.dart';
-import 'package:my_show/features/movie_details/presentation/widget/season_details_shimmer.dart';
+import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
-import '../../../../core/widgets/movie_text.dart';
+import '../../../../features/movie_details/presentation/widget/movie_action_widget.dart';
+import '../../../../features/movie_details/presentation/widget/season_details_shimmer.dart';
+import '../../../../features/movie_details/presentation/provider/season_details_provider.dart';
+import '../../../../features/movie_details/presentation/provider/params/session_details_param.dart';
 
 class SeasonDetailsWidget extends HookConsumerWidget {
   

@@ -95,10 +95,10 @@ class MyApp extends StatelessWidget {
         dividerColor: const Color(0xFF2C2C2C),
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: <TargetPlatform, PageTransitionsBuilder>{
-            TargetPlatform.android: CupertinoPageTransitionsBuilder(), // ⬅ forces iOS-style slide on Android
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           }
-        )
+        ),
       ),
       routerConfig: AppRoutes.routes,
     );

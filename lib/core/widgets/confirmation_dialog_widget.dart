@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:my_show/core/widgets/custom_gradient_button.dart';
-import 'package:my_show/core/widgets/movie_text.dart';
 import '../constants/movie_colors.dart';
-
+import '../../core/widgets/movie_text.dart';
+import '../../core/widgets/custom_gradient_button.dart';
 class ConfirmationDialogWidget extends StatelessWidget {
 
   final String title;

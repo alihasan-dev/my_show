@@ -10,3 +10,5 @@ enum WatchlistFavType {
   watchlist,
   favourite
 }
+
+enum ImageErrorIconSize {large, medium, small}

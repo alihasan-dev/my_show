@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../core/widgets/movie_text.dart';
 import '../constants/movie_colors.dart';
-
+import '../../core/widgets/movie_text.dart';
 class CustomKeywordChipWidget extends StatelessWidget {
   
   final Function()? onTap;

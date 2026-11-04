@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_show/core/constants/movie_colors.dart';
-import 'package:my_show/core/widgets/movie_image_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import '../../core/constants/movie_colors.dart';
+import '../../core/widgets/movie_image_widget.dart';
 class AboutScreen extends StatelessWidget {
 
   const AboutScreen({super.key});

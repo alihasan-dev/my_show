@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:my_show/core/utils/app_enums.dart';
-import '../../core/utils/language_code.dart';
 import '../constants/app_strings.dart';
 import '../widgets/movie_image_widget.dart';
-
+import '../../core/utils/app_enums.dart';
+import '../../core/utils/language_code.dart';
 extension NumExtensionUtils on num {
 
   String get parseGender {
