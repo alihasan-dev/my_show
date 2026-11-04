@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
-
-import 'package:my_show/core/storage/local_storage.dart';
-import 'package:my_show/core/storage/shared_pref_keys.dart';
 import 'package:riverpod/riverpod.dart';
-import '../../../../core/storage/storage_provider.dart';
 import '../models/recent_search_model.dart';
-
+import '../../../../core/storage/local_storage.dart';
+import '../../../../core/storage/shared_pref_keys.dart';
+import '../../../../core/storage/storage_provider.dart';
 abstract interface class RecentSearchLocalDataSource {
 
   Future<List<RecentSearchModel>> get();
@@ -19,8 +17,8 @@ abstract interface class RecentSearchLocalDataSource {
 }
 
 class RecentSearchLocalDatesourceImp implements RecentSearchLocalDataSource {
-  final LocalStorage localStorage;
 
+  final LocalStorage localStorage;
   RecentSearchLocalDatesourceImp(this.localStorage);
 
 

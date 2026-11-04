@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
-import '/core/network/dio_provider.dart';
 import 'package:riverpod/riverpod.dart';
+import '/core/network/dio_provider.dart';
 import '../../../movie/data/models/trending_movies_model.dart';
-
 abstract class ViewAllDatasource {
 
   Future<TrendingMoviesResponse> getAllShow({

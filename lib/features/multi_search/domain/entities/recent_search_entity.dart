@@ -15,16 +15,3 @@ class RecentSearchEntity {
     this.createdDate = ''
   });
 }
-
-
-
-/**
- * 
-{
-  "id": 6193,
-  "title": "Leonardo DiCaprio",
-  "mediaType": "person",
-  "posterPath": "...",
-  "subtitle": "Actor"
-}
- */

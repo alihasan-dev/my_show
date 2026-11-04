@@ -1,8 +1,8 @@
 import 'package:riverpod/legacy.dart';
 import 'package:riverpod/riverpod.dart';
-import '../../../../core/utils/app_enums.dart';
 import '../../domain/entities/watchlist_fav_entity.dart';
 import '../../domain/usecases/watchlist_fav_usecase.dart';
+import '../../../../core/utils/app_enums.dart';
 
 class WatchlistFavNotifier extends StateNotifier<AsyncValue<List<WatchlistFavEntity>>> {
 

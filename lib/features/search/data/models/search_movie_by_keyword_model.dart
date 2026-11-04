@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 part 'search_movie_by_keyword_model.freezed.dart';
 part 'search_movie_by_keyword_model.g.dart';
 

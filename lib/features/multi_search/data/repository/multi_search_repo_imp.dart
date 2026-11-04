@@ -1,17 +1,19 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../domain/repository/multi_search_repository.dart';
 import '../datasource/multi_search_datasource.dart';
-import '/core/network/check_connectivity.dart';
-import '/core/utils/custom_exception.dart';
-import '/features/search/domain/entities/search_movies_keyword_entity.dart';
-
+import '../../domain/repository/multi_search_repository.dart';
+import '../../../../core/utils/custom_exception.dart';
+import '../../../../core/network/check_connectivity.dart';
+import '../../../../features/search/domain/entities/search_movies_keyword_entity.dart';
 class MultiSearchRepoImp implements MultiSearchRepository {
 
   final CheckConnectivity checkConnectivity;
   final MultiSearchDatasource searchMovieDatasource;
 
-  MultiSearchRepoImp(this.searchMovieDatasource, this.checkConnectivity);
+  MultiSearchRepoImp(
+    this.searchMovieDatasource, 
+    this.checkConnectivity
+  );
   
   @override
   Future<Either<CustomFailureException, SearchMoviesKeywordEntity>> multiSearch({required String query, required int pageCount}) async {
@@ -74,8 +76,6 @@ class MultiSearchRepoImp implements MultiSearchRepository {
       ));
     }
   }
-
-  
 
 }
 

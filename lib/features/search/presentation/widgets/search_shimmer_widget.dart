@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:my_show/core/utils/app_enums.dart';
-import 'package:my_show/core/utils/app_utils.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:flutter/material.dart';
+import '../../../../core/utils/app_enums.dart';
+import '../../../../core/utils/app_utils.dart';
 import '../../../../core/constants/movie_colors.dart';
 
 class SearchShimmerWidget extends StatelessWidget {

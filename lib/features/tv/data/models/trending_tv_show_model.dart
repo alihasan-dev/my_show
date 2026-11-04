@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 part 'trending_tv_show_model.freezed.dart';
 part 'trending_tv_show_model.g.dart'; // for json_serializable
 

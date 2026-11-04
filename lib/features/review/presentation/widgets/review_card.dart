@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
-import 'package:my_show/core/constants/movie_colors.dart';
-import 'package:my_show/core/utils/app_enums.dart';
-import 'package:my_show/core/widgets/custom_gradient_button.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../../core/constants/app_strings.dart';
-import '../../../../core/utils/app_extension_method.dart';
-import '../../../../core/widgets/movie_text.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import '../../domain/entities/review_entity.dart';
-
+import '../../../../core/utils/app_enums.dart';
+import '../../../../core/widgets/movie_text.dart';
+import '../../../../core/constants/app_strings.dart';
+import '../../../../core/constants/movie_colors.dart';
+import '../../../../core/utils/app_extension_method.dart';
+import '../../../../core/widgets/custom_gradient_button.dart';
 class ReviewCard extends StatelessWidget {
   final ReviewEntity reviewItem;
   final Function()? onTapReadMore;

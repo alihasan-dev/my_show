@@ -1,22 +1,19 @@
 import 'dart:convert';
-import 'package:my_show/core/storage/local_storage.dart';
-import 'package:my_show/core/storage/storage_provider.dart';
-import '../../../../core/storage/shared_pref_keys.dart';
-import '../../../../core/utils/app_enums.dart';
-import '../models/watchlist_favourite_model.dart';
 import 'package:riverpod/riverpod.dart';
-
+import '../models/watchlist_favourite_model.dart';
+import '../../../../core/utils/app_enums.dart';
+import '../../../../core/storage/local_storage.dart';
+import '../../../../core/storage/storage_provider.dart';
+import '../../../../core/storage/shared_pref_keys.dart';
 abstract interface class WatchlistFavLocalDataSource {
 
   Future<List<WatchlistFavouriteModel>> getWatchFavList({required WatchlistFavType type});
-
   Future<void> clearAll({required WatchlistFavType type});
 }
 
 class WatchlistFavLocalDataSourceImp implements WatchlistFavLocalDataSource {
 
   final LocalStorage localStorage;
-
   WatchlistFavLocalDataSourceImp(this.localStorage);
   
   @override

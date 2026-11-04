@@ -1,8 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../features/search/domain/entities/search_movies_keyword_entity.dart';
 import 'package:riverpod/legacy.dart';
 import '../../domain/usecases/multi_search_usecase.dart';
-
+import '../../../../features/search/domain/entities/search_movies_keyword_entity.dart';
 class MultiSearchNotifier extends StateNotifier<AsyncValue<SearchMoviesKeywordEntity>> {
 
   final MultiSearchUsecase multiSearchUsecase;

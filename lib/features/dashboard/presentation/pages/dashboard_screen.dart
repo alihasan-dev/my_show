@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '/features/profile/presentation/pages/people_screen.dart';
+import '../widgets/bottom_animated_bar.dart';
+import '../widgets/dashboard_bottom_bar_item_list.dart';
+import '../../../multi_search/presentation/pages/multi_search_screen.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_extension_method.dart';
@@ -9,13 +13,8 @@ import '../../../../core/widgets/about_us_widget.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/routes/app_routes.dart';
-import '../../../multi_search/presentation/pages/multi_search_screen.dart';
 import '../../../../features/movie/presentation/pages/movie_screen.dart';
 import '../../../../features/tv/presentation/pages/tv_screen.dart';
-import '../widgets/bottom_animated_bar.dart';
-import '../widgets/dashboard_bottom_bar_item_list.dart';
-import '/features/profile/presentation/pages/people_screen.dart';
-
 class DashboardScreen extends HookConsumerWidget {
 
   const DashboardScreen({super.key});

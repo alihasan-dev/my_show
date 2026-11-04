@@ -11,8 +11,8 @@ abstract interface class MultiSearchDatasource {
 }
 
 class MultiSearchDatasourceImp implements MultiSearchDatasource {
-  final Dio dioClient;
 
+  final Dio dioClient;
   MultiSearchDatasourceImp(this.dioClient);
 
   @override

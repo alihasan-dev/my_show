@@ -6,8 +6,8 @@ import '/core/utils/custom_exception.dart';
 import '/features/search/domain/entities/search_movies_keyword_entity.dart';
 
 class MultiSearchUsecase {
-  final MultiSearchRepository multiSearchRepository;
 
+  final MultiSearchRepository multiSearchRepository;
   MultiSearchUsecase(this.multiSearchRepository);
 
   Future<Either<CustomFailureException, SearchMoviesKeywordEntity>> multiSearch({required String query, required int pageCount}) async {

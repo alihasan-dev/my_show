@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../domain/entities/profile_external_id_entity.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
-import '../../domain/entities/profile_external_id_entity.dart';
-
 class ProfileIdWidget extends StatelessWidget {
 
   final String? webpage;

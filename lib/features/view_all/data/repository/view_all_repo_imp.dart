@@ -1,11 +1,10 @@
 import 'package:dartz/dartz.dart';
-import '/core/network/check_connectivity.dart';
+import 'package:riverpod/riverpod.dart';
 import '/core/utils/custom_exception.dart';
+import '/core/network/check_connectivity.dart';
+import '/features/view_all/domain/repository/view_all_repo.dart';
 import '/features/movie/domain/entities/trending_movie_entity.dart';
 import '/features/view_all/data/datasource/view_all_datasource.dart';
-import '/features/view_all/domain/repository/view_all_repo.dart';
-import 'package:riverpod/riverpod.dart';
-
 class ViewAllRepoImp implements ViewAllRepo {
   
   final CheckConnectivity checkConnectivity;
