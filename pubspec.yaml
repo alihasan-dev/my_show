@@ -119,7 +119,7 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 sentry:
-  upload_debug_symbols: true
+  upload_debug_symbols: false
   upload_source_maps: true
   project: flutter
   org: traversal-nj

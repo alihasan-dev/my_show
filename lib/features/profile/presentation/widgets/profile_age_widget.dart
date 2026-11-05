@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_show/core/utils/app_extension_method.dart';
-import '../../../../core/constants/movie_colors.dart';
-import '../../../../core/widgets/movie_text.dart';
 import '../../domain/entities/profile_details_entity.dart';
-
+import '../../../../core/widgets/movie_text.dart';
+import '../../../../core/constants/movie_colors.dart';
+import '../../../../core/utils/app_extension_method.dart';
 class ProfileAgeWidget extends StatelessWidget {
 
   final ProfileDetailsEntity profileData;

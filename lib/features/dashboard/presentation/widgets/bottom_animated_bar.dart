@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/movie_colors.dart';
 import 'dashboard_bottom_bar_item_list.dart';
-
+import '../../../../core/constants/movie_colors.dart';
 class MovieBottomNavigation extends StatelessWidget {
   final int selectedIndex;
   final ValueChanged<int> onChanged;

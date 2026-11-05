@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_show/core/utils/app_enums.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../utils/app_utils.dart';
-
+import '../../core/utils/app_enums.dart';
 class MovieShimmerWidget extends StatelessWidget {
 
   final ScreenType screenType;

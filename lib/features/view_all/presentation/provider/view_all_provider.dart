@@ -1,8 +1,7 @@
-import '/features/movie/domain/entities/trending_movie_entity.dart';
 import 'package:riverpod/legacy.dart';
 import 'package:riverpod/riverpod.dart';
 import '../../domain/usecases/view_all_usecase.dart';
-
+import '../../../../features/movie/domain/entities/trending_movie_entity.dart';
 class ViewAllMoviesNotifier extends StateNotifier<AsyncValue<TrendingMoviesEntity>> {
 
   final ViewAllUsecase viewAllUsecase;

@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:my_show/core/utils/app_enums.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:flutter/material.dart';
+import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_extension_method.dart';
-
 class ProfileShimmerLoader extends StatelessWidget {
 
   final bool isDark;
@@ -212,12 +211,6 @@ class ProfileWidgetWebShimmer extends StatelessWidget {
               spacing: 16,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // MovieImageWidget(
-                //   imagePath: (profileData.profilePath ?? '').generateImageURL,
-                //   height: 290,
-                //   width: 195,
-                //   radius: 6,
-                // )
                 Container(
                   height: 290,
                   width: 195,

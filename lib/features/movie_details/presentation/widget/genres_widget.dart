@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/movie_colors.dart';
-import '../../../../core/widgets/movie_text.dart';
 import '../../domain/entities/movie_details_entity.dart';
-
+import '../../../../core/widgets/movie_text.dart';
+import '../../../../core/constants/movie_colors.dart';
 class GenresWidget extends StatelessWidget {
 
   final MovieDetailEntity movieData;

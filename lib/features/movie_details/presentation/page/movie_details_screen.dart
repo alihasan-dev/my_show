@@ -441,12 +441,12 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                 child: ListView.separated(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: movieCrewList.length,
-                                  separatorBuilder: (_,_) => SizedBox(
+                                  separatorBuilder: (_, _) => SizedBox(
                                     width: screenType == ScreenType.mobile
                                     ? 4
                                     : 12
                                   ),
-                                  itemBuilder: (context, index) {
+                                  itemBuilder: (_, index) {
                                     final cast = movieCrewList[index];
                                     return MovieCastBanner(
                                       onTap: () {
@@ -482,16 +482,14 @@ class MovieDetailsScreen extends HookConsumerWidget {
                                   scrollDirection: Axis.horizontal,
                                   itemCount: (movieData.seasons ?? []).length,
                                   padding: EdgeInsets.zero,
-                                  separatorBuilder: (context, index) => SizedBox(width: screenType == ScreenType.mobile
+                                  separatorBuilder: (_, _) => SizedBox(width: screenType == ScreenType.mobile
                                     ? AppUtils.cardGapHeightMobile
                                     : AppUtils.cardGapHeightWeb
                                   ),
-                                  itemBuilder: (context, subIndex) {
+                                  itemBuilder: (_, subIndex) {
                                     final item = (movieData.seasons ?? [])[(movieData.seasons ?? []).length - 1 - subIndex];
                                     return InkWell(
-                                      onTap: () {
-                                        showSeasonDetailsDialog(context, season: item.seasonNumber);
-                                      },
+                                      onTap: () => showSeasonDetailsDialog(context, season: item.seasonNumber),
                                       borderRadius: BorderRadius.circular(8),
                                       child: Container(
                                         height: double.maxFinite,
@@ -754,12 +752,12 @@ class MovieDetailsScreen extends HookConsumerWidget {
                               child: ListView.separated(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: recommendedMovieList.length,
-                                separatorBuilder: (_,_) => SizedBox(
+                                separatorBuilder: (_, _) => SizedBox(
                                   width: screenType == ScreenType.mobile
                                   ? 4
                                   : 12
                                 ),
-                                itemBuilder: (context, index) {
+                                itemBuilder: (_, index) {
                                   final cast = recommendedMovieList[index];
                                   return MovieCastBanner(
                                     width: 200,

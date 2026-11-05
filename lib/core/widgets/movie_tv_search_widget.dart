@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_show/core/widgets/movie_image_widget.dart';
-import 'package:my_show/core/widgets/movie_text.dart';
 import '../constants/movie_colors.dart';
 import '../utils/app_extension_method.dart';
-
+import '../../core/widgets/movie_text.dart';
+import '../../core/widgets/movie_image_widget.dart';
 class MovieTvSearchWidget extends StatelessWidget {
   
   final Function()? onTap;

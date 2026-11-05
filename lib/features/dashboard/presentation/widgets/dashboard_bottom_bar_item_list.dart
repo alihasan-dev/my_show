@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_show/features/dashboard/domain/entities/label_icon_model.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../features/dashboard/domain/entities/label_icon_model.dart';
 
 List<LabelIcon> bottomBarIconList = [
   LabelIcon(title: AppStrings.movies, iconData: Icons.movie_outlined),

@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
-import '/features/view_all/data/repository/view_all_repo_imp.dart';
 import 'package:riverpod/riverpod.dart';
-import '../../../../features/view_all/domain/repository/view_all_repo.dart';
-import '../../../../core/utils/custom_exception.dart';
+import '/features/view_all/data/repository/view_all_repo_imp.dart';
 import '../../../movie/domain/entities/trending_movie_entity.dart';
-
+import '../../../../core/utils/custom_exception.dart';
+import '../../../../features/view_all/domain/repository/view_all_repo.dart';
 class ViewAllUsecase {
 
   final ViewAllRepo viewAllRepo;

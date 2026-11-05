@@ -1,15 +1,15 @@
 import 'package:go_router/go_router.dart';
-import '../../features/watchlist_favourite/presentation/pages/watchlist_favourite_screen.dart';
-import '../../features/dashboard/presentation/pages/dashboard_screen.dart';
-import '../../features/movie/presentation/pages/movie_screen.dart';
-import '../../features/movie_details/presentation/page/movie_details_screen.dart';
-import '../../features/profile/presentation/pages/profile_screen.dart';
-import '../../features/review/presentation/pages/review_screen.dart';
-import '../../features/view_all/presentation/page/view_all_screen.dart';
-import '../../features/search/presentation/pages/search_movie_by_keyword_screen.dart';
-import '../../features/movie_details/presentation/page/video_player_screen.dart';
-import '../../features/movie_details/domain/entities/video_entity.dart';
 import '../utils/app_enums.dart';
+import '../../features/movie/presentation/pages/movie_screen.dart';
+import '../../features/review/presentation/pages/review_screen.dart';
+import '../../features/profile/presentation/pages/profile_screen.dart';
+import '../../features/view_all/presentation/page/view_all_screen.dart';
+import '../../features/movie_details/domain/entities/video_entity.dart';
+import '../../features/dashboard/presentation/pages/dashboard_screen.dart';
+import '../../features/movie_details/presentation/page/video_player_screen.dart';
+import '../../features/movie_details/presentation/page/movie_details_screen.dart';
+import '../../features/search/presentation/pages/search_movie_by_keyword_screen.dart';
+import '../../features/watchlist_favourite/presentation/pages/watchlist_favourite_screen.dart';
 class AppRoutes {
 
   AppRoutes._();

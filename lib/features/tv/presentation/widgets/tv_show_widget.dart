@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/constants/app_strings.dart';
-import '../../../../core/utils/app_enums.dart';
-import '../../../../core/utils/app_extension_method.dart';
-import '../../../../core/utils/app_utils.dart';
-import '../../../../features/tv/domain/entities/trending_tvshow_entity.dart';
-import '../../../../core/constants/movie_colors.dart';
-import '../../../../core/routes/app_routes.dart';
-import '../../../../core/widgets/movie_image_widget.dart';
-import '../../../../core/widgets/movie_text.dart';
-import '../../../../core/widgets/vote_percentage_widget.dart';
 import '../../../movie/presentation/widgets/view_all_widget.dart';
+import '../../../../core/utils/app_enums.dart';
+import '../../../../core/utils/app_utils.dart';
+import '../../../../core/routes/app_routes.dart';
+import '../../../../core/widgets/movie_text.dart';
+import '../../../../core/constants/app_strings.dart';
+import '../../../../core/constants/movie_colors.dart';
+import '../../../../core/utils/app_extension_method.dart';
+import '../../../../core/widgets/movie_image_widget.dart';
+import '../../../../core/widgets/vote_percentage_widget.dart';
+import '../../../../features/tv/domain/entities/trending_tvshow_entity.dart';
 class TvShowWidgets extends StatelessWidget {
 
   final String title;

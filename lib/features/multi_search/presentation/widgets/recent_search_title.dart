@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
-import '../../../../core/widgets/movie_text.dart';
-
 class RecentSearchTile extends StatelessWidget {
   final String imageUrl;
   final String title;

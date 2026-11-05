@@ -1,9 +1,8 @@
 import 'package:riverpod/legacy.dart';
 import 'package:riverpod/riverpod.dart';
-import '../../../../core/utils/app_extension_method.dart';
 import '../../domain/entities/movie_watchlist_entity.dart';
 import '../../domain/usecases/movie_favourite_usecase.dart';
-
+import '../../../../core/utils/app_extension_method.dart';
 class MovieFavouriteNotifier extends StateNotifier<AsyncValue<MovieWatchlistEntity?>> {
 
   final MovieFavouriteUsecase movieWatchlistUsecase;

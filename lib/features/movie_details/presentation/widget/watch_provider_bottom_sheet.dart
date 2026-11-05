@@ -1,15 +1,13 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/core/constants/movie_colors.dart';
-import 'package:my_show/core/utils/app_enums.dart';
-import 'package:my_show/core/widgets/movie_image_widget.dart';
 import '../../domain/entities/watch_provider_entity.dart';
+import '../../../../core/utils/app_enums.dart';
 import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/constants/app_strings.dart';
-import '../../../../core/utils/app_extension_method.dart';
+import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/widgets/movie_cast_banner.dart';
-
+import '../../../../core/utils/app_extension_method.dart';
 class WatchProviderBottomSheet extends HookConsumerWidget {
   
   final WatchProviderModal? watchProvider;
@@ -68,163 +66,187 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
               children: [
                 if ((watchProvider?.watchRegion?.flatrate ?? []).isNotEmpty) ...[
                   SizedBox(height: mobileView ? 10 : 12),
-                  MovieText(
-                    title: 'STREAM',
-                    style: theme.bodyMedium?.copyWith(
-                      fontSize: 13,
-                      color: MovieColors.textPrimary
-                    ),
-                  ),
-                  SizedBox(height: mobileView ? 10 : 7),
-                  SizedBox(
-                    height: 95,
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: watchProvider!.watchRegion!.flatrate!.length,
-                      itemBuilder: (context, index) {
-                        final item = watchProvider!.watchRegion!.flatrate![index];
-                        return MovieCastBanner(
-                          height: 52,
-                          width: 52,
-                          radius: 12,
-                          imagePath: item.logoPath!.generateImageURL,
-                          subTitle: item.providerName ?? '',
-                          errorIconSize: ImageErrorIconSize.small,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 5,
-                            horizontal: 1
-                          ),
-                          textAlign: TextAlign.center,
-                          textStyle: theme.bodySmall?.copyWith(
-                            fontSize: 10,
-                            color: MovieColors.textSecondary
-                          ),
-                        );
-                      },
-                      separatorBuilder: (_, _) => SizedBox(width: 16),
-                    ),
-                  ),
+                  watchProviderListItem(
+                    theme: theme,
+                    isMobileView: mobileView,
+                    label: 'STREAM',
+                    providerList: watchProvider!.watchRegion!.flatrate ?? []
+                  )
+                  // MovieText(
+                  //   title: 'STREAM',
+                  //   style: theme.bodyMedium?.copyWith(
+                  //     fontSize: 13,
+                  //     color: MovieColors.textPrimary
+                  //   ),
+                  // ),
+                  // SizedBox(height: mobileView ? 10 : 7),
+                  // SizedBox(
+                  //   height: 95,
+                  //   child: ListView.separated(
+                  //     shrinkWrap: true,
+                  //     scrollDirection: Axis.horizontal,
+                  //     itemCount: watchProvider!.watchRegion!.flatrate!.length,
+                  //     itemBuilder: (_, index) {
+                  //       final item = watchProvider!.watchRegion!.flatrate![index];
+                  //       return MovieCastBanner(
+                  //         height: 52,
+                  //         width: 52,
+                  //         radius: 12,
+                  //         imagePath: item.logoPath!.generateImageURL,
+                  //         subTitle: item.providerName ?? '',
+                  //         errorIconSize: ImageErrorIconSize.small,
+                  //         padding: EdgeInsets.symmetric(
+                  //           vertical: 5,
+                  //           horizontal: 1
+                  //         ),
+                  //         textAlign: TextAlign.center,
+                  //         textStyle: theme.bodySmall?.copyWith(
+                  //           fontSize: 10,
+                  //           color: MovieColors.textSecondary
+                  //         ),
+                  //       );
+                  //     },
+                  //     separatorBuilder: (_, _) => SizedBox(width: 16),
+                  //   ),
+                  // ),
                 ],
                 if ((watchProvider?.watchRegion?.free ?? []).isNotEmpty) ...[
                   SizedBox(height: mobileView ? 4 : 10),
-                  MovieText(
-                    title: 'FREE',
-                    style: theme.bodyMedium?.copyWith(
-                      fontSize: 13,
-                      color: MovieColors.textPrimary
-                    ),
-                  ),
-                  SizedBox(height: mobileView ? 10 : 7),
-                  SizedBox(
-                    height: 95,
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: watchProvider!.watchRegion!.free!.length,
-                      itemBuilder: (context, index) {
-                        final item = watchProvider!.watchRegion!.free![index];
-                        return MovieCastBanner(
-                          height: 52,
-                          width: 52,
-                          radius: 12,
-                          imagePath: item.logoPath!.generateImageURL,
-                          subTitle: item.providerName ?? '',
-                          errorIconSize: ImageErrorIconSize.small,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 5,
-                            horizontal: 1
-                          ),
-                          textAlign: TextAlign.center,
-                          textStyle: theme.bodySmall?.copyWith(
-                            fontSize: 10,
-                            color: MovieColors.textSecondary
-                          ),
-                        );
-                      },
-                      separatorBuilder: (_, _) => SizedBox(width: 16),
-                    ),
-                  ),
+                  watchProviderListItem(
+                    theme: theme,
+                    isMobileView: mobileView,
+                    label: 'FREE',
+                    providerList: watchProvider!.watchRegion!.free ?? []
+                  )
+                  // MovieText(
+                  //   title: 'FREE',
+                  //   style: theme.bodyMedium?.copyWith(
+                  //     fontSize: 13,
+                  //     color: MovieColors.textPrimary
+                  //   ),
+                  // ),
+                  // SizedBox(height: mobileView ? 10 : 7),
+                  // SizedBox(
+                  //   height: 95,
+                  //   child: ListView.separated(
+                  //     shrinkWrap: true,
+                  //     scrollDirection: Axis.horizontal,
+                  //     itemCount: watchProvider!.watchRegion!.free!.length,
+                  //     itemBuilder: (_, index) {
+                  //       final item = watchProvider!.watchRegion!.free![index];
+                  //       return MovieCastBanner(
+                  //         height: 52,
+                  //         width: 52,
+                  //         radius: 12,
+                  //         imagePath: item.logoPath!.generateImageURL,
+                  //         subTitle: item.providerName ?? '',
+                  //         errorIconSize: ImageErrorIconSize.small,
+                  //         padding: EdgeInsets.symmetric(
+                  //           vertical: 5,
+                  //           horizontal: 1
+                  //         ),
+                  //         textAlign: TextAlign.center,
+                  //         textStyle: theme.bodySmall?.copyWith(
+                  //           fontSize: 10,
+                  //           color: MovieColors.textSecondary
+                  //         ),
+                  //       );
+                  //     },
+                  //     separatorBuilder: (_, _) => SizedBox(width: 16),
+                  //   ),
+                  // ),
                 ],
                 if ((watchProvider?.watchRegion?.rent ?? []).isNotEmpty) ...[
                   SizedBox(height: mobileView ? 4 : 10),
-                  MovieText(
-                    title: 'RENT',
-                    style: theme.bodyMedium?.copyWith(
-                      fontSize: 13,
-                      color: MovieColors.textPrimary
-                    ),
-                  ),
-                  SizedBox(height: mobileView ? 10 : 7),
-                  SizedBox(
-                    height: 95,
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: watchProvider!.watchRegion!.rent!.length,
-                      itemBuilder: (context, index) {
-                        final item = watchProvider!.watchRegion!.rent![index];
-                        return MovieCastBanner(
-                          height: 52,
-                          width: 52,
-                          radius: 12,
-                          imagePath: item.logoPath!.generateImageURL,
-                          subTitle: item.providerName ?? '',
-                          errorIconSize: ImageErrorIconSize.small,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 5,
-                            horizontal: 1
-                          ),
-                          textAlign: TextAlign.center,
-                          textStyle: theme.bodySmall?.copyWith(
-                            fontSize: 10,
-                            color: MovieColors.textSecondary
-                          ),
-                        );
-                      },
-                      separatorBuilder: (_, _) => SizedBox(width: 16),
-                    ),
+                  watchProviderListItem(
+                    theme: theme,
+                    isMobileView: mobileView,
+                    label: 'RENT',
+                    providerList: watchProvider!.watchRegion!.rent ?? []
                   )
+                  // MovieText(
+                  //   title: 'RENT',
+                  //   style: theme.bodyMedium?.copyWith(
+                  //     fontSize: 13,
+                  //     color: MovieColors.textPrimary
+                  //   ),
+                  // ),
+                  // SizedBox(height: mobileView ? 10 : 7),
+                  // SizedBox(
+                  //   height: 95,
+                  //   child: ListView.separated(
+                  //     shrinkWrap: true,
+                  //     scrollDirection: Axis.horizontal,
+                  //     itemCount: watchProvider!.watchRegion!.rent!.length,
+                  //     itemBuilder: (_, index) {
+                  //       final item = watchProvider!.watchRegion!.rent![index];
+                  //       return MovieCastBanner(
+                  //         height: 52,
+                  //         width: 52,
+                  //         radius: 12,
+                  //         imagePath: item.logoPath!.generateImageURL,
+                  //         subTitle: item.providerName ?? '',
+                  //         errorIconSize: ImageErrorIconSize.small,
+                  //         padding: EdgeInsets.symmetric(
+                  //           vertical: 5,
+                  //           horizontal: 1
+                  //         ),
+                  //         textAlign: TextAlign.center,
+                  //         textStyle: theme.bodySmall?.copyWith(
+                  //           fontSize: 10,
+                  //           color: MovieColors.textSecondary
+                  //         ),
+                  //       );
+                  //     },
+                  //     separatorBuilder: (_, _) => SizedBox(width: 16),
+                  //   ),
+                  // )
                 ],
                 if ((watchProvider?.watchRegion?.buy ?? []).isNotEmpty) ...[
                   SizedBox(height: mobileView ? 4 : 10),
-                  MovieText(
-                    title: 'BUY',
-                    style: theme.bodyMedium?.copyWith(
-                      fontSize: 13,
-                      color: MovieColors.textPrimary
-                    ),
-                  ),
-                  SizedBox(height: mobileView ? 10 : 7),
-                  SizedBox(
-                    height: 95,
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: watchProvider!.watchRegion!.buy!.length,
-                      itemBuilder: (context, index) {
-                        final item = watchProvider!.watchRegion!.buy![index];
-                        return MovieCastBanner(
-                          height: 52,
-                          width: 52,
-                          radius: 12,
-                          imagePath: item.logoPath!.generateImageURL,
-                          subTitle: item.providerName ?? '',
-                          errorIconSize: ImageErrorIconSize.small,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 5,
-                            horizontal: 1
-                          ),
-                          textAlign: TextAlign.center,
-                          textStyle: theme.bodySmall?.copyWith(
-                            fontSize: 10,
-                            color: MovieColors.textSecondary
-                          ),
-                        );
-                      },
-                      separatorBuilder: (_, _) => SizedBox(width: 16),
-                    ),
+                  watchProviderListItem(
+                    theme: theme,
+                    isMobileView: mobileView,
+                    label: 'BUY',
+                    providerList: watchProvider!.watchRegion!.buy ?? []
                   )
+                  // MovieText(
+                  //   title: 'BUY',
+                  //   style: theme.bodyMedium?.copyWith(
+                  //     fontSize: 13,
+                  //     color: MovieColors.textPrimary
+                  //   ),
+                  // ),
+                  // SizedBox(height: mobileView ? 10 : 7),
+                  // SizedBox(
+                  //   height: 95,
+                  //   child: ListView.separated(
+                  //     shrinkWrap: true,
+                  //     scrollDirection: Axis.horizontal,
+                  //     itemCount: watchProvider!.watchRegion!.buy!.length,
+                  //     itemBuilder: (_, index) {
+                  //       final item = watchProvider!.watchRegion!.buy![index];
+                  //       return MovieCastBanner(
+                  //         height: 52,
+                  //         width: 52,
+                  //         radius: 12,
+                  //         imagePath: item.logoPath!.generateImageURL,
+                  //         subTitle: item.providerName ?? '',
+                  //         errorIconSize: ImageErrorIconSize.small,
+                  //         padding: EdgeInsets.symmetric(
+                  //           vertical: 5,
+                  //           horizontal: 1
+                  //         ),
+                  //         textAlign: TextAlign.center,
+                  //         textStyle: theme.bodySmall?.copyWith(
+                  //           fontSize: 10,
+                  //           color: MovieColors.textSecondary
+                  //         ),
+                  //       );
+                  //     },
+                  //     separatorBuilder: (_, _) => SizedBox(width: 16),
+                  //   ),
+                  // )
                 ],
                 SizedBox(height: 20),
               ],
@@ -232,6 +254,58 @@ class WatchProviderBottomSheet extends HookConsumerWidget {
           ),     
         ],
       ),
+    );
+  }
+
+
+  Widget watchProviderListItem({
+    required TextTheme theme,
+    bool isMobileView = true,
+    String label = '',
+    List<ProviderDetails> providerList = const []
+  }) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        MovieText(
+          title: label,
+          style: theme.bodyMedium?.copyWith(
+            fontSize: 13,
+            color: MovieColors.textPrimary
+          ),
+        ),
+        SizedBox(height: isMobileView ? 10 : 7),
+        SizedBox(
+          height: 95,
+          child: ListView.separated(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: providerList.length,
+            itemBuilder: (_, index) {
+              final item = providerList[index];
+              return MovieCastBanner(
+                height: 52,
+                width: 52,
+                radius: 12,
+                imagePath: item.logoPath!.generateImageURL,
+                subTitle: item.providerName ?? '',
+                errorIconSize: ImageErrorIconSize.small,
+                padding: EdgeInsets.symmetric(
+                  vertical: 5,
+                  horizontal: 1
+                ),
+                textAlign: TextAlign.center,
+                textStyle: theme.bodySmall?.copyWith(
+                  fontSize: 10,
+                  color: MovieColors.textSecondary
+                ),
+              );
+            },
+            separatorBuilder: (_, _) => SizedBox(width: 16),
+          ),
+        ),
+      ],
     );
   }
 }

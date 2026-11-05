@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:riverpod/riverpod.dart';
 
-final localeProvider = Provider<Locale>((ref) {
+final localeProvider = Provider<Locale>((_) {
   return PlatformDispatcher.instance.locale;
 });

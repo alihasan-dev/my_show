@@ -1,14 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:riverpod/riverpod.dart';
 import '/core/network/dio_provider.dart';
 import '/core/utils/custom_exception.dart';
 import '/features/profile/data/models/popular_people_model.dart';
-import 'package:riverpod/riverpod.dart';
-
 abstract interface class PeopleDataSource {
 
   Future<PopularPeopleModel> popularPeople({required int pageCount});
 }
-
 class PeopleDatasourceImp implements PeopleDataSource {
 
 
@@ -25,7 +23,6 @@ class PeopleDatasourceImp implements PeopleDataSource {
       throw CustomFailureException();
     }
   }
-
 
 }
 

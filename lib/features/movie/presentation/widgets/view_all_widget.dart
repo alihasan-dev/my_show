@@ -1,9 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:my_show/core/constants/app_strings.dart';
-import 'package:my_show/core/utils/app_enums.dart';
+import '../../../../core/utils/app_enums.dart';
+import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/movie_colors.dart';
-
 class ViewAllWidget extends StatelessWidget {
 
   final ScreenType screenType;

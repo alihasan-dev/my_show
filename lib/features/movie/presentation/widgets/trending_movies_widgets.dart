@@ -3,16 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:my_show/core/utils/app_enums.dart';
 import 'package:my_show/core/utils/app_utils.dart';
 import '../../domain/entities/trending_movie_entity.dart';
-import '../../../../core/constants/app_strings.dart';
-import '../../../../core/utils/app_extension_method.dart';
-import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/routes/app_routes.dart';
-import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/widgets/movie_text.dart';
+import '../../../../core/constants/app_strings.dart';
+import '../../../../core/constants/movie_colors.dart';
+import '../../../../core/utils/app_extension_method.dart';
+import '../../../../core/widgets/movie_image_widget.dart';
 import '../../../../core/widgets/vote_percentage_widget.dart';
 import '../../../../features/movie/presentation/widgets/view_all_widget.dart';
-
-
 class TrendingMoviesWidgets extends StatelessWidget {
 
   final String title;
@@ -55,7 +53,6 @@ class TrendingMoviesWidgets extends StatelessWidget {
           canCalculate: title == AppStrings.trending,
           screenType: screenType
         );
-        // final cardWidth = getTrendingCardWidth(constraints.maxWidth, canCalculate: title == AppStrings.trending);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

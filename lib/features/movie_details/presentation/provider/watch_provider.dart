@@ -1,9 +1,7 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hooks_riverpod/legacy.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/entities/watch_provider_entity.dart';
 import '../../domain/usecases/watch_provider_usecase.dart';
-
-
 class WatchNotifier extends StateNotifier<AsyncValue<WatchProviderModal?>> {
 
   final WatchProviderUsecase watchProviderUsecase;

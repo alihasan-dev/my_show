@@ -1,8 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/legacy.dart';
 import '../../../../features/search/domain/entities/search_movies_keyword_entity.dart';
 import '../../../../features/search/domain/usecases/search_movie_keyword_usecase.dart';
-import 'package:riverpod/legacy.dart';
-
 class SearchMovieKeywordNotifier extends StateNotifier<AsyncValue<SearchMoviesKeywordEntity>> {
 
   final SearchMovieKeywordUsecase searchMovieKeywordUsecase;

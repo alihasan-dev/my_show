@@ -1,14 +1,11 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_show/features/multi_search/domain/entities/recent_search_entity.dart';
-import 'package:my_show/features/multi_search/domain/repository/recent_search_repository.dart';
-
-import '../datasource/recent_search_local_datesource.dart';
 import '../models/recent_search_model.dart';
-
+import '../datasource/recent_search_local_datesource.dart';
+import '../../../../features/multi_search/domain/entities/recent_search_entity.dart';
+import '../../../../features/multi_search/domain/repository/recent_search_repository.dart';
 class RecentSearchRepoImp implements RecentSearchRepository {
 
   final RecentSearchLocalDataSource recentSearchLocalDataSource;
-  
   RecentSearchRepoImp(this.recentSearchLocalDataSource);
 
   @override

@@ -1,6 +1,6 @@
-import 'package:my_show/core/utils/app_extension_method.dart';
 import 'package:riverpod/legacy.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:my_show/core/utils/app_extension_method.dart';
 import '../../domain/entities/recent_search_entity.dart';
 import '../../domain/usecases/recent_search_usecase.dart';
 
@@ -32,10 +32,7 @@ class RecentSearchNotifier extends StateNotifier<AsyncValue<List<RecentSearchEnt
     await recentSearchUsecase.clearRecentSearch();
     getRecentSearch();
   }
-
-  // bool get isRecentSearchAvailable {
-  //   return (state.value ?? []).isNotEmpty;
-  // }
+  
 }
 
 final recentSearchProvider = StateNotifierProvider.autoDispose<RecentSearchNotifier, AsyncValue<List<RecentSearchEntity>>>((ref) {

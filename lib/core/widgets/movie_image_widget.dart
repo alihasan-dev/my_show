@@ -4,9 +4,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../constants/movie_colors.dart';
 import '../../core/utils/app_extension_method.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import '../utils/app_enums.dart';
 
 class MovieImageWidget extends HookConsumerWidget {
   
@@ -165,5 +166,3 @@ class MovieImageWidget extends HookConsumerWidget {
   );
 
 }
-
-enum ImageErrorIconSize {large, medium, small}

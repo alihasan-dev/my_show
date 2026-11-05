@@ -1,16 +1,3 @@
-/// Nullable entity model for a single episode details response.
-///
-/// Every field is nullable (`?`) so missing or `null` values in the payload are
-/// handled without throwing — e.g. `profile_path` is `null` for some guest
-/// stars, and `production_code` can be an empty string.
-/// Intentionally contains no `fromJson` / `toJson`; mapping belongs to the
-/// data layer.
-///
-/// The nested crew and guest-star models are named `EpisodeCrewEntity` and
-/// `EpisodeGuestStarEntity` so this file stays self-contained and does not
-/// clash with `CrewEntity` / `GuestStarEntity` if you keep the season model
-/// alongside it.
-
 class EpisodeDetailsEntity {
   const EpisodeDetailsEntity({
     this.id,

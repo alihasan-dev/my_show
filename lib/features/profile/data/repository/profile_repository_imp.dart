@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../domain/entities/profile_external_id_entity.dart';
 import '/core/utils/custom_exception.dart';
 import '/features/profile/data/datasource/profile_datasource.dart';
 import '/features/profile/domain/entities/movie_credit_entity.dart';
-import '/features/profile/domain/entities/profile_details_entity.dart';
 import '/features/profile/domain/repository/profile_repository.dart';
+import '/features/profile/domain/entities/profile_details_entity.dart';
+import '../../domain/entities/profile_external_id_entity.dart';
 import '../../../../core/network/check_connectivity.dart';
 
 class ProfileRepositoryImp implements ProfileRepository {

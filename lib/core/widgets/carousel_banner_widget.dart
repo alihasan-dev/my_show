@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:my_show/core/constants/movie_colors.dart';
-import 'package:my_show/core/utils/app_extension_method.dart';
-import 'package:my_show/core/widgets/custom_solid_button.dart';
-import 'package:my_show/core/widgets/movie_image_widget.dart';
-import 'package:my_show/core/widgets/movie_text.dart';
-import '../../features/movie/domain/entities/trending_movie_entity.dart';
 import '../routes/app_routes.dart';
-
+import '../../core/widgets/movie_text.dart';
+import '../../core/constants/movie_colors.dart';
+import '../../core/utils/app_extension_method.dart';
+import '../../core/widgets/movie_image_widget.dart';
+import '../../core/widgets/custom_solid_button.dart';
+import '../../features/movie/domain/entities/trending_movie_entity.dart';
 class CarouselBanner extends StatelessWidget {
+  
   final TrendingMovie movie;
   final String type;
 

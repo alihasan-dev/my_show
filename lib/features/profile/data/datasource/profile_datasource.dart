@@ -1,18 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../models/external_id_model.dart';
+import '../models/profile_details_model.dart';
 import '../../../../core/network/dio_provider.dart';
 import '../../../../core/utils/custom_exception.dart';
 import '../../../../features/profile/data/models/movie_credit_model.dart';
-import '../models/external_id_model.dart';
-import '../models/profile_details_model.dart';
-
 abstract class ProfileDatasource {
 
   Future<MovieCreditModel> creditMovies({required String userId, required String type});
   Future<ProfileDetailsModel> profileDetails({required String userId});
   Future<ExternlIDModel> profileExternalIds({required String userId});
 }
-
 class ProfileDatasourceImp implements ProfileDatasource {
 
   final Dio dioClient;
@@ -46,7 +44,6 @@ class ProfileDatasourceImp implements ProfileDatasource {
     }
     throw CustomFailureException(message: 'Something went wrong');
   }
-
 
 }
 

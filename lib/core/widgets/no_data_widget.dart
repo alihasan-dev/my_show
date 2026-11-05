@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_show/core/widgets/custom_gradient_button.dart';
 import '../constants/app_strings.dart';
 import '../constants/movie_colors.dart';
-
+import '../../core/widgets/custom_gradient_button.dart';
 class NoDataWidget extends StatelessWidget {
+
   final IconData icon;
   final String title;
   final String subtitle;

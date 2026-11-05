@@ -1,9 +1,3 @@
-/// Nullable entity model for a TV season details response.
-///
-/// Every field is nullable (`?`) so partially-populated or missing values in
-/// the payload are handled without throwing. Intentionally contains no
-/// `fromJson` / `toJson` — mapping is the responsibility of the data layer.
-
 class SeasonDetailsEntity {
   const SeasonDetailsEntity({
     this.id,

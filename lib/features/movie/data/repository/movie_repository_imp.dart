@@ -1,12 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '/core/network/check_connectivity.dart';
 import '/core/utils/custom_exception.dart';
-import '/features/movie/data/datasource/movie_remote_datasource.dart';
+import '/core/network/check_connectivity.dart';
 import '/features/movie/domain/repository/movie_repository.dart';
-
+import '/features/movie/data/datasource/movie_remote_datasource.dart';
 import '../../domain/entities/trending_movie_entity.dart';
-
 class DashboardRepositoryImp implements DashboardRepository {
 
   final DashboardRemoteDatasource remoteDatasource;

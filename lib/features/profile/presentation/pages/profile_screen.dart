@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../domain/entities/profile_external_id_entity.dart';
 import '../widgets/profile_id_widget.dart';
 import '../widgets/profile_info_title.dart';
 import '../provider/credit_tv_provider.dart';
@@ -11,6 +10,7 @@ import '../provider/credit_movies_provider.dart';
 import '../provider/profile_details_provider.dart';
 import '../provider/profile_external_id_provider.dart';
 import '../../domain/entities/profile_details_entity.dart';
+import '../../domain/entities/profile_external_id_entity.dart';
 import '../../../../core/utils/app_enums.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/widgets/movie_text.dart';

@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:riverpod/riverpod.dart';
-import '../../../../core/utils/custom_exception.dart';
-import '../../data/repository/movie_repository_imp.dart';
-import '../entities/trending_movie_entity.dart';
 import '../repository/movie_repository.dart';
-
+import '../entities/trending_movie_entity.dart';
+import '../../data/repository/movie_repository_imp.dart';
+import '../../../../core/utils/custom_exception.dart';
 class NowPlayingUsecase {
 
   final DashboardRepository dashboardRepository;

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:my_show/core/utils/app_enums.dart';
 import 'package:shimmer/shimmer.dart';
 import '../constants/movie_colors.dart';
+import '../../core/utils/app_enums.dart';
 class PeopleShimmerWidget extends StatelessWidget {
+
   final int? crossAxisCount;
   final ScreenType screenType;
+  
   const PeopleShimmerWidget({
     super.key,
     this.crossAxisCount,

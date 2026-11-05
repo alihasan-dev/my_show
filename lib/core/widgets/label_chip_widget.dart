@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_show/core/utils/app_extension_method.dart';
 import '../constants/movie_colors.dart';
-
+import '../../core/utils/app_extension_method.dart';
 class LabeChipWidget extends StatelessWidget {
 
   final IconData icon;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_show/core/widgets/movie_text.dart';
 import '../constants/movie_colors.dart';
-
+import '../../core/widgets/movie_text.dart';
 class CustomGradientButton extends StatelessWidget {
+
   final Function()? onTap;
   final EdgeInsetsGeometry padding;
   final String label;
@@ -66,7 +66,7 @@ class CustomGradientButton extends StatelessWidget {
           style: textStyle ?? theme.textTheme.labelMedium?.copyWith(
             color: MovieColors.white.withValues(alpha: 0.8)
           ),
-        )
+        ),
       ),
     );
   }

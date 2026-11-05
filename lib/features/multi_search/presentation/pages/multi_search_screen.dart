@@ -4,23 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../widgets/recent_search_widget.dart';
+import '../providers/multi_search_provider.dart';
+import '../../../search/presentation/widgets/search_shimmer_widget.dart';
 import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_utils.dart';
-import '../../../../core/widgets/movie_tv_search_widget.dart';
-import '../../../../features/multi_search/domain/entities/recent_search_entity.dart';
-import '../../../../features/multi_search/presentation/providers/recent_search_provider.dart';
-import '../../../../core/widgets/custom_gradient_button.dart';
-import '../../../../core/widgets/movie_carousel_widget.dart';
+import '../../../../core/routes/app_routes.dart';
+import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_image_widget.dart';
-import '../../../../core/widgets/movie_text.dart';
-import '../../../../core/routes/app_routes.dart';
-import '../../../search/presentation/widgets/search_shimmer_widget.dart';
-import '../providers/multi_search_provider.dart';
-import '../widgets/recent_search_widget.dart';
-
+import '../../../../core/widgets/movie_carousel_widget.dart';
+import '../../../../core/widgets/custom_gradient_button.dart';
+import '../../../../core/widgets/movie_tv_search_widget.dart';
+import '../../../../features/multi_search/domain/entities/recent_search_entity.dart';
+import '../../../../features/multi_search/presentation/providers/recent_search_provider.dart';
 class MultiSearchScreen extends HookConsumerWidget {
   
   const MultiSearchScreen({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import '../utils/app_enums.dart';
 import '../constants/movie_colors.dart';
+import '../../core/widgets/movie_text.dart';
 import '../../core/utils/app_extension_method.dart';
 import '../../core/widgets/movie_image_widget.dart';
-import '../../core/widgets/movie_text.dart';
-
 class MovieCastBanner extends StatelessWidget {
 
   final Function()? onTap;

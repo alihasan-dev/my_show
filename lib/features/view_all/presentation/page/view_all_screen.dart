@@ -99,7 +99,7 @@ class ViewAllScreen extends HookConsumerWidget {
       body: SafeArea(
         top: false,
         child: LayoutBuilder(
-          builder: (context, constraints) {
+          builder: (_, constraints) {
             return showList.when(
               data: (data) {
                 if (data.result.isEmpty) {
@@ -131,7 +131,7 @@ class ViewAllScreen extends HookConsumerWidget {
                     horizontal: 16
                   ),
                   itemCount: data.result.length,
-                  itemBuilder: (context, index) {
+                  itemBuilder: (_, index) {
                     final show = data.result[index];
                     return Stack(
                       fit: StackFit.expand,
