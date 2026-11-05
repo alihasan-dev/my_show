@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '/core/utils/custom_exception.dart';
 import '../entities/trending_movie_entity.dart';
-
 abstract interface class DashboardRepository {
 
   Future<Either<String, TrendingMoviesEntity>> trendingMovies();

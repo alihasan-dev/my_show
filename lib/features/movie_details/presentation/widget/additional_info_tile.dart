@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/movie_colors.dart';
 import '../../../../core/widgets/movie_text.dart';
-
+import '../../../../core/constants/movie_colors.dart';
 class AdditionalInfoTile extends StatelessWidget {
   
   final String title;

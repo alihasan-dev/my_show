@@ -1,8 +1,7 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hooks_riverpod/legacy.dart';
-import 'package:my_show/features/movie_details/domain/entities/release_dates_entity.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/usecases/release_dates_usecase.dart';
-
+import '../../../../features/movie_details/domain/entities/release_dates_entity.dart';
 class ReleaseDatesNotifier extends StateNotifier<AsyncValue<ReleaseDatesEntity?>> {
 
   final ReleaseDatesUsecase releaseDatesUsecase;

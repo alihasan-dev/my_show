@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../constants/app_strings.dart';
-import '../widgets/movie_image_widget.dart';
 import '../../core/utils/app_enums.dart';
 import '../../core/utils/language_code.dart';
 extension NumExtensionUtils on num {

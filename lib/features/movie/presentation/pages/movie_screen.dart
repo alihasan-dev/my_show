@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../widgets/trending_movies_widgets.dart';
 import '../provider/now_playing_provider.dart';
+import '../widgets/trending_movies_widgets.dart';
 import '../provider/popular_movies_provider.dart';
-import '../provider/trending_movies_provider.dart';
 import '../provider/upcoming_movie_provider.dart';
+import '../provider/trending_movies_provider.dart';
 import '../provider/top_rated_movies_provider.dart';
 import '../../../../core/utils/app_enums.dart';
-import '../../../../core/constants/app_strings.dart';
 import '../../../../core/routes/app_routes.dart';
+import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/app_extension_method.dart';
 import '../../../../core/widgets/movie_shimmer_widget.dart';
 
