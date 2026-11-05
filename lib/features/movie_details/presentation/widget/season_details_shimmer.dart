@@ -5,7 +5,7 @@ class SeasonDetailsShimmer extends StatelessWidget {
 
   const SeasonDetailsShimmer({
     super.key,
-    this.episodeCount = 3,
+    this.episodeCount = 5,
   });
 
   final int episodeCount;
