@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'MyShow',
+      title: 'My Show',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
       scrollBehavior: const MaterialScrollBehavior().copyWith(
