@@ -6,7 +6,7 @@ class AppStrings {
   static const String baseURL = "https://api.themoviedb.org";
   static const String imageBaseURL = "https://image.tmdb.org/t/p/w500";
 
-  static const String appName = 'MyShow';
+  static const String appName = 'Asteria';
   static const String biography = 'Biography';
   static const String readMore = 'Read More';
   static const String readLess = 'Read Less';

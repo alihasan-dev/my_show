@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../core/constants/app_strings.dart';
 import '../../core/constants/movie_colors.dart';
 import '../../core/widgets/movie_image_widget.dart';
 class AboutScreen extends StatelessWidget {
@@ -87,7 +88,7 @@ class AboutScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'MyShow',
+                AppStrings.appName,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -135,7 +136,7 @@ class AboutScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionTitle('About MyShow'),
+        _sectionTitle('About ${AppStrings.appName}'),
         const SizedBox(height: 10),
         const Text(
           'Your destination for discovering movies and TV shows. '
