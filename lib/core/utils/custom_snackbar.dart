@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../constants/movie_colors.dart';
 
 enum SnackBarType { success, error, info }

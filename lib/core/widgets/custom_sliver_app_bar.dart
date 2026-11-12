@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../../core/widgets/movie_image_widget.dart';
 
 class CustomSliverAppBar extends StatelessWidget {

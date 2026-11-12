@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../../domain/entities/profile_details_entity.dart';
 import '../../../../core/widgets/movie_text.dart';
 import '../../../../core/constants/movie_colors.dart';

@@ -1,5 +1,5 @@
 import 'package:shimmer/shimmer.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../../../../core/utils/app_enums.dart';
 import '../../../../core/utils/app_extension_method.dart';
 class ProfileShimmerLoader extends StatelessWidget {

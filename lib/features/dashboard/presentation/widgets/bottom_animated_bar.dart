@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'dashboard_bottom_bar_item_list.dart';
 import '../../../../core/constants/movie_colors.dart';
 class MovieBottomNavigation extends StatelessWidget {

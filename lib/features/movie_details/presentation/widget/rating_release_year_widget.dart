@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/entities/movie_details_entity.dart';
 import '../../domain/entities/release_dates_entity.dart';
